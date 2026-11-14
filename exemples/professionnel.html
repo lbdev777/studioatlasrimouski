@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bistro du Havre — Exemple du forfait Professionnel | Studio Atlas Rimouski</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#FBF4E8;--tomato:#B83A1E;--ink:#2B1A12;--sand:#EAD9BF;--mute:#6B5547;--olive:#5B6B2F}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink)}
+  a{color:inherit}
+  .demo{background:#0E1A2B;color:#F4EDE1;font-size:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center}
+  .demo a{color:#FF8A6B;font-weight:600}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{border-bottom:1px solid var(--sand);background:var(--cream);position:sticky;top:0;z-index:4}
+  header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding-top:14px;padding-bottom:14px}
+  .logo{font-family:"DM Serif Display",serif;font-size:26px;color:var(--tomato);text-decoration:none}
+  nav{display:flex;flex-wrap:wrap;gap:4px}
+  nav a{text-decoration:none;padding:10px 12px;border-radius:999px;font-weight:500;min-height:44px;display:inline-flex;align-items:center}
+  nav a[aria-current="page"]{background:var(--tomato);color:var(--cream)}
+  main{min-height:60vh}
+  .page{display:none;padding:48px 0 72px}
+  .page.on{display:block}
+  h1,h2{font-family:"DM Serif Display",serif;font-weight:400;margin:0 0 18px;line-height:1.02}
+  h1{font-size:clamp(46px,8vw,92px)}
+  h2{font-size:clamp(34px,5vw,54px)}
+  .lead{font-size:19px;line-height:1.6;color:var(--mute);max-width:560px}
+  .hero{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+  .hero>div{flex:1 1 380px;min-width:0}
+  .plate svg{width:100%;height:auto;display:block}
+  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+  .btn{display:inline-flex;align-items:center;min-height:50px;padding:0 22px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--tomato);cursor:pointer;font:inherit;font-weight:600;background:none;color:var(--tomato)}
+  .btn.full{background:var(--tomato);color:var(--cream)}
+  .today{margin-top:28px;background:#fff;border-radius:16px;padding:18px 20px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+  .today b{font-family:"DM Serif Display",serif;font-size:24px;font-weight:400}
+  .cats{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 26px}
+  .cats button{font:inherit;font-weight:500;padding:10px 16px;border-radius:999px;border:1.5px solid var(--tomato);background:none;color:var(--tomato);cursor:pointer;min-height:44px}
+  .cats button[aria-pressed="true"]{background:var(--tomato);color:var(--cream)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+  .item{background:#fff;border-radius:18px;overflow:hidden;border:0;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column}
+  .item:hover,.item:focus-visible{outline:2px solid var(--tomato);outline-offset:2px}
+  .item svg{width:100%;height:auto;display:block;background:var(--sand)}
+  .item div{padding:14px 16px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .item b{font-weight:600}
+  .item span{color:var(--tomato);font-weight:600;white-space:nowrap}
+  .item small{display:block;padding:0 16px 16px;color:var(--mute);line-height:1.45}
+  .tagv{display:inline-block;font-size:12px;font-weight:600;background:var(--olive);color:#fff;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+  .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+  .gal button{border:0;padding:0;cursor:pointer;border-radius:12px;overflow:hidden;background:var(--sand)}
+  .gal button:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+  .gal svg{display:block;width:100%;height:auto}
+  dialog{border:0;border-radius:22px;padding:0;max-width:min(560px,92vw);width:100%;background:var(--cream);color:var(--ink)}
+  dialog::backdrop{background:rgba(43,26,18,.65)}
+  .dlg-b{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px}
+  .dlg-b h3{font-family:"DM Serif Display",serif;font-weight:400;font-size:32px;margin:0}
+  .x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:var(--cream);font-size:22px;cursor:pointer;color:var(--ink)}
+  .nav2{display:flex;justify-content:space-between;gap:10px}
+  .hours{display:flex;flex-wrap:wrap;gap:40px}
+  .hours>div{flex:1 1 320px}
+  table{width:100%;border-collapse:collapse;font-size:17px}
+  td{padding:11px 0;border-bottom:1px solid var(--sand)}
+  td:last-child{text-align:right}
+  tr.now td{font-weight:600;color:var(--tomato)}
+  .ferie{background:#fff;border-radius:16px;padding:18px 20px;line-height:1.7}
+  form{display:flex;flex-direction:column;gap:14px;max-width:560px}
+  label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
+  input,textarea{font:inherit;font-weight:400;padding:13px 14px;border-radius:12px;border:1.5px solid var(--sand);background:#fff}
+  .ok{display:none;background:#fff;border-radius:16px;padding:18px 20px;max-width:560px}
+  footer{border-top:1px solid var(--sand);padding:28px 0;font-size:14px;color:var(--mute)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="demo">Exemple fictif du forfait <strong>Professionnel · 60 $/mois</strong> — 5 pages, un menu cliquable, une galerie, l'horaire. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
+
+<header><div class="wrap">
+  <a class="logo" href="#accueil">Bistro du Havre</a>
+  <nav aria-label="Pages">
+    <a href="#accueil">Accueil</a><a href="#menu">Menu</a><a href="#galerie">Galerie</a><a href="#horaire">Horaire</a><a href="#contact">Contact</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="page" id="p-accueil">
+    <div class="hero">
+      <div>
+        <h1>Cuisine du marché, vue sur le quai.</h1>
+        <p class="lead">Un petit bistro de quartier. Le menu change avec les arrivages ; ce qui ne change pas, c'est l'accueil.</p>
+        <div class="btns"><a class="btn full" href="#menu">Voir le menu</a><a class="btn" href="#horaire">Horaire et adresse</a></div>
+        <div class="today" id="todayBox"></div>
+      </div>
+      <div class="plate" aria-hidden="true">
+        <svg viewBox="0 0 400 400"><circle cx="200" cy="200" r="190" fill="#EAD9BF"/><circle cx="200" cy="200" r="150" fill="#fff"/><circle cx="200" cy="200" r="120" fill="#FBF4E8"/><path d="M130 220 Q200 120 270 220 Q200 260 130 220Z" fill="#B83A1E"/><circle cx="170" cy="190" r="12" fill="#5B6B2F"/><circle cx="215" cy="175" r="9" fill="#5B6B2F"/><circle cx="240" cy="205" r="10" fill="#5B6B2F"/><path d="M150 250 Q200 275 250 250" stroke="#2B1A12" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="p-menu">
+    <h2>Menu</h2>
+    <div class="cats" id="cats" role="group" aria-label="Catégories"></div>
+    <div class="grid" id="grid"></div>
+    <p class="lead" style="margin-top:24px;font-size:15px">Menu et prix d'exemple pour cette démo. Touchez un plat pour le voir en grand.</p>
+  </section>
+
+  <section class="page" id="p-galerie">
+    <h2>Galerie</h2>
+    <p class="lead">Sur votre vrai site : vos vraies photos. Touchez une image pour l'agrandir, puis utilisez les flèches.</p>
+    <div class="gal" id="gal"></div>
+  </section>
+
+  <section class="page" id="p-horaire">
+    <h2>Horaire et adresse</h2>
+    <div class="hours">
+      <div><table id="htable"></table></div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="ferie"><b>Horaire des Fêtes</b><br>24 décembre : 11 h – 15 h<br>25 et 26 décembre : fermé<br>1er janvier : fermé</div>
+        <div class="ferie"><b>123, rue du Quai, Rimouski</b><br>Stationnement gratuit derrière le bistro.</div>
+        <div class="btns" style="margin-top:0"><a class="btn full" href="tel:+14185550145">Appeler · 418 555-0145</a><a class="btn" href="https://www.google.com/search?q=avis+Google" target="_blank" rel="noopener">Voir nos avis Google</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="p-contact">
+    <h2>Nous écrire</h2>
+    <p class="lead">Groupe, allergie, événement privé ? Écrivez-nous, on répond dans la journée.</p>
+    <form id="cform" novalidate>
+      <label>Nom<input name="nom" required autocomplete="name"></label>
+      <label>Courriel<input name="mail" type="email" required autocomplete="email"></label>
+      <label>Message<textarea name="msg" rows="5" required></textarea></label>
+      <button class="btn full" type="submit" style="align-self:flex-start">Envoyer</button>
+    </form>
+    <div class="ok" id="ok" aria-live="polite"><b>Merci !</b> Démo : rien n'a été envoyé. Sur un vrai site, votre message arrive directement dans la boîte courriel du bistro.</div>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <button class="x" type="button" aria-label="Fermer" id="xbtn">×</button>
+  <div id="dlgMedia"></div>
+  <div class="dlg-b" id="dlgBody"></div>
+</dialog>
+
+<footer><div class="wrap">
+  <span>Bistro du Havre · commerce fictif · Rimouski</span>
+  <span>Site créé par <a href="../index.html">Studio Atlas Rimouski</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var PALS=[['#B83A1E','#5B6B2F'],['#D98E04','#2B1A12'],['#5B6B2F','#B83A1E'],['#8C3B5E','#EAD9BF'],['#2B1A12','#D98E04'],['#C2552E','#5B6B2F']];
+  function dish(i,label){
+    var p=PALS[i%PALS.length];
+    return '<svg viewBox="0 0 300 200" role="img" aria-label="'+label+'"><rect width="300" height="200" fill="#EAD9BF"/><circle cx="150" cy="100" r="78" fill="#fff"/><circle cx="150" cy="100" r="60" fill="#FBF4E8"/><ellipse cx="'+(140+i%3*8)+'" cy="98" rx="'+(36+i%4*4)+'" ry="'+(22+i%3*4)+'" fill="'+p[0]+'"/><circle cx="'+(128+i%5*6)+'" cy="88" r="7" fill="'+p[1]+'"/><circle cx="'+(168-i%4*5)+'" cy="110" r="6" fill="'+p[1]+'"/></svg>';
+  }
+  var M=[
+    ['Entrées','Soupe du jour','Selon le marché, servie avec pain de la boulangerie voisine.',9,true],
+    ['Entrées','Tartare de saumon','Câpres, échalote, croûtons à l’huile d’olive.',16,false],
+    ['Entrées','Salade de betteraves','Fromage de chèvre, noix grillées, miel.',13,true],
+    ['Plats','Poisson du jour','Purée de céleri-rave, beurre blanc.',29,false],
+    ['Plats','Burger du Havre','Bœuf de la région, cheddar vieilli, frites maison.',22,false],
+    ['Plats','Risotto aux champignons','Parmesan, herbes fraîches.',24,true],
+    ['Plats','Moules et frites','Vin blanc, ail, persil.',25,false],
+    ['Desserts','Pouding chômeur','Sirop d’érable, crème fouettée.',10,true],
+    ['Desserts','Tarte au sucre','Recette de la maison.',9,true]
+  ];
+  var cats=['Tout','Entrées','Plats','Desserts'], cur='Tout';
+  var catBox=document.getElementById('cats'), grid=document.getElementById('grid');
+  cats.forEach(function(c){ var b=document.createElement('button'); b.type='button'; b.textContent=c; b.setAttribute('aria-pressed',c===cur); b.onclick=function(){cur=c;[].forEach.call(catBox.children,function(x){x.setAttribute('aria-pressed',x.textContent===c)});drawMenu();}; catBox.appendChild(b); });
+  function drawMenu(){
+    grid.innerHTML='';
+    M.forEach(function(m,i){
+      if(cur!=='Tout'&&m[0]!==cur) return;
+      var b=document.createElement('button'); b.type='button'; b.className='item';
+      b.innerHTML=dish(i,m[1])+'<div><b>'+m[1]+(m[4]?'<span class="tagv">Végé</span>':'')+'</b><span>'+m[3]+' $</span></div><small>'+m[2]+'</small>';
+      b.onclick=function(){ open(dish(i,m[1]),'<h3>'+m[1]+'</h3><p style="margin:0;line-height:1.6">'+m[2]+'</p><b style="color:#B83A1E;font-size:20px">'+m[3]+' $</b><p style="margin:0;font-size:14px;color:#6B5547">Sur votre site : la vraie photo du plat.</p>'); };
+      grid.appendChild(b);
+    });
+  }
+  drawMenu();
+  var dlg=document.getElementById('dlg');
+  function open(media,body){ document.getElementById('dlgMedia').innerHTML=media; document.getElementById('dlgBody').innerHTML=body; if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); }
+  document.getElementById('xbtn').onclick=function(){dlg.close()};
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
+  // galerie
+  var gal=document.getElementById('gal'), gi=0, N=8;
+  function showG(){ open(dish(gi,'Photo '+(gi+1)), '<div class="nav2"><button class="btn" type="button" id="gp">← Précédente</button><span>'+(gi+1)+' / '+N+'</span><button class="btn" type="button" id="gn">Suivante →</button></div>');
+    document.getElementById('gp').onclick=function(){gi=(gi+N-1)%N;showG()}; document.getElementById('gn').onclick=function(){gi=(gi+1)%N;showG()}; }
+  for(var i=0;i<N;i++){ (function(k){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Agrandir la photo '+(k+1)); b.innerHTML=dish(k,'Photo '+(k+1)); b.onclick=function(){gi=k;showG()}; gal.appendChild(b); })(i); }
+  dlg.addEventListener('keydown',function(e){ var gp=document.getElementById('gp'); if(!gp) return; if(e.key==='ArrowLeft'){gp.click()} if(e.key==='ArrowRight'){document.getElementById('gn').click()} });
+  // horaire
+  var H=[['Dimanche',[10,14]],['Lundi',null],['Mardi',[11,21]],['Mercredi',[11,21]],['Jeudi',[11,22]],['Vendredi',[11,22]],['Samedi',[10,22]]];
+  var now=new Date(), d=now.getDay(), h=now.getHours()+now.getMinutes()/60, t=document.getElementById('htable');
+  [1,2,3,4,5,6,0].forEach(function(k){ var r=t.insertRow(); if(k===d) r.className='now'; r.insertCell().textContent=H[k][0]; r.insertCell().textContent=H[k][1]? H[k][1][0]+' h – '+H[k][1][1]+' h':'Fermé'; });
+  var x=H[d][1], open_=x&&h>=x[0]&&h<x[1];
+  document.getElementById('todayBox').innerHTML='<b>'+(open_?'Ouvert maintenant':'Fermé en ce moment')+'</b><span>'+H[d][0]+' : '+(x?x[0]+' h – '+x[1]+' h':'fermé')+'</span>';
+  // contact
+  var f=document.getElementById('cform');
+  f.addEventListener('submit',function(e){ e.preventDefault(); var bad=[].filter.call(f.querySelectorAll('[required]'),function(i){return !i.value.trim()}); if(bad.length){bad[0].focus();return;} f.style.display='none'; document.getElementById('ok').style.display='block'; });
+  // routeur
+  function route(){ var id=(location.hash||'#accueil').slice(1); if(!document.getElementById('p-'+id)) id='accueil';
+    [].forEach.call(document.querySelectorAll('.page'),function(p){p.classList.toggle('on',p.id==='p-'+id)});
+    [].forEach.call(document.querySelectorAll('nav a'),function(a){ if(a.getAttribute('href')==='#'+id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    window.scrollTo(0,0); }
+  window.addEventListener('hashchange',route); route();
+})();
+</script>
+</body>
+</html>

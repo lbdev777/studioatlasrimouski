@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garage Boréal — Exemple du forfait Essentiel | Studio Atlas Rimouski</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1C1E22;--steel:#2C3036;--yel:#FFC72C;--paper:#F3F2EE;--mute:#5C6168}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);padding-bottom:84px}
+  a{color:inherit}
+  .demo{background:#0E1A2B;color:#F4EDE1;font-size:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;align-items:center;text-align:center}
+  .demo a{color:#FF8A6B;font-weight:600}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header.hero{background:var(--steel);color:#fff;position:relative;overflow:hidden}
+  .hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:32px;padding-top:56px;padding-bottom:56px}
+  .hero-txt{flex:1 1 380px}
+  .tag{display:inline-block;background:var(--yel);color:var(--ink);font-weight:700;font-size:13px;letter-spacing:.12em;padding:6px 10px;text-transform:uppercase}
+  h1{font-family:Oswald,sans-serif;font-size:clamp(48px,9vw,96px);line-height:.95;margin:18px 0 14px;text-transform:uppercase;letter-spacing:.01em}
+  h1 span{color:var(--yel)}
+  .lead{font-size:19px;line-height:1.55;color:#D6D9DE;max-width:520px;margin:0}
+  .status{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:#1C1E22;border:1px solid #444;padding:10px 14px;border-radius:999px;font-weight:600}
+  .dot{width:12px;height:12px;border-radius:50%;background:#888}
+  .dot.on{background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.25)}
+  .dot.off{background:#F87171}
+  .hero-art{flex:0 1 380px;min-width:0}
+  .hero-art svg{width:100%;height:auto;display:block}
+  section{padding:64px 0}
+  h2{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:clamp(32px,5vw,48px);margin:0 0 28px;letter-spacing:.01em}
+  .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:3px solid var(--ink)}
+  .svc{padding:22px 18px 22px 0;border-bottom:1px solid #CFCCC4}
+  .svc b{font-family:Oswald,sans-serif;font-size:24px;text-transform:uppercase;display:block;margin-bottom:6px}
+  .svc span{color:var(--mute);line-height:1.5}
+  .band{background:var(--yel)}
+  .band .wrap{display:flex;flex-wrap:wrap;gap:40px;padding-top:56px;padding-bottom:56px}
+  .hours{flex:1 1 320px}
+  table{width:100%;border-collapse:collapse;font-size:17px}
+  td{padding:10px 0;border-bottom:1px solid rgba(0,0,0,.15)}
+  td:last-child{text-align:right;font-weight:600}
+  tr.today td{font-weight:700}
+  tr.today td:first-child::before{content:"▸ "}
+  .where{flex:1 1 320px;display:flex;flex-direction:column;gap:14px}
+  .map{background:var(--ink);color:#fff;border-radius:6px;min-height:200px;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+  .map svg{position:absolute;inset:0;width:100%;height:100%;opacity:.35}
+  .map b{position:relative;font-size:18px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;font-weight:700;font-size:17px;text-decoration:none;border-radius:6px;border:2px solid var(--ink)}
+  .btn.dark{background:var(--ink);color:#fff}
+  .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .gal figure{margin:0;background:#E3E1DA;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:14px;text-align:center;padding:12px}
+  footer{background:var(--ink);color:#B9BDC4;font-size:14px;padding:28px 0}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+  .bar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:10px;padding:12px;background:rgba(28,30,34,.96);z-index:5}
+  .bar a{flex:1}
+  .bar .btn{width:100%;border-color:var(--yel)}
+  .bar .call{background:var(--yel);color:var(--ink)}
+  .bar .go{color:#fff}
+  @media (min-width:900px){.bar{display:none}body{padding-bottom:0}}
+</style>
+</head>
+<body>
+<div class="demo">Exemple fictif du forfait <strong>Essentiel · 30 $/mois</strong> — une page, des photos, un horaire, un bouton pour appeler. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-txt">
+      <span class="tag">Mécanique générale · Rimouski</span>
+      <h1>Garage <span>Boréal</span></h1>
+      <p class="lead">Entretien, pneus, freins et inspection. On vous dit le prix avant de toucher à votre auto.</p>
+      <div class="status" aria-live="polite"><span class="dot" id="dot"></span><span id="status">Horaire</span></div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 300">
+        <rect x="0" y="230" width="400" height="8" fill="#FFC72C"/>
+        <rect x="40" y="246" width="320" height="4" fill="#FFC72C" opacity=".5"/>
+        <path d="M60 200 L95 140 Q105 125 125 125 L270 125 Q292 125 305 142 L335 182 Q345 186 352 196 L352 214 L48 214 L48 205 Q48 200 60 200Z" fill="#F3F2EE"/>
+        <path d="M118 140 L262 140 Q276 140 285 152 L305 180 L100 180 Z" fill="#2C3036"/>
+        <rect x="190" y="140" width="6" height="40" fill="#F3F2EE"/>
+        <circle cx="115" cy="214" r="30" fill="#1C1E22"/><circle cx="115" cy="214" r="12" fill="#FFC72C"/>
+        <circle cx="290" cy="214" r="30" fill="#1C1E22"/><circle cx="290" cy="214" r="12" fill="#FFC72C"/>
+        <rect x="330" y="186" width="16" height="8" fill="#FFC72C"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Ce qu'on fait</h2>
+    <div class="services">
+      <div class="svc"><b>Entretien</b><span>Huile, filtres, mise au point. Rapide, sur rendez-vous ou sans.</span></div>
+      <div class="svc"><b>Pneus</b><span>Pose, permutation, entreposage pour l'hiver.</span></div>
+      <div class="svc"><b>Freins</b><span>Inspection gratuite des freins, plaquettes et disques.</span></div>
+      <div class="svc"><b>Diagnostic</b><span>Voyant allumé ? On vous explique ce qui se passe, en mots simples.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <div class="hours">
+      <h2>Horaire</h2>
+      <table id="hours">
+        <tr data-d="1"><td>Lundi</td><td>8 h – 17 h</td></tr>
+        <tr data-d="2"><td>Mardi</td><td>8 h – 17 h</td></tr>
+        <tr data-d="3"><td>Mercredi</td><td>8 h – 17 h</td></tr>
+        <tr data-d="4"><td>Jeudi</td><td>8 h – 19 h</td></tr>
+        <tr data-d="5"><td>Vendredi</td><td>8 h – 17 h</td></tr>
+        <tr data-d="6"><td>Samedi</td><td>9 h – 12 h</td></tr>
+        <tr data-d="0"><td>Dimanche</td><td>Fermé</td></tr>
+      </table>
+    </div>
+    <div class="where">
+      <h2>Où nous trouver</h2>
+      <div class="map" aria-hidden="true">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="none"><path d="M0 140 C80 120 160 160 240 130 S360 110 400 120" stroke="#FFC72C" stroke-width="6" fill="none"/><path d="M120 0 L140 200 M260 0 L250 200 M0 60 L400 70" stroke="#fff" stroke-width="3"/></svg>
+        <b>123, rue Exemple, Rimouski</b>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a class="btn dark" href="tel:+14185550123">Appeler · 418 555-0123</a>
+        <a class="btn" href="https://www.google.com/maps/search/Rimouski" target="_blank" rel="noopener">Itinéraire</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Le garage</h2>
+    <div class="gal">
+      <figure>Ici : une vraie photo de votre façade</figure>
+      <figure>Ici : votre équipe au travail</figure>
+      <figure>Ici : votre atelier</figure>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Garage Boréal · commerce fictif · 123, rue Exemple, Rimouski</span>
+    <span>Site créé par <a href="../index.html">Studio Atlas Rimouski</a></span>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="Actions rapides">
+  <a class="btn call" href="tel:+14185550123">Appeler</a>
+  <a class="btn go" href="https://www.google.com/maps/search/Rimouski" target="_blank" rel="noopener">Itinéraire</a>
+</nav>
+
+<script>
+(function(){
+  var H={1:[8,17],2:[8,17],3:[8,17],4:[8,19],5:[8,17],6:[9,12],0:null};
+  var now=new Date(), d=now.getDay(), h=now.getHours()+now.getMinutes()/60;
+  var row=document.querySelector('#hours tr[data-d="'+d+'"]'); if(row) row.className='today';
+  var t=H[d], dot=document.getElementById('dot'), s=document.getElementById('status');
+  if(t && h>=t[0] && h<t[1]){ dot.className='dot on'; s.textContent='Ouvert maintenant · jusqu’à '+t[1]+' h'; }
+  else {
+    dot.className='dot off';
+    var n=null; for(var i=1;i<=7;i++){ var dd=(d+i)%7; if(t && h<t[0] && i===1){} if(H[dd]){ n=[dd,H[dd][0]]; break; } }
+    if(t && h<t[0]) s.textContent='Fermé · ouvre aujourd’hui à '+t[0]+' h';
+    else { var j=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi']; s.textContent='Fermé · ouvre '+j[n[0]]+' à '+n[1]+' h'; }
+  }
+})();
+</script>
+</body>
+</html>
