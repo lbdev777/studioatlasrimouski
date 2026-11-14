@@ -34,14 +34,21 @@
     </section>
   </div>
 
-  <section style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
-    <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Lequel vous convient ? Quatre questions.</h2>
-    <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
-      <li style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 18px; font-weight: 700">Vos visiteurs lisent et regardent ?</span><span style="font-size: 16px; line-height: 1.5">Photos, textes, horaire, bouton pour appeler : c'est l'<strong>Essentiel</strong>.</span></li>
-      <li style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 18px; font-weight: 700">Ils doivent prendre rendez-vous ou postuler ?</span><span style="font-size: 16px; line-height: 1.5">Un formulaire de demande et vous rappelez pour confirmer : c'est le <strong>Rendez-vous</strong>.</span></li>
-      <li style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 18px; font-weight: 700">Ils cliquent pour explorer ?</span><span style="font-size: 16px; line-height: 1.5">Un menu, une galerie, plusieurs pages : c'est le <strong>Professionnel</strong>. Plus grand ou bilingue : l'<strong>Entreprise</strong>.</span></li>
-      <li style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 18px; font-weight: 700">Ils achètent, commandent ou réservent ?</span><span style="font-size: 16px; line-height: 1.5">Pour vendre des produits : la <strong>Boutique</strong>. Pour réserver ou commander : une option suffit.</span></li>
-    </ol>
+  <section id="quiz" style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+    <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Pas certain ? Trouvez votre forfait en 30 secondes.</h2>
+    <p style="margin: 0; font-size: 17px; color: #4A5566">Cinq questions, et on vous dit quel forfait vous convient, avec un prix estimé.</p>
+    <div id="quiz-app">
+      <div style="background: #0E1A2B; color: #F4EDE1; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+        <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #3FC1B0">QUESTION 1 SUR 5</span>
+        <h3 style="margin: 0; font-size: clamp(22px, 3vw, 30px); font-weight: 900; line-height: 1.15">Sur votre site, vos clients doivent surtout…</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+          <button type="button" style="font: inherit; font-size: 17px; text-align: left; background: #F4EDE1; color: #0E1A2B; border: 2px solid #F4EDE1; border-radius: 14px; padding: 16px 18px; min-height: 56px">Voir qui vous êtes, votre horaire et vous appeler</button>
+          <button type="button" style="font: inherit; font-size: 17px; text-align: left; background: #F4EDE1; color: #0E1A2B; border: 2px solid #F4EDE1; border-radius: 14px; padding: 16px 18px; min-height: 56px">Demander un rendez-vous, postuler ou demander une soumission</button>
+          <button type="button" style="font: inherit; font-size: 17px; text-align: left; background: #F4EDE1; color: #0E1A2B; border: 2px solid #F4EDE1; border-radius: 14px; padding: 16px 18px; min-height: 56px">Parcourir un menu, une galerie ou vos services en détail</button>
+          <button type="button" style="font: inherit; font-size: 17px; text-align: left; background: #F4EDE1; color: #0E1A2B; border: 2px solid #F4EDE1; border-radius: 14px; padding: 16px 18px; min-height: 56px">Acheter vos produits en ligne</button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 72px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
@@ -213,5 +220,6 @@
     </div>
   </footer>
 </div>
+<script src="quiz.js" defer></script>
 </body>
 </html>
