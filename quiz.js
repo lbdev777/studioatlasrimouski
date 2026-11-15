@@ -83,7 +83,7 @@
       if (plan === 'P' || plan === 'N' || plan === 'B') extras.push({ label: 'Menu ou horaire que vous modifiez vous-même', month: 10, setup: 99 });
       else notes.push('Vos mises à jour par texto sont gratuites, mais avec des changements chaque semaine, vous pourriez dépasser celles de votre forfait. On en parlera ensemble.');
     }
-    if (a.domain === 'non') extras.push({ label: 'Domaine clé en main : on s’en occupe pour vous', month: 4, setup: 0 });
+    if (a.domain === 'non') extras.push({ label: 'Domaine clé en main : on s’en occupe pour vous (il reste à Studio Atlas ; rachat 50 $ si vous partez)', month: 4, setup: 0 });
     var p = PLANS[plan];
     var month = p.price, setup = p.setup;
     extras.forEach(function (x) { month += x.month; setup += x.setup; });
