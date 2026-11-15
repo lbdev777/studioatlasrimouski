@@ -6,147 +6,213 @@
 <title>Salon Marée — Exemple du forfait Rendez-vous | Studio Atlas Rimouski</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--blush:#F6E7E1;--rose:#E8C9BF;--forest:#1F3B33;--mute:#5E6B66;--white:#FFFDFB}
+  :root{--blush:#F8E9E3;--rose:#EBC6B9;--clay:#C9775F;--forest:#1F3B33;--moss:#3F6B5B;--cream:#FFFBF8;--mute:#5E6B66;--gold:#C9A14A}
   *{box-sizing:border-box}
-  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--forest);background:var(--blush)}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--forest);background:var(--cream)}
   a{color:inherit}
-  .demo{background:#0E1A2B;color:#F4EDE1;font-size:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center}
+  button{font:inherit;color:inherit}
+  .demo{background:#0E1A2B;color:#F4EDE1;font-size:13px;padding:9px 16px;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;text-align:center}
   .demo a{color:#FF8A6B;font-weight:600}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-  header{padding:28px 0}
-  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-  .logo{font-family:Fraunces,serif;font-size:28px;font-weight:700;letter-spacing:-.01em}
-  .logo i{font-style:italic;font-weight:500}
-  .cta{background:var(--forest);color:var(--blush);text-decoration:none;font-weight:600;padding:14px 20px;border-radius:999px}
-  .hero{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding:24px 0 56px}
-  .hero-t{flex:1 1 380px}
-  h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(44px,7vw,78px);line-height:1;margin:0 0 18px;letter-spacing:-.02em}
-  h1 em{font-weight:700}
-  .lead{font-size:19px;line-height:1.6;color:var(--mute);max-width:480px;margin:0}
-  .art{flex:0 1 340px;min-width:0}
-  .art svg{width:100%;height:auto;display:block}
-  h2{font-family:Fraunces,serif;font-weight:700;font-size:clamp(30px,4.5vw,44px);margin:0 0 20px}
-  section{padding:56px 0}
-  .menu{background:var(--white)}
-  .svc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 40px}
-  .svc{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px dashed var(--rose);font-size:17px}
-  .svc small{display:block;color:var(--mute);font-size:14px;margin-top:2px}
-  .svc b{white-space:nowrap}
-  .note{color:var(--mute);font-size:14px;margin-top:14px}
-  .book{display:flex;flex-wrap:wrap;gap:40px}
-  .book-t{flex:1 1 300px}
-  .steps{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:14px;font-size:17px}
-  .steps li{display:flex;gap:12px;align-items:flex-start}
-  .steps span{flex:0 0 32px;height:32px;border-radius:50%;background:var(--forest);color:var(--blush);display:flex;align-items:center;justify-content:center;font-weight:600}
-  .card{flex:1 1 420px;min-width:0;background:var(--white);border-radius:24px;padding:28px;box-shadow:0 1px 0 var(--rose)}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .serif{font-family:Fraunces,serif}
+  header{position:sticky;top:0;z-index:10;background:rgba(255,251,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid #F0DDD5}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:72px}
+  .logo{font-family:Fraunces,serif;font-size:28px;font-weight:600;text-decoration:none}
+  .logo i{font-weight:400;color:var(--clay)}
+  header nav{display:flex;align-items:center;gap:6px}
+  header nav a{text-decoration:none;padding:10px 12px;font-size:15px;min-height:44px;display:inline-flex;align-items:center}
+  .cta{background:var(--forest);color:var(--cream)!important;border-radius:999px;padding:12px 20px!important;font-weight:600}
+  @media (max-width:700px){header nav a:not(.cta){display:none}}
+  .hero{background:var(--blush);overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;padding-top:56px;padding-bottom:0}
+  .hero-t{padding-bottom:56px}
+  .eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);font-weight:600}
+  h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(46px,6.6vw,84px);line-height:1;margin:16px 0 20px;letter-spacing:-.02em}
+  h1 i{color:var(--clay)}
+  .lead{font-size:19px;line-height:1.65;color:var(--mute);max-width:480px;margin:0}
+  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .b{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid var(--forest);cursor:pointer;background:none}
+  .b.full{background:var(--forest);color:var(--cream)}
+  .hero-art{align-self:end}
+  .hero-art svg{display:block;width:100%;height:auto}
+  @media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-t{padding-bottom:0}}
+  section{padding:84px 0}
+  h2{font-family:Fraunces,serif;font-weight:400;font-size:clamp(36px,5vw,58px);margin:10px 0 30px;line-height:1.02;letter-spacing:-.01em}
+  .svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .svc{background:#fff;border:1px solid #F0DDD5;border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+  .svc svg{display:block;width:100%;height:auto}
+  .svc .in{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
+  .svc .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .svc h3{font-family:Fraunces,serif;font-weight:600;font-size:22px;margin:0}
+  .svc .pr{font-weight:600;color:var(--clay)}
+  .svc p{margin:0;color:var(--mute);font-size:15px;line-height:1.5}
+  .svc .dur{font-size:13px;color:var(--mute)}
+  .gal{background:var(--forest);color:var(--cream)}
+  .gal .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .gal figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:3/4}
+  .gal svg{display:block;width:100%;height:100%}
+  .gal p{color:#C6D3CD;margin:20px 0 0;font-size:14px}
+  @media (max-width:760px){.gal .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .book{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}
+  @media (max-width:900px){.book{grid-template-columns:1fr}}
+  .how{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:16px}
+  .how li{display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.5}
+  .how span{flex:0 0 34px;height:34px;border-radius:50%;background:var(--blush);color:var(--clay);display:flex;align-items:center;justify-content:center;font-weight:600}
+  .card{background:#fff;border:1px solid #F0DDD5;border-radius:26px;padding:28px;box-shadow:0 20px 50px rgba(31,59,51,.08)}
   .tabs{display:flex;gap:6px;background:var(--blush);padding:5px;border-radius:999px;margin-bottom:22px}
-  .tabs button{flex:1;font:inherit;font-weight:600;border:0;background:none;padding:12px;border-radius:999px;cursor:pointer;color:var(--forest);min-height:44px}
-  .tabs button[aria-selected="true"]{background:var(--forest);color:var(--blush)}
-  form{display:flex;flex-direction:column;gap:16px}
-  label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
-  input,select,textarea{font:inherit;font-weight:400;font-size:16px;padding:13px 14px;border:1.5px solid var(--rose);border-radius:12px;background:#fff;color:var(--forest)}
+  .tabs button{flex:1;border:0;background:none;padding:12px;border-radius:999px;cursor:pointer;font-weight:600;min-height:46px}
+  .tabs button[aria-selected="true"]{background:var(--forest);color:var(--cream)}
+  .prog{display:flex;gap:6px;margin-bottom:20px}
+  .prog span{flex:1;height:4px;border-radius:2px;background:#F0DDD5}
+  .prog span.on{background:var(--clay)}
+  .step h3{font-family:Fraunces,serif;font-weight:600;font-size:24px;margin:0 0 14px}
+  .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .opt{border:1.5px solid #F0DDD5;background:var(--cream);border-radius:14px;padding:14px 16px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:56px}
+  .opt small{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+  .opt[aria-pressed="true"]{border-color:var(--forest);background:#fff;box-shadow:inset 0 0 0 1px var(--forest)}
+  .days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+  .day{flex:0 0 72px;border:1.5px solid #F0DDD5;background:var(--cream);border-radius:14px;padding:10px 0;text-align:center;cursor:pointer}
+  .day b{display:block;font-family:Fraunces,serif;font-size:24px;font-weight:600}
+  .day small{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+  .day[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--cream)}
+  .day[aria-pressed="true"] small{color:#C6D3CD}
+  .lbl{font-weight:600;font-size:14px;margin:18px 0 8px;display:block}
+  .moments{display:flex;gap:8px;flex-wrap:wrap}
+  .moments button{border:1.5px solid #F0DDD5;background:var(--cream);border-radius:999px;padding:10px 16px;cursor:pointer;min-height:44px}
+  .moments button[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--cream)}
+  form{display:flex;flex-direction:column;gap:14px}
+  label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+  input,select,textarea{font:inherit;font-weight:400;font-size:16px;padding:13px 14px;border:1.5px solid #EBC6B9;border-radius:12px;background:#fff;color:var(--forest)}
   input:focus,select:focus,textarea:focus{outline:2px solid var(--forest);outline-offset:1px}
-  .row{display:flex;flex-wrap:wrap;gap:14px}.row>*{flex:1 1 180px}
-  fieldset{border:0;padding:0;margin:0}
-  legend{font-weight:600;font-size:15px;margin-bottom:8px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chips label{flex-direction:row;align-items:center;gap:0;font-weight:500}
-  .chips input{position:absolute;opacity:0;width:1px;height:1px}
-  .chips span{padding:10px 14px;border:1.5px solid var(--rose);border-radius:999px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center}
-  .chips input:checked+span{background:var(--forest);border-color:var(--forest);color:var(--blush)}
-  .chips input:focus-visible+span{outline:2px solid var(--forest);outline-offset:2px}
-  .sum{background:var(--blush);border-radius:12px;padding:12px 14px;font-size:15px}
-  .err{color:#A3271A;font-size:14px;min-height:1em}
-  button.send{font:inherit;font-weight:600;font-size:17px;background:var(--forest);color:var(--blush);border:0;border-radius:999px;padding:16px;cursor:pointer;min-height:52px}
-  .done{text-align:center;padding:24px 8px;display:none}
-  .done h3{font-family:Fraunces,serif;font-size:30px;margin:8px 0}
+  .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  @media (max-width:520px){.two{grid-template-columns:1fr}}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+  .err{color:#A3271A;font-size:14px;min-height:1.2em;margin-top:10px}
+  .sum{background:var(--blush);border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.6}
+  .done{text-align:center;padding:10px 6px}
+  .done h3{font-family:Fraunces,serif;font-weight:600;font-size:32px;margin:10px 0}
   .done p{color:var(--mute);line-height:1.6}
-  .done button{font:inherit;font-weight:600;border:1.5px solid var(--forest);background:none;border-radius:999px;padding:12px 18px;cursor:pointer;color:var(--forest)}
-  footer{padding:32px 0;font-size:14px;color:var(--mute)}
-  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;border-top:1px solid var(--rose);padding-top:24px}
   [hidden]{display:none!important}
+  .info{background:var(--blush)}
+  .info .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:56px;padding-bottom:56px}
+  .info h3{font-family:Fraunces,serif;font-weight:600;font-size:22px;margin:0 0 8px}
+  .info p{margin:0;color:var(--mute);line-height:1.7}
+  @media (max-width:760px){.info .wrap{grid-template-columns:1fr}}
+  footer{padding:30px 0;font-size:14px;color:var(--mute)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
 </style>
 </head>
 <body>
 <div class="demo">Exemple fictif du forfait <strong>Rendez-vous · 45 $/mois</strong> — les clients demandent un rendez-vous, le salon rappelle pour confirmer. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
 
 <header><div class="wrap">
-  <span class="logo">Salon <i>Marée</i></span>
-  <a class="cta" href="#rdv">Prendre rendez-vous</a>
+  <a class="logo" href="#">Salon <i>Marée</i></a>
+  <nav><a href="#services">Services</a><a href="#realisations">Réalisations</a><a href="#infos">Infos</a><a class="cta" href="#rdv">Rendez-vous</a></nav>
 </div></header>
 
-<div class="wrap hero">
+<div class="hero"><div class="wrap">
   <div class="hero-t">
-    <h1>Coupe, couleur et <em>un vrai moment</em> pour vous.</h1>
-    <p class="lead">Un petit salon tranquille, à deux pas du fleuve. Demandez votre rendez-vous en ligne, on vous rappelle dans la journée.</p>
+    <span class="eyebrow">Coiffure · Rimouski</span>
+    <h1>Coupe, couleur et <i>un vrai moment</i> pour vous.</h1>
+    <p class="lead">Un petit salon lumineux, à deux pas du fleuve. Demandez votre rendez-vous en ligne en une minute ; on vous rappelle dans la journée pour confirmer.</p>
+    <div class="btns"><a class="b full" href="#rdv">Demander un rendez-vous</a><a class="b" href="#services">Voir les services</a></div>
   </div>
-  <div class="art" aria-hidden="true">
-    <svg viewBox="0 0 340 340"><circle cx="170" cy="170" r="160" fill="#E8C9BF"/><path d="M20 210 Q95 180 170 210 T320 210 L320 340 L20 340Z" fill="#1F3B33" opacity=".9"/><path d="M40 240 Q105 215 170 240 T300 240" stroke="#F6E7E1" stroke-width="4" fill="none"/><path d="M60 270 Q115 250 170 270 T280 270" stroke="#F6E7E1" stroke-width="3" fill="none" opacity=".6"/><g transform="translate(150 60) rotate(20)"><rect x="0" y="0" width="14" height="110" rx="7" fill="#1F3B33"/><rect x="24" y="0" width="14" height="110" rx="7" fill="#1F3B33"/><circle cx="7" cy="128" r="16" fill="none" stroke="#1F3B33" stroke-width="7"/><circle cx="31" cy="128" r="16" fill="none" stroke="#1F3B33" stroke-width="7"/></g></svg>
+  <div class="hero-art" role="img" aria-label="Illustration : l'intérieur du salon, un fauteuil devant un miroir rond, une fenêtre sur le fleuve">
+    <svg viewBox="0 0 560 520">
+      <rect x="40" y="40" width="200" height="260" rx="100" fill="#BFE0E8"/>
+      <rect x="40" y="200" width="200" height="100" fill="#8FC3D3"/>
+      <path d="M40 210 Q90 196 140 210 T240 210" stroke="#fff" stroke-width="4" fill="none" opacity=".7"/>
+      <circle cx="180" cy="110" r="26" fill="#FFD9A8"/>
+      <rect x="40" y="40" width="200" height="260" rx="100" fill="none" stroke="#fff" stroke-width="10"/>
+      <circle cx="390" cy="170" r="104" fill="#F0DDD5"/>
+      <circle cx="390" cy="170" r="88" fill="#DCEBEA"/>
+      <path d="M330 120 Q390 90 440 140" stroke="#fff" stroke-width="10" fill="none" opacity=".6" stroke-linecap="round"/>
+      <circle cx="390" cy="170" r="104" fill="none" stroke="#C9A14A" stroke-width="6"/>
+      <rect x="0" y="440" width="560" height="80" fill="#EBC6B9"/>
+      <rect x="0" y="436" width="560" height="8" fill="#D9A897"/>
+      <rect x="300" y="300" width="190" height="24" rx="12" fill="#C9A14A"/>
+      <path d="M318 324 Q300 380 330 410 L460 410 Q490 380 472 324Z" fill="#1F3B33"/>
+      <rect x="318" y="210" width="154" height="110" rx="40" fill="#1F3B33"/>
+      <rect x="290" y="300" width="30" height="70" rx="15" fill="#3F6B5B"/><rect x="470" y="300" width="30" height="70" rx="15" fill="#3F6B5B"/>
+      <rect x="386" y="410" width="18" height="30" fill="#C9A14A"/><rect x="340" y="436" width="110" height="10" rx="5" fill="#C9A14A"/>
+      <g transform="translate(70 330)"><path d="M30 110 L20 30 L80 30 L70 110Z" fill="#C9775F"/><path d="M50 30 Q30 -20 0 -10 Q20 10 50 30 Q60 -30 90 -30 Q80 0 50 30 Q90 -5 110 15 Q80 25 50 30Z" fill="#3F6B5B"/></g>
+      <g transform="translate(520 360)"><rect x="-10" y="0" width="20" height="80" rx="4" fill="#fff"/><rect x="-14" y="-8" width="28" height="14" rx="4" fill="#C9775F"/></g>
+    </svg>
   </div>
-</div>
+</div></div>
 
-<section class="menu"><div class="wrap">
-  <h2>Services et prix</h2>
-  <div class="svc-list" id="svcs"></div>
-  <p class="note">Prix d'exemple pour cette démo. Les prix varient selon la longueur des cheveux.</p>
+<section id="services"><div class="wrap">
+  <span class="eyebrow">Services et prix</span>
+  <h2>Ce qu'on fait, et combien ça coûte.</h2>
+  <div class="svcs" id="svcs"></div>
+  <p style="color:var(--mute);font-size:14px;margin-top:18px">Prix d'exemple pour cette démo. Les prix peuvent varier selon la longueur et l'épaisseur des cheveux.</p>
+</div></section>
+
+<section class="gal" id="realisations"><div class="wrap">
+  <span class="eyebrow" style="color:#EBC6B9">Réalisations</span>
+  <h2>Quelques coupes et couleurs.</h2>
+  <div class="grid" id="gal"></div>
+  <p>Sur votre vrai site : les vraies photos de vos clients (avec leur permission) ou de votre salon.</p>
 </div></section>
 
 <section id="rdv"><div class="wrap book">
-  <div class="book-t">
-    <h2>Demander un rendez-vous</h2>
-    <p class="lead">Ce n'est pas une réservation automatique : c'est une demande. On vous appelle pour confirmer l'heure.</p>
-    <ol class="steps">
+  <div>
+    <span class="eyebrow">Rendez-vous</span>
+    <h2>Demandez votre place.</h2>
+    <p class="lead">Ce n'est pas une réservation automatique : c'est une demande. Le salon vous rappelle pour confirmer l'heure exacte.</p>
+    <ol class="how">
       <li><span>1</span>Vous choisissez un service et vos disponibilités.</li>
-      <li><span>2</span>Le salon reçoit votre demande par courriel.</li>
-      <li><span>3</span>On vous rappelle pour confirmer.</li>
+      <li><span>2</span>Le salon reçoit votre demande par courriel, sur son cellulaire.</li>
+      <li><span>3</span>On vous rappelle dans la journée pour confirmer.</li>
     </ol>
   </div>
 
   <div class="card">
     <div class="tabs" role="tablist">
-      <button type="button" role="tab" aria-selected="true" aria-controls="f-rdv" id="t-rdv">Rendez-vous</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="f-job" id="t-job">On embauche</button>
+      <button type="button" role="tab" aria-selected="true" id="t1">Rendez-vous</button>
+      <button type="button" role="tab" aria-selected="false" id="t2">On embauche</button>
     </div>
 
-    <form id="f-rdv" role="tabpanel" aria-labelledby="t-rdv" novalidate>
-      <div class="row">
-        <label>Nom<input name="nom" autocomplete="name" required></label>
-        <label>Téléphone<input name="tel" type="tel" autocomplete="tel" required placeholder="418 555-0000"></label>
+    <div id="wiz">
+      <div class="prog" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="step" data-s="0"><h3>Quel service ?</h3><div class="opts" id="sOpts"></div></div>
+      <div class="step" data-s="1" hidden><h3>Quand êtes-vous disponible ?</h3><span class="lbl">Journées possibles (choisissez-en une ou plusieurs)</span><div class="days" id="days"></div><span class="lbl">Moment de la journée</span><div class="moments" id="moments"></div></div>
+      <div class="step" data-s="2" hidden><h3>Comment vous joindre ?</h3>
+        <form id="who" novalidate>
+          <div class="two"><label>Prénom et nom<input name="nom" autocomplete="name" required></label><label>Téléphone<input name="tel" type="tel" autocomplete="tel" placeholder="418 555-0000" required></label></div>
+          <label>Une précision ? (facultatif)<textarea name="msg" rows="3" placeholder="Ex. : première visite, cheveux très longs…"></textarea></label>
+        </form>
+        <div class="sum" id="sum"></div>
       </div>
-      <label>Service<select name="service" id="svcSel" required></select></label>
-      <fieldset><legend>Vos journées possibles</legend><div class="chips" id="days"></div></fieldset>
-      <fieldset><legend>Moment de la journée</legend><div class="chips">
-        <label><input type="radio" name="moment" value="Matin" checked><span>Matin</span></label>
-        <label><input type="radio" name="moment" value="Après-midi"><span>Après-midi</span></label>
-        <label><input type="radio" name="moment" value="Soir"><span>Soir</span></label>
-      </div></fieldset>
-      <div class="sum" id="sum" aria-live="polite"></div>
+      <div class="step done" data-s="3" hidden>
+        <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#1F3B33"/><path d="M19 33 L28 42 L46 23" stroke="#F8E9E3" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Merci, c'est reçu !</h3>
+        <p id="doneTxt"></p>
+        <p style="font-size:13px">Démo : rien n'a été envoyé. Sur un vrai site, la demande arrive dans le Google Sheets du salon, avec un courriel.</p>
+        <button class="b" type="button" id="again">Faire une autre demande</button>
+      </div>
       <div class="err" id="err" aria-live="assertive"></div>
-      <button class="send" type="submit">Envoyer ma demande</button>
-    </form>
+      <div class="nav" id="navBtns"><button class="b" type="button" id="prev">Retour</button><button class="b full" type="button" id="next">Continuer</button></div>
+    </div>
 
-    <form id="f-job" role="tabpanel" aria-labelledby="t-job" hidden novalidate>
-      <div class="row">
-        <label>Nom<input name="nom" autocomplete="name" required></label>
-        <label>Téléphone<input name="tel" type="tel" autocomplete="tel" required></label>
-      </div>
+    <form id="job" hidden novalidate>
+      <div class="two"><label>Prénom et nom<input name="nom" autocomplete="name" required></label><label>Téléphone<input name="tel" type="tel" autocomplete="tel" required></label></div>
       <label>Poste<select name="poste"><option>Coiffeuse ou coiffeur</option><option>Réception</option><option>Stage</option></select></label>
       <label>Parlez-nous de vous<textarea name="msg" rows="4" required></textarea></label>
       <div class="err" id="err2" aria-live="assertive"></div>
-      <button class="send" type="submit">Envoyer ma candidature</button>
+      <button class="b full" type="submit" style="align-self:flex-start">Envoyer ma candidature</button>
+      <p id="jobDone" hidden style="background:var(--blush);border-radius:14px;padding:14px">Merci ! On lit votre candidature et on vous appelle. (Démo : rien n'a été envoyé.)</p>
     </form>
-
-    <div class="done" id="done" aria-live="polite">
-      <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="28" fill="#1F3B33"/><path d="M17 29 L25 37 L40 20" stroke="#F6E7E1" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <h3>Merci, c'est reçu !</h3>
-      <p id="doneTxt"></p>
-      <p><small>Démo : rien n'a été envoyé. Sur un vrai site, la demande arrive dans le Google Sheets du salon, avec un courriel.</small></p>
-      <button type="button" id="again">Faire une autre demande</button>
-    </div>
   </div>
 </div></section>
+
+<div class="info" id="infos"><div class="wrap">
+  <div><h3>Horaire</h3><p>Mardi et mercredi : 9 h – 17 h<br>Jeudi et vendredi : 9 h – 20 h<br>Samedi : 9 h – 15 h<br>Dimanche et lundi : fermé</p></div>
+  <div><h3>Adresse</h3><p>45, rue Exemple, Rimouski<br>Stationnement dans la rue.</p></div>
+  <div><h3>Nous joindre</h3><p><a href="tel:+14185550188">418 555-0188</a><br>Ou par la demande en ligne, 24 h sur 24.</p></div>
+</div></div>
 
 <footer><div class="wrap">
   <span>Salon Marée · commerce fictif · Rimouski</span>
@@ -155,51 +221,64 @@
 
 <script>
 (function(){
-  var S=[['Coupe femme','45 min',48],['Coupe homme','30 min',30],['Coloration','1 h 30',85],['Mèches','2 h',110],['Mise en plis','45 min',40],['Coupe enfant (12 ans et moins)','30 min',22]];
-  var list=document.getElementById('svcs'), sel=document.getElementById('svcSel');
-  sel.innerHTML='<option value="">Choisir un service</option>';
-  S.forEach(function(s,i){
-    var d=document.createElement('div'); d.className='svc';
-    d.innerHTML='<span>'+s[0]+'<small>'+s[1]+'</small></span><b>'+s[2]+' $</b>';
-    list.appendChild(d);
-    var o=document.createElement('option'); o.value=i; o.textContent=s[0]+' — '+s[2]+' $'; sel.appendChild(o);
+  function $(i){return document.getElementById(i);}
+  var S=[
+    ['Coupe femme','45 min',48,'Shampooing, coupe et coiffage.','#F8E9E3',function(){return '<path d="M120 60 L200 120 M120 120 L200 60" stroke="#1F3B33" stroke-width="8" stroke-linecap="round"/><circle cx="110" cy="56" r="16" fill="none" stroke="#1F3B33" stroke-width="7"/><circle cx="110" cy="124" r="16" fill="none" stroke="#1F3B33" stroke-width="7"/><path d="M230 140 Q260 60 300 70 Q280 110 300 150" stroke="#C9775F" stroke-width="10" fill="none" stroke-linecap="round"/>';}],
+    ['Coupe homme','30 min',30,'Coupe aux ciseaux ou à la tondeuse.','#E6EFEA',function(){return '<rect x="110" y="70" width="130" height="44" rx="14" fill="#1F3B33"/><rect x="240" y="80" width="30" height="24" rx="4" fill="#C9A14A"/><g stroke="#3F6B5B" stroke-width="4"><line x1="120" y1="78" x2="120" y2="106"/><line x1="134" y1="78" x2="134" y2="106"/><line x1="148" y1="78" x2="148" y2="106"/></g>';}],
+    ['Coloration','1 h 30',85,'Couleur complète, racines ou ton sur ton.','#F3E3D3',function(){return '<path d="M120 90 h110 l-12 50 h-86z" fill="#C9775F"/><ellipse cx="175" cy="90" rx="55" ry="12" fill="#A85A45"/><rect x="230" y="40" width="12" height="90" rx="6" fill="#1F3B33" transform="rotate(25 236 85)"/><rect x="250" y="34" width="30" height="20" rx="4" fill="#C9A14A" transform="rotate(25 265 44)"/>';}],
+    ['Mèches et balayage','2 h',110,'Lumière naturelle, effet soleil.','#FBEFD9',function(){return '<g fill="none" stroke-width="10" stroke-linecap="round"><path d="M130 40 Q150 100 130 150" stroke="#8A5A3C"/><path d="M155 40 Q175 100 155 150" stroke="#E7C27A"/><path d="M180 40 Q200 100 180 150" stroke="#8A5A3C"/><path d="M205 40 Q225 100 205 150" stroke="#E7C27A"/><path d="M230 40 Q250 100 230 150" stroke="#8A5A3C"/></g>';}],
+    ['Mise en plis','45 min',40,'Brushing, boucles ou chignon.','#EAE6F2',function(){return '<path d="M120 70 h90 a24 24 0 0 1 0 48 h-90z" fill="#1F3B33"/><rect x="150" y="118" width="26" height="46" rx="8" fill="#3F6B5B"/><g stroke="#C9775F" stroke-width="5" stroke-linecap="round"><path d="M240 80 h40"/><path d="M240 94 h52"/><path d="M240 108 h36"/></g>';}],
+    ['Coupe enfant','30 min',22,'12 ans et moins, avec patience.','#E3F0F4',function(){return '<circle cx="180" cy="96" r="44" fill="#F3D1BE"/><path d="M136 90 Q140 44 182 46 Q228 46 226 94 Q210 70 182 72 Q156 72 136 90Z" fill="#8A5A3C"/><circle cx="166" cy="98" r="4" fill="#1F3B33"/><circle cx="196" cy="98" r="4" fill="#1F3B33"/><path d="M168 116 Q181 126 194 116" stroke="#1F3B33" stroke-width="4" fill="none" stroke-linecap="round"/>';}]
+  ];
+  S.forEach(function(s){
+    var a=document.createElement('article'); a.className='svc';
+    a.innerHTML='<svg viewBox="0 0 360 180" role="img" aria-label="Illustration : '+s[0]+'"><rect width="360" height="180" fill="'+s[4]+'"/>'+s[5]()+'</svg><div class="in"><div class="row"><h3>'+s[0]+'</h3><span class="pr">'+s[2]+' $</span></div><p>'+s[3]+'</p><span class="dur">Environ '+s[1]+'</span></div>';
+    $('svcs').appendChild(a);
   });
-  var days=document.getElementById('days'), names=['Mar','Mer','Jeu','Ven','Sam'];
-  names.forEach(function(n){ var l=document.createElement('label'); l.innerHTML='<input type="checkbox" name="jour" value="'+n+'"><span>'+n+'</span>'; days.appendChild(l); });
-  var fr=document.getElementById('f-rdv'), fj=document.getElementById('f-job'), done=document.getElementById('done');
-  function summary(){
-    var i=sel.value, j=[].map.call(fr.querySelectorAll('input[name=jour]:checked'),function(x){return x.value});
-    var m=fr.querySelector('input[name=moment]:checked').value;
-    document.getElementById('sum').textContent = i==='' ? 'Choisissez un service pour voir la durée et le prix.' :
-      S[i][0]+' · '+S[i][1]+' · '+S[i][2]+' $'+(j.length?' — '+j.join(', ')+', '+m.toLowerCase():'');
-  }
-  fr.addEventListener('change',summary); summary();
-  function tab(job){
-    document.getElementById('t-rdv').setAttribute('aria-selected',!job);
-    document.getElementById('t-job').setAttribute('aria-selected',job);
-    fr.hidden=job; fj.hidden=!job; done.style.display='none';
-  }
-  document.getElementById('t-rdv').onclick=function(){tab(false)};
-  document.getElementById('t-job').onclick=function(){tab(true)};
-  function ok(form,errId){
-    var bad=[].filter.call(form.querySelectorAll('[required]'),function(x){return !x.value.trim()});
-    var e=document.getElementById(errId);
-    if(bad.length){ e.textContent='Il manque : '+bad.map(function(x){return x.closest('label').firstChild.textContent.trim()}).join(', ')+'.'; bad[0].focus(); return false; }
-    e.textContent=''; return true;
-  }
-  fr.addEventListener('submit',function(ev){
-    ev.preventDefault();
-    if(!ok(fr,'err')) return;
-    if(!fr.querySelector('input[name=jour]:checked')){ document.getElementById('err').textContent='Choisissez au moins une journée possible.'; return; }
-    document.getElementById('doneTxt').textContent='On vous rappelle au '+fr.tel.value+' pour confirmer votre '+S[sel.value][0].toLowerCase()+'.';
-    fr.hidden=true; done.style.display='block';
+  var HAIR=[['#8A5A3C','#F3D1BE','#EBC6B9','bob'],['#2B1E16','#C99A7E','#3F6B5B','long'],['#E7C27A','#F3D1BE','#C9775F','wave'],['#B34A2E','#F6DCCB','#E8B97A','short']];
+  HAIR.forEach(function(h,i){
+    var hair = h[3]==='bob' ? '<path d="M70 120 Q70 50 150 50 Q230 50 230 120 L230 200 Q200 214 186 196 L186 130 Q150 110 114 130 L114 196 Q100 214 70 200Z" fill="'+h[0]+'"/>' :
+      h[3]==='long' ? '<path d="M66 130 Q66 46 150 46 Q234 46 234 130 L244 300 Q200 320 190 290 L188 140 Q150 120 112 140 L110 290 Q100 320 56 300Z" fill="'+h[0]+'"/>' :
+      h[3]==='wave' ? '<path d="M70 120 Q70 48 150 48 Q230 48 230 120 Q246 150 228 180 Q246 210 222 240 Q190 250 186 220 L186 132 Q150 112 114 132 L114 220 Q110 250 78 240 Q54 210 72 180 Q54 150 70 120Z" fill="'+h[0]+'"/>' :
+      '<path d="M86 116 Q86 52 150 52 Q214 52 214 116 Q200 96 150 94 Q100 96 86 116Z" fill="'+h[0]+'"/>';
+    var f=document.createElement('figure');
+    f.innerHTML='<svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration d’une réalisation '+(i+1)+'"><rect width="300" height="400" fill="'+h[2]+'"/><rect x="118" y="230" width="64" height="80" fill="'+h[1]+'"/><path d="M40 400 Q40 300 150 296 Q260 300 260 400Z" fill="#FFFBF8"/><ellipse cx="150" cy="150" rx="70" ry="86" fill="'+h[1]+'"/>'+hair+'</svg>';
+    $('gal').appendChild(f);
   });
-  fj.addEventListener('submit',function(ev){
-    ev.preventDefault(); if(!ok(fj,'err2')) return;
-    document.getElementById('doneTxt').textContent='Merci '+fj.nom.value.split(' ')[0]+' ! On lit votre candidature et on vous appelle.';
-    fj.hidden=true; done.style.display='block';
-  });
-  document.getElementById('again').onclick=function(){ fr.reset(); fj.reset(); summary(); var job=document.getElementById('t-job').getAttribute('aria-selected')==='true'; tab(job); };
+  // assistant de demande
+  var st={s:0,svc:null,days:[],mom:null}, steps=document.querySelectorAll('.step');
+  S.forEach(function(s,i){ var b=document.createElement('button'); b.type='button'; b.className='opt'; b.setAttribute('aria-pressed','false'); b.innerHTML='<span>'+s[0]+'<small>Environ '+s[1]+'</small></span><b>'+s[2]+' $</b>'; b.onclick=function(){ st.svc=i; [].forEach.call($('sOpts').children,function(x,j){x.setAttribute('aria-pressed',j===i)}); $('err').textContent=''; }; $('sOpts').appendChild(b); });
+  var open=[2,3,4,5,6], JN=['dim','lun','mar','mer','jeu','ven','sam'], MN=['janv','févr','mars','avr','mai','juin','juil','août','sept','oct','nov','déc'];
+  var d=new Date(); d.setHours(12); var count=0;
+  while(count<10){ d.setDate(d.getDate()+1); if(open.indexOf(d.getDay())<0) continue; count++;
+    (function(dt){ var lab=JN[dt.getDay()]+' '+dt.getDate()+' '+MN[dt.getMonth()];
+      var b=document.createElement('button'); b.type='button'; b.className='day'; b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label',lab);
+      b.innerHTML='<small>'+JN[dt.getDay()]+'</small><b>'+dt.getDate()+'</b><small>'+MN[dt.getMonth()]+'</small>';
+      b.onclick=function(){ var k=st.days.indexOf(lab); if(k<0) st.days.push(lab); else st.days.splice(k,1); b.setAttribute('aria-pressed',k<0); $('err').textContent=''; };
+      $('days').appendChild(b); })(new Date(d));
+  }
+  ['Matin','Après-midi','Soir'].forEach(function(m){ var b=document.createElement('button'); b.type='button'; b.textContent=m; b.setAttribute('aria-pressed','false'); b.onclick=function(){ st.mom=m; [].forEach.call($('moments').children,function(x){x.setAttribute('aria-pressed',x===b)}); $('err').textContent=''; }; $('moments').appendChild(b); });
+  function show(){
+    [].forEach.call(steps,function(e){ e.hidden=+e.dataset.s!==st.s; });
+    [].forEach.call(document.querySelectorAll('.prog span'),function(e,i){ e.className=i<=Math.min(st.s,2)?'on':''; });
+    $('prev').style.visibility=st.s>0&&st.s<3?'visible':'hidden'; $('navBtns').hidden=st.s===3;
+    $('next').textContent=st.s===2?'Envoyer ma demande':'Continuer';
+    if(st.s===2){ var s=S[st.svc]; $('sum').innerHTML='<b>'+s[0]+'</b> · environ '+s[1]+' · '+s[2]+' $<br>'+st.days.join(', ')+' · '+st.mom.toLowerCase(); }
+  }
+  $('next').onclick=function(){
+    var e=$('err');
+    if(st.s===0&&st.svc===null){ e.textContent='Choisissez un service.'; return; }
+    if(st.s===1&&(!st.days.length||!st.mom)){ e.textContent=!st.days.length?'Choisissez au moins une journée.':'Choisissez un moment de la journée.'; return; }
+    if(st.s===2){ var f=$('who'), bad=[].filter.call(f.querySelectorAll('[required]'),function(x){return !x.value.trim()}); if(bad.length){ e.textContent='Il manque votre '+(bad[0].name==='nom'?'nom':'téléphone')+'.'; bad[0].focus(); return; }
+      $('doneTxt').textContent='On vous rappelle au '+f.tel.value+' pour confirmer votre '+S[st.svc][0].toLowerCase()+'.'; }
+    e.textContent=''; st.s++; show();
+  };
+  $('prev').onclick=function(){ if(st.s>0){ st.s--; $('err').textContent=''; show(); } };
+  $('again').onclick=function(){ st={s:0,svc:null,days:[],mom:null}; $('who').reset(); [].forEach.call(document.querySelectorAll('#wiz [aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')}); show(); };
+  function tab(job){ $('t1').setAttribute('aria-selected',!job); $('t2').setAttribute('aria-selected',job); $('wiz').hidden=job; $('job').hidden=!job; }
+  $('t1').onclick=function(){tab(false)}; $('t2').onclick=function(){tab(true)};
+  $('job').addEventListener('submit',function(ev){ ev.preventDefault(); var f=this, bad=[].filter.call(f.querySelectorAll('[required]'),function(x){return !x.value.trim()}); if(bad.length){ $('err2').textContent='Remplissez tous les champs.'; bad[0].focus(); return; } $('err2').textContent=''; $('jobDone').hidden=false; });
+  show();
 })();
 </script>
 </body>
