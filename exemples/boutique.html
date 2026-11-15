@@ -16,7 +16,7 @@
   button{font:inherit;color:inherit}
   .demo{background:#0E1A2B;color:#F4EDE1;font-size:13px;padding:9px 16px;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;text-align:center}
   .demo a{color:#FF8A6B;font-weight:600}
-  .ann{background:var(--ink);color:var(--bg);font-size:13px;letter-spacing:.04em;text-align:center;padding:9px 16px}
+  .ann{background:var(--rust);color:var(--bg);font-size:13px;letter-spacing:.04em;text-align:center;padding:9px 16px}
   .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
   header{position:sticky;top:0;z-index:20;background:rgba(244,241,234,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;min-height:68px}
@@ -282,7 +282,18 @@
 
 <script>
 (function(){
-  var BG=['#E6DFD2','#DCE1DB','#E9DDD3','#DEDAD0','#D9DFE3','#E7E1D6','#E2DCCF','#DDE2DA'];
+  var THEMES={
+    fleuve:{bg:'#FBF7F1',card:'#F1E9DE',ink:'#14213D',mute:'#5A6276',line:'#E3DACC',accent:'#E2583E',sage:'#2E8B6B',white:'#FFFFFF',
+      tiles:['#FFD9C7','#BFE3DD','#FFE7A8','#CFDCF7','#E2D6F7','#FFD3DC','#CDEBD3','#F9E0C4'],sky:'#FFC9A8',sun:'#FF8A5B',floor:'#14213D',edge:'#0B1428',story:'#2E8B6B',storyFloor:'#246F55'},
+    cobalt:{bg:'#FFFFFF',card:'#F2F4FA',ink:'#0F1222',mute:'#596079',line:'#E3E6EF',accent:'#2A4FD6',sage:'#2A4FD6',white:'#FFFFFF',
+      tiles:['#DCE5FF','#FFE1D6','#E4F5E8','#FFF1BF','#EFE2FF','#D9F1F5','#FFE0EC','#E7E9F2'],sky:'#DCE5FF',sun:'#2A4FD6',floor:'#0F1222',edge:'#05070F',story:'#2A4FD6',storyFloor:'#1D3BAA'},
+    terracotta:{bg:'#FFF6EC',card:'#FBE7D3',ink:'#2A1810',mute:'#7A5C4A',line:'#F0D9C2',accent:'#D9481F',sage:'#4F7A3A',white:'#FFFDF9',
+      tiles:['#FFD0B5','#F6E2A8','#D7E8C4','#FFC9C0','#F3D7B7','#E8D2F0','#CFE5E0','#FADDB8'],sky:'#FFD9A8',sun:'#D9481F',floor:'#6B2E1A',edge:'#4F1F10',story:'#4F7A3A',storyFloor:'#3D6029'}
+  };
+  var tn=(location.search.match(/theme=(\w+)/)||[])[1]; var T=THEMES[tn]||THEMES.fleuve;
+  ['bg','card','ink','mute','line','white'].forEach(function(k){ document.documentElement.style.setProperty('--'+k,T[k]); });
+  document.documentElement.style.setProperty('--rust',T.accent); document.documentElement.style.setProperty('--sage',T.sage);
+  var BG=T.tiles;
   function shadow(cx,cy,rx){return '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+(rx*0.14)+'" fill="#000" opacity=".12"/>';}
   function jar(o,lit,bare){
     var w=o.w||120,x=200-w/2,top=190, s='';
@@ -340,33 +351,33 @@
 
   var CARE_C='Coupez la mèche à 5 mm avant chaque utilisation. La première fois, laissez brûler jusqu’à ce que toute la surface soit fondue, environ 2 heures.';
   var CARE_K='Lave-vaisselle et micro-ondes. Évitez les chocs thermiques brusques. Chaque pièce est unique : l’émail varie d’une pièce à l’autre.';
-  var M={bg:BG[1],glass:'#B9C6C4',wax:'#EDEBE4',label:'#F7F4EE',ink:'#2B3A3C',lid:'#2B3A3C',scent:'Marée',w:124};
-  var F={bg:BG[2],glass:'#B07A4F',wax:'#F1E6D6',label:'#1E1A17',ink:'#F1E6D6',lid:'#1E1A17',scent:'Feu de grève',w:124};
-  var B={bg:BG[4],glass:'#C3C3CF',wax:'#E9E6EE',label:'#F6F5F8',ink:'#3E3A4F',lid:'#BFB8A8',scent:'Brume',w:110};
-  var TF={bg:BG[3],clay:'#B9A27D',glaze:'#2F5266',inner:'#3A6377'};
-  var TS={bg:BG[5],clay:'#9C8466',glaze:'#E3D7C1',inner:'#EFE6D6'};
-  var BG1={bg:BG[6],clay:'#A58D6E',glaze:'#55624A',inner:'#6B7A5E'};
-  var VA={bg:BG[7],glaze:'#C9B79C'};
+  var M={bg:BG[1],glass:'#9FD3CC',wax:'#F5F2EA',label:'#1F7A78',ink:'#FFFFFF',lid:'#14213D',scent:'Marée',w:124};
+  var F={bg:BG[0],glass:'#E39A62',wax:'#FFF1DF',label:'#C2452D',ink:'#FFFFFF',lid:'#3A1A10',scent:'Feu de grève',w:124};
+  var B={bg:BG[4],glass:'#B9A9EE',wax:'#F4F0FF',label:'#6E5BB8',ink:'#FFFFFF',lid:'#3A2E70',scent:'Brume',w:110};
+  var TF={bg:BG[3],clay:'#D9B98C',glaze:'#2A4FD6',inner:'#3D63E8'};
+  var TS={bg:BG[2],clay:'#B48A5E',glaze:'#F2B63A',inner:'#F7CB63'};
+  var BG1={bg:BG[6],clay:'#B9946A',glaze:'#2E8B6B',inner:'#3DA582'};
+  var VA={bg:BG[5],glaze:'#EF8A7A'};
   var P=[
     {id:'maree',cat:'Chandelles',name:'Marée',sub:'Sel de mer & bois flotté',care:CARE_C,desc:'Une odeur de grève au petit matin : sel, bois flotté, une pointe d’agrumes. Coulée à la main dans un pot de verre réutilisable.',det:'Cire de soya, mèche de coton, pot de verre réutilisable. Petit : environ 50 h de combustion. Grand : environ 90 h.',
-      v:[['Petit','180 g',28],['Grand','320 g',42]],dots:['#8FA3A6'],art:function(k){return k===1?jar(M,true):k===2?jar(ext(M,'bg','#C9D2CF'),false):jar(M,false);}},
+      v:[['Petit','180 g',28],['Grand','320 g',42]],dots:['#1F7A78'],art:function(k){return k===1?jar(M,true):k===2?jar(ext(M,'bg',BG[3]),false):jar(M,false);}},
     {id:'feu',cat:'Chandelles',name:'Feu de grève',sub:'Bois fumé & cèdre',care:CARE_C,tag:'Nouveau',desc:'Le feu de camp sur la plage, en septembre. Bois fumé, cèdre et une note de vanille.',det:'Cire de soya, mèche de coton, pot ambré. Petit : environ 50 h. Grand : environ 90 h.',
-      v:[['Petit','180 g',28],['Grand','320 g',42]],dots:['#9A4A2F'],art:function(k){return k===1?jar(F,true):k===2?jar(ext(F,'bg','#D8C2AE'),false):jar(F,false);}},
+      v:[['Petit','180 g',28],['Grand','320 g',42]],dots:['#C2452D'],art:function(k){return k===1?jar(F,true):k===2?jar(ext(F,'bg',BG[2]),false):jar(F,false);}},
     {id:'brume',cat:'Chandelles',name:'Brume',sub:'Lavande & sapin baumier',care:CARE_C,desc:'Les matins gris qui sentent bon. Lavande douce et sapin baumier, pour les soirées tranquilles.',det:'Cire de soya, mèche de coton. Petit : environ 50 h. Grand : environ 90 h.',
-      v:[['Petit','180 g',28],['Grand','320 g',42]],dots:['#A9A3B8'],art:function(k){return k===1?jar(B,true):k===2?jar(ext(B,'bg','#C8CDD3'),false):jar(B,false);}},
+      v:[['Petit','180 g',28],['Grand','320 g',42]],dots:['#6E5BB8'],art:function(k){return k===1?jar(B,true):k===2?jar(ext(B,'bg',BG[5]),false):jar(B,false);}},
     {id:'tasse-fleuve',cat:'Céramique',name:'Tasse Fleuve',sub:'Grès émaillé · 350 ml',care:CARE_K,desc:'Une tasse lourde et douce dans la main, émail bleu profond qui coule sur l’argile brute.',det:'Grès tourné à la main, émail sans plomb, 350 ml.',
-      v:[['À l’unité','350 ml',34],['La paire','2 × 350 ml',62]],dots:['#2F5266','#B9A27D'],art:function(k){return k===1?mug(TF,true):mug(k===2?ext(TF,'bg','#CFC6B5'):TF,false);}},
+      v:[['À l’unité','350 ml',34],['La paire','2 × 350 ml',62]],dots:['#2A4FD6','#D9B98C'],art:function(k){return k===1?mug(TF,true):mug(k===2?ext(TF,'bg',BG[2]):TF,false);}},
     {id:'tasse-sable',cat:'Céramique',name:'Tasse Sable',sub:'Grès émaillé · 350 ml',care:CARE_K,desc:'Émail crème mat, pied d’argile brute. La tasse du matin, tous les matins.',det:'Grès tourné à la main, émail sans plomb, 350 ml.',
-      v:[['À l’unité','350 ml',34],['La paire','2 × 350 ml',62]],dots:['#E3D7C1','#9C8466'],art:function(k){return k===1?mug(TS,true):mug(k===2?ext(TS,'bg','#D5CBBB'):TS,false);}},
+      v:[['À l’unité','350 ml',34],['La paire','2 × 350 ml',62]],dots:['#F2B63A','#B48A5E'],art:function(k){return k===1?mug(TS,true):mug(k===2?ext(TS,'bg',BG[3]):TS,false);}},
     {id:'bol-goemon',cat:'Céramique',name:'Bol Goémon',sub:'Grès moucheté',care:CARE_K,desc:'Vert algue moucheté, assez grand pour la soupe du dimanche. Joli vide aussi, sur une tablette.',det:'Grès tourné à la main. Petit : 14 cm. Grand : 20 cm.',
-      v:[['Petit','14 cm',32],['Grand','20 cm',48]],dots:['#55624A'],art:function(k){return k===1?bowl(BG1,true):bowl(k===2?ext(BG1,'bg','#D3CCBC'):BG1,false);}},
+      v:[['Petit','14 cm',32],['Grand','20 cm',48]],dots:['#2E8B6B'],art:function(k){return k===1?bowl(BG1,true):bowl(k===2?ext(BG1,'bg',BG[7]):BG1,false);}},
     {id:'vase-anse',cat:'Céramique',name:'Vase Anse',sub:'Grès émaillé · 22 cm',care:CARE_K,out:true,desc:'Une forme ronde et calme, pour trois branches ramassées en revenant de marcher.',det:'Grès émaillé à l’intérieur, étanche. Hauteur 22 cm.',
-      v:[['Pièce unique','22 cm',58]],dots:['#C9B79C'],art:function(k){return vase(k===2?ext(VA,'bg','#D7D0C2'):VA,k===1);}},
+      v:[['Pièce unique','22 cm',58]],dots:['#EF8A7A'],art:function(k){return vase(k===2?ext(VA,'bg',BG[1]):VA,k===1);}},
     {id:'coffret',cat:'Coffrets',name:'Coffret Grève',sub:'Chandelle + tasse',care:CARE_C,desc:'Le cadeau tout fait : une chandelle Marée petit format et une tasse Fleuve, emballées dans une boîte kraft.',det:'Contient : 1 chandelle Marée 180 g et 1 tasse Fleuve 350 ml. Carte écrite à la main sur demande.',
-      v:[['Coffret','2 pièces',56]],dots:['#8FA3A6','#2F5266'],art:function(k){
+      v:[['Coffret','2 pièces',56]],dots:['#1F7A78','#2A4FD6'],art:function(k){
         if(k===1) return jar(M,true);
         if(k===2) return mug(TF,false);
-        return '<rect width="400" height="500" fill="#E3D9C8"/>'+shadow(200,420,150)+'<rect x="60" y="230" width="280" height="190" fill="#C3A27A"/><rect x="60" y="230" width="280" height="18" fill="#B08E66"/><rect x="190" y="230" width="20" height="190" fill="#7E5B3D"/><path d="M200 230 Q170 196 150 214 Q170 232 200 230 Q230 196 250 214 Q230 232 200 230Z" fill="#7E5B3D"/><rect x="96" y="276" width="80" height="44" fill="#F7F4EE"/><text x="136" y="304" text-anchor="middle" font-family="Instrument Serif,serif" font-size="18" fill="#2B3A3C">Fjord</text>';}}
+        return '<rect width="400" height="500" fill="'+BG[7]+'"/>'+shadow(200,420,150)+'<rect x="60" y="230" width="280" height="190" fill="#14213D"/><rect x="60" y="230" width="280" height="18" fill="#0B1428"/><rect x="190" y="230" width="20" height="190" fill="#E2583E"/><path d="M200 230 Q170 196 150 214 Q170 232 200 230 Q230 196 250 214 Q230 232 200 230Z" fill="#E2583E"/><rect x="96" y="276" width="80" height="44" fill="#F7F4EE"/><text x="136" y="304" text-anchor="middle" font-family="Instrument Serif,serif" font-size="18" fill="#2B3A3C">Fjord</text>';}}
   ];
 
   var cart=[]; try{ cart=JSON.parse(localStorage.getItem('fjord-cart-v2')||'[]'); }catch(e){ cart=[]; }
@@ -378,12 +389,12 @@
   cart=cart.filter(function(l){ var a=String(l.k).split('|'), p=byId(a[0]); return p && p.v[+a[1]] && l.q>0; });
   var FREE=75, SHIPFEE=12, cat='Tout', sort='feat', query='';
 
-  $('heroArt').innerHTML='<svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice"><rect width="600" height="700" fill="#D6C7AE"/><circle cx="440" cy="220" r="120" fill="#E9B98A"/><rect y="252" width="600" height="16" fill="#D6C7AE"/><rect y="292" width="600" height="22" fill="#D6C7AE"/><rect y="338" width="600" height="30" fill="#D6C7AE"/><rect y="440" width="600" height="260" fill="#B9A387"/><rect y="440" width="600" height="10" fill="#A8917A"/>'+
+  $('heroArt').style.background=T.sky; $('heroArt').innerHTML='<svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice"><rect width="600" height="700" fill="'+T.sky+'"/><circle cx="440" cy="220" r="120" fill="'+T.sun+'"/><rect y="252" width="600" height="16" fill="'+T.sky+'"/><rect y="292" width="600" height="22" fill="'+T.sky+'"/><rect y="338" width="600" height="30" fill="'+T.sky+'"/><rect y="440" width="600" height="260" fill="'+T.floor+'"/><rect y="440" width="600" height="10" fill="'+T.edge+'"/>'+
     '<g transform="translate(40 168) scale(.66)">'+jar(F,true,true)+'</g>'+
     '<g transform="translate(220 212) scale(.58)">'+mug(TF,false,true)+'</g>'+
-    '<g transform="translate(360 160) scale(.68)">'+vase({glaze:'#EDE4D3'},true,true)+'</g></svg>';
-  $('storyArt').innerHTML='<svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice"><rect width="500" height="500" fill="#6F7B62"/><rect y="330" width="500" height="170" fill="#5D6852"/><rect y="330" width="500" height="8" fill="#4F5946"/>'+
-    [0,1,2,3].map(function(i){ var o={glass:'#C9D2C5',wax:['#EDEBE4','#F1E6D6','#E9E6EE','#EFE8DA'][i],label:'#F7F4EE',ink:'#2B3A3C',lid:'#2B3A3C',scent:['Marée','Feu','Brume','Bois'][i],w:124}; return '<g transform="translate('+(26+i*112)+' 186) scale(.36)">'+jar(o,i%2===0,true)+'</g>'; }).join('')+
+    '<g transform="translate(360 160) scale(.68)">'+vase({glaze:'#FFFFFF'},true,true)+'</g></svg>';
+  $('storyArt').innerHTML='<svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice"><rect width="500" height="500" fill="'+T.story+'"/><rect y="330" width="500" height="170" fill="'+T.storyFloor+'"/>'+
+    [0,1,2,3].map(function(i){ var o={glass:'#FFFFFF',wax:'#FFF8EE',label:['#1F7A78','#C2452D','#6E5BB8','#F2B63A'][i],ink:'#FFFFFF',lid:'#14213D',scent:['Marée','Feu','Brume','Bois'][i],w:124}; return '<g transform="translate('+(26+i*112)+' 186) scale(.36)">'+jar(o,i%2===0,true)+'</g>'; }).join('')+
     '<text x="40" y="440" font-family="Instrument Serif,serif" font-style="italic" font-size="30" fill="#E7E3D6">Lot n° 24 · au repos</text></svg>';
 
   ['Tout','Chandelles','Céramique','Coffrets'].forEach(function(c){ var b=document.createElement('button'); b.type='button'; b.textContent=c; b.setAttribute('aria-pressed',c===cat); b.onclick=function(){cat=c;[].forEach.call($('chips').children,function(x){x.setAttribute('aria-pressed',x.textContent===c)});draw();}; $('chips').appendChild(b); });
