@@ -22,6 +22,7 @@
     '.qz-ctas{display:flex;flex-wrap:wrap;gap:12px}' +
     '.qz-cta{background:#FF6B4A;color:#0E1A2B;padding:15px 24px;border-radius:999px;font-weight:700;text-decoration:none}' +
     '.qz-cta2{border:2px solid #F4EDE1;color:#F4EDE1;padding:13px 22px;border-radius:999px;font-weight:700;text-decoration:none}';
+  css.textContent += '.qz-day{display:inline-block;background:#3FC1B0;color:#0E1A2B;font-weight:700;padding:6px 12px;border-radius:999px;margin:8px 0 0}';
   document.head.appendChild(css);
 
   var PLANS = {
@@ -125,6 +126,7 @@
       var price = el('div', 'qz-price', 'environ ' + money(r.month));
       var sm = el('small', null, ' / mois'); price.appendChild(sm);
       res.appendChild(price);
+      if (r.plan.name === 'Essentiel' && r.month <= 31) { res.appendChild(el('p', 'qz-day', 'Oui : environ 1 $ par jour pour avoir votre site. Moins qu’un café.')); }
       if (r.extras.length) {
         res.appendChild(el('span', null, 'Ce qu’on ajouterait :'));
         var ul = el('ul');
