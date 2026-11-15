@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salon Marée — Exemple du forfait Rendez-vous | Studio Atlas Rimouski</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--blush:#F6E7E1;--rose:#E8C9BF;--forest:#1F3B33;--mute:#5E6B66;--white:#FFFDFB}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--forest);background:var(--blush)}
+  a{color:inherit}
+  .demo{background:#0E1A2B;color:#F4EDE1;font-size:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center}
+  .demo a{color:#FF8A6B;font-weight:600}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  header{padding:28px 0}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .logo{font-family:Fraunces,serif;font-size:28px;font-weight:700;letter-spacing:-.01em}
+  .logo i{font-style:italic;font-weight:500}
+  .cta{background:var(--forest);color:var(--blush);text-decoration:none;font-weight:600;padding:14px 20px;border-radius:999px}
+  .hero{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding:24px 0 56px}
+  .hero-t{flex:1 1 380px}
+  h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(44px,7vw,78px);line-height:1;margin:0 0 18px;letter-spacing:-.02em}
+  h1 em{font-weight:700}
+  .lead{font-size:19px;line-height:1.6;color:var(--mute);max-width:480px;margin:0}
+  .art{flex:0 1 340px;min-width:0}
+  .art svg{width:100%;height:auto;display:block}
+  h2{font-family:Fraunces,serif;font-weight:700;font-size:clamp(30px,4.5vw,44px);margin:0 0 20px}
+  section{padding:56px 0}
+  .menu{background:var(--white)}
+  .svc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 40px}
+  .svc{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px dashed var(--rose);font-size:17px}
+  .svc small{display:block;color:var(--mute);font-size:14px;margin-top:2px}
+  .svc b{white-space:nowrap}
+  .note{color:var(--mute);font-size:14px;margin-top:14px}
+  .book{display:flex;flex-wrap:wrap;gap:40px}
+  .book-t{flex:1 1 300px}
+  .steps{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:14px;font-size:17px}
+  .steps li{display:flex;gap:12px;align-items:flex-start}
+  .steps span{flex:0 0 32px;height:32px;border-radius:50%;background:var(--forest);color:var(--blush);display:flex;align-items:center;justify-content:center;font-weight:600}
+  .card{flex:1 1 420px;min-width:0;background:var(--white);border-radius:24px;padding:28px;box-shadow:0 1px 0 var(--rose)}
+  .tabs{display:flex;gap:6px;background:var(--blush);padding:5px;border-radius:999px;margin-bottom:22px}
+  .tabs button{flex:1;font:inherit;font-weight:600;border:0;background:none;padding:12px;border-radius:999px;cursor:pointer;color:var(--forest);min-height:44px}
+  .tabs button[aria-selected="true"]{background:var(--forest);color:var(--blush)}
+  form{display:flex;flex-direction:column;gap:16px}
+  label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
+  input,select,textarea{font:inherit;font-weight:400;font-size:16px;padding:13px 14px;border:1.5px solid var(--rose);border-radius:12px;background:#fff;color:var(--forest)}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--forest);outline-offset:1px}
+  .row{display:flex;flex-wrap:wrap;gap:14px}.row>*{flex:1 1 180px}
+  fieldset{border:0;padding:0;margin:0}
+  legend{font-weight:600;font-size:15px;margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips label{flex-direction:row;align-items:center;gap:0;font-weight:500}
+  .chips input{position:absolute;opacity:0;width:1px;height:1px}
+  .chips span{padding:10px 14px;border:1.5px solid var(--rose);border-radius:999px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center}
+  .chips input:checked+span{background:var(--forest);border-color:var(--forest);color:var(--blush)}
+  .chips input:focus-visible+span{outline:2px solid var(--forest);outline-offset:2px}
+  .sum{background:var(--blush);border-radius:12px;padding:12px 14px;font-size:15px}
+  .err{color:#A3271A;font-size:14px;min-height:1em}
+  button.send{font:inherit;font-weight:600;font-size:17px;background:var(--forest);color:var(--blush);border:0;border-radius:999px;padding:16px;cursor:pointer;min-height:52px}
+  .done{text-align:center;padding:24px 8px;display:none}
+  .done h3{font-family:Fraunces,serif;font-size:30px;margin:8px 0}
+  .done p{color:var(--mute);line-height:1.6}
+  .done button{font:inherit;font-weight:600;border:1.5px solid var(--forest);background:none;border-radius:999px;padding:12px 18px;cursor:pointer;color:var(--forest)}
+  footer{padding:32px 0;font-size:14px;color:var(--mute)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;border-top:1px solid var(--rose);padding-top:24px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="demo">Exemple fictif du forfait <strong>Rendez-vous · 45 $/mois</strong> — les clients demandent un rendez-vous, le salon rappelle pour confirmer. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
+
+<header><div class="wrap">
+  <span class="logo">Salon <i>Marée</i></span>
+  <a class="cta" href="#rdv">Prendre rendez-vous</a>
+</div></header>
+
+<div class="wrap hero">
+  <div class="hero-t">
+    <h1>Coupe, couleur et <em>un vrai moment</em> pour vous.</h1>
+    <p class="lead">Un petit salon tranquille, à deux pas du fleuve. Demandez votre rendez-vous en ligne, on vous rappelle dans la journée.</p>
+  </div>
+  <div class="art" aria-hidden="true">
+    <svg viewBox="0 0 340 340"><circle cx="170" cy="170" r="160" fill="#E8C9BF"/><path d="M20 210 Q95 180 170 210 T320 210 L320 340 L20 340Z" fill="#1F3B33" opacity=".9"/><path d="M40 240 Q105 215 170 240 T300 240" stroke="#F6E7E1" stroke-width="4" fill="none"/><path d="M60 270 Q115 250 170 270 T280 270" stroke="#F6E7E1" stroke-width="3" fill="none" opacity=".6"/><g transform="translate(150 60) rotate(20)"><rect x="0" y="0" width="14" height="110" rx="7" fill="#1F3B33"/><rect x="24" y="0" width="14" height="110" rx="7" fill="#1F3B33"/><circle cx="7" cy="128" r="16" fill="none" stroke="#1F3B33" stroke-width="7"/><circle cx="31" cy="128" r="16" fill="none" stroke="#1F3B33" stroke-width="7"/></g></svg>
+  </div>
+</div>
+
+<section class="menu"><div class="wrap">
+  <h2>Services et prix</h2>
+  <div class="svc-list" id="svcs"></div>
+  <p class="note">Prix d'exemple pour cette démo. Les prix varient selon la longueur des cheveux.</p>
+</div></section>
+
+<section id="rdv"><div class="wrap book">
+  <div class="book-t">
+    <h2>Demander un rendez-vous</h2>
+    <p class="lead">Ce n'est pas une réservation automatique : c'est une demande. On vous appelle pour confirmer l'heure.</p>
+    <ol class="steps">
+      <li><span>1</span>Vous choisissez un service et vos disponibilités.</li>
+      <li><span>2</span>Le salon reçoit votre demande par courriel.</li>
+      <li><span>3</span>On vous rappelle pour confirmer.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" aria-controls="f-rdv" id="t-rdv">Rendez-vous</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="f-job" id="t-job">On embauche</button>
+    </div>
+
+    <form id="f-rdv" role="tabpanel" aria-labelledby="t-rdv" novalidate>
+      <div class="row">
+        <label>Nom<input name="nom" autocomplete="name" required></label>
+        <label>Téléphone<input name="tel" type="tel" autocomplete="tel" required placeholder="418 555-0000"></label>
+      </div>
+      <label>Service<select name="service" id="svcSel" required></select></label>
+      <fieldset><legend>Vos journées possibles</legend><div class="chips" id="days"></div></fieldset>
+      <fieldset><legend>Moment de la journée</legend><div class="chips">
+        <label><input type="radio" name="moment" value="Matin" checked><span>Matin</span></label>
+        <label><input type="radio" name="moment" value="Après-midi"><span>Après-midi</span></label>
+        <label><input type="radio" name="moment" value="Soir"><span>Soir</span></label>
+      </div></fieldset>
+      <div class="sum" id="sum" aria-live="polite"></div>
+      <div class="err" id="err" aria-live="assertive"></div>
+      <button class="send" type="submit">Envoyer ma demande</button>
+    </form>
+
+    <form id="f-job" role="tabpanel" aria-labelledby="t-job" hidden novalidate>
+      <div class="row">
+        <label>Nom<input name="nom" autocomplete="name" required></label>
+        <label>Téléphone<input name="tel" type="tel" autocomplete="tel" required></label>
+      </div>
+      <label>Poste<select name="poste"><option>Coiffeuse ou coiffeur</option><option>Réception</option><option>Stage</option></select></label>
+      <label>Parlez-nous de vous<textarea name="msg" rows="4" required></textarea></label>
+      <div class="err" id="err2" aria-live="assertive"></div>
+      <button class="send" type="submit">Envoyer ma candidature</button>
+    </form>
+
+    <div class="done" id="done" aria-live="polite">
+      <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="28" fill="#1F3B33"/><path d="M17 29 L25 37 L40 20" stroke="#F6E7E1" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Merci, c'est reçu !</h3>
+      <p id="doneTxt"></p>
+      <p><small>Démo : rien n'a été envoyé. Sur un vrai site, la demande arrive dans le Google Sheets du salon, avec un courriel.</small></p>
+      <button type="button" id="again">Faire une autre demande</button>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>Salon Marée · commerce fictif · Rimouski</span>
+  <span>Site créé par <a href="../index.html">Studio Atlas Rimouski</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var S=[['Coupe femme','45 min',48],['Coupe homme','30 min',30],['Coloration','1 h 30',85],['Mèches','2 h',110],['Mise en plis','45 min',40],['Coupe enfant (12 ans et moins)','30 min',22]];
+  var list=document.getElementById('svcs'), sel=document.getElementById('svcSel');
+  sel.innerHTML='<option value="">Choisir un service</option>';
+  S.forEach(function(s,i){
+    var d=document.createElement('div'); d.className='svc';
+    d.innerHTML='<span>'+s[0]+'<small>'+s[1]+'</small></span><b>'+s[2]+' $</b>';
+    list.appendChild(d);
+    var o=document.createElement('option'); o.value=i; o.textContent=s[0]+' — '+s[2]+' $'; sel.appendChild(o);
+  });
+  var days=document.getElementById('days'), names=['Mar','Mer','Jeu','Ven','Sam'];
+  names.forEach(function(n){ var l=document.createElement('label'); l.innerHTML='<input type="checkbox" name="jour" value="'+n+'"><span>'+n+'</span>'; days.appendChild(l); });
+  var fr=document.getElementById('f-rdv'), fj=document.getElementById('f-job'), done=document.getElementById('done');
+  function summary(){
+    var i=sel.value, j=[].map.call(fr.querySelectorAll('input[name=jour]:checked'),function(x){return x.value});
+    var m=fr.querySelector('input[name=moment]:checked').value;
+    document.getElementById('sum').textContent = i==='' ? 'Choisissez un service pour voir la durée et le prix.' :
+      S[i][0]+' · '+S[i][1]+' · '+S[i][2]+' $'+(j.length?' — '+j.join(', ')+', '+m.toLowerCase():'');
+  }
+  fr.addEventListener('change',summary); summary();
+  function tab(job){
+    document.getElementById('t-rdv').setAttribute('aria-selected',!job);
+    document.getElementById('t-job').setAttribute('aria-selected',job);
+    fr.hidden=job; fj.hidden=!job; done.style.display='none';
+  }
+  document.getElementById('t-rdv').onclick=function(){tab(false)};
+  document.getElementById('t-job').onclick=function(){tab(true)};
+  function ok(form,errId){
+    var bad=[].filter.call(form.querySelectorAll('[required]'),function(x){return !x.value.trim()});
+    var e=document.getElementById(errId);
+    if(bad.length){ e.textContent='Il manque : '+bad.map(function(x){return x.closest('label').firstChild.textContent.trim()}).join(', ')+'.'; bad[0].focus(); return false; }
+    e.textContent=''; return true;
+  }
+  fr.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(!ok(fr,'err')) return;
+    if(!fr.querySelector('input[name=jour]:checked')){ document.getElementById('err').textContent='Choisissez au moins une journée possible.'; return; }
+    document.getElementById('doneTxt').textContent='On vous rappelle au '+fr.tel.value+' pour confirmer votre '+S[sel.value][0].toLowerCase()+'.';
+    fr.hidden=true; done.style.display='block';
+  });
+  fj.addEventListener('submit',function(ev){
+    ev.preventDefault(); if(!ok(fj,'err2')) return;
+    document.getElementById('doneTxt').textContent='Merci '+fj.nom.value.split(' ')[0]+' ! On lit votre candidature et on vous appelle.';
+    fj.hidden=true; done.style.display='block';
+  });
+  document.getElementById('again').onclick=function(){ fr.reset(); fj.reset(); summary(); var job=document.getElementById('t-job').getAttribute('aria-selected')==='true'; tab(job); };
+})();
+</script>
+</body>
+</html>

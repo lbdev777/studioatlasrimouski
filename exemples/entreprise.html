@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nordet Chauffage &amp; Plomberie — Exemple du forfait Entreprise | Studio Atlas Rimouski</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#13294B;--blue:#1F4E8C;--amber:#F2A541;--ice:#EEF3F9;--line:#D5DFEB;--mute:#4A5A73}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--navy);background:#fff}
+  a{color:inherit}
+  .demo{background:#0E1A2B;color:#F4EDE1;font-size:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;text-align:center}
+  .demo a{color:#FF8A6B;font-weight:600}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+  .top{background:var(--navy);color:#fff;font-size:14px}
+  .top .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding-top:8px;padding-bottom:8px}
+  header{border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:5}
+  header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding-top:12px;padding-bottom:12px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Manrope,sans-serif;font-weight:800;font-size:20px}
+  .logo svg{flex:0 0 auto}
+  nav{display:flex;flex-wrap:wrap;gap:2px;align-items:center}
+  nav a{text-decoration:none;padding:10px 12px;font-weight:500;border-radius:8px;min-height:44px;display:inline-flex;align-items:center}
+  nav a[aria-current="page"]{background:var(--ice);color:var(--blue);font-weight:600}
+  .lang{display:inline-flex;border:1.5px solid var(--navy);border-radius:999px;overflow:hidden;margin-left:6px}
+  .lang button{font:inherit;font-weight:600;border:0;background:none;padding:8px 12px;cursor:pointer;color:var(--navy);min-height:40px;min-width:44px}
+  .lang button[aria-pressed="true"]{background:var(--navy);color:#fff}
+  .page{display:none}.page.on{display:block}
+  h1,h2,h3{font-family:Manrope,sans-serif;margin:0}
+  h1{font-size:clamp(40px,6.5vw,72px);line-height:1.02;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:clamp(30px,4.5vw,46px);font-weight:800;margin-bottom:22px}
+  h3{font-size:20px;font-weight:700}
+  .hero{background:var(--ice)}
+  .hero .wrap{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding-top:64px;padding-bottom:64px}
+  .hero .wrap>div{flex:1 1 420px;min-width:0}
+  .lead{font-size:19px;line-height:1.6;color:var(--mute);margin:18px 0 0;max-width:560px}
+  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .btn{display:inline-flex;align-items:center;min-height:50px;padding:0 22px;border-radius:10px;font:inherit;font-weight:600;text-decoration:none;border:2px solid var(--navy);background:none;color:var(--navy);cursor:pointer}
+  .btn.full{background:var(--amber);border-color:var(--amber);color:var(--navy)}
+  .urg{display:flex;align-items:center;gap:12px;margin-top:22px;font-weight:600}
+  .urg span{background:var(--amber);border-radius:6px;padding:4px 8px;font-size:13px}
+  section.pad{padding:64px 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .card{border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+  .card p{margin:0;color:var(--mute);line-height:1.55}
+  .ico{width:44px;height:44px;border-radius:10px;background:var(--ice);display:flex;align-items:center;justify-content:center}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .filters button{font:inherit;font-weight:500;padding:9px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer;color:var(--navy);min-height:44px}
+  .filters button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+  .news{display:flex;flex-direction:column;gap:12px}
+  .news article{border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline}
+  .news time{font-size:14px;color:var(--mute);min-width:110px}
+  .news .k{font-size:12px;font-weight:600;background:var(--ice);color:var(--blue);padding:3px 8px;border-radius:999px}
+  .news p{flex:1 1 100%;margin:4px 0 0;color:var(--mute);line-height:1.55}
+  .proj{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .proj figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  .proj .ph{aspect-ratio:16/10;background:var(--ice);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:14px;padding:12px;text-align:center}
+  .proj figcaption{padding:16px}
+  .jobs{display:flex;flex-direction:column;gap:12px}
+  details{border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  summary{cursor:pointer;font-family:Manrope,sans-serif;font-weight:700;font-size:19px}
+  details p{color:var(--mute);line-height:1.6}
+  form{display:flex;flex-direction:column;gap:14px;max-width:620px}
+  label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}
+  input,textarea,select{font:inherit;font-weight:400;padding:13px 14px;border-radius:10px;border:1.5px solid var(--line)}
+  .ok{display:none;border:1px solid var(--line);border-radius:14px;padding:18px 20px;max-width:620px;background:var(--ice)}
+  footer{background:var(--navy);color:#C7D2E3;font-size:14px;padding:32px 0;margin-top:40px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+  footer a{color:#fff}
+</style>
+</head>
+<body>
+<div class="demo"><span data-i="demo">Exemple fictif du forfait <strong>Entreprise · 100 $/mois</strong> — plusieurs pages, bilingue, nouvelles et carrières.</span> <a href="index.html" data-i="demoOthers">Voir les autres exemples</a> <a href="../forfaits.html" data-i="demoPlans">Voir les forfaits</a></div>
+<div class="top"><div class="wrap"><span data-i="topLeft">Urgences 24/7 · 418 555-0177</span><span data-i="topRight">Service au Bas-Saint-Laurent</span></div></div>
+<header><div class="wrap">
+  <a class="logo" href="#accueil"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#13294B"/><path d="M8 22 Q17 6 26 22" stroke="#F2A541" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="17" cy="23" r="3.5" fill="#fff"/></svg>Nordet</a>
+  <nav aria-label="Pages">
+    <a href="#accueil" data-i="nHome">Accueil</a><a href="#services" data-i="nServ">Services</a><a href="#realisations" data-i="nProj">Réalisations</a><a href="#nouvelles" data-i="nNews">Nouvelles</a><a href="#carrieres" data-i="nJobs">Carrières</a><a href="#contact" data-i="nCont">Contact</a>
+    <span class="lang" role="group" aria-label="Langue"><button type="button" data-l="fr">FR</button><button type="button" data-l="en">EN</button></span>
+  </nav>
+</div></header>
+
+<main>
+  <section class="page" id="p-accueil">
+    <div class="hero"><div class="wrap">
+      <div>
+        <h1 data-i="hTitle">Chauffage et plomberie, faits comme il faut.</h1>
+        <p class="lead" data-i="hLead">Installation, entretien et réparation pour les maisons et les commerces de la région. Une équipe d'ici, des soumissions claires.</p>
+        <div class="btns"><a class="btn full" href="#contact" data-i="hCta">Demander une soumission</a><a class="btn" href="#services" data-i="hCta2">Nos services</a></div>
+        <div class="urg"><span data-i="urgTag">URGENCE</span><span data-i="urgTxt">Bris de tuyau ou pas de chauffage ? Appelez, jour et nuit.</span></div>
+      </div>
+      <div aria-hidden="true" style="flex:0 1 360px">
+        <svg viewBox="0 0 360 300" style="width:100%;height:auto"><rect x="30" y="40" width="300" height="220" rx="20" fill="#fff"/><path d="M70 220 L70 120 Q70 90 100 90 L260 90" stroke="#13294B" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M260 90 L260 180" stroke="#13294B" stroke-width="18" stroke-linecap="round"/><circle cx="260" cy="200" r="22" fill="#F2A541"/><rect x="140" y="150" width="70" height="70" rx="10" fill="#1F4E8C"/><path d="M160 200 Q175 165 190 200" stroke="#F2A541" stroke-width="6" fill="none"/></svg>
+      </div>
+    </div></div>
+    <section class="pad"><div class="wrap">
+      <h2 data-i="whyT">Pourquoi Nordet</h2>
+      <div class="cards">
+        <div class="card"><h3 data-i="w1t">Soumission écrite</h3><p data-i="w1p">Le prix est écrit avant les travaux. Pas de surprise sur la facture.</p></div>
+        <div class="card"><h3 data-i="w2t">Techniciens certifiés</h3><p data-i="w2p">Ici, la liste réelle de vos certifications et licences.</p></div>
+        <div class="card"><h3 data-i="w3t">Urgences 24/7</h3><p data-i="w3p">Un vrai numéro, une vraie personne, même la nuit.</p></div>
+      </div>
+    </div></section>
+  </section>
+
+  <section class="page pad" id="p-services"><div class="wrap">
+    <h2 data-i="nServ">Services</h2>
+    <div class="cards">
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F4E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2 4 6 5 6 10a6 6 0 0 1-12 0c0-3 2-4 3-6 1 2 2 2 3 2 0-3-1-4 0-6z"/></svg></div><h3 data-i="s1t">Thermopompes</h3><p data-i="s1p">Conseil, installation et entretien annuel.</p></div>
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F4E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg></div><h3 data-i="s2t">Plomberie résidentielle</h3><p data-i="s2p">Salles de bain, chauffe-eau, réparations de fuites.</p></div>
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F4E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-4h4v4"/></svg></div><h3 data-i="s3t">Commercial</h3><p data-i="s3p">Contrats d'entretien pour commerces et immeubles.</p></div>
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F4E8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></div><h3 data-i="s4t">Urgences</h3><p data-i="s4p">Dégât d'eau, panne de chauffage : intervention rapide.</p></div>
+    </div>
+  </div></section>
+
+  <section class="page pad" id="p-realisations"><div class="wrap">
+    <h2 data-i="nProj">Réalisations</h2>
+    <div class="proj">
+      <figure><div class="ph" data-i="ph">Ici : la vraie photo du chantier</div><figcaption><h3 data-i="r1t">Thermopompe, maison de 1950</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r1p">Remplacement d'une fournaise au mazout.</p></figcaption></figure>
+      <figure><div class="ph" data-i="ph">Ici : la vraie photo du chantier</div><figcaption><h3 data-i="r2t">Salle de bain complète</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r2p">Plomberie neuve et douche sans seuil.</p></figcaption></figure>
+      <figure><div class="ph" data-i="ph">Ici : la vraie photo du chantier</div><figcaption><h3 data-i="r3t">Immeuble de 6 logements</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r3p">Chauffe-eau et contrat d'entretien.</p></figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="page pad" id="p-nouvelles"><div class="wrap">
+    <h2 data-i="nNews">Nouvelles</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filtrer"></div>
+    <div class="news" id="news"></div>
+  </div></section>
+
+  <section class="page pad" id="p-carrieres"><div class="wrap">
+    <h2 data-i="nJobs">Carrières</h2>
+    <p class="lead" style="margin-top:0;margin-bottom:22px" data-i="jLead">On cherche des gens d'ici. Touchez un poste pour le détail.</p>
+    <div class="jobs">
+      <details><summary data-i="j1t">Plombier ou plombière</summary><p data-i="j1p">Temps plein, jour. Ici : les vraies conditions, le salaire et les avantages.</p><a class="btn" href="#contact" data-i="jApply">Postuler</a></details>
+      <details><summary data-i="j2t">Apprenti en réfrigération</summary><p data-i="j2p">Formation sur place. Ici : les vraies conditions.</p><a class="btn" href="#contact" data-i="jApply">Postuler</a></details>
+    </div>
+  </div></section>
+
+  <section class="page pad" id="p-contact"><div class="wrap">
+    <h2 data-i="cT">Demander une soumission</h2>
+    <form id="cform" novalidate>
+      <label><span data-i="fName">Nom</span><input name="n" required autocomplete="name"></label>
+      <label><span data-i="fPhone">Téléphone</span><input name="t" type="tel" required autocomplete="tel"></label>
+      <label><span data-i="fType">Type de demande</span><select name="s"><option data-i="o1">Chauffage</option><option data-i="o2">Plomberie</option><option data-i="o3">Commercial</option><option data-i="o4">Candidature</option></select></label>
+      <label><span data-i="fMsg">Décrivez votre projet</span><textarea name="m" rows="5" required></textarea></label>
+      <button class="btn full" type="submit" style="align-self:flex-start" data-i="fSend">Envoyer</button>
+    </form>
+    <div class="ok" id="ok" aria-live="polite" data-i="fOk">Merci ! Démo : rien n'a été envoyé. Sur un vrai site, la demande arrive par courriel à l'entreprise.</div>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <span data-i="foot">Nordet Chauffage &amp; Plomberie · entreprise fictive · Rimouski</span>
+  <span><span data-i="made">Site créé par</span> <a href="../index.html">Studio Atlas Rimouski</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var EN={demo:'Fictional example of the <strong>Entreprise plan · $100/month</strong> — several pages, bilingual, news and careers.',demoOthers:'See the other examples',demoPlans:'See the plans',
+  topLeft:'24/7 emergencies · 418 555-0177',topRight:'Serving the Lower St. Lawrence',nHome:'Home',nServ:'Services',nProj:'Projects',nNews:'News',nJobs:'Careers',nCont:'Contact',
+  hTitle:'Heating and plumbing, done right.',hLead:'Installation, maintenance and repairs for homes and businesses in the region. A local team, clear quotes.',hCta:'Get a quote',hCta2:'Our services',
+  urgTag:'EMERGENCY',urgTxt:'Burst pipe or no heat? Call us, day or night.',whyT:'Why Nordet',w1t:'Written quote',w1p:'The price is in writing before the work starts. No surprises on the bill.',
+  w2t:'Certified technicians',w2p:'Here: your real list of certifications and licences.',w3t:'24/7 emergencies',w3p:'A real number, a real person, even at night.',
+  s1t:'Heat pumps',s1p:'Advice, installation and yearly maintenance.',s2t:'Residential plumbing',s2p:'Bathrooms, water heaters, leak repairs.',s3t:'Commercial',s3p:'Maintenance contracts for businesses and buildings.',s4t:'Emergencies',s4p:'Water damage, heating failure: fast response.',
+  ph:'Here: the real photo of the job',r1t:'Heat pump, 1950 house',r1p:'Replacing an oil furnace.',r2t:'Full bathroom',r2p:'New plumbing and curbless shower.',r3t:'6-unit building',r3p:'Water heaters and maintenance contract.',
+  jLead:'We’re looking for local people. Tap a job for details.',j1t:'Plumber',j1p:'Full time, days. Here: the real conditions, pay and benefits.',j2t:'Refrigeration apprentice',j2p:'On-the-job training. Here: the real conditions.',jApply:'Apply',
+  cT:'Get a quote',fName:'Name',fPhone:'Phone',fType:'Type of request',o1:'Heating',o2:'Plumbing',o3:'Commercial',o4:'Job application',fMsg:'Describe your project',fSend:'Send',
+  fOk:'Thank you! Demo: nothing was sent. On a real site, the request goes to the company by email.',foot:'Nordet Heating & Plumbing · fictional company · Rimouski',made:'Website by'};
+  var NEWS=[['2026-11-03','conseils','Préparer sa thermopompe pour l’hiver','Getting your heat pump ready for winter','Trois vérifications simples à faire avant les grands froids.','Three simple checks before the deep cold.'],
+            ['2026-10-15','equipe','Bienvenue à notre nouvel apprenti','Welcome to our new apprentice','Ici : une vraie nouvelle de votre équipe.','Here: real news about your team.'],
+            ['2026-09-22','promos','Entretien d’automne','Fall maintenance','Ici : votre vraie promotion du moment.','Here: your real current promotion.']];
+  var KEYS={tout:['Tout','All'],conseils:['Conseils','Tips'],equipe:['Équipe','Team'],promos:['Promos','Deals']};
+  var FR={}, lang='fr', filt='tout';
+  [].forEach.call(document.querySelectorAll('[data-i]'),function(e){ if(!(e.dataset.i in FR)) FR[e.dataset.i]=e.innerHTML; });
+  try{ lang=localStorage.getItem('nordet-lang')||'fr'; }catch(e){}
+  function setLang(l){ lang=l; document.documentElement.lang=l;
+    [].forEach.call(document.querySelectorAll('[data-i]'),function(e){ var k=e.dataset.i; e.innerHTML=(l==='en'&&EN[k])?EN[k]:FR[k]; });
+    [].forEach.call(document.querySelectorAll('.lang button'),function(b){b.setAttribute('aria-pressed',b.dataset.l===l)});
+    try{ localStorage.setItem('nordet-lang',l); }catch(e){}
+    drawNews(); }
+  [].forEach.call(document.querySelectorAll('.lang button'),function(b){ b.onclick=function(){setLang(b.dataset.l)}; });
+  function drawNews(){
+    var fb=document.getElementById('filters'); fb.innerHTML='';
+    Object.keys(KEYS).forEach(function(k){ var b=document.createElement('button'); b.type='button'; b.textContent=KEYS[k][lang==='en'?1:0]; b.setAttribute('aria-pressed',k===filt); b.onclick=function(){filt=k;drawNews()}; fb.appendChild(b); });
+    var box=document.getElementById('news'); box.innerHTML='';
+    NEWS.forEach(function(n){ if(filt!=='tout'&&n[1]!==filt) return; var en=lang==='en';
+      var d=new Date(n[0]+'T12:00:00').toLocaleDateString(en?'en-CA':'fr-CA',{day:'numeric',month:'long',year:'numeric'});
+      var a=document.createElement('article'); a.innerHTML='<time datetime="'+n[0]+'">'+d+'</time><h3>'+(en?n[3]:n[2])+'</h3><span class="k">'+KEYS[n[1]][en?1:0]+'</span><p>'+(en?n[5]:n[4])+'</p>'; box.appendChild(a); });
+  }
+  var f=document.getElementById('cform');
+  f.addEventListener('submit',function(e){ e.preventDefault(); var bad=[].filter.call(f.querySelectorAll('[required]'),function(i){return !i.value.trim()}); if(bad.length){bad[0].focus();return;} f.style.display='none'; document.getElementById('ok').style.display='block'; });
+  function route(){ var id=(location.hash||'#accueil').slice(1); if(!document.getElementById('p-'+id)) id='accueil';
+    [].forEach.call(document.querySelectorAll('.page'),function(p){p.classList.toggle('on',p.id==='p-'+id)});
+    [].forEach.call(document.querySelectorAll('nav a'),function(a){ if(a.getAttribute('href')==='#'+id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    window.scrollTo(0,0); }
+  window.addEventListener('hashchange',route);
+  setLang(lang); route();
+})();
+</script>
+</body>
+</html>
