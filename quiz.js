@@ -28,8 +28,8 @@
     E: { name: 'Essentiel', price: 30, setup: 99, why: 'Une page claire avec vos photos, votre horaire et un bouton pour appeler. C’est tout ce qu’il vous faut pour que vos clients vous trouvent.' },
     R: { name: 'Rendez-vous', price: 45, setup: 149, why: 'Vos clients remplissent une demande de rendez-vous (ou de candidature), vous la recevez par courriel et vous les rappelez pour confirmer.' },
     P: { name: 'Professionnel', price: 60, setup: 199, why: 'Un site qu’on explore : plusieurs pages, un menu ou un catalogue cliquable, une galerie et un formulaire de contact.' },
-    N: { name: 'Entreprise', price: 100, setup: 299, why: 'Jusqu’à 10 pages, la version anglaise incluse et une section nouvelles et promos pour un contenu qui bouge.' },
-    B: { name: 'Boutique', price: 150, setup: 499, why: 'Vos produits en ligne avec les tailles, un panier et le paiement sécurisé.' }
+    N: { name: 'Entreprise', price: 75, setup: 249, why: 'Jusqu’à 10 pages, la version anglaise incluse et une section nouvelles et promos pour un contenu qui bouge.' },
+    B: { name: 'Boutique', price: 89, setup: 349, why: 'Vos produits en ligne avec les tailles, un panier et le paiement sécurisé.' }
   };
 
   var QUESTIONS = [
