@@ -81,10 +81,17 @@
   .bar .btn{width:100%}
   .bar .go{color:#fff}
   @media (min-width:900px){.bar{display:none}body{padding-bottom:0}}
+.demo .oneday{background:#3FC1B0;color:#0E1A2B;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.atlas-day{background:#3FC1B0;color:#0E1A2B;padding:56px 0}
+.ad-in{display:flex;gap:40px;align-items:center;flex-wrap:wrap}.ad-in>div:last-child{flex:1 1 320px}
+.ad-big{font-family:Oswald,sans-serif;font-weight:700;font-size:120px;line-height:.9;display:flex;flex-direction:column}
+.ad-big small{font-size:26px;font-weight:600;letter-spacing:.04em}
+.atlas-day h2{font-family:Oswald,sans-serif;font-size:clamp(28px,3.4vw,42px);margin:0 0 10px;line-height:1.05}
+.atlas-day p{margin:0 0 14px;max-width:56ch;font-size:17px}.atlas-day a{color:#0E1A2B;font-weight:700}
 </style>
 </head>
 <body>
-<div class="demo">Exemple fictif du forfait <strong>Essentiel · 30 $/mois</strong> — une page, des images, l'horaire, un bouton pour appeler. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
+<div class="demo">Exemple fictif du forfait <strong>Essentiel · 30 $/mois</strong> <span class="oneday">soit environ 1 $ par jour</span> — une page, des images, l'horaire, un bouton pour appeler. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
 
 <div class="top"><div class="wrap">
   <a class="logo" href="#"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="4" fill="#FFC42E"/><path d="M11 27 L20 11 L29 27 Z" fill="#16191D"/><rect x="11" y="27" width="18" height="3" fill="#16191D"/></svg><span><b>Garage <span>Boréal</span></b><small>MÉCANIQUE · RIMOUSKI</small></span></a>
@@ -188,6 +195,10 @@
   <p class="note">Sur votre vrai site : vos vraies photos (façade, équipe, atelier). Elles comptent plus que tout le reste pour la confiance.</p>
 </div></section>
 
+<section class="atlas-day" aria-label="Prix de ce site">
+<div class="wrap ad-in"><div class="ad-big">1&nbsp;$<small>par jour</small></div>
+<div><h2>Ce site au complet coûte environ 1&nbsp;$ par jour.</h2><p>30&nbsp;$ par mois avec Studio Atlas Rimouski : la page, l'hébergement, la sécurité et vos changements d'horaire par texto. Moins qu'un café.</p>
+<a href="../forfaits.html">Voir le forfait Essentiel</a></div></div></section>
 <footer><div class="wrap">
   <span>Garage Boréal · commerce fictif · 123, rue Exemple, Rimouski</span>
   <span>Site créé par <a href="../index.html">Studio Atlas Rimouski</a></span>
