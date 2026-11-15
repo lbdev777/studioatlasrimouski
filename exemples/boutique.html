@@ -18,7 +18,7 @@
   .demo a{color:#FF8A6B;font-weight:600}
   .ann{background:var(--rust);color:var(--bg);font-size:13px;letter-spacing:.04em;text-align:center;padding:9px 16px}
   .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
-  header{position:sticky;top:0;z-index:20;background:rgba(244,241,234,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;min-height:68px}
   .hd nav{display:flex;gap:4px;flex-wrap:wrap}
   .hd nav a{text-decoration:none;font-size:14px;padding:10px 10px;min-height:44px;display:inline-flex;align-items:center}
@@ -28,7 +28,7 @@
   .tools{display:flex;justify-content:flex-end;gap:6px}
   .icon{width:44px;height:44px;border:0;background:none;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
   .icon:hover{background:var(--card)}
-  .badge{position:absolute;top:4px;right:2px;background:var(--rust);color:#fff;font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+  .badge{position:absolute;top:4px;right:2px;background:var(--rust);color:var(--bg);font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px}
   .badge[data-n="0"]{display:none}
   @media (max-width:760px){.hd{grid-template-columns:auto 1fr auto}.hd nav{display:none}.brand{font-size:26px}}
   .search{display:none;border-top:1px solid var(--line)}
@@ -42,7 +42,7 @@
   .hero p{max-width:420px;font-size:17px;line-height:1.6;color:var(--mute);margin:0}
   .cta{display:inline-flex;align-items:center;gap:12px;align-self:flex-start;background:var(--ink);color:var(--bg);text-decoration:none;padding:17px 26px;font-weight:500;min-height:54px;border:0;cursor:pointer}
   .cta:hover{background:var(--rust)}
-  .hero-art{background:#C9B79C;position:relative;overflow:hidden}
+  .hero-art{background:var(--card);position:relative;overflow:hidden}
   .hero-art svg{position:absolute;inset:0;width:100%;height:100%}
   @media (max-width:860px){.hero{grid-template-columns:1fr}.hero-txt{padding:48px 0 40px}.hero-art{min-height:0;aspect-ratio:6/7}}
   .vals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line)}
@@ -90,7 +90,7 @@
   .nl h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(34px,4vw,52px);margin:0;max-width:560px;line-height:1.05}
   .nl form{display:flex;flex:1 1 360px;max-width:480px;border-bottom:1px solid var(--bg)}
   .nl input{flex:1;background:none;border:0;color:var(--bg);font:inherit;font-size:17px;padding:16px 0;outline:none}
-  .nl input::placeholder{color:#A8A398}
+  .nl input::placeholder{color:var(--mute)}
   .nl button{background:none;border:0;color:var(--bg);font-weight:500;cursor:pointer;padding:0 6px;min-height:52px}
   footer{padding:40px 0 48px;font-size:14px;color:var(--mute)}
   footer .wrap{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
@@ -121,7 +121,7 @@
   .qty span{min-width:28px;text-align:center}
   .add{flex:1;border:0;background:var(--ink);color:var(--bg);font-weight:500;cursor:pointer;min-height:54px}
   .add:hover{background:var(--rust)}
-  .add:disabled{background:#8A867E;cursor:not-allowed}
+  .add:disabled{background:var(--mute);cursor:not-allowed}
   .acc details{border-top:1px solid var(--line);padding:16px 0}
   .acc details:last-child{border-bottom:1px solid var(--line)}
   .acc summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between}
@@ -132,7 +132,7 @@
   .also{border-top:1px solid var(--line);padding:56px 0 80px}
   .also h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:40px;margin:0 0 26px}
   @media (max-width:860px){.pv-grid{grid-template-columns:1fr;gap:28px}.gal{grid-template-columns:1fr}.thumbs{flex-direction:row;order:2}.thumbs button{width:64px}.info{position:static}}
-  .shade{position:fixed;inset:0;background:rgba(23,22,20,.4);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
+  .shade{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
   .shade.open{opacity:1;pointer-events:auto}
   .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--white);z-index:51;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
   .drawer.open{transform:none}
@@ -283,14 +283,14 @@
 <script>
 (function(){
   var THEMES={
-    fleuve:{bg:'#FBF7F1',card:'#F1E9DE',ink:'#14213D',mute:'#5A6276',line:'#E3DACC',accent:'#E2583E',sage:'#2E8B6B',white:'#FFFFFF',
-      tiles:['#FFD9C7','#BFE3DD','#FFE7A8','#CFDCF7','#E2D6F7','#FFD3DC','#CDEBD3','#F9E0C4'],sky:'#FFC9A8',sun:'#FF8A5B',floor:'#14213D',edge:'#0B1428',story:'#2E8B6B',storyFloor:'#246F55'},
-    cobalt:{bg:'#FFFFFF',card:'#F2F4FA',ink:'#0F1222',mute:'#596079',line:'#E3E6EF',accent:'#2A4FD6',sage:'#2A4FD6',white:'#FFFFFF',
-      tiles:['#DCE5FF','#FFE1D6','#E4F5E8','#FFF1BF','#EFE2FF','#D9F1F5','#FFE0EC','#E7E9F2'],sky:'#DCE5FF',sun:'#2A4FD6',floor:'#0F1222',edge:'#05070F',story:'#2A4FD6',storyFloor:'#1D3BAA'},
-    terracotta:{bg:'#FFF6EC',card:'#FBE7D3',ink:'#2A1810',mute:'#7A5C4A',line:'#F0D9C2',accent:'#D9481F',sage:'#4F7A3A',white:'#FFFDF9',
-      tiles:['#FFD0B5','#F6E2A8','#D7E8C4','#FFC9C0','#F3D7B7','#E8D2F0','#CFE5E0','#FADDB8'],sky:'#FFD9A8',sun:'#D9481F',floor:'#6B2E1A',edge:'#4F1F10',story:'#4F7A3A',storyFloor:'#3D6029'}
+    nuit:{bg:'#14120F',card:'#211E19',ink:'#F4EEE3',mute:'#A79F90',line:'#34302A',accent:'#E9B44C',sage:'#9CC5A1',white:'#1B1915',
+      tiles:['#3B2A22','#1F3A38','#3A3320','#22304A','#2E2742','#43262C','#24392A','#3A2E22'],sky:'#2B2545',sun:'#E9B44C',floor:'#0B0A08',edge:'#000000',story:'#1F3A38',storyFloor:'#152A28'},
+    sauge:{bg:'#EEF1E8',card:'#E1E7D7',ink:'#1C2B22',mute:'#56655A',line:'#D1D9C5',accent:'#2F6B4A',sage:'#C9A227',white:'#FAFBF6',
+      tiles:['#D6E4C9','#F2E3B3','#E6D9C3','#C9DDD6','#E9E1CF','#F0D2C2','#D4E0C0','#E8E4D2'],sky:'#CFE0D0',sun:'#F2C14E',floor:'#1C2B22',edge:'#0F1A13',story:'#2F6B4A',storyFloor:'#24543A'},
+    lilas:{bg:'#F5F1FA',card:'#EAE3F4',ink:'#1F1535',mute:'#655A7C',line:'#DED5EC',accent:'#D93B73',sage:'#6B4FD8',white:'#FFFFFF',
+      tiles:['#E5DAFA','#FFD6E4','#D8ECF7','#FFF0C9','#E2F3E3','#F7DDF2','#DDE3FF','#FBE4D6'],sky:'#D9CCF5',sun:'#D93B73',floor:'#1F1535',edge:'#120C22',story:'#6B4FD8',storyFloor:'#5338B5'}
   };
-  var tn=(location.search.match(/theme=(\w+)/)||[])[1]; var T=THEMES[tn]||THEMES.fleuve;
+  var tn=(location.search.match(/theme=(\w+)/)||[])[1]; var T=THEMES[tn]||THEMES.nuit;
   ['bg','card','ink','mute','line','white'].forEach(function(k){ document.documentElement.style.setProperty('--'+k,T[k]); });
   document.documentElement.style.setProperty('--rust',T.accent); document.documentElement.style.setProperty('--sage',T.sage);
   var BG=T.tiles;
@@ -377,7 +377,7 @@
       v:[['Coffret','2 pièces',56]],dots:['#1F7A78','#2A4FD6'],art:function(k){
         if(k===1) return jar(M,true);
         if(k===2) return mug(TF,false);
-        return '<rect width="400" height="500" fill="'+BG[7]+'"/>'+shadow(200,420,150)+'<rect x="60" y="230" width="280" height="190" fill="#14213D"/><rect x="60" y="230" width="280" height="18" fill="#0B1428"/><rect x="190" y="230" width="20" height="190" fill="#E2583E"/><path d="M200 230 Q170 196 150 214 Q170 232 200 230 Q230 196 250 214 Q230 232 200 230Z" fill="#E2583E"/><rect x="96" y="276" width="80" height="44" fill="#F7F4EE"/><text x="136" y="304" text-anchor="middle" font-family="Instrument Serif,serif" font-size="18" fill="#2B3A3C">Fjord</text>';}}
+        return '<rect width="400" height="500" fill="'+BG[7]+'"/>'+shadow(200,420,150)+'<rect x="60" y="230" width="280" height="190" fill="'+T.story+'"/><rect x="60" y="230" width="280" height="18" fill="'+T.storyFloor+'"/><rect x="190" y="230" width="20" height="190" fill="'+T.accent+'"/><path d="M200 230 Q170 196 150 214 Q170 232 200 230 Q230 196 250 214 Q230 232 200 230Z" fill="'+T.accent+'"/><rect x="96" y="276" width="80" height="44" fill="#F7F4EE"/><text x="136" y="304" text-anchor="middle" font-family="Instrument Serif,serif" font-size="18" fill="#2B3A3C">Fjord</text>';}}
   ];
 
   var cart=[]; try{ cart=JSON.parse(localStorage.getItem('fjord-cart-v2')||'[]'); }catch(e){ cart=[]; }
