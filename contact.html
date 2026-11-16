@@ -102,8 +102,10 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
     if(!window.fetch) return;
     e.preventDefault();
     btn.disabled=true; var label=btn.textContent; btn.textContent='Envoi…';
-    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-      .then(function(r){return r.json().catch(function(){return {ok:false};});})
+    var BACKUP='https://studioatlasrimouski.louisbeaulieu33.workers.dev/api/contact';
+    function post(u){ return fetch(u,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}}).then(function(r){ return r.json().then(function(d){ d.__json=true; return d; }, function(){ return {ok:false,__json:false}; }); }); }
+    post(form.action)
+      .then(function(d){ return d.__json ? d : post(BACKUP); }, function(){ return post(BACKUP); })
       .then(function(d){
         if(d.ok){ form.reset(); show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.'); }
         else show(false,d.error||"L'envoi n'a pas fonctionné. Écrivez-nous à bonjour@studioatlasrimouski.ca.");

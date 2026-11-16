@@ -3,8 +3,14 @@
 
 const MAX = { nom: 120, entreprise: 160, courriel: 200, telephone: 40, message: 5000 };
 
+// Pendant la transition DNS, la copie GitHub du site envoie aussi ici.
+const ALLOWED_ORIGINS = ["https://studioatlasrimouski.ca", "https://www.studioatlasrimouski.ca", "https://lbdev777.github.io"];
+let currentOrigin = "";
+
 function json(data, status = 200) {
-  return new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
+  const headers = { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" };
+  if (ALLOWED_ORIGINS.includes(currentOrigin)) { headers["access-control-allow-origin"] = currentOrigin; headers["vary"] = "Origin"; }
+  return new Response(JSON.stringify(data), { status, headers });
 }
 
 async function readForm(request) {
@@ -44,6 +50,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    currentOrigin = request.headers.get("origin") || "";
+    if (url.pathname === "/api/contact" && request.method === "OPTIONS") {
+      const h = { "access-control-allow-methods": "POST", "access-control-allow-headers": "Accept, Content-Type", "access-control-max-age": "86400" };
+      if (ALLOWED_ORIGINS.includes(currentOrigin)) h["access-control-allow-origin"] = currentOrigin;
+      return new Response(null, { status: 204, headers: h });
+    }
     if (url.pathname === "/api/contact") {
       if (request.method !== "POST") return json({ ok: false, error: "Méthode non permise." }, 405);
       const wantsJson = (request.headers.get("accept") || "").includes("application/json");
