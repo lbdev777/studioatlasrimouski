@@ -77,6 +77,8 @@ th{font-size:12px;color:#4A4F7A;font-weight:700}td.n{text-align:right;font-varia
 .empty{color:#4A4F7A;padding:8px 0}
 .msg{border-bottom:1px solid #ECEEFA;padding:14px 0}.msg:last-child{border:0}.msg .who{font-weight:700}.msg .meta{color:#4A4F7A;font-size:13px}
 .msg p{white-space:pre-wrap;margin:8px 0}.msg.done{opacity:.55}
+.muted{color:#4A4F7A}.tag.you{background:#10123A;color:#FFD84D}.tag.vis{background:#E6E8FF;color:#2335F5}
+.card{overflow-x:auto}
 .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:#FFF1B8;color:#6B5200}.tag.ok{background:#E3F6E8;color:#14532D}
 button,.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:9px 16px;cursor:pointer;background:#10123A;color:#fff;text-decoration:none;display:inline-block}
 button.light{background:#ECEEFA;color:#10123A}button.danger{background:#FDE8E8;color:#7F1D1D}
@@ -114,7 +116,7 @@ ${error ? `<div class="err">${esc(error)}</div>` : ""}
 }
 
 // ---------- pages ----------
-const PAGE_NAMES = { "/": "Accueil", "/forfaits": "Forfaits", "/a-propos": "À propos", "/contact": "Contact", "/exemples": "Exemples" };
+const PAGE_NAMES = { "/": "Accueil", "/forfaits": "Forfaits", "/a-propos": "À propos", "/contact": "Contact", "/exemples": "Exemples", "/exemples/essentiel": "Exemple Essentiel (garage)", "/exemples/rendez-vous": "Exemple Rendez-vous (salon)", "/exemples/professionnel": "Exemple Professionnel (bistro)", "/exemples/entreprise": "Exemple Entreprise", "/exemples/boutique": "Exemple Boutique" };
 const pageName = (p) => PAGE_NAMES[p] || p;
 
 async function counts(env) {
@@ -122,27 +124,51 @@ async function counts(env) {
   return { nouveaux: r?.n || 0 };
 }
 
+const dureeTxt = (ms) => { const m = Math.floor(ms / 60e3), sec = Math.floor((ms % 60e3) / 1e3); return m >= 60 ? Math.floor(m / 60) + " h " + (m % 60) + " min" : m ? m + " min " + String(sec).padStart(2, "0") + " s" : sec + " s"; };
+const lieu = (r) => [r.ville, r.region].filter(Boolean).join(", ") + (r.pays && r.pays !== "CA" ? (r.ville || r.region ? " · " : "") + r.pays : "") || "Inconnu";
+const qui = (r) => r.moi ? '<span class="tag you">Vous</span>' : `<span class="tag vis">Visiteur ${esc(String(r.visiteur || "").slice(0, 4).toUpperCase())}</span>`;
+
+async function liveData(env) {
+  const now = Date.now();
+  const rows = (await env.DB.prepare("SELECT * FROM presence WHERE dernier > ? ORDER BY moi ASC, debut ASC").bind(now - LIVE_MS).all()).results || [];
+  const others = rows.filter((r) => !r.moi).length, mine = rows.length - others;
+  const today = jourLocal(now);
+  const t = await env.DB.prepare("SELECT COUNT(DISTINCT CASE WHEN moi = 0 THEN visiteur END) AS v, SUM(CASE WHEN moi = 0 THEN 1 ELSE 0 END) AS p, SUM(CASE WHEN moi = 1 THEN 1 ELSE 0 END) AS mp FROM visites WHERE jour = ?").bind(today).first();
+  const recent = (await env.DB.prepare("SELECT * FROM visites ORDER BY ts DESC LIMIT 15").all()).results || [];
+  const liveHtml = rows.length
+    ? `<table><tr><th>Qui</th><th>Page en ce moment</th><th>Sur le site depuis</th><th style="text-align:right">Pages</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${rows.map((r) => `<tr>
+<td>${qui(r)}</td><td><strong>${esc(pageName(r.page))}</strong></td><td>${dureeTxt(now - r.debut)}</td><td class="n">${num(r.pages)}</td>
+<td>${esc(r.source || "Accès direct")}</td><td>${esc(r.appareil || "")}<br><span class="muted">${esc([r.navigateur, r.os].filter(Boolean).join(" · "))}</span></td><td>${esc(lieu(r))}</td></tr>`).join("")}</table>`
+    : `<p class="empty">Personne sur le site en ce moment. Cette liste se met à jour toute seule.</p>`;
+  const recentHtml = recent.length
+    ? `<table><tr><th>Heure</th><th>Qui</th><th>Page</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${recent.map((r) => `<tr>
+<td>${esc(new Intl.DateTimeFormat("fr-CA", { timeZone: TZ, hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" }).format(new Date(r.ts)))}</td><td>${qui(r)}</td>
+<td>${esc(pageName(r.page))}</td><td>${esc(r.source || "Accès direct")}</td><td>${esc([r.appareil, r.navigateur].filter(Boolean).join(" · "))}</td><td>${esc(lieu(r))}</td></tr>`).join("")}</table>`
+    : `<p class="empty">Aucune visite enregistrée pour l'instant.</p>`;
+  const label = `${num(others)} visiteur${others > 1 ? "s" : ""} en ce moment` + (mine ? ` · ${mine === 1 ? "vous êtes" : "vous avez " + mine + " onglets"} sur le site` : "");
+  return { others, mine, label, todayV: t?.v || 0, todayP: t?.p || 0, todayMine: t?.mp || 0, liveHtml, recentHtml, at: now };
+}
+
 async function home(env) {
   const now = Date.now();
-  const today = jourLocal(now);
   const days = [];
   for (let i = 6; i >= 0; i--) days.push(jourLocal(now - i * 864e5));
   const since7 = days[0];
   const DB = env.DB;
-  const [live, todayRow, perDay, topPages, sources, devices, clientsRow, msgs] = await Promise.all([
-    DB.prepare("SELECT COUNT(DISTINCT visiteur) AS n FROM visites WHERE ts > ?").bind(now - 5 * 60e3).first(),
-    DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v, COUNT(*) AS p FROM visites WHERE jour = ?").bind(today).first(),
-    DB.prepare("SELECT jour, COUNT(DISTINCT visiteur) AS v, COUNT(*) AS p FROM visites WHERE jour >= ? GROUP BY jour").bind(since7).all(),
-    DB.prepare("SELECT page, COUNT(*) AS p, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? GROUP BY page ORDER BY p DESC LIMIT 8").bind(since7).all(),
-    DB.prepare("SELECT source, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? GROUP BY source ORDER BY v DESC LIMIT 8").bind(since7).all(),
-    DB.prepare("SELECT appareil, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? GROUP BY appareil ORDER BY v DESC").bind(since7).all(),
+  const [live, perDay, topPages, sources, devices, villes, clientsRow, msgs, v7row] = await Promise.all([
+    liveData(env),
+    DB.prepare("SELECT jour, COUNT(DISTINCT visiteur) AS v, COUNT(*) AS p FROM visites WHERE jour >= ? AND moi = 0 GROUP BY jour").bind(since7).all(),
+    DB.prepare("SELECT page, COUNT(*) AS p, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY page ORDER BY p DESC LIMIT 8").bind(since7).all(),
+    DB.prepare("SELECT source, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY source ORDER BY v DESC LIMIT 8").bind(since7).all(),
+    DB.prepare("SELECT appareil, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY appareil ORDER BY v DESC").bind(since7).all(),
+    DB.prepare("SELECT ville, region, pays, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY ville, region, pays ORDER BY v DESC LIMIT 8").bind(since7).all(),
     DB.prepare("SELECT COUNT(*) AS n, COALESCE(SUM(prix_mois),0) AS mrr FROM clients WHERE actif = 1").first(),
     DB.prepare("SELECT * FROM messages ORDER BY ts DESC LIMIT 4").all(),
+    DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0").bind(since7).first(),
   ]);
   const map = Object.fromEntries((perDay.results || []).map((r) => [r.jour, r]));
   const week = days.map((d) => ({ d, v: map[d]?.v || 0, p: map[d]?.p || 0 }));
   const max = Math.max(1, ...week.map((w) => w.v));
-  const v7 = (await DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ?").bind(since7).first())?.v || 0;
   const dayLabel = (d) => new Intl.DateTimeFormat("fr-CA", { weekday: "short", timeZone: "UTC" }).format(new Date(d + "T12:00:00Z")).replace(".", "");
   const c = await counts(env);
   const list = (rows, label, fmt) => rows.length
@@ -150,22 +176,43 @@ async function home(env) {
     : `<p class="empty">Pas encore de données.</p>`;
 
   const body = `
-<div class="hd"><h1>Accueil</h1><span class="live"><i></i>${num(live?.n)} visiteur${(live?.n || 0) > 1 ? "s" : ""} en ce moment</span><span class="sub">Aujourd'hui, ${esc(today)}</span></div>
+<div class="hd"><h1>Accueil</h1><span class="live"><i></i><span id="live-label">${esc(live.label)}</span></span><span class="sub" id="live-upd">Mis à jour en direct</span></div>
 <section class="card kpis">
-  <div class="kpi"><div class="l">Visiteurs aujourd'hui</div><div class="v">${num(todayRow?.v)}</div><div class="s">${num(todayRow?.p)} pages vues</div></div>
-  <div class="kpi"><div class="l">Visiteurs (7 jours)</div><div class="v">${num(v7)}</div><div class="s">personnes différentes</div></div>
+  <div class="kpi"><div class="l">Visiteurs aujourd'hui</div><div class="v" id="k-today">${num(live.todayV)}</div><div class="s" id="k-today-s">${num(live.todayP)} pages vues${live.todayMine ? ` · sans vos ${num(live.todayMine)}` : ""}</div></div>
+  <div class="kpi"><div class="l">Visiteurs (7 jours)</div><div class="v">${num(v7row?.v)}</div><div class="s">personnes différentes</div></div>
   <div class="kpi"><div class="l">Messages à traiter</div><div class="v">${num(c.nouveaux)}</div><div class="s"><a href="/admin/messages">Voir les messages</a></div></div>
   <div class="kpi"><div class="l">Revenu mensuel</div><div class="v">${money(clientsRow?.mrr)}</div><div class="s">${num(clientsRow?.n)} client${(clientsRow?.n || 0) > 1 ? "s" : ""} actif${(clientsRow?.n || 0) > 1 ? "s" : ""}</div></div>
 </section>
+<section class="card"><h2>En direct sur le site</h2><div id="live-table">${live.liveHtml}</div></section>
 <section class="card"><h2>Visiteurs, 7 derniers jours</h2>
 <div class="bars">${week.map((w) => `<div class="bar" title="${w.v} visiteurs, ${w.p} pages vues"><em>${w.v}</em><b style="height:${Math.round((w.v / max) * 120)}px"></b><span>${dayLabel(w.d)}</span></div>`).join("")}</div></section>
+<section class="card"><h2>Dernières visites</h2><div id="recent-table">${live.recentHtml}</div></section>
 <div class="grid2">
 <section class="card"><h2>Pages les plus vues (7 jours)</h2>${topPages.results?.length ? `<table><tr><th>Page</th><th style="text-align:right">Vues</th></tr>${topPages.results.map((r) => `<tr><td>${esc(pageName(r.page))}</td><td class="n">${num(r.p)}</td></tr>`).join("")}</table>` : `<p class="empty">Pas encore de données.</p>`}</section>
 <section class="card"><h2>D'où viennent les visiteurs (7 jours)</h2>${list(sources.results || [], "Source", (r) => r.source || "Accès direct")}</section>
+<section class="card"><h2>Villes (7 jours)</h2>${list(villes.results || [], "Lieu", (r) => lieu(r))}</section>
 <section class="card"><h2>Appareils (7 jours)</h2>${list(devices.results || [], "Appareil", (r) => r.appareil || "Inconnu")}</section>
-<section class="card"><h2>Derniers messages</h2>${(msgs.results || []).length ? (msgs.results || []).map((m) => `<div class="msg${m.traite ? " done" : ""}"><span class="who">${esc(m.nom)}</span>${m.entreprise ? ` · ${esc(m.entreprise)}` : ""} ${m.traite ? '<span class="tag ok">Traité</span>' : '<span class="tag">Nouveau</span>'}<div class="meta">${esc(dateHeure(m.ts))}</div></div>`).join("") + `<p><a href="/admin/messages">Tous les messages</a></p>` : `<p class="empty">Aucun message pour l'instant.</p>`}</section>
+<section class="card" style="grid-column:1/-1"><h2>Derniers messages</h2>${(msgs.results || []).length ? (msgs.results || []).map((m) => `<div class="msg${m.traite ? " done" : ""}"><span class="who">${esc(m.nom)}</span>${m.entreprise ? ` · ${esc(m.entreprise)}` : ""} ${m.traite ? '<span class="tag ok">Traité</span>' : '<span class="tag">Nouveau</span>'}<div class="meta">${esc(dateHeure(m.ts))}</div></div>`).join("") + `<p><a href="/admin/messages">Tous les messages</a></p>` : `<p class="empty">Aucun message pour l'instant.</p>`}</section>
 </div>
-<p class="sub" style="color:#4A4F7A;font-size:13px">Les visites sont comptées sans témoin (cookie) ni adresse IP conservée. Vos propres visites ne sont pas comptées quand vous êtes connecté.</p>`;
+<p class="muted" style="font-size:13px">Vos visites sont marquées « Vous » (reconnues par ce navigateur ou votre adresse IP) et ne sont pas comptées dans les chiffres. Les adresses IP ne sont jamais conservées, seulement une empreinte chiffrée. La ville est estimée par Cloudflare.</p>
+<script>
+(function(){
+  var last=Date.now();
+  function tick(){
+    fetch('/admin/api/live',{headers:{'Accept':'application/json'},cache:'no-store'}).then(function(r){ if(r.status===401){location.reload();return null;} return r.json(); }).then(function(d){
+      if(!d) return; last=Date.now();
+      document.getElementById('live-label').textContent=d.label;
+      document.getElementById('live-table').innerHTML=d.liveHtml;
+      document.getElementById('recent-table').innerHTML=d.recentHtml;
+      document.getElementById('k-today').textContent=new Intl.NumberFormat('fr-CA').format(d.todayV);
+      document.getElementById('k-today-s').textContent=new Intl.NumberFormat('fr-CA').format(d.todayP)+' pages vues'+(d.todayMine?' · sans vos '+d.todayMine:'');
+    }).catch(function(){});
+  }
+  setInterval(function(){ if(document.visibilityState==='visible') tick(); },5000);
+  setInterval(function(){ var s=Math.round((Date.now()-last)/1000); document.getElementById('live-upd').textContent= s<3 ? 'Mis à jour à l’instant' : 'Mis à jour il y a '+s+' s'; },1000);
+  document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible') tick(); });
+})();
+</script>`;
   return page("Accueil", "home", body, c);
 }
 
@@ -238,7 +285,11 @@ export async function handleAdmin(request, env, url) {
   if (p === "/admin/logout") {
     return redirect("/admin", { "set-cookie": `${COOKIE}=; Path=/admin; Max-Age=0; HttpOnly; Secure; SameSite=Strict` });
   }
-  if (!(await isLogged(request, env))) return loginPage();
+  if (!(await isLogged(request, env))) return p === "/admin/api/live" ? new Response("{}", { status: 401 }) : loginPage();
+  try { await env.DB.prepare("INSERT INTO admin_ips (ip_h, dernier) VALUES (?, ?) ON CONFLICT(ip_h) DO UPDATE SET dernier = excluded.dernier").bind(await ipHash(request, env), Date.now()).run(); } catch {}
+  if (p === "/admin/api/live") {
+    return new Response(JSON.stringify(await liveData(env)), { headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
+  }
 
   if (request.method === "POST") {
     let m;
@@ -273,31 +324,79 @@ export async function handleAdmin(request, env, url) {
   return redirect("/admin");
 }
 
-// ---------- comptage des visites (appelé par /api/v) ----------
+// ---------- comptage des visites (appelé par /api/v, depuis /stats.js) ----------
 const BOT = /bot|crawl|spider|slurp|facebookexternalhit|preview|headless|lighthouse|pingdom|uptime|curl|wget|python|monitor/i;
-export async function recordVisit(request, env) {
-  if (!env.DB) return new Response(null, { status: 204 });
-  if (getCookie(request, "atlas_moi")) return new Response(null, { status: 204 });
-  const ua = request.headers.get("user-agent") || "";
-  if (BOT.test(ua)) return new Response(null, { status: 204 });
-  let d = {};
-  try { d = JSON.parse(await request.text()); } catch {}
-  let page = String(d.p || "/").slice(0, 200).replace(/\.html$/, "").replace(/\/index$/, "/").replace(/\/+$/, "") || "/";
-  if (page.startsWith("/admin") || page.startsWith("/api")) return new Response(null, { status: 204 });
+const LIVE_MS = 45e3; // une page est « en direct » si elle a donné signe de vie dans les 45 dernières secondes
+
+function parseUA(ua) {
+  const nav = /Edg\//.test(ua) ? "Edge" : /OPR\/|Opera/.test(ua) ? "Opera" : /SamsungBrowser/.test(ua) ? "Samsung Internet" : /Firefox\//.test(ua) ? "Firefox" : /CriOS|Chrome\//.test(ua) ? "Chrome" : /Safari\//.test(ua) ? "Safari" : "Autre";
+  const os = /iPhone|iPad|iPod/.test(ua) ? "iOS" : /Android/.test(ua) ? "Android" : /Windows/.test(ua) ? "Windows" : /Mac OS X|Macintosh/.test(ua) ? "macOS" : /CrOS/.test(ua) ? "ChromeOS" : /Linux/.test(ua) ? "Linux" : "Autre";
+  return { nav, os };
+}
+function cleanPage(p) {
+  return String(p || "/").slice(0, 200).replace(/\.html$/, "").replace(/\/index$/, "/").replace(/\/+$/, "") || "/";
+}
+function sourceOf(d) {
   let source = "";
   try {
-    const r = new URL(String(d.r || ""));
-    const host = r.hostname.replace(/^www\./, "");
+    const host = new URL(String(d.r || "")).hostname.replace(/^www\./, "");
     if (host && !host.endsWith("studioatlasrimouski.ca") && !host.endsWith("workers.dev") && host !== "lbdev777.github.io") {
       source = /google\./.test(host) ? "Google" : /facebook\.com|fb\.me|messenger/.test(host) ? "Facebook" : /instagram/.test(host) ? "Instagram" : /bing\./.test(host) ? "Bing" : host;
     }
   } catch {}
-  if (!source && d.u) source = String(d.u).slice(0, 60); // utm_source
+  if (!source && d.u) source = String(d.u).slice(0, 60);
+  return source || null;
+}
+export async function ipHash(request, env) {
+  return (await sha("ip|" + (request.headers.get("cf-connecting-ip") || "") + "|" + (env.ADMIN_PASSWORD || "atlas"))).slice(0, 16);
+}
+
+export async function recordVisit(request, env) {
+  const ok = () => new Response(null, { status: 204 });
+  if (!env.DB) return ok();
+  const ua = request.headers.get("user-agent") || "";
+  if (BOT.test(ua)) return ok();
+  let d = {};
+  try { d = JSON.parse(await request.text()); } catch {}
+  const page = cleanPage(d.p);
+  if (page.startsWith("/admin") || page.startsWith("/api")) return ok();
+  const t = d.t === "h" || d.t === "x" ? d.t : "v";
+  const session = String(d.s || "").replace(/[^a-z0-9]/gi, "").slice(0, 40) || null;
   const now = Date.now();
+  const DB = env.DB;
+
+  if (t === "x") {
+    if (session) await DB.prepare("UPDATE presence SET dernier = ? WHERE session = ?").bind(now - LIVE_MS - 1000, session).run();
+    return ok();
+  }
   const jour = jourLocal(now);
-  const ip = request.headers.get("cf-connecting-ip") || "";
-  const visiteur = (await sha(ip + "|" + ua + "|" + jour + "|" + (env.ADMIN_PASSWORD || "atlas"))).slice(0, 16);
-  const appareil = Number(d.w) && Number(d.w) < 768 ? "Cellulaire" : Number(d.w) ? "Ordinateur" : "Inconnu";
-  await env.DB.prepare("INSERT INTO visites (ts, jour, page, source, visiteur, appareil) VALUES (?,?,?,?,?,?)").bind(now, jour, page, source || null, visiteur, appareil).run();
-  return new Response(null, { status: 204 });
+  const ip_h = await ipHash(request, env);
+  const visiteur = (await sha(ip_h + "|" + ua + "|" + jour)).slice(0, 16);
+  const admin = await DB.prepare("SELECT 1 AS x FROM admin_ips WHERE ip_h = ? AND dernier > ?").bind(ip_h, now - 30 * 864e5).first();
+  const moi = getCookie(request, "atlas_moi") || admin ? 1 : 0;
+  const { nav, os } = parseUA(ua);
+  const w = Number(d.w) || 0;
+  const appareil = w ? (w < 768 ? "Cellulaire" : w < 1100 ? "Tablette" : "Ordinateur") : "Inconnu";
+  const cf = request.cf || {};
+  const ville = cf.city || null, region = cf.region === "Quebec" ? "Québec" : cf.region || null, pays = cf.country || null;
+  const source = sourceOf(d);
+
+  if (t === "h") {
+    const r = session ? await DB.prepare("UPDATE presence SET dernier = ?, page = ? WHERE session = ?").bind(now, page, session).run() : null;
+    if (r && r.meta && r.meta.changes > 0) return ok();
+    // pas de session connue (ex. page restée ouverte avant la mise à jour) : on la crée
+  }
+  if (t === "v") {
+    await DB.prepare("INSERT INTO visites (ts, jour, page, source, visiteur, appareil, session, ip_h, moi, navigateur, os, ville, region, pays) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, jour, page, source, visiteur, appareil, session, ip_h, moi, nav, os, ville, region, pays).run();
+  }
+  if (session) {
+    await DB.prepare(`INSERT INTO presence (session, visiteur, ip_h, moi, page, debut, dernier, pages, source, appareil, navigateur, os, ville, region, pays)
+      VALUES (?,?,?,?,?,?,?,1,?,?,?,?,?,?,?)
+      ON CONFLICT(session) DO UPDATE SET page = excluded.page, dernier = excluded.dernier, moi = excluded.moi,
+        pages = presence.pages + (CASE WHEN ? = 'v' THEN 1 ELSE 0 END)`)
+      .bind(session, visiteur, ip_h, moi, page, now, now, source, appareil, nav, os, ville, region, pays, t).run();
+  }
+  if (Math.random() < 0.03) await DB.prepare("DELETE FROM presence WHERE dernier < ?").bind(now - 864e5).run();
+  return ok();
 }

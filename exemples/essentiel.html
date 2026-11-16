@@ -222,6 +222,6 @@
   for(var i=1;i<=7;i++){ var dd=(d+i)%7; if(H[dd]){ s.textContent='Fermé · ouvre '+(i===1?'demain':J[dd])+' à '+H[dd][0]+' h'; return; } }
 })();
 </script>
-<script>try{var q=new URLSearchParams(location.search);navigator.sendBeacon("/api/v",JSON.stringify({p:location.pathname,r:document.referrer,w:window.innerWidth,u:q.get("utm_source")||""}))}catch(e){}</script>
+<script src="/stats.js" defer></script>
 </body>
 </html>
