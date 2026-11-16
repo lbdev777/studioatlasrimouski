@@ -54,8 +54,10 @@ export default {
       clean.infolettre = !!f.infolettre;
       // Champ piège invisible : rempli seulement par les robots.
       if (String(f.site_web || "").trim()) return wantsJson ? json({ ok: true }) : Response.redirect(url.origin + "/contact.html?envoye=1#contact", 303);
-      if (!clean.nom || !clean.message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean.courriel)) {
-        return wantsJson ? json({ ok: false, error: "Il manque votre nom, votre courriel ou votre message." }, 400)
+      const courrielOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean.courriel);
+      if (!clean.nom || !clean.message || !courrielOk) {
+        const why = !courrielOk ? "Votre adresse courriel semble incomplète (exemple : nom@domaine.com)." : "Il manque votre nom ou votre message.";
+        return wantsJson ? json({ ok: false, error: why }, 400)
                          : Response.redirect(url.origin + "/contact.html?erreur=1#contact", 303);
       }
       try { await sendContact(env, clean); }
