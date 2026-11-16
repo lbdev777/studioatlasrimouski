@@ -212,6 +212,14 @@ ${(actions.results || []).length ? `<table><tr><th>Action</th><th>Type</th><th s
 <section class="card"><h2>Appareils (7 jours)</h2>${list(devices.results || [], "Appareil", (r) => r.appareil || "Inconnu")}</section>
 <section class="card" style="grid-column:1/-1"><h2>Derniers messages</h2>${(msgs.results || []).length ? (msgs.results || []).map((m) => `<div class="msg${m.traite ? " done" : ""}"><span class="who">${esc(m.nom)}</span>${m.entreprise ? ` · ${esc(m.entreprise)}` : ""} ${m.traite ? '<span class="tag ok">Traité</span>' : '<span class="tag">Nouveau</span>'}<div class="meta">${esc(dateHeure(m.ts))}</div></div>`).join("") + `<p><a href="/admin/messages">Tous les messages</a></p>` : `<p class="empty">Aucun message pour l'instant.</p>`}</section>
 </div>
+<section class="card"><h2>Nettoyer les statistiques</h2>
+<p class="muted" style="margin:-4px 0 12px">Efface les visites, les parcours et les actions. Les messages et les clients ne sont jamais touchés. Impossible d'annuler.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<form class="inline" method="post" action="/admin/nettoyer/moi" onsubmit="return confirm('Effacer toutes vos visites (marquées « Vous »)?')"><button class="light" type="submit">Effacer mes visites (« Vous »)</button></form>
+<form class="inline" method="post" action="/admin/nettoyer/aujourdhui" onsubmit="return confirm('Effacer toutes les visites d\u2019aujourd\u2019hui?')"><button class="light" type="submit">Effacer aujourd'hui</button></form>
+<form class="inline" method="post" action="/admin/nettoyer/7jours" onsubmit="return confirm('Effacer les visites des 7 derniers jours?')"><button class="light" type="submit">Effacer les 7 derniers jours</button></form>
+<form class="inline" method="post" action="/admin/nettoyer/tout" onsubmit="return confirm('Effacer TOUTES les statistiques depuis le début?')"><button class="danger" type="submit">Tout effacer</button></form>
+</div></section>
 <p class="muted" style="font-size:13px">Vos visites sont marquées « Vous » (reconnues par ce navigateur ou votre adresse IP) et ne sont pas comptées dans les chiffres. Les adresses IP ne sont jamais conservées, seulement une empreinte chiffrée. La ville est estimée par Cloudflare.</p>
 <script>
 (function(){
@@ -276,6 +284,7 @@ async function parcoursPage(env, session) {
 <div><span>Fournisseur Internet</span>${esc(f.fai || "Inconnu")}</div>
 </div></section>
 <section class="card"><h2>Ce qu'il a fait, dans l'ordre</h2>${items.length ? `<ul class="tl">${items.map((i) => i.html).join("")}</ul>` : `<p class="empty">Rien d'enregistré.</p>`}</section>
+<form method="post" action="/admin/visite/${esc(session)}/supprimer" onsubmit="return confirm('Supprimer ce visiteur et tout son parcours?')" style="margin-bottom:10px"><button class="danger" type="submit">Supprimer ce visiteur</button></form>
 ${f.moi ? "" : `<form method="post" action="/admin/visite/${esc(session)}/moi"><button class="light" type="submit">C'est moi : marquer ce visiteur comme « Vous »</button></form>
 <p class="muted" style="font-size:13px">Marque cet appareil et sa connexion Internet comme les vôtres. Ses visites ne compteront plus dans vos chiffres.</p>`}
 <p class="muted" style="font-size:13px">La position vient de l'adresse du réseau, pas du GPS : elle indique la ville ou le quartier du fournisseur, parfois à quelques kilomètres près.</p>`;
@@ -374,6 +383,24 @@ export async function handleAdmin(request, env, url) {
       if (m[2] === "supprimer") await env.DB.prepare("DELETE FROM clients WHERE id = ?").bind(id).run();
       else await env.DB.prepare("UPDATE clients SET actif = ? WHERE id = ?").bind(m[2] === "reactiver" ? 1 : 0, id).run();
       return redirect("/admin/clients");
+    }
+    if ((m = p.match(/^\/admin\/nettoyer\/(moi|aujourdhui|7jours|tout)$/))) {
+      const now = Date.now();
+      const since = m[1] === "aujourdhui" ? jourLocal(now) : jourLocal(now - 6 * 864e5);
+      const run = (sql, ...a) => env.DB.prepare(sql).bind(...a).run();
+      if (m[1] === "moi") {
+        await run("DELETE FROM visites WHERE moi = 1"); await run("DELETE FROM evenements WHERE moi = 1"); await run("DELETE FROM presence WHERE moi = 1");
+      } else if (m[1] === "tout") {
+        await run("DELETE FROM visites"); await run("DELETE FROM evenements"); await run("DELETE FROM presence");
+      } else {
+        await run("DELETE FROM presence WHERE session IN (SELECT session FROM visites WHERE jour >= ?)", since);
+        await run("DELETE FROM visites WHERE jour >= ?", since); await run("DELETE FROM evenements WHERE jour >= ?", since);
+      }
+      return redirect("/admin");
+    }
+    if ((m = p.match(/^\/admin\/visite\/([a-z0-9]{1,40})\/supprimer$/i))) {
+      for (const t of ["visites", "evenements", "presence"]) await env.DB.prepare(`DELETE FROM ${t} WHERE session = ?`).bind(m[1]).run();
+      return redirect("/admin");
     }
     if ((m = p.match(/^\/admin\/visite\/([a-z0-9]{1,40})\/moi$/i))) {
       const row = await env.DB.prepare("SELECT ip_h, visiteur FROM presence WHERE session = ? UNION SELECT ip_h, visiteur FROM visites WHERE session = ? LIMIT 1").bind(m[1], m[1]).first();
