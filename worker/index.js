@@ -2,7 +2,6 @@
 // Les messages sont envoyés au Gmail de l'entreprise (adresse vérifiée dans Cloudflare Email Routing).
 
 const MAX = { nom: 120, entreprise: 160, courriel: 200, telephone: 40, message: 5000 };
-const TEST_TOKEN = "c04a2fcae9fc092218558928"; // test d'envoi temporaire, retiré après vérification
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
@@ -44,13 +43,6 @@ async function sendContact(env, f) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-
-    if (url.pathname === "/api/contact/test/" + TEST_TOKEN) {
-      try {
-        await sendContact(env, { nom: "Test Cloudflare", entreprise: "Studio Atlas", courriel: "studioatlasrimouski@gmail.com", telephone: "", message: "Ceci est un test automatique du nouveau formulaire de contact." });
-        return json({ ok: true });
-      } catch (e) { return json({ ok: false, error: String(e && e.message || e) }, 500); }
-    }
 
     if (url.pathname === "/api/contact") {
       if (request.method !== "POST") return json({ ok: false, error: "Méthode non permise." }, 405);
