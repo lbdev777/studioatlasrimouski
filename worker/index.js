@@ -50,11 +50,6 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // TEST TEMPORAIRE (retiré après vérification)
-    if (url.pathname === "/api/contact/essai-5826ff75d2bede18e46e19e7") {
-      try { await sendContact(env, { nom: "Test court", entreprise: "", courriel: "studioatlasrimouski@gmail.com", telephone: "", message: "Bonjour, je veux un site.", infolettre: false }); return json({ ok: true }); }
-      catch (e) { return json({ ok: false, error: String(e && e.message || e) }, 500); }
-    }
     currentOrigin = request.headers.get("origin") || "";
     if (url.pathname === "/api/contact" && request.method === "OPTIONS") {
       const h = { "access-control-allow-methods": "POST", "access-control-allow-headers": "Accept, Content-Type", "access-control-max-age": "86400" };
