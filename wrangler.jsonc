@@ -1,0 +1,11 @@
+{
+  // Site de Studio Atlas Rimouski, servi par Cloudflare Workers (fichiers statiques).
+  // Chaque fusion dans main redéploie automatiquement le site (Workers Builds).
+  "name": "studioatlasrimouski",
+  "compatibility_date": "2026-11-15",
+  "assets": {
+    "directory": "./",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
