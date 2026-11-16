@@ -42,8 +42,14 @@ async function isLogged(request, env) {
   if (Date.now() - Number(ts) > SESSION_DAYS * 864e5) return false;
   return safeEqual(sig, await hmac(env.ADMIN_PASSWORD + ":session", ts));
 }
+const SECURITY = {
+  "x-frame-options": "DENY",
+  "x-content-type-options": "nosniff",
+  "strict-transport-security": "max-age=31536000",
+  "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'none'",
+};
 const html = (body, status = 200, headers = {}) =>
-  new Response(body, { status, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex", "referrer-policy": "same-origin", ...headers } });
+  new Response(body, { status, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex", "referrer-policy": "same-origin", ...SECURITY, ...headers } });
 const redirect = (to, headers = {}) => new Response(null, { status: 303, headers: { location: to, "cache-control": "no-store", ...headers } });
 
 // ---------- gabarit ----------
@@ -106,13 +112,13 @@ function page(title, current, body, counts = {}) {
 <main>${body}</main></div></body></html>`);
 }
 
-function loginPage(error = "") {
+function loginPage(error = "", status) {
   return html(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
 <title>Connexion · Admin Studio Atlas</title><link rel="icon" href="/favicon.svg">${FONTS}<style>${CSS}</style></head><body class="login">
 <form method="post" action="/admin/login">${LOGO}<h1 style="font-size:22px">Admin Studio Atlas</h1>
 ${error ? `<div class="err">${esc(error)}</div>` : ""}
 <label>Mot de passe<input type="password" name="password" autocomplete="current-password" required autofocus></label>
-<button type="submit">Se connecter</button></form></body></html>`, error ? 401 : 200);
+<button type="submit">Se connecter</button></form></body></html>`, status || (error ? 401 : 200));
 }
 
 // ---------- pages ----------
@@ -269,12 +275,21 @@ export async function handleAdmin(request, env, url) {
   if (!env.DB) return html("Base de données non branchée.", 500);
 
   if (p === "/admin/login" && request.method === "POST") {
+    const ip_h = await ipHash(request, env);
+    const now = Date.now();
+    // Blocage : 5 essais ratés en 15 minutes = 15 minutes d'attente pour cette connexion.
+    const fails = await env.DB.prepare("SELECT COUNT(*) AS n FROM login_echecs WHERE ip_h = ? AND ts > ?").bind(ip_h, now - 15 * 60e3).first();
+    if ((fails?.n || 0) >= 5) return loginPage("Trop d'essais ratés. Réessayez dans 15 minutes.", 429);
     const fd = await request.formData();
-    const pw = String(fd.get("password") || "");
+    const pw = String(fd.get("password") || "").slice(0, 200);
     if (!env.ADMIN_PASSWORD || !safeEqual(await sha(pw), await sha(env.ADMIN_PASSWORD))) {
+      await env.DB.prepare("INSERT INTO login_echecs (ip_h, ts) VALUES (?, ?)").bind(ip_h, now).run();
+      if (Math.random() < 0.1) await env.DB.prepare("DELETE FROM login_echecs WHERE ts < ?").bind(now - 864e5).run();
       await new Promise((r) => setTimeout(r, 800));
-      return loginPage("Mot de passe incorrect.");
+      const left = 4 - (fails?.n || 0);
+      return loginPage(left > 0 ? `Mot de passe incorrect. Encore ${left} essai${left > 1 ? "s" : ""} avant un blocage de 15 minutes.` : "Trop d'essais ratés. Réessayez dans 15 minutes.", left > 0 ? 401 : 429);
     }
+    await env.DB.prepare("DELETE FROM login_echecs WHERE ip_h = ?").bind(ip_h).run();
     const ts = String(Date.now());
     const val = ts + "." + (await hmac(env.ADMIN_PASSWORD + ":session", ts));
     const h = new Headers({ location: "/admin", "cache-control": "no-store" });
