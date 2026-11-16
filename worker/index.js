@@ -45,7 +45,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (url.pathname === "/api/contact/test" && url.searchParams.get("t") === TEST_TOKEN) {
+    if (url.pathname === "/api/contact/test/" + TEST_TOKEN) {
       try {
         await sendContact(env, { nom: "Test Cloudflare", entreprise: "Studio Atlas", courriel: "studioatlasrimouski@gmail.com", telephone: "", message: "Ceci est un test automatique du nouveau formulaire de contact." });
         return json({ ok: true });
