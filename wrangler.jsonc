@@ -1,11 +1,19 @@
 {
-  // Site de Studio Atlas Rimouski, servi par Cloudflare Workers (fichiers statiques).
+  // Site de Studio Atlas Rimouski, servi par Cloudflare Workers.
   // Chaque fusion dans main redéploie automatiquement le site (Workers Builds).
   "name": "studioatlasrimouski",
+  "main": "worker/index.js",
   "compatibility_date": "2026-11-15",
   "assets": {
     "directory": "./",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  // Formulaire de contact : envoi au Gmail de l'entreprise (adresse vérifiée dans Email Routing).
+  "send_email": [
+    { "name": "EMAIL", "destination_address": "studioatlasrimouski@gmail.com" }
+  ],
+  "observability": { "enabled": true }
 }

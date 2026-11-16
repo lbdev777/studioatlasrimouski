@@ -3,3 +3,4 @@ wrangler.jsonc
 CNAME
 README.md
 *.py
+worker/
