@@ -216,10 +216,50 @@ ${(actions.results || []).length ? `<table><tr><th>Action</th><th>Type</th><th s
 <p class="muted" style="margin:-4px 0 12px">Efface les visites, les parcours et les actions. Les messages et les clients ne sont jamais touchés. Impossible d'annuler.</p>
 <div style="display:flex;flex-wrap:wrap;gap:8px">
 <form class="inline" method="post" action="/admin/nettoyer/moi" onsubmit="return confirm('Effacer toutes vos visites (marquées « Vous »)?')"><button class="light" type="submit">Effacer mes visites (« Vous »)</button></form>
-<form class="inline" method="post" action="/admin/nettoyer/aujourdhui" onsubmit="return confirm('Effacer toutes les visites d\u2019aujourd\u2019hui?')"><button class="light" type="submit">Effacer aujourd'hui</button></form>
-<form class="inline" method="post" action="/admin/nettoyer/7jours" onsubmit="return confirm('Effacer les visites des 7 derniers jours?')"><button class="light" type="submit">Effacer les 7 derniers jours</button></form>
-<form class="inline" method="post" action="/admin/nettoyer/tout" onsubmit="return confirm('Effacer TOUTES les statistiques depuis le début?')"><button class="danger" type="submit">Tout effacer</button></form>
+<form class="inline guard" method="post" action="/admin/nettoyer/aujourdhui" data-n="2" data-title="Effacer les visites d’aujourd’hui"><input type="hidden" name="ok" value=""><button class="light" type="submit">Effacer aujourd'hui</button></form>
+<form class="inline guard" method="post" action="/admin/nettoyer/7jours" data-n="3" data-title="Effacer les 7 derniers jours"><input type="hidden" name="ok" value=""><button class="light" type="submit">Effacer les 7 derniers jours</button></form>
+<form class="inline guard" method="post" action="/admin/nettoyer/tout" data-n="5" data-title="Tout effacer, depuis le début"><input type="hidden" name="ok" value=""><button class="danger" type="submit">Tout effacer</button></form>
 </div></section>
+<div id="guard" hidden style="position:fixed;inset:0;z-index:50;background:rgba(16,18,58,.82)">
+  <div id="guard-box" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:18px;padding:20px 22px;width:min(380px,90vw);text-align:center;z-index:2">
+    <h2 id="guard-title" style="font-size:17px;margin-bottom:6px"></h2>
+    <p class="muted" id="guard-help" style="margin:0 0 14px"></p>
+    <button id="guard-ok" class="danger" type="button" disabled style="opacity:.45">Confirmer</button>
+    <button id="guard-cancel" class="light" type="button">Annuler</button>
+  </div>
+</div>
+<script>
+(function(){
+  var ov=document.getElementById('guard'), box=document.getElementById('guard-box'), ok=document.getElementById('guard-ok'), help=document.getElementById('guard-help'), current=null, boxes=[];
+  function close(){ ov.hidden=true; boxes.forEach(function(b){b.remove()}); boxes=[]; current=null; }
+  function update(){ var left=boxes.filter(function(b){return !b.firstChild.checked}).length; ok.disabled=left>0; ok.style.opacity=left?'.45':'1'; help.textContent= left ? 'Cochez les '+boxes.length+' cases jaunes dispersées sur l’écran pour confirmer. Encore '+left+'.' : 'Toutes les cases sont cochées. Vous pouvez confirmer.'; }
+  function overlaps(x,y){ var r=box.getBoundingClientRect(); return x>r.left-60&&x<r.right+20&&y>r.top-60&&y<r.bottom+20; }
+  document.querySelectorAll('form.guard').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      if(f.dataset.passed==='1') return;
+      e.preventDefault(); current=f; ov.hidden=false;
+      document.getElementById('guard-title').textContent=f.dataset.title+' ?';
+      var n=+f.dataset.n, W=window.innerWidth, H=window.innerHeight, placed=[];
+      for(var i=0;i<n;i++){
+        var x,y,tries=0;
+        do { x=20+Math.random()*(W-80); y=20+Math.random()*(H-80); tries++; }
+        while(tries<300 && (overlaps(x,y) || placed.some(function(p){return Math.abs(p[0]-x)<90&&Math.abs(p[1]-y)<70;})));
+        placed.push([x,y]);
+        var l=document.createElement('label');
+        l.style.cssText='position:absolute;left:'+x+'px;top:'+y+'px;background:#FFD84D;border-radius:12px;padding:10px;cursor:pointer;display:flex;box-shadow:0 4px 14px rgba(0,0,0,.3)';
+        l.innerHTML='<input type="checkbox" style="width:24px;height:24px;margin:0;cursor:pointer" aria-label="Case de confirmation '+(i+1)+'">';
+        l.firstChild.addEventListener('change',update);
+        ov.appendChild(l); boxes.push(l);
+      }
+      update();
+    });
+  });
+  ok.addEventListener('click',function(){ if(!current||ok.disabled) return; var f=current; f.querySelector('input[name=ok]').value=f.dataset.n; f.dataset.passed='1'; close(); f.submit(); });
+  document.getElementById('guard-cancel').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!ov.hidden) close(); });
+})();
+</script>
+
 <p class="muted" style="font-size:13px">Vos visites sont marquées « Vous » (reconnues par ce navigateur ou votre adresse IP) et ne sont pas comptées dans les chiffres. Les adresses IP ne sont jamais conservées, seulement une empreinte chiffrée. La ville est estimée par Cloudflare.</p>
 <script>
 (function(){
@@ -385,6 +425,8 @@ export async function handleAdmin(request, env, url) {
       return redirect("/admin/clients");
     }
     if ((m = p.match(/^\/admin\/nettoyer\/(moi|aujourdhui|7jours|tout)$/))) {
+      const need = { aujourdhui: "2", "7jours": "3", tout: "5" }[m[1]];
+      if (need) { const fd = await request.formData(); if (String(fd.get("ok") || "") !== need) return redirect("/admin"); }
       const now = Date.now();
       const since = m[1] === "aujourdhui" ? jourLocal(now) : jourLocal(now - 6 * 864e5);
       const run = (sql, ...a) => env.DB.prepare(sql).bind(...a).run();
