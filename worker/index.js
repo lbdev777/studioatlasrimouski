@@ -75,7 +75,7 @@ export default {
       try { await sendContact(env, clean); }
       catch (e) {
         console.error("Envoi impossible", e);
-        return wantsJson ? json({ ok: false, error: "L'envoi n'a pas fonctionné. Écrivez-nous directement à bonjour@studioatlasrimouski.ca." }, 502)
+        return wantsJson ? json({ ok: false, error: "L'envoi n'a pas fonctionné. Écrivez-nous directement à studioatlasrimouski@gmail.com." }, 502)
                          : Response.redirect(url.origin + "/contact.html?erreur=2#contact", 303);
       }
       return wantsJson ? json({ ok: true }) : Response.redirect(url.origin + "/contact.html?envoye=1#contact", 303);

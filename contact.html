@@ -63,7 +63,7 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
         <h2 style="margin: 0; font-size: clamp(34px, 4.5vw, 56px); line-height: 1; font-weight: 900">Parlons de votre site.</h2>
         <p style="margin: 0; font-size: 19px; line-height: 1.6; color: #C8CCF0">Dites-nous en quelques mots ce que fait votre entreprise. Par le formulaire, par courriel ou sur Facebook : on vous répond en un jour ouvrable, personnellement.</p>
         <div style="display: flex; flex-direction: column; gap: 6px; font-size: 17px; line-height: 1.6">
-          <span><strong>Courriel :</strong> <a href="mailto:bonjour@studioatlasrimouski.ca">bonjour@studioatlasrimouski.ca</a></span>
+          <span><strong>Courriel :</strong> studioatlasrimouski@gmail.com</span>
           <span><strong>Facebook :</strong> <a href="https://www.facebook.com/profile.php?id=61593451400932">Écrivez-nous sur Messenger</a></span>
           <span><strong>Où :</strong> Rimouski (Québec)</span>
           <span><strong>Heures :</strong> lundi au vendredi</span>
@@ -88,7 +88,7 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
     </div>
   </section>
 
-  <footer class="sa-foot"><div class="sa-wrap sa-foot-in"><div><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#FFD84D"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#10123A">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg></a><p>Des sites web pour les commerces d'ici, avec quelqu'un pour vous répondre.</p></div><div><p>Rimouski (Québec)</p><p><a href="mailto:bonjour@studioatlasrimouski.ca">bonjour@studioatlasrimouski.ca</a></p><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p></div><div><p><a href="forfaits.html">Forfaits</a></p><p><a href="exemples/index.html">Exemples</a></p><p><a href="mailto:bonjour@studioatlasrimouski.ca?subject=Annuler%20mon%20abonnement">Annuler mon abonnement</a></p></div></div></footer>
+  <footer class="sa-foot"><div class="sa-wrap sa-foot-in"><div><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#FFD84D"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#10123A">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg></a><p>Des sites web pour les commerces d'ici, avec quelqu'un pour vous répondre.</p></div><div><p>Rimouski (Québec)</p><p>studioatlasrimouski@gmail.com</p><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p></div><div><p><a href="forfaits.html">Forfaits</a></p><p><a href="exemples/index.html">Exemples</a></p><p><a href="contact.html#contact">Annuler mon abonnement</a></p></div></div></footer>
 </div>
 <script>
 (function(){
@@ -97,7 +97,7 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
   function show(ok,msg){ box.hidden=false; box.textContent=msg; box.style.background=ok?'#E3F6E8':'#FDE8E8'; box.style.color=ok?'#14532D':'#7F1D1D'; }
   var q=new URLSearchParams(location.search);
   if(q.get('envoye')) show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.');
-  if(q.get('erreur')) show(false,"Le message n'est pas parti. Vérifiez votre nom, votre courriel et votre message, ou écrivez-nous à bonjour@studioatlasrimouski.ca.");
+  if(q.get('erreur')) show(false,"Le message n'est pas parti. Vérifiez votre nom, votre courriel et votre message, ou écrivez-nous à studioatlasrimouski@gmail.com.");
   form.addEventListener('submit',function(e){
     if(!window.fetch) return;
     e.preventDefault();
@@ -108,9 +108,9 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
       .then(function(d){ return d.__json ? d : post(BACKUP); }, function(){ return post(BACKUP); })
       .then(function(d){
         if(d.ok){ form.reset(); show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.'); }
-        else show(false,d.error||"L'envoi n'a pas fonctionné. Écrivez-nous à bonjour@studioatlasrimouski.ca.");
+        else show(false,d.error||"L'envoi n'a pas fonctionné. Écrivez-nous à studioatlasrimouski@gmail.com.");
       })
-      .catch(function(){ show(false,"Pas de connexion. Réessayez, ou écrivez-nous à bonjour@studioatlasrimouski.ca."); })
+      .catch(function(){ show(false,"Pas de connexion. Réessayez, ou écrivez-nous à studioatlasrimouski@gmail.com."); })
       .then(function(){ btn.disabled=false; btn.textContent=label; box.scrollIntoView({block:'nearest'}); });
   });
 })();
