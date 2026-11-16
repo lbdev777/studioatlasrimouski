@@ -9,11 +9,15 @@
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/admin", "/admin/*"]
   },
   // Formulaire de contact : envoi au Gmail de l'entreprise (adresse vérifiée dans Email Routing).
   "send_email": [
     { "name": "EMAIL", "destination_address": "studioatlasrimouski@gmail.com" }
+  ],
+  // Tableau de bord /admin : visites, messages, clients.
+  "d1_databases": [
+    { "binding": "DB", "database_name": "atlas-admin", "database_id": "387f602d-53a0-405e-914e-20c073c457e0" }
   ],
   "observability": { "enabled": true }
 }

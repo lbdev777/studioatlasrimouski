@@ -1,6 +1,8 @@
 // Studio Atlas Rimouski : sert le site statique et reçoit le formulaire de contact.
 // Les messages sont envoyés au Gmail de l'entreprise (adresse vérifiée dans Cloudflare Email Routing).
 
+import { handleAdmin, recordVisit } from "./admin.js";
+
 const MAX = { nom: 120, entreprise: 160, courriel: 200, telephone: 40, message: 5000 };
 
 // Pendant la transition DNS, la copie GitHub du site envoie aussi ici.
@@ -50,6 +52,10 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === "/admin" || url.pathname.startsWith("/admin/")) return handleAdmin(request, env, url);
+    if (url.pathname === "/api/v" && request.method === "POST") {
+      try { return await recordVisit(request, env); } catch (e) { console.error("Visite non comptée", e); return new Response(null, { status: 204 }); }
+    }
     currentOrigin = request.headers.get("origin") || "";
     if (url.pathname === "/api/contact" && request.method === "OPTIONS") {
       const h = { "access-control-allow-methods": "POST", "access-control-allow-headers": "Accept, Content-Type", "access-control-max-age": "86400" };
@@ -72,6 +78,11 @@ export default {
         return wantsJson ? json({ ok: false, error: why }, 400)
                          : Response.redirect(url.origin + "/contact.html?erreur=1#contact", 303);
       }
+      // Garde une copie dans le tableau de bord (/admin), même si le courriel échoue.
+      try {
+        if (env.DB) await env.DB.prepare("INSERT INTO messages (ts, nom, entreprise, courriel, telephone, message, infolettre) VALUES (?,?,?,?,?,?,?)")
+          .bind(Date.now(), clean.nom, clean.entreprise, clean.courriel, clean.telephone, clean.message, clean.infolettre ? 1 : 0).run();
+      } catch (e) { console.error("Enregistrement du message impossible", e); }
       try { await sendContact(env, clean); }
       catch (e) {
         console.error("Envoi impossible", e);
