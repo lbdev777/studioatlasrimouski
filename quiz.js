@@ -126,6 +126,7 @@
       var price = el('div', 'qz-price', 'environ ' + money(r.month));
       var sm = el('small', null, ' / mois'); price.appendChild(sm);
       res.appendChild(price);
+      try { window.dispatchEvent(new CustomEvent('atlas:evt', { detail: { k: 'test', l: 'Résultat du test : ' + r.plan.name, c: String(r.month || '') } })); } catch (e) {}
       if (r.plan.name === 'Essentiel' && r.month <= 31) { res.appendChild(el('p', 'qz-day', 'Oui : environ 1 $ par jour pour avoir votre site.')); }
       if (r.extras.length) {
         res.appendChild(el('span', null, 'Ce qu’on ajouterait :'));

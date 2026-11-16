@@ -107,7 +107,7 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
     post(form.action)
       .then(function(d){ return d.__json ? d : post(BACKUP); }, function(){ return post(BACKUP); })
       .then(function(d){
-        if(d.ok){ form.reset(); show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.'); }
+        if(d.ok){ try{window.dispatchEvent(new CustomEvent('atlas:evt',{detail:{k:'formulaire',l:'Envoyé',c:'contact'}}))}catch(e){} form.reset(); show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.'); }
         else show(false,d.error||"L'envoi n'a pas fonctionné. Écrivez-nous à studioatlasrimouski@gmail.com.");
       })
       .catch(function(){ show(false,"Pas de connexion. Réessayez, ou écrivez-nous à studioatlasrimouski@gmail.com."); })

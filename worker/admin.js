@@ -83,7 +83,10 @@ th{font-size:12px;color:#4A4F7A;font-weight:700}td.n{text-align:right;font-varia
 .empty{color:#4A4F7A;padding:8px 0}
 .msg{border-bottom:1px solid #ECEEFA;padding:14px 0}.msg:last-child{border:0}.msg .who{font-weight:700}.msg .meta{color:#4A4F7A;font-size:13px}
 .msg p{white-space:pre-wrap;margin:8px 0}.msg.done{opacity:.55}
-.muted{color:#4A4F7A}.tag.you{background:#10123A;color:#FFD84D}.tag.vis{background:#E6E8FF;color:#2335F5}
+.muted{color:#4A4F7A}.tag.ret{background:#E3F6E8;color:#14532D}.tag.new{background:#FFF1B8;color:#6B5200}.btn.sm{padding:6px 12px;font-size:13px}
+.tl{list-style:none;margin:0;padding:0;border-left:3px solid #DADDF5}.tl li{position:relative;padding:8px 0 12px 18px}.tl li::before{content:"";position:absolute;left:-8px;top:13px;width:13px;height:13px;border-radius:50%;background:#2335F5;border:3px solid #fff}.tl li.ev::before{background:#FFD84D}.tl .h{color:#4A4F7A;font-size:13px;font-variant-numeric:tabular-nums}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px}.facts div span{display:block;font-size:12px;color:#4A4F7A;font-weight:700}
+@media(max-width:860px){.facts{grid-template-columns:1fr 1fr}}.tag.you{background:#10123A;color:#FFD84D}.tag.vis{background:#E6E8FF;color:#2335F5}
 .card{overflow-x:auto}
 .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:#FFF1B8;color:#6B5200}.tag.ok{background:#E3F6E8;color:#14532D}
 button,.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:9px 16px;cursor:pointer;background:#10123A;color:#fff;text-decoration:none;display:inline-block}
@@ -132,6 +135,9 @@ async function counts(env) {
 
 const dureeTxt = (ms) => { const m = Math.floor(ms / 60e3), sec = Math.floor((ms % 60e3) / 1e3); return m >= 60 ? Math.floor(m / 60) + " h " + (m % 60) + " min" : m ? m + " min " + String(sec).padStart(2, "0") + " s" : sec + " s"; };
 const lieu = (r) => [r.ville, r.region].filter(Boolean).join(", ") + (r.pays && r.pays !== "CA" ? (r.ville || r.region ? " · " : "") + r.pays : "") || "Inconnu";
+const lieuPlus = (r) => esc(lieu(r)) + (r.cp ? ` <span class="muted">(${esc(r.cp)})</span>` : "") + (r.fai ? `<br><span class="muted">${esc(r.fai)}</span>` : "");
+const retour = (r) => (r.nb_visites || 1) > 1 ? `<span class="tag ret">${num(r.nb_visites)}ᵉ visite</span>` : `<span class="tag new">Nouveau</span>`;
+const dureeCourte = (ms) => !ms ? "—" : ms < 60e3 ? Math.round(ms / 1e3) + " s" : Math.floor(ms / 60e3) + " min " + String(Math.round((ms % 60e3) / 1e3)).padStart(2, "0") + " s";
 const qui = (r) => r.moi ? '<span class="tag you">Vous</span>' : `<span class="tag vis">Visiteur ${esc(String(r.visiteur || "").slice(0, 4).toUpperCase())}</span>`;
 
 async function liveData(env) {
@@ -142,14 +148,15 @@ async function liveData(env) {
   const t = await env.DB.prepare("SELECT COUNT(DISTINCT CASE WHEN moi = 0 THEN visiteur END) AS v, SUM(CASE WHEN moi = 0 THEN 1 ELSE 0 END) AS p, SUM(CASE WHEN moi = 1 THEN 1 ELSE 0 END) AS mp FROM visites WHERE jour = ?").bind(today).first();
   const recent = (await env.DB.prepare("SELECT * FROM visites ORDER BY ts DESC LIMIT 15").all()).results || [];
   const liveHtml = rows.length
-    ? `<table><tr><th>Qui</th><th>Page en ce moment</th><th>Sur le site depuis</th><th style="text-align:right">Pages</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${rows.map((r) => `<tr>
-<td>${qui(r)}</td><td><strong>${esc(pageName(r.page))}</strong></td><td>${dureeTxt(now - r.debut)}</td><td class="n">${num(r.pages)}</td>
-<td>${esc(r.source || "Accès direct")}</td><td>${esc(r.appareil || "")}<br><span class="muted">${esc([r.navigateur, r.os].filter(Boolean).join(" · "))}</span></td><td>${esc(lieu(r))}</td></tr>`).join("")}</table>`
+    ? `<table><tr><th>Qui</th><th>Page en ce moment</th><th>Sur le site</th><th style="text-align:right">Pages</th><th style="text-align:right">Défilé</th><th>Provenance</th><th>Appareil</th><th>Lieu</th><th></th></tr>${rows.map((r) => `<tr>
+<td>${qui(r)}<br>${retour(r)}</td><td><strong>${esc(pageName(r.page))}</strong></td><td>${dureeTxt(now - r.debut)}<br><span class="muted">actif ${dureeCourte(r.actif_ms)}</span></td><td class="n">${num(r.pages)}</td><td class="n">${num(r.scroll)} %</td>
+<td>${esc(r.source || "Accès direct")}</td><td>${esc(r.appareil || "")}<br><span class="muted">${esc([r.navigateur, r.os].filter(Boolean).join(" · "))}</span></td><td>${lieuPlus(r)}</td>
+<td><a class="btn sm" href="/admin/visite/${esc(r.session)}">Parcours</a></td></tr>`).join("")}</table>`
     : `<p class="empty">Personne sur le site en ce moment. Cette liste se met à jour toute seule.</p>`;
   const recentHtml = recent.length
-    ? `<table><tr><th>Heure</th><th>Qui</th><th>Page</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${recent.map((r) => `<tr>
-<td>${esc(new Intl.DateTimeFormat("fr-CA", { timeZone: TZ, hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" }).format(new Date(r.ts)))}</td><td>${qui(r)}</td>
-<td>${esc(pageName(r.page))}</td><td>${esc(r.source || "Accès direct")}</td><td>${esc([r.appareil, r.navigateur].filter(Boolean).join(" · "))}</td><td>${esc(lieu(r))}</td></tr>`).join("")}</table>`
+    ? `<table><tr><th>Heure</th><th>Qui</th><th>Page</th><th style="text-align:right">Temps</th><th style="text-align:right">Défilé</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${recent.map((r) => `<tr>
+<td>${r.session ? `<a href="/admin/visite/${esc(r.session)}">` : ""}${esc(new Intl.DateTimeFormat("fr-CA", { timeZone: TZ, hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" }).format(new Date(r.ts)))}${r.session ? "</a>" : ""}</td><td>${qui(r)}</td>
+<td>${esc(pageName(r.page))}</td><td class="n">${dureeCourte(r.duree_ms)}</td><td class="n">${r.scroll != null ? num(r.scroll) + " %" : "—"}</td><td>${esc(r.source || "Accès direct")}</td><td>${esc([r.appareil, r.navigateur].filter(Boolean).join(" · "))}</td><td>${lieuPlus(r)}</td></tr>`).join("")}</table>`
     : `<p class="empty">Aucune visite enregistrée pour l'instant.</p>`;
   const label = `${num(others)} visiteur${others > 1 ? "s" : ""} en ce moment` + (mine ? ` · ${mine === 1 ? "vous êtes" : "vous avez " + mine + " onglets"} sur le site` : "");
   return { others, mine, label, todayV: t?.v || 0, todayP: t?.p || 0, todayMine: t?.mp || 0, liveHtml, recentHtml, at: now };
@@ -161,7 +168,7 @@ async function home(env) {
   for (let i = 6; i >= 0; i--) days.push(jourLocal(now - i * 864e5));
   const since7 = days[0];
   const DB = env.DB;
-  const [live, perDay, topPages, sources, devices, villes, clientsRow, msgs, v7row] = await Promise.all([
+  const [live, perDay, topPages, sources, devices, villes, clientsRow, msgs, v7row, actions, moy] = await Promise.all([
     liveData(env),
     DB.prepare("SELECT jour, COUNT(DISTINCT visiteur) AS v, COUNT(*) AS p FROM visites WHERE jour >= ? AND moi = 0 GROUP BY jour").bind(since7).all(),
     DB.prepare("SELECT page, COUNT(*) AS p, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY page ORDER BY p DESC LIMIT 8").bind(since7).all(),
@@ -171,6 +178,8 @@ async function home(env) {
     DB.prepare("SELECT COUNT(*) AS n, COALESCE(SUM(prix_mois),0) AS mrr FROM clients WHERE actif = 1").first(),
     DB.prepare("SELECT * FROM messages ORDER BY ts DESC LIMIT 4").all(),
     DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0").bind(since7).first(),
+    DB.prepare("SELECT type, label, COUNT(*) AS n, COUNT(DISTINCT visiteur) AS v FROM evenements WHERE jour >= ? AND moi = 0 GROUP BY type, label ORDER BY n DESC LIMIT 12").bind(since7).all(),
+    DB.prepare("SELECT AVG(duree_ms) AS d, AVG(scroll) AS sc FROM visites WHERE jour >= ? AND moi = 0 AND duree_ms > 0").bind(since7).first(),
   ]);
   const map = Object.fromEntries((perDay.results || []).map((r) => [r.jour, r]));
   const week = days.map((d) => ({ d, v: map[d]?.v || 0, p: map[d]?.p || 0 }));
@@ -190,6 +199,9 @@ async function home(env) {
   <div class="kpi"><div class="l">Revenu mensuel</div><div class="v">${money(clientsRow?.mrr)}</div><div class="s">${num(clientsRow?.n)} client${(clientsRow?.n || 0) > 1 ? "s" : ""} actif${(clientsRow?.n || 0) > 1 ? "s" : ""}</div></div>
 </section>
 <section class="card"><h2>En direct sur le site</h2><div id="live-table">${live.liveHtml}</div></section>
+<section class="card"><h2>Ce que les visiteurs font (7 jours)</h2>
+<p class="muted" style="margin:-4px 0 10px">Temps moyen par page : <strong>${dureeCourte(moy?.d)}</strong> · défilement moyen : <strong>${moy?.sc != null ? Math.round(moy.sc) + " %" : "—"}</strong></p>
+${(actions.results || []).length ? `<table><tr><th>Action</th><th>Type</th><th style="text-align:right">Fois</th><th style="text-align:right">Visiteurs</th></tr>${actions.results.map((a) => `<tr><td>${esc(a.label || "(sans nom)")}</td><td>${esc({ clic: "Clic", formulaire: "Formulaire", test: "Test des forfaits" }[a.type] || a.type)}</td><td class="n">${num(a.n)}</td><td class="n">${num(a.v)}</td></tr>`).join("")}</table>` : `<p class="empty">Aucune action pour l'instant. Les clics sur les boutons et les liens, les formulaires et les résultats du test apparaîtront ici.</p>`}</section>
 <section class="card"><h2>Visiteurs, 7 derniers jours</h2>
 <div class="bars">${week.map((w) => `<div class="bar" title="${w.v} visiteurs, ${w.p} pages vues"><em>${w.v}</em><b style="height:${Math.round((w.v / max) * 120)}px"></b><span>${dayLabel(w.d)}</span></div>`).join("")}</div></section>
 <section class="card"><h2>Dernières visites</h2><div id="recent-table">${live.recentHtml}</div></section>
@@ -235,6 +247,39 @@ async function messagesPage(env) {
   <form class="inline" method="post" action="/admin/messages/${m.id}/supprimer" onsubmit="return confirm('Supprimer ce message?')"><button class="danger" type="submit">Supprimer</button></form>
 </div>`).join("") : `<p class="empty">Aucun message pour l'instant. Ceux envoyés par le formulaire apparaîtront ici (et dans votre Gmail).</p>`}</section>`;
   return page("Messages", "messages", body, c);
+}
+
+
+async function parcoursPage(env, session) {
+  const DB = env.DB;
+  const pages = (await DB.prepare("SELECT * FROM visites WHERE session = ? ORDER BY ts").bind(session).all()).results || [];
+  const evs = (await DB.prepare("SELECT * FROM evenements WHERE session = ? ORDER BY ts").bind(session).all()).results || [];
+  const pres = await DB.prepare("SELECT * FROM presence WHERE session = ?").bind(session).first();
+  const c = await counts(env);
+  if (!pages.length && !pres) return page("Parcours", "home", `<div class="hd"><h1>Parcours introuvable</h1></div><p><a href="/admin">Retour à l'accueil</a></p>`, c);
+  const f = pres || pages[0];
+  const first = pages[0] || f;
+  const enDirect = pres && pres.dernier > Date.now() - LIVE_MS;
+  const items = [
+    ...pages.map((p) => ({ ts: p.ts, html: `<li><span class="h">${esc(new Intl.DateTimeFormat("fr-CA", { timeZone: TZ, timeStyle: "medium" }).format(new Date(p.ts)))}</span><br><strong>A ouvert : ${esc(pageName(p.page))}</strong><br><span class="muted">${dureeCourte(p.duree_ms)} d'attention · défilé jusqu'à ${num(p.scroll)} % de la page</span></li>` })),
+    ...evs.map((e) => ({ ts: e.ts, html: `<li class="ev"><span class="h">${esc(new Intl.DateTimeFormat("fr-CA", { timeZone: TZ, timeStyle: "medium" }).format(new Date(e.ts)))}</span><br>${esc({ clic: "A cliqué sur", formulaire: "Formulaire :", test: "" }[e.type] ?? e.type)} <strong>${esc(e.label || "(sans nom)")}</strong>${e.cible && e.type === "clic" && e.cible !== e.label ? ` <span class="muted">→ ${esc(e.cible)}</span>` : ""}<br><span class="muted">sur ${esc(pageName(e.page))}</span></li>` })),
+  ].sort((a, b) => a.ts - b.ts);
+  const map = f.lat && f.lon ? ` · <a href="https://www.openstreetmap.org/?mlat=${f.lat}&mlon=${f.lon}#map=11/${f.lat}/${f.lon}" target="_blank" rel="noopener">Voir la zone sur la carte</a>` : "";
+  const body = `<p><a href="/admin">← Accueil</a></p>
+<div class="hd"><h1>Parcours du ${f.moi ? "vôtre" : "visiteur " + esc(String(f.visiteur || "").slice(0, 4).toUpperCase())}</h1>${enDirect ? '<span class="live"><i></i>Sur le site en ce moment</span>' : ""}${qui(f)} ${retour(f)}</div>
+<section class="card"><div class="facts">
+<div><span>Arrivé</span>${esc(dateHeure(first.ts))}</div>
+<div><span>Provenance</span>${esc(first.source || "Accès direct")}</div>
+<div><span>Pages vues</span>${num(pages.length)} · ${dureeCourte(pages.reduce((s, p) => s + (p.duree_ms || 0), 0))} au total</div>
+<div><span>Appareil</span>${esc([f.appareil, f.navigateur, f.os].filter(Boolean).join(" · "))}</div>
+<div><span>Lieu (approximatif)</span>${esc(lieu(f))}${f.cp ? " · région postale " + esc(f.cp) : ""}${map}</div>
+<div><span>Fournisseur Internet</span>${esc(f.fai || "Inconnu")}</div>
+</div></section>
+<section class="card"><h2>Ce qu'il a fait, dans l'ordre</h2>${items.length ? `<ul class="tl">${items.map((i) => i.html).join("")}</ul>` : `<p class="empty">Rien d'enregistré.</p>`}</section>
+${f.moi ? "" : `<form method="post" action="/admin/visite/${esc(session)}/moi"><button class="light" type="submit">C'est moi : marquer ce visiteur comme « Vous »</button></form>
+<p class="muted" style="font-size:13px">Marque cet appareil et sa connexion Internet comme les vôtres. Ses visites ne compteront plus dans vos chiffres.</p>`}
+<p class="muted" style="font-size:13px">La position vient de l'adresse du réseau, pas du GPS : elle indique la ville ou le quartier du fournisseur, parfois à quelques kilomètres près.</p>`;
+  return page("Parcours", "home", body, c);
 }
 
 const FORFAITS = [["Essentiel", 30], ["Rendez-vous", 45], ["Professionnel", 60], ["Entreprise", 75], ["Boutique", 89], ["Autre", 0]];
@@ -330,10 +375,22 @@ export async function handleAdmin(request, env, url) {
       else await env.DB.prepare("UPDATE clients SET actif = ? WHERE id = ?").bind(m[2] === "reactiver" ? 1 : 0, id).run();
       return redirect("/admin/clients");
     }
+    if ((m = p.match(/^\/admin\/visite\/([a-z0-9]{1,40})\/moi$/i))) {
+      const row = await env.DB.prepare("SELECT ip_h, visiteur FROM presence WHERE session = ? UNION SELECT ip_h, visiteur FROM visites WHERE session = ? LIMIT 1").bind(m[1], m[1]).first();
+      if (row) {
+        const now = Date.now();
+        if (row.ip_h) await env.DB.prepare("INSERT INTO admin_ips (ip_h, dernier) VALUES (?, ?) ON CONFLICT(ip_h) DO UPDATE SET dernier = excluded.dernier").bind(row.ip_h, now).run();
+        for (const t of ["visites", "presence", "evenements"]) {
+          await env.DB.prepare(`UPDATE ${t} SET moi = 1 WHERE session = ? OR (ip_h IS NOT NULL AND ip_h = ?) OR visiteur = ?`).bind(m[1], row.ip_h || "", row.visiteur || "").run();
+        }
+      }
+      return redirect("/admin/visite/" + m[1]);
+    }
     return redirect("/admin");
   }
 
   if (p === "/admin") return home(env);
+  { const mv = p.match(/^\/admin\/visite\/([a-z0-9]{1,40})$/i); if (mv) return parcoursPage(env, mv[1]); }
   if (p === "/admin/messages") return messagesPage(env);
   if (p === "/admin/clients") return clientsPage(env);
   return redirect("/admin");
@@ -366,51 +423,74 @@ export async function ipHash(request, env) {
   return (await sha("ip|" + (request.headers.get("cf-connecting-ip") || "") + "|" + (env.ADMIN_PASSWORD || "atlas"))).slice(0, 16);
 }
 
+async function isMe(request, env, ip_h, now) {
+  if (getCookie(request, "atlas_moi")) return 1;
+  const admin = await env.DB.prepare("SELECT 1 AS x FROM admin_ips WHERE ip_h = ? AND dernier > ?").bind(ip_h, now - 60 * 864e5).first();
+  return admin ? 1 : 0;
+}
+
 export async function recordVisit(request, env) {
   const ok = () => new Response(null, { status: 204 });
   if (!env.DB) return ok();
   const ua = request.headers.get("user-agent") || "";
   if (BOT.test(ua)) return ok();
+  const raw = await request.text();
+  if (raw.length > 4000) return ok();
   let d = {};
-  try { d = JSON.parse(await request.text()); } catch {}
+  try { d = JSON.parse(raw); } catch {}
   const page = cleanPage(d.p);
   if (page.startsWith("/admin") || page.startsWith("/api")) return ok();
-  const t = d.t === "h" || d.t === "x" ? d.t : "v";
-  const session = String(d.s || "").replace(/[^a-z0-9]/gi, "").slice(0, 40) || null;
+  const t = ["v", "h", "x", "e"].includes(d.t) ? d.t : "v";
+  const id = (v, n) => String(v || "").replace(/[^a-z0-9]/gi, "").slice(0, n) || null;
+  const session = id(d.s, 40), pv = id(d.pv, 16);
+  const actif = Math.max(0, Math.min(Number(d.a) || 0, 6 * 3600e3));
+  const sc = Math.max(0, Math.min(Number(d.sc) || 0, 100));
   const now = Date.now();
   const DB = env.DB;
 
-  if (t === "x") {
-    if (session) await DB.prepare("UPDATE presence SET dernier = ? WHERE session = ?").bind(now - LIVE_MS - 1000, session).run();
-    return ok();
+  if (t === "h" || t === "x") {
+    if (pv) await DB.prepare("UPDATE visites SET duree_ms = MAX(duree_ms, ?), scroll = MAX(scroll, ?) WHERE pv = ?").bind(actif, sc, pv).run();
+    if (session) {
+      const r = await DB.prepare("UPDATE presence SET dernier = ?, page = ?, scroll = ?, actif_ms = ? WHERE session = ?")
+        .bind(t === "x" ? now - LIVE_MS - 1000 : now, page, sc, actif, session).run();
+      if (t === "x" || (r.meta && r.meta.changes > 0)) return ok();
+    } else return ok();
   }
+
   const jour = jourLocal(now);
   const ip_h = await ipHash(request, env);
   const visiteur = (await sha(ip_h + "|" + ua + "|" + jour)).slice(0, 16);
-  const admin = await DB.prepare("SELECT 1 AS x FROM admin_ips WHERE ip_h = ? AND dernier > ?").bind(ip_h, now - 30 * 864e5).first();
-  const moi = getCookie(request, "atlas_moi") || admin ? 1 : 0;
+  const moi = await isMe(request, env, ip_h, now);
+
+  if (t === "e") {
+    const type = String(d.k || "action").slice(0, 20);
+    await DB.prepare("INSERT INTO evenements (ts, jour, session, visiteur, ip_h, moi, page, type, label, cible) VALUES (?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, jour, session, visiteur, ip_h, moi, page, type, String(d.l || "").slice(0, 80), String(d.c || "").slice(0, 200)).run();
+    return ok();
+  }
+
   const { nav, os } = parseUA(ua);
   const w = Number(d.w) || 0;
   const appareil = w ? (w < 768 ? "Cellulaire" : w < 1100 ? "Tablette" : "Ordinateur") : "Inconnu";
   const cf = request.cf || {};
   const ville = cf.city || null, region = cf.region === "Quebec" ? "Québec" : cf.region || null, pays = cf.country || null;
+  const cp = cf.postalCode ? String(cf.postalCode).slice(0, 3).toUpperCase() : null; // seulement la région postale (ex. G5L)
+  const fai = cf.asOrganization ? String(cf.asOrganization).slice(0, 80) : null;
+  const lat = cf.latitude ? Math.round(Number(cf.latitude) * 100) / 100 : null; // ~1 km, position approximative du réseau
+  const lon = cf.longitude ? Math.round(Number(cf.longitude) * 100) / 100 : null;
+  const nb = Math.max(1, Math.min(Number(d.n) || 1, 9999));
   const source = sourceOf(d);
 
-  if (t === "h") {
-    const r = session ? await DB.prepare("UPDATE presence SET dernier = ?, page = ? WHERE session = ?").bind(now, page, session).run() : null;
-    if (r && r.meta && r.meta.changes > 0) return ok();
-    // pas de session connue (ex. page restée ouverte avant la mise à jour) : on la crée
-  }
   if (t === "v") {
-    await DB.prepare("INSERT INTO visites (ts, jour, page, source, visiteur, appareil, session, ip_h, moi, navigateur, os, ville, region, pays) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-      .bind(now, jour, page, source, visiteur, appareil, session, ip_h, moi, nav, os, ville, region, pays).run();
+    await DB.prepare("INSERT INTO visites (ts, jour, page, source, visiteur, appareil, session, ip_h, moi, navigateur, os, ville, region, pays, pv, duree_ms, scroll, cp, fai, lat, lon, nb_visites) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, jour, page, source, visiteur, appareil, session, ip_h, moi, nav, os, ville, region, pays, pv, 0, sc, cp, fai, lat, lon, nb).run();
   }
   if (session) {
-    await DB.prepare(`INSERT INTO presence (session, visiteur, ip_h, moi, page, debut, dernier, pages, source, appareil, navigateur, os, ville, region, pays)
-      VALUES (?,?,?,?,?,?,?,1,?,?,?,?,?,?,?)
-      ON CONFLICT(session) DO UPDATE SET page = excluded.page, dernier = excluded.dernier, moi = excluded.moi,
+    await DB.prepare(`INSERT INTO presence (session, visiteur, ip_h, moi, page, debut, dernier, pages, source, appareil, navigateur, os, ville, region, pays, cp, fai, lat, lon, scroll, actif_ms, nb_visites)
+      VALUES (?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      ON CONFLICT(session) DO UPDATE SET page = excluded.page, dernier = excluded.dernier, moi = MAX(presence.moi, excluded.moi), scroll = excluded.scroll, actif_ms = excluded.actif_ms,
         pages = presence.pages + (CASE WHEN ? = 'v' THEN 1 ELSE 0 END)`)
-      .bind(session, visiteur, ip_h, moi, page, now, now, source, appareil, nav, os, ville, region, pays, t).run();
+      .bind(session, visiteur, ip_h, moi, page, now, now, source, appareil, nav, os, ville, region, pays, cp, fai, lat, lon, sc, actif, nb, t).run();
   }
   if (Math.random() < 0.03) await DB.prepare("DELETE FROM presence WHERE dernier < ?").bind(now - 864e5).run();
   return ok();
