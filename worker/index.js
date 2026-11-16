@@ -50,19 +50,6 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // TEST TEMPORAIRE : envoie un message simulé (retiré après vérification)
-    if (url.pathname.startsWith("/api/contact/essai-bfc5fb17410a20484421d0e2/")) {
-      const n = url.pathname.split("/").pop();
-      const samples = {
-        "1": { nom: "Marie Tremblay", entreprise: "Boulangerie du Fleuve", courriel: "studioatlasrimouski@gmail.com", telephone: "418 555-0101", message: "Essai 1 : un commerce qui veut un site Essentiel pour afficher son horaire et ses produits.", infolettre: true },
-        "2": { nom: "Jean Ouellet", entreprise: "", courriel: "studioatlasrimouski@gmail.com", telephone: "", message: "Essai 2 : message court sans entreprise ni téléphone.", infolettre: false },
-        "3": { nom: "Sophie Gagnon", entreprise: "Salon Coupe & Cie", courriel: "studioatlasrimouski@gmail.com", telephone: "418 555-0199", message: "Essai 3 : long message avec accents (é, è, à, ç) et plusieurs lignes.\nDeuxième ligne : intéressée par le forfait Rendez-vous.\nTroisième ligne : disponible le soir.", infolettre: false },
-      };
-      const f = samples[n];
-      if (!f) return json({ ok: false, error: "essai inconnu" }, 404);
-      try { await sendContact(env, f); return json({ ok: true, essai: n }); }
-      catch (e) { return json({ ok: false, error: String(e && e.message || e) }, 500); }
-    }
     currentOrigin = request.headers.get("origin") || "";
     if (url.pathname === "/api/contact" && request.method === "OPTIONS") {
       const h = { "access-control-allow-methods": "POST", "access-control-allow-headers": "Accept, Content-Type", "access-control-max-age": "86400" };
