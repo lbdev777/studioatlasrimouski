@@ -69,7 +69,9 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
           <span><strong>Heures :</strong> lundi au vendredi</span>
         </div>
       </div>
-      <form action="mailto:bonjour@studioatlasrimouski.ca" method="post" enctype="text/plain" style="flex: 1 1 460px; min-width: 0; background: #F4F5FF; color: #10123A; border-radius: 24px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+      <form id="contact-form" action="/api/contact" method="post" style="flex: 1 1 460px; min-width: 0; background: #F4F5FF; color: #10123A; border-radius: 24px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Ne pas remplir<input type="text" name="site_web" tabindex="-1" autocomplete="off"></label></div>
+        <p id="contact-status" role="status" aria-live="polite" hidden style="margin:0;padding:14px 16px;border-radius:12px;font-weight:600;line-height:1.5"></p>
         <div style="display: flex; flex-wrap: wrap; gap: 18px">
           <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 15px">Nom<input type="text" name="nom" autocomplete="name" required style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px; border: 2px solid #10123A; border-radius: 12px; background: #FFFFFF"></label>
           <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 15px">Entreprise<input type="text" name="entreprise" autocomplete="organization" style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px; border: 2px solid #10123A; border-radius: 12px; background: #FFFFFF"></label>
@@ -80,7 +82,7 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
         </div>
         <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 15px">Votre entreprise en quelques mots<textarea name="message" rows="5" required style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px; border: 2px solid #10123A; border-radius: 12px; background: #FFFFFF; resize: vertical"></textarea></label>
         <label style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.5"><input type="checkbox" name="infolettre" style="width: 22px; height: 22px; margin: 0; flex: 0 0 auto">J'accepte de recevoir l'infolettre de Studio Atlas Rimouski (facultatif, désabonnement en un clic).</label>
-        <button type="submit" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 17px; background: #10123A; color: #F4F5FF; border: none; padding: 17px 28px; border-radius: 999px; cursor: pointer; min-height: 48px">Envoyer</button>
+        <button type="submit" id="contact-send" style="align-self: flex-start; font: inherit; font-weight: 700; font-size: 17px; background: #10123A; color: #F4F5FF; border: none; padding: 17px 28px; border-radius: 999px; cursor: pointer; min-height: 48px">Envoyer</button>
         <span style="font-size: 14px; line-height: 1.5; color: #4A4F7A">Vos renseignements servent seulement à vous répondre.</span>
       </form>
     </div>
@@ -88,5 +90,28 @@ a:focus-visible{outline:3px solid #FFD84D;outline-offset:3px}
 
   <footer class="sa-foot"><div class="sa-wrap sa-foot-in"><div><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#FFD84D"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#10123A">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg></a><p>Des sites web pour les commerces d'ici, avec quelqu'un pour vous répondre.</p></div><div><p>Rimouski (Québec)</p><p><a href="mailto:bonjour@studioatlasrimouski.ca">bonjour@studioatlasrimouski.ca</a></p><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p></div><div><p><a href="forfaits.html">Forfaits</a></p><p><a href="exemples/index.html">Exemples</a></p><p><a href="mailto:bonjour@studioatlasrimouski.ca?subject=Annuler%20mon%20abonnement">Annuler mon abonnement</a></p></div></div></footer>
 </div>
+<script>
+(function(){
+  var form=document.getElementById('contact-form'); if(!form) return;
+  var box=document.getElementById('contact-status'), btn=document.getElementById('contact-send');
+  function show(ok,msg){ box.hidden=false; box.textContent=msg; box.style.background=ok?'#E3F6E8':'#FDE8E8'; box.style.color=ok?'#14532D':'#7F1D1D'; }
+  var q=new URLSearchParams(location.search);
+  if(q.get('envoye')) show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.');
+  if(q.get('erreur')) show(false,"Le message n'est pas parti. Vérifiez votre nom, votre courriel et votre message, ou écrivez-nous à bonjour@studioatlasrimouski.ca.");
+  form.addEventListener('submit',function(e){
+    if(!window.fetch) return;
+    e.preventDefault();
+    btn.disabled=true; var label=btn.textContent; btn.textContent='Envoi…';
+    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      .then(function(r){return r.json().catch(function(){return {ok:false};});})
+      .then(function(d){
+        if(d.ok){ form.reset(); show(true,'Merci! Votre message est bien envoyé. On vous répond en un jour ouvrable.'); }
+        else show(false,d.error||"L'envoi n'a pas fonctionné. Écrivez-nous à bonjour@studioatlasrimouski.ca.");
+      })
+      .catch(function(){ show(false,"Pas de connexion. Réessayez, ou écrivez-nous à bonjour@studioatlasrimouski.ca."); })
+      .then(function(){ btn.disabled=false; btn.textContent=label; box.scrollIntoView({block:'nearest'}); });
+  });
+})();
+</script>
 </body>
 </html>
