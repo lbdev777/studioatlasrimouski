@@ -3,6 +3,7 @@
 // et les actions (clics sur liens et boutons, formulaire commencé/envoyé, résultat du test).
 (function () {
   try {
+    if (window.self !== window.top) return; // aperçu affiché dans une autre page : pas une visite
     var SK = "atlas_sid", sid = sessionStorage.getItem(SK), nouvelleSession = !sid;
     if (!sid) { sid = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem(SK, sid); }
     var nb = 1;
