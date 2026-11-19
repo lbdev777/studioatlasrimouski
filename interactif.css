@@ -22,36 +22,6 @@
 .ls-hours .ls-new-row{animation:lsin .5s ease}
 @keyframes lsin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
-/* 2. Avant / après */
-.ba-sec{background:#EEF6FA}
-.ba-in{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center;padding-top:88px;padding-bottom:88px}
-.ba-txt h2{font-size:clamp(30px,3.6vw,48px);margin-bottom:18px}
-.ba-txt p{color:#475B70;font-size:18px;max-width:46ch}
-.ba-txt .ba-note{font-size:14px;margin-top:14px;color:#6B7E92}
-.ba{position:relative;width:min(330px,86vw);margin:0 auto;background:#123A6B;border-radius:34px;padding:10px;box-shadow:0 30px 60px rgba(11,27,51,.25);touch-action:pan-y}
-.ba-screen{position:relative;border-radius:25px;overflow:hidden;aspect-ratio:390/844;--p:50%}
-.ba-screen .frame{position:absolute;inset:0}
-.ba-screen .frame iframe{width:390px;height:844px}
-.ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0);background:#E4E6EB}
-.ba-mock{position:absolute;left:0;top:0;width:390px;height:844px;transform-origin:0 0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#1c1e21;background:#E4E6EB}
-.ba-mock .bm-top{background:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #d6d8dc}
-.ba-mock .bm-av{width:40px;height:40px;border-radius:50%;background:#B0B3B8}
-.ba-mock .bm-top b{font-size:17px}.ba-mock .bm-top small{display:block;color:#65676b;font-size:13px}
-.ba-mock .bm-cover{height:150px;background:linear-gradient(135deg,#cfd2d6,#b9bcc1)}
-.ba-mock .bm-post{background:#fff;margin:10px 0;padding:14px 16px}
-.ba-mock .bm-post p{font-size:15px;line-height:1.35;margin:8px 0 10px}
-.ba-mock .bm-meta{color:#65676b;font-size:13px}
-.ba-mock .bm-img{height:250px;border-radius:6px;background:repeating-linear-gradient(0deg,#d9d2c3 0 14px,#cfc6b4 14px 16px);filter:blur(2.4px);display:grid;place-items:center}
-.ba-mock .bm-img span{filter:blur(0);font-size:13px;color:#7a7060}
-.ba-mock .bm-com{background:#F0F2F5;border-radius:16px;padding:8px 12px;font-size:14px;margin-top:8px;display:inline-block}
-.ba-line{position:absolute;top:0;bottom:0;left:var(--p);width:4px;margin-left:-2px;background:#F2B544;pointer-events:none;box-shadow:0 0 0 1px rgba(11,27,51,.15)}
-.ba-knob{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:#F2B544;display:grid;place-items:center;box-shadow:0 6px 18px rgba(11,27,51,.35)}
-.ba-lab{position:absolute;top:12px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;pointer-events:none}
-.ba-lab.l{left:12px;background:#0B1B33;color:#fff}.ba-lab.r{right:12px;background:#F2B544;color:#0B1B33}
-.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
-.ba-range:focus-visible+.ba-focus{opacity:1}
-.ba-focus{position:absolute;inset:-6px;border-radius:40px;outline:3px solid #2F86B5;opacity:0;pointer-events:none}
-
 /* 3. Choisissez votre commerce */
 .pick-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
 .pick-chips button{background:#EEF6FA;color:#0B1B33;font-size:15px;padding:11px 18px}
@@ -165,7 +135,6 @@
 @media (max-width:760px){.sa-sticky{display:flex}}
 
 @media (max-width:900px){
- .ba-in{grid-template-columns:1fr;gap:34px}
  .pick-body{grid-template-columns:1fr;gap:30px}
  .pick-phone{width:min(280px,78vw);margin:0 auto}
  .st-grid{grid-template-columns:1fr;gap:28px}
