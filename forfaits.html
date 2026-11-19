@@ -74,6 +74,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .fd-help p{margin:0;max-width:62ch}.fd-help a{display:inline-block;margin-left:10px;background:#F2B544;color:#0B1B33;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:999px}
 @media(max-width:860px){.fd-cols,.fd-facts,.fd-glossary{grid-template-columns:1fr}.fd-price{text-align:left}.fd-help a{margin:8px 10px 0 0}}
 </style>
+<link rel="stylesheet" href="interactif.css">
 </head>
 <body>
 <div style="font-family: "Instrument Sans", sans-serif; color: #0B1B33; background: #EEF6FA; min-height: 100vh">
@@ -179,6 +180,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <a href="#detail-boutique" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
     </article>
   </section>
+<section class="calc" id="calc" aria-labelledby="calc-title"><div class="calc-box">
+ <div>
+  <h2 id="calc-title">Votre prix en 20 secondes</h2>
+  <p class="calc-lead">Cochez ce dont votre commerce a besoin. Le forfait et le prix se calculent tout seuls.</p>
+  <fieldset><legend>Votre site doit…</legend>
+   <label class="calc-opt"><input type="checkbox" checked disabled><span>Montrer votre horaire, vos photos et vos coordonnées<small>Compris dans tous les forfaits</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-need="1"><span>Recevoir des demandes de rendez-vous<small>Salon, clinique, esthétique, garage</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-need="2"><span>Avoir un menu cliquable, une galerie ou plusieurs pages<small>Jusqu'à 5 pages</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-need="3"><span>Être en français et en anglais, avec nouvelles et promos<small>Jusqu'à 10 pages</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-need="4"><span>Vendre des produits en ligne<small>Panier et paiement sécurisé, jusqu'à 25 produits</small></span></label>
+  </fieldset>
+  <fieldset><legend>Options</legend>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Domaine clé en main" data-m="4" data-c="0"><span>Domaine clé en main (+4 $ par mois)<small>On réserve et gère votre adresse .ca ou .com</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Réservations en ligne" data-m="10" data-c="49"><span>Réservations en ligne (+10 $ par mois, 49 $ une fois)<small>Le client choisit lui-même son heure</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Commandes pour emporter" data-m="15" data-c="99"><span>Commandes pour emporter (+15 $ par mois, 99 $ une fois)</span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Menu ou horaire modifiable par vous" data-m="10" data-c="99"><span>Menu ou horaire que vous modifiez vous-même (+10 $ par mois, 99 $ une fois)</span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Logo simple" data-m="0" data-c="149"><span>Logo simple (149 $ une fois)</span></label>
+  </fieldset>
+  <fieldset><legend>Ou choisissez le forfait vous-même</legend>
+   <div class="calc-plans"><button type="button">Essentiel</button><button type="button">Rendez-vous</button><button type="button">Professionnel</button><button type="button">Entreprise</button><button type="button">Boutique</button></div>
+  </fieldset>
+ </div>
+ <div class="calc-out" aria-live="polite">
+  <p class="co-plan">Forfait Essentiel</p>
+  <p class="co-price">30 $<small>par mois</small></p>
+  <span class="co-day">Environ 1 $ par jour</span>
+  <label class="calc-toggle"><input type="checkbox" id="calc-annual">Payer à l'année : 2 mois gratuits et création offerte</label>
+  <dl></dl>
+  <a class="btn gold co-go" href="contact.html#contact">Demander mon aperçu gratuit</a>
+  <p class="co-fine">Prix avant taxes. Les outils de réservation, de commande et de paiement sont payés directement à leur fournisseur. Le prix exact est écrit dans votre contrat avant de signer.</p>
+ </div>
+</div></section>
+
   <section class="fd" id="details" aria-labelledby="fd-title">
    <div class="fd-wrap">
     <h2 id="fd-title">Chaque forfait expliqué, en détail</h2>
@@ -274,7 +308,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </div>
     <div class="fd-facts">
       <div><span>Vos changements chaque mois</span>10 petites mises à jour par mois (ex. : un prix, un produit en rupture), plus 2 heures d'ajouts par mois (ex. : ajouter de nouveaux produits).</div>
-      <div><span>Pour démarrer</span>Frais de création : 349 $ (sur soumission au-delà de 25 produits). En ligne en confirmé dans votre soumission, selon le nombre de produits.</div>
+      <div><span>Pour démarrer</span>Frais de création : 349 $ (sur soumission au-delà de 25 produits). Délai confirmé dans votre soumission, selon le nombre de produits.</div>
       <div><span>Payé à l'année</span>890 $ pour l'année (10 mois payés sur 12, création offerte)</div>
     </div>
     <a class="fd-ex" href="exemples/boutique.html">Essayer l'exemple : Atelier Fjord</a>
@@ -395,5 +429,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 <script src="quiz.js" defer></script>
 <script src="/stats.js" defer></script>
+<script src="interactif.js" defer></script>
 </body>
 </html>
