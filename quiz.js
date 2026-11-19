@@ -136,7 +136,7 @@
         res.appendChild(ul);
       }
       r.notes.forEach(function (n) { res.appendChild(el('p', null, n)); });
-      res.appendChild(el('p', 'qz-note', 'Au départ : environ ' + money(r.setup) + ' de création (ceux du forfait sont offerts si vous payez l’année). Prix avant taxes, sans engagement. C’est une estimation : on confirme tout par écrit après un appel de 30 minutes.'));
+      res.appendChild(el('p', 'qz-note', 'Au départ : environ ' + money(r.setup) + ' de création (ceux du forfait sont offerts si vous payez l’année). Prix avant taxes, avec un contrat clair. C’est une estimation : on confirme tout par écrit après un appel de 30 minutes.'));
       var ctas = el('div', 'qz-ctas');
       var c1 = el('a', 'qz-cta', 'Demander ma soumission'); c1.href = 'contact.html#contact';
       var c2 = el('a', 'qz-cta2', 'Refaire le test'); c2.href = '#quiz';
