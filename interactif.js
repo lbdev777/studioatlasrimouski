@@ -5,7 +5,7 @@
   function fitScaled(){
     document.querySelectorAll('[data-w]').forEach(function(f){
       var s = f.clientWidth / +f.dataset.w;
-      var t = f.querySelector('iframe') || f.querySelector('.ba-mock');
+      var t = f.querySelector('iframe');
       if (t) t.style.transform = 'scale(' + s + ')';
     });
   }
@@ -81,25 +81,6 @@
     if ('IntersectionObserver' in window){
       new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? start() : stop(); }); }, {threshold:.35}).observe(st);
     } else start();
-  })();
-
-  /* 2. Avant / après */
-  (function(){
-    var sc = document.querySelector('.ba-screen'); if (!sc) return;
-    var r = sc.querySelector('.ba-range'), used = false;
-    function set(v){ sc.style.setProperty('--p', v + '%'); }
-    r.addEventListener('input', function(){ set(r.value); if (!used){ used = true; evt('Avant/après glissé', 'avant-apres'); } });
-    set(r.value);
-    if (!reduce && 'IntersectionObserver' in window){
-      var done = false;
-      new IntersectionObserver(function(es){ es.forEach(function(e){
-        if (!e.isIntersecting || done || used) return; done = true;
-        var t0 = null;
-        function hint(ts){ if (used) return; if (!t0) t0 = ts; var k = (ts - t0) / 1600; if (k > 1) { set(50); r.value = 50; return; }
-          var v = 50 + Math.sin(k * Math.PI * 2) * 22; set(v); r.value = v; requestAnimationFrame(hint); }
-        requestAnimationFrame(hint);
-      }); }, {threshold:.6}).observe(sc);
-    }
   })();
 
   /* 3. Choisissez votre commerce */
