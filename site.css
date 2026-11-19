@@ -1,0 +1,114 @@
+/* Studio Atlas Rimouski : style du site */
+:root{
+  --ink:#0B1B33;
+  --navy:#123A6B;
+  --ice:#A9D9EC;
+  --ice-pale:#EEF6FA;
+  --line:#D5E2EA;
+  --muted:#4A5D72;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font:400 18px/1.55 var(--sans)}
+img,iframe{max-width:100%}
+a{color:var(--navy);text-underline-offset:3px}
+a:hover{color:var(--ink)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(34px,5vw,52px);max-width:19ch}
+h2{font-size:clamp(26px,3.2vw,34px);max-width:28ch}
+h3{font-size:21px}
+p{margin:0 0 1em;max-width:62ch}
+ul,ol{margin:0 0 1em;padding-left:1.2em}
+li{margin-bottom:.35em}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+:focus-visible{outline:3px solid var(--ice);outline-offset:2px}
+.w{max-width:1080px;margin:0 auto;padding:0 24px}
+.muted{color:var(--muted)}
+.small{font-size:15px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:12px;background:#fff;padding:8px 12px;z-index:99}
+
+/* en-tête */
+.top{border-bottom:1px solid var(--line)}
+.top .w{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
+.mark{display:flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--ink)}
+.mark b{font:600 23px var(--serif)}
+.mark span{font-size:15px;color:var(--muted)}
+.nav{display:flex;gap:22px;flex-wrap:wrap}
+.nav a{color:var(--ink);text-decoration:none;font-size:17px}
+.nav a:hover,.nav a[aria-current=page]{text-decoration:underline}
+
+/* boutons */
+.b{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:17px;padding:13px 20px;border-radius:3px;border:1px solid var(--navy);cursor:pointer;font-family:var(--sans)}
+.b:hover{background:var(--ink);color:#fff}
+.b.alt{background:#fff;color:var(--navy)}
+.b.alt:hover{background:var(--ice-pale);color:var(--ink)}
+.acts{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:8px}
+
+/* sections */
+.sec{padding:64px 0;border-top:1px solid var(--line)}
+.sec.first{border-top:0;padding-top:48px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start}
+.lead{font-size:20px}
+
+/* aperçu d'un site d'exemple, sans faux appareil */
+.peek{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
+.peek .frame{position:relative;overflow:hidden;aspect-ratio:390/700}
+.peek .frame iframe{position:absolute;left:0;top:0;width:390px;max-width:none;height:700px;border:0;transform-origin:0 0;pointer-events:none}
+.peek figcaption,.cap{font-size:15px;color:var(--muted);padding:10px 12px;border-top:1px solid var(--line)}
+
+/* tableaux */
+.tbl{overflow-x:auto;margin:0 0 1em}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;vertical-align:top;padding:11px 14px 11px 0;border-bottom:1px solid var(--line)}
+th{font-weight:600}
+thead th{border-bottom:2px solid var(--ink)}
+td.n,th.n{text-align:right;white-space:nowrap}
+
+/* listes de définitions */
+dl.defs{display:grid;grid-template-columns:minmax(160px,240px) 1fr;gap:0;margin:0 0 1em}
+dl.defs dt,dl.defs dd{padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+dl.defs dt{font-weight:600;padding-right:20px}
+
+/* forfaits en détail */
+.plan{padding:36px 0;border-top:1px solid var(--line)}
+.plan h3{font-size:26px;margin-bottom:4px}
+.plan .price{font-size:17px;color:var(--muted);margin-bottom:14px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:18px 0}
+.cols3 h4{font:600 16px var(--sans);margin:0 0 8px}
+.cols3 ul{font-size:16px}
+
+/* questions */
+details{border-bottom:1px solid var(--line);padding:14px 0}
+details summary{cursor:pointer;font-weight:600;font-size:18px}
+details p{margin:10px 0 0}
+
+/* formulaire */
+.form{display:grid;gap:16px;max-width:620px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form label{display:grid;gap:6px;font-weight:600;font-size:16px}
+.form input[type=text],.form input[type=email],.form input[type=tel],.form textarea{font:inherit;font-weight:400;font-size:17px;padding:11px 12px;border:1px solid #9FB3C4;border-radius:3px;background:#fff;color:var(--ink);width:100%}
+.form textarea{min-height:140px;resize:vertical}
+.form .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:15px}
+.form .check input{margin-top:4px}
+#contact-status{padding:12px 14px;border-radius:3px;font-size:16px}
+
+/* pied de page */
+.foot{border-top:1px solid var(--line);margin-top:24px}
+.foot .w{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:28px;padding-bottom:40px;font-size:15px;color:var(--muted)}
+.foot p{margin:0 0 6px}
+.foot a{color:var(--muted)}
+
+@media (max-width:860px){
+  .two,.hero{grid-template-columns:1fr;gap:32px}
+  .cols3{grid-template-columns:1fr;gap:8px}
+  dl.defs{grid-template-columns:1fr}
+  dl.defs dt{border-bottom:0;padding-bottom:0}
+  .form .row{grid-template-columns:1fr}
+  .sec{padding:48px 0}
+}
+.two>*,.hero>*,.cols3>*{min-width:0}
+.exrow{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start}
+@media (max-width:860px){.exrow{grid-template-columns:1fr;gap:20px}.exrow .peek{max-width:280px}}
