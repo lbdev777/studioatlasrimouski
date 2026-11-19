@@ -214,7 +214,8 @@ h1,h2,h3{font-family:Unbounded,system-ui,sans-serif;letter-spacing:-.03em;line-h
 .sa-foot-in{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px;padding-top:56px;padding-bottom:56px}.sa-foot .sa-logo{color:#FFF;margin-bottom:12px}.sa-foot p{margin:0}.sa-foot a{text-decoration:none}.sa-foot a:hover{color:#A9D9EC}
 @media(max-width:760px){.sa-foot-in{grid-template-columns:1fr}.sa-nav a:not(.sa-btn){font-size:14px}}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2F86B5;outline-offset:3px}
-</style></head><body>
+</style><link rel="stylesheet" href="interactif.css">
+</head><body>
 <header class="sa-top"><div class="sa-wrap sa-top-in"><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#A9D9EC"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#0B1B33">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg><span>Studio<br>Rimouski</span></a><nav class="sa-nav"><a href="forfaits.html">Forfaits</a><a href="a-propos.html">À propos</a><a href="contact.html">FAQ</a><a class="sa-btn sa-small" href="contact.html#contact">Parlons de votre site</a></nav></div></header>
 <main>
 <section class="hero"><div class="wrap hero-in">
@@ -245,17 +246,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    <li data-k="2"><b>2</b>On vous répond</li>
    <li data-k="3"><b>3</b>Votre site est à jour</li>
   </ol>
+  <div class="ls-try" id="ls-try">
+   <p class="ls-try-t">À vous d'essayer : choisissez un changement.</p>
+   <div class="ls-chips">
+    <button type="button" data-k="ferme" aria-pressed="false">Fermer à 15 h vendredi</button>
+    <button type="button" data-k="plat" aria-pressed="false">Nouveau plat du jour</button>
+    <button type="button" data-k="promo" aria-pressed="false">Promo du soir</button>
+    <button type="button" data-k="lundi" aria-pressed="false">Fermé lundi</button>
+   </div>
+   <form class="ls-form"><input type="text" maxlength="70" placeholder="Ou écrivez votre propre annonce" aria-label="Écrivez une annonce pour le site d'exemple"><button type="submit">Envoyer</button></form>
+  </div>
  </div>
- <div class="ls-stage" id="ls-stage" aria-hidden="true">
+ <div class="ls-stage" id="ls-stage">
   <div class="ls-phone">
    <div class="ls-head"><span class="ls-av">a</span><div><strong>Studio Atlas</strong><small>Votre ligne texto</small></div></div>
-   <div class="ls-chat">
-    <div class="ls-msg me" data-s="1">Salut! On ferme à 15 h vendredi, c'est la fête du quartier.</div>
-    <div class="ls-typing" data-s="2"><i></i><i></i><i></i></div>
-    <div class="ls-msg them" data-s="3">Parfait, je m'en occupe.</div>
-    <div class="ls-msg them" data-s="5">C'est en ligne. Bon vendredi!</div>
-    <div class="ls-msg me" data-s="6">Wow, déjà? Merci!</div>
-   </div>
+   <div class="ls-chat" aria-live="polite"></div>
   </div>
   <div class="ls-site">
    <div class="ls-bar"><i></i><i></i><i></i><span>bistroduhavre.ca</span></div>
@@ -263,6 +268,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <div class="ls-banner" data-s="4">Vendredi : on ferme à 15 h (fête du quartier)</div>
     <p class="ls-name">Bistro du Havre</p>
     <p class="ls-sub">Cuisine du marché, vue sur le quai</p>
+    <div class="ls-special"></div>
     <div class="ls-hours"><p class="ls-h">Horaire</p>
      <div><span>Lundi au jeudi</span><span>11 h – 21 h</span></div>
      <div class="ls-fri"><span>Vendredi</span><span class="ls-swap"><span class="old">11 h – 22 h</span><b class="new">11 h – 15 h</b></span></div>
@@ -283,27 +289,70 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
  <div class="prom"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A9D9EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Un contrat clair</h3><p>Le prix, ce qui est compris et les conditions d'annulation sont écrits d'avance et expliqués avant de signer. Rien de caché.</p></div>
 </section>
 
+<section class="ba-sec" aria-labelledby="ba-title"><div class="wrap ba-in">
+ <div class="ba-txt"><p class="eyebrow">Avant et après</p><h2 id="ba-title">Ce que vos clients voient, avant et après.</h2>
+ <p>Glissez la ligne. À gauche, ce que trouvent souvent les clients aujourd'hui : une page de réseau social pas à jour, un menu en photo floue et une question sans réponse. À droite, le même commerce avec un site Atlas.</p>
+ <p class="ba-note">Commerce fictif, pour l'exemple.</p></div>
+ <div class="ba"><div class="ba-screen">
+  <div class="frame" data-w="390"><iframe src="exemples/professionnel.html" title="Le site d'exemple du Bistro du Havre" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+  <div class="ba-before" data-w="390" aria-hidden="true"><div class="ba-mock">
+   <div class="bm-top"><span class="bm-av"></span><div><b>Bistro du Havre</b><small>Restaurant · 412 abonnés</small></div></div>
+   <div class="bm-cover"></div>
+   <div class="bm-post"><div class="bm-meta">Il y a 8 mois</div><p>Ouvert aujourd'hui? Écrivez-nous en message privé pour l'horaire! Menu ci-dessous 👇</p><div class="bm-img"><span>menu_2023.jpg</span></div>
+   <div class="bm-com"><b>Julie</b> Vous êtes ouverts dimanche soir?</div><div class="bm-meta" style="margin-top:6px">Aucune réponse</div></div>
+  </div></div>
+  <div class="ba-line"><span class="ba-knob"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B1B33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+  <span class="ba-lab l">Avant</span><span class="ba-lab r">Avec Studio Atlas</span>
+  <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer avant et après : glissez vers la gauche ou la droite">
+  <span class="ba-focus"></span>
+ </div></div>
+</div></section>
+
 <section class="work wrap">
- <div class="work-head"><h2>Des sites qui donnent envie d'appeler, de réserver et d'acheter.</h2><p>Voici nos sites d'exemple, affichés en direct. Touchez-en un pour l'essayer comme un client. Le vôtre aura votre nom, vos photos et votre style.</p></div>
- <div class="work-list">
-  <article class="wcard"><div class="phone2" style="position:relative"><div class="frame" data-w="390"><iframe src="exemples/essentiel.html" title="Ouvrir l'exemple Essentiel : un garage" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div><a class="shot-link" href="exemples/essentiel.html" aria-label="Ouvrir l'exemple Essentiel : un garage"></a></div><div class="meta"><div><h3>Garage Boréal</h3><p>Horaire en direct, bouton pour appeler, itinéraire.</p></div><span class="tagp">Essentiel · 30&nbsp;$</span></div><a class="go" href="exemples/essentiel.html">Essayer l'exemple</a></article>
-  <article class="wcard"><div class="phone2" style="position:relative"><div class="frame" data-w="390"><iframe src="exemples/rendez-vous.html" title="Ouvrir l'exemple Rendez-vous : un salon de coiffure" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div><a class="shot-link" href="exemples/rendez-vous.html" aria-label="Ouvrir l'exemple Rendez-vous : un salon de coiffure"></a></div><div class="meta"><div><h3>Salon Marée</h3><p>Demande de rendez-vous en 3 étapes, avec les vraies dates.</p></div><span class="tagp">Rendez-vous · 45&nbsp;$</span></div><a class="go" href="exemples/rendez-vous.html">Essayer l'exemple</a></article>
-  <article class="wcard"><div class="phone2" style="position:relative"><div class="frame" data-w="390"><iframe src="exemples/entreprise.html" title="Ouvrir l'exemple Entreprise" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div><a class="shot-link" href="exemples/entreprise.html" aria-label="Ouvrir l'exemple Entreprise"></a></div><div class="meta"><div><h3>Nordet Chauffage</h3><p>Plusieurs pages, français et anglais, nouvelles et promos.</p></div><span class="tagp">Entreprise · 75&nbsp;$</span></div><a class="go" href="exemples/entreprise.html">Essayer l'exemple</a></article>
+ <div class="work-head"><h2>Des sites qui donnent envie d'appeler, de réserver et d'acheter.</h2><p>Choisissez votre type de commerce pour voir un site d'exemple en direct, avec le forfait qui lui convient. Le vôtre aura votre nom, vos photos et votre style.</p></div>
+ <div class="pick" id="pick">
+  <div class="pick-chips" role="tablist" aria-label="Votre type de commerce">
+   <button type="button" role="tab" data-ex="resto" aria-selected="true">Resto ou café</button>
+   <button type="button" role="tab" data-ex="salon" aria-selected="false">Salon ou clinique</button>
+   <button type="button" role="tab" data-ex="garage" aria-selected="false">Garage ou atelier</button>
+   <button type="button" role="tab" data-ex="boutique" aria-selected="false">Boutique</button>
+   <button type="button" role="tab" data-ex="services" aria-selected="false">Entrepreneur</button>
+  </div>
+  <div class="pick-body" role="tabpanel">
+   <div class="pick-phone"><div class="frame" data-w="390"><iframe id="pick-frame" src="exemples/professionnel.html" title="Aperçu du site d'exemple" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div></div>
+   <div class="pick-info" aria-live="polite">
+    <span class="pick-tag">Professionnel : 60 $ par mois</span>
+    <h3>Bistro du Havre</h3>
+    <p class="pick-desc">Un site qu'on explore, pensé pour donner faim avant même d'arriver.</p>
+    <ul><li>Menu cliquable avec photos</li><li>Galerie et horaire toujours à jour</li><li>Jusqu'à 5 pages</li></ul>
+    <p style="color:#475B70;margin:-12px 0 22px" class="pick-dayv">Environ 2 $ par jour.</p>
+    <div class="pick-acts"><a class="btn navy pick-go" href="exemples/professionnel.html">Essayer l'exemple</a><a class="btn gold" href="contact.html#contact">Je veux le mien</a></div>
+   </div>
+  </div>
  </div>
  <p class="work-more"><a class="btn navy" href="exemples/index.html">Voir les 5 exemples</a></p>
 </section>
 
 <section class="note"><div class="wrap note-in">
- <div class="avatar" aria-hidden="true">L</div>
+ <div class="avatar" aria-hidden="true">a</div>
  <div><blockquote>« Chaque site est conçu ici, à Rimouski. Quand vous textez pour changer votre horaire ou votre menu, c'est moi qui réponds. Mon but est simple : que votre site soit le plus beau de votre rue. »</blockquote><cite>Studio Atlas Rimouski</cite></div>
 </div></section>
 
-<section class="steps wrap"><h2>Comment ça marche</h2><ol>
- <li><span class="sn">1</span><h3>On se parle</h3><p>30 minutes, gratuit, pour comprendre votre commerce et vos clients.</p></li>
- <li><span class="sn">2</span><h3>Vous voyez votre site</h3><p>Un aperçu avec votre nom et vos photos. Deux rondes de révisions.</p></li>
- <li><span class="sn">3</span><h3>On met en ligne</h3><p>Rien n'est publié sans votre accord. Sécurisé en HTTPS, rapide.</p></li>
- <li><span class="sn">4</span><h3>On s'en occupe</h3><p>Un texto suffit pour changer votre horaire ou votre menu. Sécurité et sauvegardes incluses.</p></li>
-</ol></section>
+<section class="steps wrap"><h2>Comment ça marche</h2><div class="st-grid"><ol>
+ <li data-st="1"><span class="sn">1</span><h3>On se parle</h3><p>30 minutes, gratuit, pour comprendre votre commerce et vos clients.</p></li>
+ <li data-st="2"><span class="sn">2</span><h3>Vous voyez votre site</h3><p>Un aperçu avec votre nom et vos photos. Deux rondes de révisions.</p></li>
+ <li data-st="3"><span class="sn">3</span><h3>On met en ligne</h3><p>Rien n'est publié sans votre accord. Sécurisé en HTTPS, rapide.</p></li>
+ <li data-st="4"><span class="sn">4</span><h3>On s'en occupe</h3><p>Un texto suffit pour changer votre horaire ou votre menu. Sécurité et sauvegardes incluses.</p></li>
+</ol>
+<div class="st-vis" aria-hidden="true"><div class="st-phone" id="st-phone" data-st="1"><div class="st-scr">
+ <div class="st-url"><svg width="11" height="11" viewBox="0 0 24 24" fill="#1F7A4D"><path d="M6 10V8a6 6 0 1 1 12 0v2h1v12H5V10zm2 0h8V8a4 4 0 1 0-8 0z"/></svg><span>votrecommerce.ca</span></div>
+ <div class="st-pill">En ligne</div>
+ <div class="st-blk b1"></div><div class="st-blk b2"><i></i></div><div class="st-blk b3"></div><div class="st-blk b3b"></div>
+ <div class="st-blk b4"><div><span>Lundi au jeudi</span><span>9 h – 17 h</span></div><div><span>Vendredi</span><span><span class="old">9 h – 17 h</span><span class="new">9 h – 12 h</span></span></div></div>
+ <div class="st-blk b5"></div>
+ <div class="st-chat"><div class="st-bub at s1">Parlez-moi de votre commerce!</div><div class="st-bub me s1b">On fait des pizzas depuis 1998.</div><div class="st-bub me s4">Vendredi on ferme à midi.</div><div class="st-bub at s4b">C'est fait!</div></div>
+</div></div><p class="st-cap" id="st-cap"></p></div>
+</div></section>
 
 <section class="demo"><div class="wrap demo-in">
  <div><h2>On vous montre votre site. Vous décidez ensuite.</h2>
@@ -318,7 +367,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div></section>
 
 <section class="plans wrap"><div class="plans-head"><h2>Cinq forfaits, un prix par mois</h2>
- <p class="links"><a href="forfaits.html#quiz">Trouver mon forfait en 30 secondes</a><a href="forfaits.html">Tout voir en détail</a></p></div>
+ <p class="links"><a href="forfaits.html#calc">Calculer mon prix</a><a href="forfaits.html#quiz">Trouver mon forfait en 30 secondes</a><a href="forfaits.html">Tout voir en détail</a></p></div>
  <div class="plan-list">
   <a class="plan" href="forfaits.html"><span class="pn">Essentiel</span><span class="pp"><b>30&nbsp;$</b> / mois</span><span class="pday">1 $ par jour</span><span class="pd">Une page avec vos photos, vos textes et vos coordonnées.</span></a>
   <a class="plan" href="forfaits.html"><span class="pn">Rendez-vous</span><span class="pp"><b>45&nbsp;$</b> / mois</span><span class="pday">1,50 $ par jour</span><span class="pd">Vos clients demandent un rendez-vous en ligne, vous rappelez pour confirmer.</span></a>
@@ -332,38 +381,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <section class="cta"><div class="wrap"><h2>Prêt à avoir le plus beau site de votre rue ?</h2><a class="btn gold" href="contact.html#contact">Voir mon site en aperçu gratuit</a></div></section>
 </main>
-<script>
-(function(){
-  var st=document.getElementById('ls-stage'); if(!st) return;
-  var q=function(sel){return st.querySelector(sel)};
-  var msgs=[].slice.call(st.querySelectorAll('[data-s]')), typing=q('.ls-typing'), fri=q('.ls-fri');
-  var steps=[].slice.call(document.querySelectorAll('.ls-steps li'));
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var timers=[], running=false;
-  function step(n){ steps.forEach(function(li){ li.classList.toggle('on', +li.dataset.k===n); }); }
-  function show(s){ msgs.filter(function(m){return m.dataset.s==s}).forEach(function(m){ if(m.classList.contains('ls-typing')){m.classList.add('show');return;} m.classList.add('show'); requestAnimationFrame(function(){requestAnimationFrame(function(){m.classList.add('in')})}); }); }
-  function reset(){ msgs.forEach(function(m){m.classList.remove('show','in')}); fri.classList.remove('done','flash'); step(0); }
-  function finalState(){ msgs.forEach(function(m){ if(!m.classList.contains('ls-typing')) m.classList.add('show','in'); }); fri.classList.add('done'); step(3); }
-  function at(ms,fn){ timers.push(setTimeout(fn,ms)); }
-  function play(){
-    reset(); step(1);
-    at(700,function(){show(1)});
-    at(2000,function(){typing.classList.add('show'); step(2)});
-    at(3300,function(){typing.classList.remove('show'); show(3)});
-    at(4600,function(){ step(3); fri.classList.add('flash'); });
-    at(5300,function(){ fri.classList.add('done'); show(4); });
-    at(6400,function(){ fri.classList.remove('flash'); show(5); });
-    at(7900,function(){ show(6); });
-    at(12500,function(){ if(running) play(); });
-  }
-  if(reduce){ finalState(); return; }
-  function start(){ if(running) return; running=true; play(); }
-  function stop(){ running=false; timers.forEach(clearTimeout); timers=[]; }
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? start() : stop(); }); },{threshold:.35}).observe(st);
-  } else start();
-})();
-</script>
+
 
 <script>
 (function(){
@@ -375,4 +393,5 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <footer class="sa-foot"><div class="sa-wrap sa-foot-in"><div><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#A9D9EC"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#0B1B33">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg></a><p>Des sites web pour les commerces d'ici, avec quelqu'un pour vous répondre.</p></div><div><p>Rimouski (Québec)</p><p>studioatlasrimouski@gmail.com</p><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p></div><div><p><a href="forfaits.html">Forfaits</a></p><p><a href="exemples/index.html">Exemples</a></p><p><a href="contact.html#contact">Annuler mon abonnement</a></p></div></div></footer>
 
 <script src="/stats.js" defer></script>
+<script src="interactif.js" defer></script>
 </body></html>
