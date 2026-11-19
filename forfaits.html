@@ -1,172 +1,49 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr-CA">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Forfaits | Studio Atlas Rimouski</title>
-  <meta name="description" content="Cinq forfaits de 30 $ à 89 $ par mois, avec un contrat clair : Essentiel, Rendez-vous, Professionnel, Entreprise et Boutique. Options à la carte et prix écrits d'avance.">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Studio Atlas Rimouski"><meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Forfaits | Studio Atlas Rimouski"><meta property="og:description" content="Cinq forfaits de 30 $ à 89 $ par mois, avec un contrat clair : Essentiel, Rendez-vous, Professionnel, Entreprise et Boutique. Options à la carte et prix écrits d'avance."><meta property="og:url" content="https://studioatlasrimouski.ca/forfaits.html">
-<meta property="og:image" content="https://studioatlasrimouski.ca/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://studioatlasrimouski.ca/forfaits.html">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <style>
-  body{margin:0}
-  a{color:inherit}
-  .mockrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
-  @media (max-width:1100px){.mockrow{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 4px 12px}.mockrow>figure{flex:0 0 220px;scroll-snap-align:start}}
-  
-body{font-family:"Instrument Sans",sans-serif}
-h1,h2,h3{font-family:Unbounded,sans-serif!important;letter-spacing:-.03em!important;font-weight:700!important}
-h1{font-size:clamp(34px,5vw,64px)!important;line-height:1.05!important}
-h2{font-size:clamp(26px,3.2vw,42px)!important;line-height:1.1!important}
-h3{line-height:1.2!important}
-a:hover{color:inherit}
-
-.sa-wrap{max-width:1200px;margin:0 auto;padding:0 24px;box-sizing:border-box}
-.sa-top{background:#123A6B;color:#FFF;font-family:"Instrument Sans",sans-serif}
-.sa-top-in{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px}
-.sa-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}.sa-logo span{font-size:11px;font-weight:600;line-height:1.15;opacity:.8}
-.sa-nav{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:center;font-weight:600;font-size:15px}.sa-nav a{text-decoration:none;color:#FFF}.sa-nav a[aria-current]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
-.sa-btn{display:inline-block;background:#F2B544;color:#0B1B33!important;font-weight:700;text-decoration:none;padding:13px 20px;border-radius:999px}.sa-btn:hover{background:#F7C96A}
-.sa-foot{background:#0B1B33;color:#C2DCE8;font-family:"Instrument Sans",sans-serif;font-size:15px;line-height:1.7}
-.sa-foot-in{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px;padding-top:56px;padding-bottom:56px}.sa-foot .sa-logo{color:#FFF;margin-bottom:12px}.sa-foot p{margin:0}.sa-foot a{text-decoration:none}.sa-foot a:hover{color:#A9D9EC}
-@media(max-width:760px){.sa-foot-in{grid-template-columns:1fr}.sa-nav a:not(.sa-btn){font-size:14px}}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2F86B5;outline-offset:3px}
-.plan-grid>article{padding:24px 20px!important;min-width:0}
-.plan-grid h3{font-size:17px!important;letter-spacing:-.02em!important;line-height:1.15!important;white-space:nowrap}
-.plan-grid>article>span:nth-of-type(2){font-size:44px!important;white-space:nowrap;letter-spacing:-.02em}
-.plan-grid>article>span:nth-of-type(2)>span{font-size:16px!important}
-@media(max-width:1180px) and (min-width:700px){.plan-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
-
-.fd{background:#F6FAFC;border-top:1px solid #D2E5EE;border-bottom:1px solid #D2E5EE}
-.fd-wrap{max-width:1200px;margin:0 auto;padding:80px 24px}
-.fd h2{margin:0 0 14px}.fd-h2{margin-top:72px!important}
-.fd-intro{max-width:70ch;font-size:18px;color:#475B70;margin:0 0 36px}
-.fd-card{background:#fff;border:2px solid #0B1B33;border-radius:24px;padding:30px;margin-bottom:22px;scroll-margin-top:20px}
-.fd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:12px}
-.fd-num{margin:0 0 4px;font-weight:700;color:#2F86B5;font-size:14px}
-.fd-top h3{margin:0;font-size:28px!important}
-.fd-price{text-align:right}.fd-price b{display:block;font-family:Unbounded,sans-serif;font-size:34px;letter-spacing:-.03em;line-height:1}.fd-price span{font-size:14px;color:#475B70}
-.fd-resume{font-size:18px;margin:0 0 10px;max-width:80ch}
-.fd-pour{margin:0 0 22px;color:#475B70;max-width:80ch}
-.fd-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:22px}
-.fd-cols h4{margin:0 0 10px;font-size:15px}
-.fd-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:15.5px;line-height:1.45}
-.fd-list li{display:flex;gap:10px;align-items:flex-start}.fd-list svg{flex:none;margin-top:2px}
-.fd-no{color:#475B70}
-.fd-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
-.fd-facts div{background:#EEF6FA;border-radius:16px;padding:16px;font-size:15px;line-height:1.5}
-.fd-facts span{display:block;font-weight:700;font-size:13px;color:#123A6B;margin-bottom:4px}
-.fd-ex{font-weight:700;color:#123A6B;text-underline-offset:4px}
-.fd-table{overflow-x:auto;background:#fff;border:2px solid #0B1B33;border-radius:20px}
-.fd-table table{width:100%;border-collapse:collapse;min-width:760px;font-size:15px}
-.fd-table th,.fd-table td{padding:12px 14px;border-bottom:1px solid #D2E5EE;text-align:left;vertical-align:top}
-.fd-table thead th{background:#0B1B33;color:#fff;font-size:14px}
-.fd-table tbody th{font-weight:600;color:#0B1B33;width:24%}
-.fd-table tr:last-child th,.fd-table tr:last-child td{border-bottom:0;font-weight:700}
-.fd-glossary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0}
-.fd-glossary div{background:#fff;border:1px solid #D2E5EE;border-radius:16px;padding:18px}
-.fd-glossary dt{font-weight:700;margin-bottom:6px}.fd-glossary dd{margin:0;color:#475B70;line-height:1.55}
-.fd-help{margin-top:40px;background:#0B1B33;color:#fff;border-radius:20px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.fd-help p{margin:0;max-width:62ch}.fd-help a{display:inline-block;margin-left:10px;background:#F2B544;color:#0B1B33;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:999px}
-@media(max-width:860px){.fd-cols,.fd-facts,.fd-glossary{grid-template-columns:1fr}.fd-price{text-align:left}.fd-help a{margin:8px 10px 0 0}}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forfaits | Studio Atlas Rimouski</title>
+<meta name="description" content="Cinq forfaits de 30 $ à 89 $ par mois, avec un contrat clair : Essentiel, Rendez-vous, Professionnel, Entreprise et Boutique. Options à la carte et prix écrits d'avance.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Studio Atlas Rimouski">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Forfaits | Studio Atlas Rimouski">
+<meta property="og:description" content="Cinq forfaits de 30 $ à 89 $ par mois, avec un contrat clair : Essentiel, Rendez-vous, Professionnel, Entreprise et Boutique. Options à la carte et prix écrits d'avance.">
+<meta property="og:url" content="https://studioatlasrimouski.ca/forfaits.html">
+<meta property="og:image" content="https://studioatlasrimouski.ca/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://studioatlasrimouski.ca/forfaits.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="interactif.css">
 </head>
 <body>
-<div style="font-family: "Instrument Sans", sans-serif; color: #0B1B33; background: #EEF6FA; min-height: 100vh">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="top"><div class="w">
+ <a class="mark" href="index.html"><b>Studio Atlas</b><span>Rimouski</span></a>
+ <nav class="nav" aria-label="Menu principal"><a href="forfaits.html" aria-current=page>Prix</a><a href="exemples/index.html">Exemples</a><a href="a-propos.html">À propos</a><a href="contact.html">Questions et contact</a></nav>
+</div></header>
+<main id="contenu">
+<section class="sec first"><div class="w">
+ <h1>Les prix</h1>
+ <p class="lead">Des frais de création une fois au départ, puis un abonnement par mois qui comprend l'hébergement, la sécurité, les sauvegardes et vos changements par texto. Tout est écrit dans votre contrat avant de signer.</p>
+ <div class="tbl"><table>
+  <thead><tr><th>Forfait</th><th class="n">Par mois</th><th class="n">Création</th><th>Délai</th></tr></thead>
+  <tbody><tr><td><a href="#detail-essentiel">Essentiel</a></td><td class="n">30 $</td><td class="n">99 $</td><td>environ 1 semaine</td></tr><tr><td><a href="#detail-rendez-vous">Rendez-vous</a></td><td class="n">45 $</td><td class="n">149 $</td><td>environ 1 semaine</td></tr><tr><td><a href="#detail-professionnel">Professionnel</a></td><td class="n">60 $</td><td class="n">199 $</td><td>environ 2 semaines</td></tr><tr><td><a href="#detail-entreprise">Entreprise</a></td><td class="n">75 $</td><td class="n">249 $</td><td>environ 3 semaines</td></tr><tr><td><a href="#detail-boutique">Boutique</a></td><td class="n">89 $</td><td class="n">349 $</td><td>selon la soumission</td></tr></tbody>
+ </table></div>
+ <p class="small muted">Prix avant taxes. Pour l'Essentiel, la création est gratuite si vous acceptez l'aperçu qu'on vous a préparé.</p>
+</div></section>
 
-  <div style="background: #123A6B; color: #FFFFFF">
-    <header class="sa-top"><div class="sa-wrap sa-top-in"><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#A9D9EC"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#0B1B33">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg><span>Studio<br>Rimouski</span></a><nav class="sa-nav"><a href="forfaits.html" aria-current="page">Forfaits</a><a href="a-propos.html">À propos</a><a href="contact.html">FAQ</a><a class="sa-btn sa-small" href="contact.html#contact">Parlons de votre site</a></nav></div></header>
-    <section style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 80px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
-      <h1 style="margin: 0; font-size: clamp(40px, 5.5vw, 72px); line-height: 1; font-weight: 900; letter-spacing: -0.02em; max-width: 900px">Un prix par mois. Tout est écrit d'avance.</h1>
-      <p style="margin: 0; font-size: 20px; line-height: 1.55; color: #D5EAF3; max-width: 720px">Pas de grosse facture au départ, et un contrat clair, écrit d'avance. Vous choisissez un forfait, on conçoit votre site, et l'abonnement couvre l'hébergement, la sécurité et vos modifications.</p>
-    </section>
-  </div>
-
-    <section class="plan-grid" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 72px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
-    <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
-      <h3 style="margin: 0; font-size: 24px; font-weight: 900">Essentiel</h3>
-      <span style="font-size: 15px">Une page, du texte et des photos</span>
-      <span style="font-size: 52px; font-weight: 900; line-height: 1">30 $<span style="font-size: 18px; font-weight: 500"> / mois</span></span>
-      <span style="align-self: flex-start; background: #C9E7F3; color: #0B1B33; font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px; white-space: nowrap">Environ 1 $ par jour</span>
-      <span style="font-size: 15px; color: #475B70">+ 99 $ de création (0 $ si vous acceptez l'aperçu gratuit qu'on vous a préparé), en ligne en environ 1 semaine</span>
-      <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6">
-        <li>Une page qui défile, jusqu'à 6 sections</li>
-        <li>Jusqu'à 15 photos</li>
-        <li>Horaire, carte, boutons Appeler et Itinéraire</li>
-        <li>2 mises à jour gratuites par mois</li>
-      </ul>
-      <a href="#detail-essentiel" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
-    </article>
-    <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
-      <h3 style="margin: 0; font-size: 24px; font-weight: 900">Rendez-vous</h3>
-      <span style="font-size: 15px">Vos clients demandent, vous rappelez</span>
-      <span style="font-size: 52px; font-weight: 900; line-height: 1">45 $<span style="font-size: 18px; font-weight: 500"> / mois</span></span>
-      <span style="font-size: 15px; color: #475B70">+ 149 $ de création, en ligne en environ 1 semaine</span>
-      <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6">
-        <li>Tout l'Essentiel</li>
-        <li>Jusqu'à 2 formulaires : rendez-vous, candidature, soumission</li>
-        <li>Liste des services et des prix</li>
-        <li>Les demandes dans votre Google Sheets, avec un courriel à chaque fois</li>
-        <li>3 mises à jour gratuites par mois</li>
-      </ul>
-      <a href="#detail-rendez-vous" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
-    </article>
-    <article style="background: #0B1B33; color: #EEF6FA; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
-      <h3 style="margin: 0; font-size: 24px; font-weight: 900">Professionnel</h3>
-      <span style="font-size: 15px; color: #C2DCE8">Un site qu'on explore</span>
-      <span style="font-size: 52px; font-weight: 900; line-height: 1">60 $<span style="font-size: 18px; font-weight: 500"> / mois</span></span>
-      <span style="font-size: 15px; color: #93B3C4">+ 199 $ de création, en ligne en environ 2 semaines</span>
-      <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6">
-        <li>Jusqu'à 5 pages</li>
-        <li>Menu ou catalogue cliquable, jusqu'à 60 items</li>
-        <li>Galerie avec agrandissement</li>
-        <li>Horaire avec jours fériés, formulaire de contact</li>
-        <li>Fiche Google et lien vers vos avis</li>
-        <li>4 mises à jour gratuites et 1 h d'ajouts par mois</li>
-      </ul>
-      <a href="#detail-professionnel" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
-    </article>
-    <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
-      <h3 style="margin: 0; font-size: 24px; font-weight: 900">Entreprise</h3>
-      <span style="font-size: 15px">Plus de pages, du contenu qui bouge</span>
-      <span style="font-size: 52px; font-weight: 900; line-height: 1">75 $<span style="font-size: 18px; font-weight: 500"> / mois</span></span>
-      <span style="font-size: 15px; color: #475B70">+ 249 $ de création, en ligne en environ 3 semaines</span>
-      <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6">
-        <li>Tout le Professionnel</li>
-        <li>Jusqu'à 10 pages et 150 items</li>
-        <li>Nouvelles, événements, promotions</li>
-        <li>Version anglaise incluse</li>
-        <li>Bilan annuel du site</li>
-        <li>10 mises à jour gratuites et 2 h d'ajouts par mois</li>
-      </ul>
-      <a href="#detail-entreprise" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
-    </article>
-    <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
-      <h3 style="margin: 0; font-size: 24px; font-weight: 900">Boutique</h3>
-      <span style="font-size: 15px">Vendre en ligne</span>
-      <span style="font-size: 52px; font-weight: 900; line-height: 1">89 $<span style="font-size: 18px; font-weight: 500"> / mois</span></span>
-      <span style="font-size: 15px; color: #475B70">+ 349 $ de création, sur soumission au-delà de 25 produits</span>
-      <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6">
-        <li>Tout l'Entreprise</li>
-        <li>Panier et paiement sécurisé</li>
-        <li>Jusqu'à 25 produits avec tailles et couleurs</li>
-        <li>Courriels de confirmation de commande</li>
-        <li>Pages livraison et retours</li>
-        <li>Aucune application à payer en plus</li>
-        <li>10 mises à jour gratuites et 2 h d'ajouts par mois</li>
-      </ul>
-      <a href="#detail-boutique" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
-    </article>
-  </section>
-<section class="calc" id="calc" aria-labelledby="calc-title"><div class="calc-box">
+<section class="sec"><div class="w">
+ <h2>Calculez votre prix</h2>
+ <p>Cochez ce dont votre commerce a besoin. Le forfait et le prix se calculent tout seuls.</p>
+ <div class="calc" id="calc">
  <div>
-  <h2 id="calc-title">Votre prix en 20 secondes</h2>
-  <p class="calc-lead">Cochez ce dont votre commerce a besoin. Le forfait et le prix se calculent tout seuls.</p>
   <fieldset><legend>Votre site doit…</legend>
    <label class="calc-opt"><input type="checkbox" checked disabled><span>Montrer votre horaire, vos photos et vos coordonnées<small>Compris dans tous les forfaits</small></span></label>
    <label class="calc-opt"><input type="checkbox" data-need="1"><span>Recevoir des demandes de rendez-vous<small>Salon, clinique, esthétique, garage</small></span></label>
@@ -175,9 +52,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    <label class="calc-opt"><input type="checkbox" data-need="4"><span>Vendre des produits en ligne<small>Panier et paiement sécurisé, jusqu'à 25 produits</small></span></label>
   </fieldset>
   <fieldset><legend>Options</legend>
-   <label class="calc-opt"><input type="checkbox" data-opt data-name="Domaine clé en main" data-m="4" data-c="0"><span>Domaine clé en main (+4 $ par mois)<small>On réserve et gère votre adresse .ca ou .com</small></span></label>
-   <label class="calc-opt"><input type="checkbox" data-opt data-name="Réservations en ligne" data-m="10" data-c="49"><span>Réservations en ligne (+10 $ par mois, 49 $ une fois)<small>Le client choisit lui-même son heure</small></span></label>
-   <label class="calc-opt"><input type="checkbox" data-opt data-name="Commandes pour emporter" data-m="15" data-c="99"><span>Commandes pour emporter (+15 $ par mois, 99 $ une fois)</span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Domaine clé en main" data-m="4" data-c="0"><span>Domaine clé en main, +4 $ par mois<small>On réserve et gère votre adresse .ca ou .com</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Réservations en ligne" data-m="10" data-c="49"><span>Réservations en ligne, +10 $ par mois et 49 $ une fois<small>Le client choisit lui-même son heure</small></span></label>
+   <label class="calc-opt"><input type="checkbox" data-opt data-name="Commandes pour emporter" data-m="15" data-c="99"><span>Commandes pour emporter, +15 $ par mois et 99 $ une fois</span></label>
   </fieldset>
   <fieldset><legend>Ou choisissez le forfait vous-même</legend>
    <div class="calc-plans"><button type="button">Essentiel</button><button type="button">Rendez-vous</button><button type="button">Professionnel</button><button type="button">Entreprise</button><button type="button">Boutique</button></div>
@@ -187,217 +64,195 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   <p class="co-plan">Forfait Essentiel</p>
   <p class="co-price">30 $<small>par mois</small></p>
   <span class="co-day">Environ 1 $ par jour</span>
-  <label class="calc-toggle"><input type="checkbox" id="calc-annual">Payer à l'année : 2 mois gratuits et création offerte</label>
+  <label class="calc-toggle"><input type="checkbox" id="calc-annual">Payer à l'année (10 mois pour 12, création offerte)</label>
   <dl></dl>
-  <a class="btn gold co-go" href="contact.html#contact">Demander mon aperçu gratuit</a>
-  <p class="co-fine">Prix avant taxes. Les outils de réservation, de commande et de paiement sont payés directement à leur fournisseur. Le prix exact est écrit dans votre contrat avant de signer.</p>
+  <a class="b co-go" href="contact.html#contact">Demander mon aperçu gratuit</a>
+  <p class="co-fine">Prix avant taxes. Les outils de réservation, de commande et de paiement sont payés directement à leur fournisseur. Le prix exact est écrit dans votre contrat.</p>
+ </div>
+</div>
+</div></section>
+
+<section class="sec"><div class="w">
+ <h2>Chaque forfait en détail</h2>
+ <p>Les forfaits s'empilent : chacun comprend tout ce qu'il y a dans le précédent, plus quelque chose de nouveau.</p>
+ <div class="plan" id="detail-essentiel">
+ <h3>Essentiel</h3>
+ <p class="price">30 $ par mois. Création : 99 $, ou 0 $ si vous acceptez l'aperçu gratuit qu'on vous a préparé. En ligne : environ 1 semaine.</p>
+ <p>Une seule page qui dit l'essentiel : qui vous êtes, ce que vous faites, quand vous êtes ouvert et comment vous joindre. Le client la parcourt en faisant défiler, puis il vous appelle ou vient vous voir.</p>
+ <p><b>Pour qui :</b> Garage, dépanneur, entrepreneur, atelier, service à domicile : tout commerce dont les clients veulent surtout votre horaire, votre adresse et votre numéro.</p>
+ <div class="cols3">
+  <div><h4>Ce que vos clients peuvent faire</h4><ul><li>Voir vos photos et ce que vous offrez</li><li>Vérifier si vous êtes ouvert en ce moment</li><li>Vous appeler en un toucher sur leur cellulaire</li><li>Ouvrir l'itinéraire jusqu'à chez vous</li></ul></div>
+  <div><h4>Ce que vous recevez</h4><ul><li>1 page qui défile, jusqu'à 6 sections (accueil, services, photos, horaire, carte, contact)</li><li>Jusqu'à 15 photos</li><li>Horaire, carte, boutons « Appeler » et « Itinéraire »</li></ul></div>
+  <div><h4>Ce qui n'est pas compris</h4><ul><li>Pas de formulaire : les clients vous appellent (option Formulaire de contact : 29 $ + 5 $ par mois)</li><li>Pas de deuxième page ni de menu cliquable (c'est le Professionnel)</li><li>Pas de version anglaise (option : +50 %)</li></ul></div>
+ </div>
+ <p><b>Vos changements :</b> 2 petites mises à jour par mois, par texto (l'horaire des Fêtes, un prix, un numéro). Pour ajouter quelque chose de nouveau, c'est 15 $ par 30 minutes.</p>
+ <p><b>Payé à l'année :</b> 300 $ pour 12 mois, création offerte. <a href="exemples/essentiel.html">Voir l'exemple : Garage Boréal</a></p>
+</div>
+<div class="plan" id="detail-rendez-vous">
+ <h3>Rendez-vous</h3>
+ <p class="price">45 $ par mois. Création : 149 $. En ligne : environ 1 semaine.</p>
+ <p>Tout l'Essentiel, plus des formulaires pour que vos clients vous fassent une demande à toute heure. Le client demande un rendez-vous : ce n'est pas un agenda en ligne. Vous recevez la demande et vous le rappelez pour confirmer l'heure.</p>
+ <p><b>Pour qui :</b> Coiffeuse, esthéticienne, massothérapeute, toiletteur, entrepreneur qui fait des soumissions, ou tout commerce qui veut recevoir des candidatures.</p>
+ <div class="cols3">
+  <div><h4>Ce que vos clients peuvent faire</h4><ul><li>Tout ce que permet l'Essentiel</li><li>Choisir un service et les moments où ils sont disponibles</li><li>Laisser leurs coordonnées pour que vous les rappeliez</li><li>Postuler ou demander une soumission</li></ul></div>
+  <div><h4>Ce que vous recevez</h4><ul><li>Tout ce qu'il y a dans l'Essentiel</li><li>Jusqu'à 2 formulaires au choix : rendez-vous, candidature, soumission</li><li>La liste de vos services avec leurs prix</li><li>Un courriel à chaque demande, et toutes les demandes rangées dans un tableau en ligne</li></ul></div>
+  <div><h4>Ce qui n'est pas compris</h4><ul><li>Pas d'agenda où le client réserve lui-même une heure (option Réservations en ligne : 49 $ + 10 $ par mois, avec un outil payé directement à son fournisseur)</li><li>Pas de menu cliquable ni de galerie (c'est le Professionnel)</li><li>Pas de version anglaise (option : +50 %)</li></ul></div>
+ </div>
+ <p><b>Vos changements :</b> 3 petites mises à jour par mois, par texto. Pour ajouter quelque chose de nouveau, c'est 15 $ par 30 minutes.</p>
+ <p><b>Payé à l'année :</b> 450 $ pour 12 mois, création offerte. <a href="exemples/rendez-vous.html">Voir l'exemple : Salon Marée</a></p>
+</div>
+<div class="plan" id="detail-professionnel">
+ <h3>Professionnel</h3>
+ <p class="price">60 $ par mois. Création : 199 $. En ligne : environ 2 semaines.</p>
+ <p>Un vrai site de plusieurs pages. C'est le forfait des restaurants et des cafés : le client parcourt votre menu par catégorie, touche un plat pour voir la photo et le prix, regarde votre galerie et vous écrit.</p>
+ <p><b>Pour qui :</b> Restaurant, café, traiteur, boutique sans vente en ligne, salle de spectacle, studio : tout commerce qui a beaucoup à montrer.</p>
+ <div class="cols3">
+  <div><h4>Ce que vos clients peuvent faire</h4><ul><li>Parcourir votre menu ou votre catalogue par catégories</li><li>Toucher un plat ou un produit pour voir sa photo et son prix</li><li>Agrandir les photos de votre galerie</li><li>Voir l'horaire, y compris les jours fériés, et vous écrire</li><li>Aller lire vos avis Google</li></ul></div>
+  <div><h4>Ce que vous recevez</h4><ul><li>Jusqu'à 5 pages (Accueil, Menu, Galerie, À propos, Contact)</li><li>Menu ou catalogue cliquable, jusqu'à 60 plats ou articles avec photo et prix</li><li>Galerie avec agrandissement</li><li>Formulaire de contact</li><li>Lien vers votre fiche Google et vos avis</li></ul></div>
+  <div><h4>Ce qui n'est pas compris</h4><ul><li>Pas de vente ni de paiement en ligne (c'est la Boutique)</li><li>Pas de commandes pour emporter (option : 99 $ + 15 $ par mois)</li><li>Pas de réservation de table en ligne (option : 49 $ + 10 $ par mois)</li><li>Pas de version anglaise (option : +50 %)</li></ul></div>
+ </div>
+ <p><b>Vos changements :</b> 4 petites mises à jour par mois (le plat du jour, un prix, l'horaire), plus 1 heure d'ajouts par mois (une nouvelle section, une promo, des photos).</p>
+ <p><b>Payé à l'année :</b> 600 $ pour 12 mois, création offerte. <a href="exemples/professionnel.html">Voir l'exemple : Bistro du Havre</a></p>
+</div>
+<div class="plan" id="detail-entreprise">
+ <h3>Entreprise</h3>
+ <p class="price">75 $ par mois. Création : 249 $. En ligne : environ 3 semaines.</p>
+ <p>Tout le Professionnel, en plus grand et en deux langues. Pour une entreprise qui a plusieurs services, une équipe, des réalisations à montrer et des nouvelles à publier.</p>
+ <p><b>Pour qui :</b> Entreprise de services (chauffage, construction, transport), clinique, organisme, commerce avec une clientèle anglophone ou touristique.</p>
+ <div class="cols3">
+  <div><h4>Ce que vos clients peuvent faire</h4><ul><li>Tout ce que permet le Professionnel</li><li>Passer du français à l'anglais en un clic</li><li>Lire vos nouvelles, vos événements et vos promotions</li><li>Découvrir votre équipe, vos réalisations et vos offres d'emploi</li></ul></div>
+  <div><h4>Ce que vous recevez</h4><ul><li>Tout ce qu'il y a dans le Professionnel</li><li>Jusqu'à 10 pages et 150 articles</li><li>Une section Nouvelles, événements et promotions</li><li>La version anglaise complète</li><li>Un bilan annuel : ce qui marche sur votre site et ce qu'on pourrait améliorer</li></ul></div>
+  <div><h4>Ce qui n'est pas compris</h4><ul><li>Pas de vente ni de paiement en ligne (c'est la Boutique)</li><li>Les commandes et les réservations restent des options</li></ul></div>
+ </div>
+ <p><b>Vos changements :</b> 10 petites mises à jour par mois, plus 2 heures d'ajouts par mois.</p>
+ <p><b>Payé à l'année :</b> 750 $ pour 12 mois, création offerte. <a href="exemples/entreprise.html">Voir l'exemple : Nordet Chauffage</a></p>
+</div>
+<div class="plan" id="detail-boutique">
+ <h3>Boutique</h3>
+ <p class="price">89 $ par mois. Création : 349 $ (sur soumission au-delà de 25 produits). En ligne : confirmé dans votre soumission, selon le nombre de produits.</p>
+ <p>Tout l'Entreprise, plus une boutique : le client choisit un produit, sa taille ou sa couleur, l'ajoute au panier et paie en ligne de façon sécurisée. Vous recevez la commande par courriel.</p>
+ <p><b>Pour qui :</b> Boutique de vêtements, artisan, marque locale, épicerie fine, commerce qui veut vendre ses produits ou ses cartes-cadeaux en ligne.</p>
+ <div class="cols3">
+  <div><h4>Ce que vos clients peuvent faire</h4><ul><li>Tout ce que permet l'Entreprise</li><li>Choisir un produit, sa taille et sa couleur</li><li>Mettre des articles dans un panier et payer en ligne</li><li>Recevoir un courriel de confirmation de commande</li><li>Lire vos conditions de livraison et de retour</li></ul></div>
+  <div><h4>Ce que vous recevez</h4><ul><li>Tout ce qu'il y a dans l'Entreprise</li><li>Panier et paiement sécurisé</li><li>Jusqu'à 25 produits avec tailles et couleurs</li><li>Les courriels de confirmation de commande</li><li>Les pages Livraison et Retours</li><li>Aucun abonnement à une application de boutique en plus</li></ul></div>
+  <div><h4>Ce qui n'est pas compris</h4><ul><li>Les frais par transaction du service de paiement (Stripe ou Square, par exemple), payés directement à ce service, comme pour un terminal en magasin</li><li>Plus de 25 produits : sur soumission</li></ul></div>
+ </div>
+ <p><b>Vos changements :</b> 10 petites mises à jour par mois (un prix, un produit en rupture), plus 2 heures d'ajouts par mois (de nouveaux produits).</p>
+ <p><b>Payé à l'année :</b> 890 $ pour 12 mois, création offerte. <a href="exemples/boutique.html">Voir l'exemple : Atelier Fjord</a></p>
+</div>
+
+</div></section>
+
+<section class="sec"><div class="w">
+ <h2>Les 5 forfaits côte à côte</h2>
+ <div class="tbl"><table>
+  <thead><tr><th></th><th>Essentiel</th><th>Rendez-vous</th><th>Professionnel</th><th>Entreprise</th><th>Boutique</th></tr></thead>
+  <tbody>
+   <tr><th>Pages</th><td>1 qui défile</td><td>1 qui défile</td><td>Jusqu'à 5</td><td>Jusqu'à 10</td><td>Jusqu'à 10, plus la boutique</td></tr>
+   <tr><th>Photos</th><td>Jusqu'à 15</td><td>Jusqu'à 15</td><td>Galerie</td><td>Galerie</td><td>Galerie et produits</td></tr>
+   <tr><th>Horaire, carte, bouton Appeler</th><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+   <tr><th>Formulaire</th><td>Option</td><td>2 formulaires</td><td>Contact</td><td>Contact</td><td>Contact</td></tr>
+   <tr><th>Demande de rendez-vous ou de soumission</th><td>Non</td><td>Oui</td><td>Option</td><td>Option</td><td>Option</td></tr>
+   <tr><th>Menu ou catalogue cliquable</th><td>Non</td><td>Non</td><td>60 articles</td><td>150 articles</td><td>150 articles</td></tr>
+   <tr><th>Nouvelles et promotions</th><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
+   <tr><th>Version anglaise</th><td>Option</td><td>Option</td><td>Option</td><td>Oui</td><td>Oui</td></tr>
+   <tr><th>Panier et paiement en ligne</th><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>25 produits</td></tr>
+   <tr><th>Petites mises à jour par mois</th><td>2</td><td>3</td><td>4</td><td>10</td><td>10</td></tr>
+   <tr><th>Temps d'ajouts par mois</th><td>Aucun</td><td>Aucun</td><td>1 h</td><td>2 h</td><td>2 h</td></tr>
+   <tr><th>Création</th><td>99 $ (0 $ après aperçu accepté)</td><td>149 $</td><td>199 $</td><td>249 $</td><td>349 $</td></tr>
+   <tr><th>Par mois</th><td>30 $</td><td>45 $</td><td>60 $</td><td>75 $</td><td>89 $</td></tr>
+  </tbody>
+ </table></div>
+</div></section>
+
+<section class="sec"><div class="w two">
+ <div>
+  <h2>Compris dans tous les forfaits</h2>
+  <p>Conception sur mesure, adaptation au cellulaire, hébergement, certificat HTTPS, sauvegardes, mises à jour de sécurité, référencement de base, deux rondes de révisions avant la mise en ligne, le branchement de votre domaine et votre ligne texto. Une petite mention « Site créé par Studio Atlas Rimouski » apparaît en bas de page.</p>
+  <h3>Votre nom de domaine</h3>
+  <p>Achetez-le vous-même : il est à vous et on le branche gratuitement. Ou prenez le domaine clé en main (+4 $ par mois) : on l'achète, on le gère et on le renouvelle. Il reste alors la propriété de Studio Atlas Rimouski. Si vous annulez, vous pouvez le racheter pour 50 $; sinon, on ne le renouvelle pas et il expire.</p>
+  <p>Le site est loué : son design et son code restent à Studio Atlas, et il est mis hors ligne à la fin de la période payée. Vos textes et vos photos vous sont renvoyés sur demande.</p>
+ </div>
+ <div>
+  <h2>Vos changements</h2>
+  <p>Vous changez d'horaire ou de plat du jour ? Envoyez un texto au numéro qu'on vous donne à la signature. C'est fait en moins de 48 heures.</p>
+  <dl class="defs">
+   <dt>Mises à jour</dt><dd>Gratuites. Horaire, prix, plats du menu, coordonnées, textes, une photo à remplacer. De 2 à 10 par mois selon votre forfait.</dd>
+   <dt>Ajouts</dt><dd>Une nouvelle section, des photos de plus, une promo. Compris dans le temps de votre forfait, puis 15 $ par 30 minutes.</dd>
+   <dt>Projets</dt><dd>Une nouvelle page, une nouvelle fonction ou une refonte. Toujours avec un prix écrit avant de commencer.</dd>
+  </dl>
  </div>
 </div></section>
 
-  <section class="fd" id="details" aria-labelledby="fd-title">
-   <div class="fd-wrap">
-    <h2 id="fd-title">Chaque forfait expliqué, en détail</h2>
-    <p class="fd-intro">Les forfaits s'empilent : chacun comprend tout ce qu'il y a dans le précédent, plus quelque chose de nouveau. Le prix couvre la création de votre site, puis chaque mois l'hébergement, la sécurité, les sauvegardes et vos changements par texto.</p>
-    
-  <article class="fd-card" id="detail-essentiel">
-    <header class="fd-top">
-      <div><p class="fd-num">Forfait 1 sur 5</p><h3>Essentiel</h3></div>
-      <div class="fd-price"><b>30 $</b><span>par mois, environ 1 $ par jour</span></div>
-    </header>
-    <p class="fd-resume">Une seule belle page qui dit l'essentiel : qui vous êtes, ce que vous faites, quand vous êtes ouvert et comment vous joindre. Le client la parcourt en faisant défiler, puis il vous appelle ou vient vous voir.</p>
-    <p class="fd-pour"><strong>Pour qui :</strong> Garage, dépanneur, entrepreneur, atelier, service à domicile : tout commerce dont les clients veulent surtout votre horaire, votre adresse et votre numéro.</p>
-    <div class="fd-cols">
-      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Voir vos photos et ce que vous offrez</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vérifier si vous êtes ouvert en ce moment</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vous appeler en un toucher sur leur cellulaire</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ouvrir l'itinéraire jusqu'à chez vous</span></li></ul></div>
-      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 page qui défile, jusqu'à 6 sections (ex. : accueil, services, photos, horaire, carte, contact)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 15 photos</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Horaire, carte, boutons « Appeler » et « Itinéraire »</span></li></ul></div>
-      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de formulaire : les clients vous appellent (option Formulaire de contact : 29 $ + 5 $/mois)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de deuxième page ni de menu cliquable (c'est le Professionnel)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de version anglaise (option : +50 %)</span></li></ul></div>
-    </div>
-    <div class="fd-facts">
-      <div><span>Vos changements chaque mois</span>2 petites mises à jour par mois, par texto (ex. : changer l'horaire des Fêtes, un prix, un numéro). Pour ajouter quelque chose de nouveau, c'est 15 $ par 30 minutes.</div>
-      <div><span>Pour démarrer</span>Frais de création : 99 $, ou 0 $ si vous acceptez l'aperçu gratuit qu'on vous a préparé. En ligne en environ 1 semaine.</div>
-      <div><span>Payé à l'année</span>300 $ pour l'année (10 mois payés sur 12, création offerte)</div>
-    </div>
-    <a class="fd-ex" href="exemples/essentiel.html">Essayer l'exemple : Garage Boréal</a>
-  </article>
-  <article class="fd-card" id="detail-rendez-vous">
-    <header class="fd-top">
-      <div><p class="fd-num">Forfait 2 sur 5</p><h3>Rendez-vous</h3></div>
-      <div class="fd-price"><b>45 $</b><span>par mois, environ 1,50 $ par jour</span></div>
-    </header>
-    <p class="fd-resume">Tout l'Essentiel, plus des formulaires pour que vos clients vous fassent une demande à toute heure. Important : le client <strong>demande</strong> un rendez-vous, ce n'est pas un agenda en ligne. Vous recevez la demande et vous le rappelez pour confirmer l'heure.</p>
-    <p class="fd-pour"><strong>Pour qui :</strong> Coiffeuse, esthéticienne, massothérapeute, toiletteur, entrepreneur qui fait des soumissions, ou tout commerce qui veut recevoir des candidatures.</p>
-    <div class="fd-cols">
-      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce que permet l'Essentiel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Choisir un service et les moments où ils sont disponibles</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Laisser leurs coordonnées pour que vous les rappeliez</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Postuler (section « On embauche ») ou demander une soumission</span></li></ul></div>
-      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce qu'il y a dans l'Essentiel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 2 formulaires au choix : rendez-vous, candidature, soumission</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>La liste de vos services avec leurs prix</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Un courriel à chaque nouvelle demande, et toutes les demandes rangées dans un tableau en ligne que vous pouvez consulter en tout temps</span></li></ul></div>
-      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas d'agenda où le client réserve lui-même une heure précise (option Réservations en ligne : 49 $ + 10 $/mois, avec un outil payé directement à son fournisseur)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de menu cliquable ni de galerie (c'est le Professionnel)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de version anglaise (option : +50 %)</span></li></ul></div>
-    </div>
-    <div class="fd-facts">
-      <div><span>Vos changements chaque mois</span>3 petites mises à jour par mois, par texto. Pour ajouter quelque chose de nouveau, c'est 15 $ par 30 minutes.</div>
-      <div><span>Pour démarrer</span>Frais de création : 149 $. En ligne en environ 1 semaine.</div>
-      <div><span>Payé à l'année</span>450 $ pour l'année (10 mois payés sur 12, création offerte)</div>
-    </div>
-    <a class="fd-ex" href="exemples/rendez-vous.html">Essayer l'exemple : Salon Marée</a>
-  </article>
-  <article class="fd-card" id="detail-professionnel">
-    <header class="fd-top">
-      <div><p class="fd-num">Forfait 3 sur 5</p><h3>Professionnel</h3></div>
-      <div class="fd-price"><b>60 $</b><span>par mois, environ 2 $ par jour</span></div>
-    </header>
-    <p class="fd-resume">Un vrai site de plusieurs pages qu'on explore. C'est le forfait des restaurants et des cafés : le client parcourt votre menu par catégorie, touche un plat pour voir la photo et le prix, regarde votre galerie et vous écrit.</p>
-    <p class="fd-pour"><strong>Pour qui :</strong> Restaurant, café, traiteur, boutique sans vente en ligne, salle de spectacle, studio : tout commerce qui a beaucoup à montrer.</p>
-    <div class="fd-cols">
-      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Parcourir votre menu ou votre catalogue par catégories</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Toucher un plat ou un produit pour voir sa photo et son prix</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Agrandir les photos de votre galerie</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Voir l'horaire, y compris les jours fériés, et vous écrire par formulaire</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Aller lire vos avis Google</span></li></ul></div>
-      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 5 pages (ex. : Accueil, Menu, Galerie, À propos, Contact)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Menu ou catalogue cliquable, jusqu'à 60 plats ou articles avec photo et prix</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Galerie avec agrandissement</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Formulaire de contact</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Lien vers votre fiche Google et vos avis</span></li></ul></div>
-      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de vente ni de paiement en ligne (c'est la Boutique)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de commandes pour emporter (option : 99 $ + 15 $/mois)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de réservation de table en ligne (option : 49 $ + 10 $/mois)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de version anglaise (option : +50 %)</span></li></ul></div>
-    </div>
-    <div class="fd-facts">
-      <div><span>Vos changements chaque mois</span>4 petites mises à jour par mois (ex. : le plat du jour, un prix, l'horaire), plus 1 heure d'ajouts par mois (ex. : une nouvelle section, une promo, des photos de plus).</div>
-      <div><span>Pour démarrer</span>Frais de création : 199 $. En ligne en environ 2 semaines.</div>
-      <div><span>Payé à l'année</span>600 $ pour l'année (10 mois payés sur 12, création offerte)</div>
-    </div>
-    <a class="fd-ex" href="exemples/professionnel.html">Essayer l'exemple : Bistro du Havre</a>
-  </article>
-  <article class="fd-card" id="detail-entreprise">
-    <header class="fd-top">
-      <div><p class="fd-num">Forfait 4 sur 5</p><h3>Entreprise</h3></div>
-      <div class="fd-price"><b>75 $</b><span>par mois, environ 2,50 $ par jour</span></div>
-    </header>
-    <p class="fd-resume">Tout le Professionnel, en plus grand et en deux langues. Pour une entreprise qui a plusieurs services, une équipe, des réalisations à montrer et des nouvelles à publier souvent.</p>
-    <p class="fd-pour"><strong>Pour qui :</strong> Entreprise de services (chauffage, construction, transport), clinique, organisme, commerce avec une clientèle anglophone ou touristique.</p>
-    <div class="fd-cols">
-      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce que permet le Professionnel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Passer du français à l'anglais en un clic</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Lire vos nouvelles, vos événements et vos promotions</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Découvrir votre équipe, vos réalisations et vos offres d'emploi</span></li></ul></div>
-      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce qu'il y a dans le Professionnel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 10 pages et 150 articles</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Une section Nouvelles, événements et promotions</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>La version anglaise complète, incluse</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Un bilan annuel : ce qui marche sur votre site et ce qu'on pourrait améliorer</span></li></ul></div>
-      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de vente ni de paiement en ligne (c'est la Boutique)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Les commandes et les réservations restent des options</span></li></ul></div>
-    </div>
-    <div class="fd-facts">
-      <div><span>Vos changements chaque mois</span>10 petites mises à jour par mois, plus 2 heures d'ajouts par mois.</div>
-      <div><span>Pour démarrer</span>Frais de création : 249 $. En ligne en environ 3 semaines.</div>
-      <div><span>Payé à l'année</span>750 $ pour l'année (10 mois payés sur 12, création offerte)</div>
-    </div>
-    <a class="fd-ex" href="exemples/entreprise.html">Essayer l'exemple : Nordet Chauffage</a>
-  </article>
-  <article class="fd-card" id="detail-boutique">
-    <header class="fd-top">
-      <div><p class="fd-num">Forfait 5 sur 5</p><h3>Boutique</h3></div>
-      <div class="fd-price"><b>89 $</b><span>par mois, moins de 3 $ par jour</span></div>
-    </header>
-    <p class="fd-resume">Tout l'Entreprise, plus une vraie boutique : le client choisit un produit, sa taille ou sa couleur, l'ajoute au panier et paie en ligne de façon sécurisée. Vous recevez la commande par courriel.</p>
-    <p class="fd-pour"><strong>Pour qui :</strong> Boutique de vêtements, artisan, marque locale, épicerie fine, commerce qui veut vendre ses produits ou ses cartes-cadeaux en ligne.</p>
-    <div class="fd-cols">
-      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce que permet l'Entreprise</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Choisir un produit, sa taille et sa couleur</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Mettre des articles dans un panier et payer en ligne</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Recevoir un courriel de confirmation de commande</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Lire vos conditions de livraison et de retour</span></li></ul></div>
-      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce qu'il y a dans l'Entreprise</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Panier et paiement sécurisé</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 25 produits avec tailles et couleurs</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Les courriels de confirmation de commande</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Les pages Livraison et Retours</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Aucun abonnement à une application de boutique en plus</span></li></ul></div>
-      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Les frais par transaction du service de paiement (ex. : Stripe ou Square) sont payés par vous, directement à ce service, comme pour un terminal en magasin</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Plus de 25 produits : sur soumission</span></li></ul></div>
-    </div>
-    <div class="fd-facts">
-      <div><span>Vos changements chaque mois</span>10 petites mises à jour par mois (ex. : un prix, un produit en rupture), plus 2 heures d'ajouts par mois (ex. : ajouter de nouveaux produits).</div>
-      <div><span>Pour démarrer</span>Frais de création : 349 $ (sur soumission au-delà de 25 produits). Délai confirmé dans votre soumission, selon le nombre de produits.</div>
-      <div><span>Payé à l'année</span>890 $ pour l'année (10 mois payés sur 12, création offerte)</div>
-    </div>
-    <a class="fd-ex" href="exemples/boutique.html">Essayer l'exemple : Atelier Fjord</a>
-  </article>
+<section class="sec"><div class="w two">
+ <div>
+  <h2>Extras par mois</h2>
+  <div class="tbl"><table><tbody>
+   <tr><td>Retirer la mention « Site créé par Studio Atlas Rimouski »</td><td class="n">+5 $</td></tr>
+   <tr><td>Domaine clé en main (reste à Studio Atlas, rachat 50 $ si vous partez)</td><td class="n">+4 $</td></tr>
+   <tr><td>Bannière d'annonce (fermé, promo, nouveauté)</td><td class="n">+3 $</td></tr>
+   <tr><td>Section « On embauche »</td><td class="n">+3 $</td></tr>
+   <tr><td>Rapport de visites mensuel</td><td class="n">+5 $</td></tr>
+   <tr><td>Mise à jour de votre fiche Google</td><td class="n">+5 $</td></tr>
+   <tr><td>Modifications prioritaires, le jour même</td><td class="n">+10 $</td></tr>
+   <tr><td>30 minutes d'ajouts en plus</td><td class="n">+15 $</td></tr>
+  </tbody></table></div>
+ </div>
+ <div>
+  <h2>Options à installer</h2>
+  <div class="tbl"><table>
+   <thead><tr><th>Option</th><th class="n">Création</th><th class="n">Par mois</th></tr></thead>
+   <tbody>
+    <tr><td>Page supplémentaire</td><td class="n">49 $</td><td class="n">+10 $</td></tr>
+    <tr><td>Formulaire de contact (Essentiel)</td><td class="n">29 $</td><td class="n">+5 $</td></tr>
+    <tr><td>Formulaire supplémentaire</td><td class="n">29 $</td><td class="n">+3 $</td></tr>
+    <tr><td>Version anglaise (Essentiel à Professionnel)</td><td class="n">50 % de la création</td><td class="n">+50 %</td></tr>
+    <tr><td>Réservations en ligne</td><td class="n">49 $</td><td class="n">+10 $</td></tr>
+    <tr><td>Commandes pour emporter</td><td class="n">99 $</td><td class="n">+15 $</td></tr>
+    <tr><td>Code QR imprimable vers votre site ou menu</td><td class="n">19 $</td><td class="n"></td></tr>
+    <tr><td>Rédaction des textes, travail hors forfait</td><td class="n">60 $ / h</td><td class="n"></td></tr>
+   </tbody>
+  </table></div>
+  <p class="small muted">Les outils de réservation, de commande et de paiement choisis avec vous sont payés directement à leur fournisseur.</p>
+ </div>
+</div></section>
 
-    <h2 class="fd-h2">Les 5 forfaits, côte à côte</h2>
-    <div class="fd-table"><table><thead><tr><th scope="col"></th><th scope="col">Essentiel</th><th scope="col">Rendez-vous</th><th scope="col">Professionnel</th><th scope="col">Entreprise</th><th scope="col">Boutique</th></tr></thead><tbody><tr><th scope="row">Pages</th><td>1 (qui défile)</td><td>1 (qui défile)</td><td>Jusqu'à 5</td><td>Jusqu'à 10</td><td>Jusqu'à 10 + boutique</td></tr><tr><th scope="row">Photos</th><td>Jusqu'à 15</td><td>Jusqu'à 15</td><td>Galerie</td><td>Galerie</td><td>Galerie + produits</td></tr><tr><th scope="row">Horaire, carte, bouton Appeler</th><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><th scope="row">Formulaire</th><td>Option</td><td>2 formulaires</td><td>Contact</td><td>Contact</td><td>Contact</td></tr><tr><th scope="row">Demande de rendez-vous ou de soumission</th><td>—</td><td>✓</td><td>Option</td><td>Option</td><td>Option</td></tr><tr><th scope="row">Menu ou catalogue cliquable</th><td>—</td><td>—</td><td>60 articles</td><td>150 articles</td><td>150 articles</td></tr><tr><th scope="row">Nouvelles et promotions</th><td>—</td><td>—</td><td>—</td><td>✓</td><td>✓</td></tr><tr><th scope="row">Version anglaise</th><td>Option</td><td>Option</td><td>Option</td><td>✓</td><td>✓</td></tr><tr><th scope="row">Panier et paiement en ligne</th><td>—</td><td>—</td><td>—</td><td>—</td><td>✓ (25 produits)</td></tr><tr><th scope="row">Petites mises à jour par mois</th><td>2</td><td>3</td><td>4</td><td>10</td><td>10</td></tr><tr><th scope="row">Temps d'ajouts par mois</th><td>—</td><td>—</td><td>1 h</td><td>2 h</td><td>2 h</td></tr><tr><th scope="row">Frais de création</th><td>99 $ (0 $ après aperçu accepté)</td><td>149 $</td><td>199 $</td><td>249 $</td><td>349 $</td></tr><tr><th scope="row">Par mois</th><td>30 $</td><td>45 $</td><td>60 $</td><td>75 $</td><td>89 $</td></tr></tbody></table></div>
+<section class="sec"><div class="w two">
+ <div>
+  <h2>Quand vous payez</h2>
+  <dl class="defs">
+   <dt>À la signature</dt><dd>Les frais de création, par virement Interac. On commence ensuite.</dd>
+   <dt>À la mise en ligne</dt><dd>Rien. Le reste du mois est offert.</dd>
+   <dt>Le 1er du mois</dt><dd>L'abonnement. La facture est envoyée 5 jours avant.</dd>
+   <dt>Ou une fois par année</dt><dd>10 mois pour 12, et la création est offerte.</dd>
+  </dl>
+ </div>
+ <div>
+  <h2>Trois exemples</h2>
+  <p><b>Une coiffeuse qui prend des rendez-vous :</b> Rendez-vous et domaine clé en main. 149 $ au départ, puis 49 $ par mois.</p>
+  <p><b>Un restaurant avec menu cliquable :</b> Professionnel, domaine, bannière et réservations. 248 $ au départ, puis 77 $ par mois.</p>
+  <p><b>Un garage à qui on a montré son aperçu :</b> Essentiel sans la mention en bas de page. Rien au départ, puis 35 $ par mois.</p>
+  <p class="small muted">Prix avant taxes.</p>
+ </div>
+</div></section>
 
-    <h2 class="fd-h2">Les mots qu'on utilise</h2>
-    <dl class="fd-glossary">
-      <div><dt>Une page ou une section ?</dt><dd>Une <strong>section</strong> est un bloc dans une page (ex. : l'horaire). Une <strong>page</strong> a sa propre adresse et son propre menu (ex. : la page Menu). L'Essentiel, c'est une seule page avec jusqu'à 6 sections.</dd></div>
-      <div><dt>Mise à jour</dt><dd>Changer une information qui existe déjà : l'horaire, un prix, un plat, un numéro, un texte, une photo à remplacer. Vous nous textez, c'est fait en moins de 48 h.</dd></div>
-      <div><dt>Ajout</dt><dd>Mettre quelque chose de nouveau : une section, des photos de plus, une promo. C'est compris dans le temps d'ajouts de votre forfait, sinon 15 $ par 30 minutes.</dd></div>
-      <div><dt>Projet</dt><dd>Une nouvelle page, une nouvelle fonctionnalité ou une refonte. On vous donne toujours le prix par écrit avant de commencer.</dd></div>
-      <div><dt>Demande de rendez-vous ou réservation en ligne ?</dt><dd>Avec une <strong>demande</strong> (forfait Rendez-vous), le client propose ses disponibilités et vous le rappelez pour confirmer. Avec la <strong>réservation en ligne</strong> (option), le client choisit lui-même une heure libre dans votre agenda, sans appel.</dd></div>
-      <div><dt>Frais de création ou abonnement ?</dt><dd>Les <strong>frais de création</strong> se paient une fois, au départ, pour concevoir votre site. L'<strong>abonnement</strong> se paie chaque mois et garde le site en ligne, sécurisé et à jour. Payé à l'année, c'est 10 mois pour 12, et la création est offerte.</dd></div>
-    </dl>
+<section class="sec"><div class="w">
+ <h2>Les mots qu'on utilise</h2>
+ <dl class="defs">
+  <dt>Page ou section</dt><dd>Une section est un bloc dans une page, comme l'horaire. Une page a sa propre adresse, comme la page Menu. L'Essentiel, c'est une seule page avec jusqu'à 6 sections.</dd>
+  <dt>Demande de rendez-vous ou réservation</dt><dd>Avec une demande (forfait Rendez-vous), le client propose ses disponibilités et vous le rappelez. Avec la réservation en ligne (option), il choisit lui-même une heure libre dans votre agenda.</dd>
+  <dt>Création ou abonnement</dt><dd>La création se paie une fois, au départ, pour concevoir votre site. L'abonnement se paie chaque mois et garde le site en ligne, sécurisé et à jour.</dd>
+ </dl>
+ <p>Pas certain du forfait ? <a href="contact.html#contact">Écrivez-nous</a> : on vous dit lequel vous convient, même si c'est le moins cher.</p>
+</div></section>
 
-    <div class="fd-help"><p><strong>Encore un doute ?</strong> Calculez votre prix en 20 secondes, ou écrivez-nous : on vous dit honnêtement quel forfait vous convient, même si c'est le moins cher.</p><p><a href="#calc">Calculer mon prix</a><a href="contact.html#contact">Nous écrire</a></p></div>
-   </div>
-  </section>
-
-
-  
-
-  <section style="background: #FFFFFF; border-top: 1px solid #D2E5EE; border-bottom: 1px solid #D2E5EE">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
-      <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Inclus dans tous les forfaits</h2>
-      <p style="margin: 0; font-size: 18px; line-height: 1.65; max-width: 900px">Conception sur mesure, adaptation au cellulaire, hébergement, certificat HTTPS, sauvegardes, mises à jour de sécurité, référencement de base, deux rondes de révisions avant la mise en ligne, le branchement de votre domaine et votre ligne texto directe. Une petite mention « Site créé par Studio Atlas Rimouski » apparaît en bas de page.</p>
-      <p style="margin: 0; font-size: 18px; line-height: 1.65; max-width: 900px"><strong>Votre nom de domaine :</strong> achetez-le vous-même, il est à vous et on le branche gratuitement. Ou prenez le domaine clé en main (+4 $/mois) : on l'achète, on le gère et on le renouvelle pour vous. Il reste alors la propriété de Studio Atlas Rimouski. Si vous annulez, vous pouvez le racheter pour 50 $. Sinon, on ne le renouvelle pas et il expire. Le site est loué : il est mis hors ligne à la fin de la période payée.</p>
-    </div>
-  </section>
-
-  <section style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
-    <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Vos changements</h2>
-    <div style="background: #0B1B33; color: #EEF6FA; border-radius: 22px; padding: 30px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between"><div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #C9E7F3">INCLUS DANS TOUS LES FORFAITS</span><span style="font-size: clamp(24px, 3vw, 34px); font-weight: 900; line-height: 1.1">Votre ligne texto directe</span><span style="font-size: 17px; line-height: 1.55; color: #C2DCE8">Vous changez d'horaire ? Un nouveau plat ? Envoyez un texto au numéro qu'on vous donne à la signature. C'est mis à jour en moins de 48 h, sans formulaire ni centre d'appels.</span></div><span style="font-size: 54px; font-weight: 900; color: #A9D9EC; line-height: 1">48 h</span></div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
-      <div style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 20px">Mises à jour : gratuites</span><span style="font-size: 16px; line-height: 1.55">Horaire, prix, plats du menu, coordonnées, textes, une photo à remplacer. Selon votre forfait, de 2 à 10 demandes par mois, par simple texto, faites en moins de 48 h.</span></div>
-      <div style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 20px">Ajouts : inclus</span><span style="font-size: 16px; line-height: 1.55">Une nouvelle section, des photos de plus, une promo. Compris dans le temps de votre forfait, puis 15 $ par 30 minutes.</span></div>
-      <div style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 900; font-size: 20px">Projets : sur soumission</span><span style="font-size: 16px; line-height: 1.55">Une nouvelle page, une nouvelle fonctionnalité, une refonte. Toujours avec un prix écrit avant de commencer.</span></div>
-    </div>
-  </section>
-
-  <section style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
-    <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Extras mensuels</h2>
-    <div style="overflow-x: auto; background: #FFFFFF; border-radius: 18px">
-      <table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 16px">
-        <thead><tr style="text-align: left; border-bottom: 2px solid #0B1B33"><th style="padding: 16px 20px">Extra</th><th style="padding: 16px 20px">Par mois</th></tr></thead>
-        <tbody><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Retirer la mention « Site créé par Studio Atlas Rimouski »</td><td style="padding: 14px 20px">+5 $</td></tr><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Domaine clé en main : on l'achète, on le gère et on le renouvelle (il reste à Studio Atlas ; rachat 50 $ si vous partez)</td><td style="padding: 14px 20px">+4 $</td></tr><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Bannière d'annonce (fermé, promo, nouveauté)</td><td style="padding: 14px 20px">+3 $</td></tr><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Section « On embauche »</td><td style="padding: 14px 20px">+3 $</td></tr><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Rapport de visites mensuel</td><td style="padding: 14px 20px">+5 $</td></tr><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Mise à jour de votre fiche Google</td><td style="padding: 14px 20px">+5 $</td></tr><tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Modifications prioritaires, le jour même</td><td style="padding: 14px 20px">+10 $</td></tr><tr><td style="padding: 14px 20px">30 minutes d'ajouts en plus</td><td style="padding: 14px 20px">+15 $</td></tr></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section style="max-width: 1200px; margin: 0 auto; padding: 72px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
-    <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Options à installer</h2>
-    <div style="overflow-x: auto; background: #FFFFFF; border-radius: 18px">
-      <table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 16px">
-        <thead><tr style="text-align: left; border-bottom: 2px solid #0B1B33"><th style="padding: 16px 20px">Option</th><th style="padding: 16px 20px">Création</th><th style="padding: 16px 20px">Par mois</th></tr></thead>
-        <tbody>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Page supplémentaire</td><td style="padding: 14px 20px">49 $</td><td style="padding: 14px 20px">+10 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Formulaire de contact (Essentiel)</td><td style="padding: 14px 20px">29 $</td><td style="padding: 14px 20px">+5 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Formulaire supplémentaire (Rendez-vous et plus)</td><td style="padding: 14px 20px">29 $</td><td style="padding: 14px 20px">+3 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Version anglaise (Essentiel, Rendez-vous, Professionnel)</td><td style="padding: 14px 20px">50 % des frais de création</td><td style="padding: 14px 20px">+50 %</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Réservations en ligne</td><td style="padding: 14px 20px">49 $</td><td style="padding: 14px 20px">+10 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Commandes pour emporter</td><td style="padding: 14px 20px">99 $</td><td style="padding: 14px 20px">+15 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Menu ou horaire que vous modifiez vous-même</td><td style="padding: 14px 20px">99 $</td><td style="padding: 14px 20px">+10 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Avis sur votre site : vos clients laissent une note, un commentaire et une photo, et vous approuvez chaque avis avant qu'il soit publié</td><td style="padding: 14px 20px">29 $</td><td style="padding: 14px 20px">+5 $</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Logo simple</td><td style="padding: 14px 20px">149 $</td><td style="padding: 14px 20px">—</td></tr>
-          <tr style="border-bottom: 1px solid #D2E5EE"><td style="padding: 14px 20px">Code QR imprimable vers votre site ou menu</td><td style="padding: 14px 20px">19 $</td><td style="padding: 14px 20px">—</td></tr>
-          <tr><td style="padding: 14px 20px">Rédaction des textes, travail hors forfait</td><td style="padding: 14px 20px">60 $ / h, estimation écrite d'abord</td><td style="padding: 14px 20px">—</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <span style="font-size: 14px; color: #475B70">Les outils de réservation, de commande et de paiement choisis avec vous sont payés directement par vous à leur fournisseur.</span>
-  </section>
-
-  <section style="background: #0B1B33; color: #EEF6FA">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
-      <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Quand vous payez</h2>
-      <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px">
-        <li style="border-top: 3px solid #A9D9EC; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px">À la signature</span><span style="font-size: 16px; line-height: 1.55; color: #C2DCE8">Les frais de création, par virement Interac. On commence ensuite.</span></li>
-        <li style="border-top: 3px solid #A9D9EC; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px">À la mise en ligne</span><span style="font-size: 16px; line-height: 1.55; color: #C2DCE8">Rien. Le reste du mois est offert.</span></li>
-        <li style="border-top: 3px solid #A9D9EC; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px">Chaque 1er du mois</span><span style="font-size: 16px; line-height: 1.55; color: #C2DCE8">L'abonnement. Facture envoyée 5 jours avant.</span></li>
-        <li style="border-top: 3px solid #C9E7F3; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><span style="font-weight: 700; font-size: 19px">Ou une fois par année</span><span style="font-size: 16px; line-height: 1.55; color: #C2DCE8">10 mois pour 12, et les frais de création sont offerts.</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <section style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
-    <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Trois exemples concrets</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
-      <div style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 700; font-size: 18px">Une coiffeuse qui prend des rendez-vous</span><span style="font-size: 16px; line-height: 1.55">Rendez-vous + domaine clé en main : 149 $ au départ, puis 45 $ + 4 $.</span><span style="font-size: 16px"><strong>49 $ par mois</strong></span></div>
-      <div style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 700; font-size: 18px">Un restaurant avec menu cliquable</span><span style="font-size: 16px; line-height: 1.55">Professionnel + domaine + bannière + réservations : 248 $ au départ, puis 60 $ + 4 $ + 3 $ + 10 $.</span><span style="font-size: 16px"><strong>77 $ par mois</strong></span></div>
-      <div style="background: #FFFFFF; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 700; font-size: 18px">Un garage à qui on a montré son aperçu</span><span style="font-size: 16px; line-height: 1.55">Essentiel, sans la mention en bas de page : rien au départ, puis 30 $ + 5 $.</span><span style="font-size: 16px"><strong>35 $ par mois</strong></span></div>
-    </div>
-    <span style="font-size: 14px; color: #475B70">Prix avant taxes. Un contrat clair : le prix, ce qui est compris et les conditions d'annulation sont écrits dans votre contrat et expliqués avant de signer.</span>
-  </section>
-
-  <section style="background: #A9D9EC">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 64px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
-      <h2 style="margin: 0; font-size: clamp(28px, 3.6vw, 44px); font-weight: 900; line-height: 1.05; max-width: 700px">Pas certain du forfait ? On vous le dit honnêtement, même si c'est le moins cher.</h2>
-      <a href="contact.html" style="background: #0B1B33; color: #EEF6FA; padding: 18px 30px; border-radius: 999px; font-weight: 700; font-size: 18px; text-decoration: none">Appel gratuit de 30 min</a>
-    </div>
-  </section>
-
-  <footer class="sa-foot"><div class="sa-wrap sa-foot-in"><div><a href="index.html" class="sa-logo" aria-label="Studio Atlas Rimouski, accueil"><svg width="128" height="40" viewBox="0 0 128 40" aria-hidden="true"><path d="M6 6h32a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H20l-8 7v-7H6a6 6 0 0 1-6-6V12a6 6 0 0 1 6-6z" fill="#A9D9EC"/><text x="22" y="25" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="17" fill="#0B1B33">a</text><text x="52" y="27" font-family="Unbounded" font-weight="700" font-size="21" letter-spacing="-1" fill="currentColor">atlas</text></svg></a><p>Des sites web pour les commerces d'ici, avec quelqu'un pour vous répondre.</p></div><div><p>Rimouski (Québec)</p><p>studioatlasrimouski@gmail.com</p><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p></div><div><p><a href="forfaits.html">Forfaits</a></p><p><a href="exemples/index.html">Exemples</a></p><p><a href="contact.html#contact">Annuler mon abonnement</a></p></div></div></footer>
-</div>
+</main>
+<footer class="foot"><div class="w">
+ <div><p>Studio Atlas Rimouski, studio web à Rimouski (Québec).</p><p>studioatlasrimouski@gmail.com</p></div>
+ <div><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p><p><a href="contact.html#contact">Annuler mon abonnement</a></p></div>
+</div></footer>
 <script src="/stats.js" defer></script>
 <script src="interactif.js" defer></script>
+
 </body>
 </html>
