@@ -37,6 +37,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .plan-grid>article>span:nth-of-type(2){font-size:44px!important;white-space:nowrap;letter-spacing:-.02em}
 .plan-grid>article>span:nth-of-type(2)>span{font-size:16px!important}
 @media(max-width:1180px) and (min-width:700px){.plan-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+
+.fd{background:#F6FAFC;border-top:1px solid #D2E5EE;border-bottom:1px solid #D2E5EE}
+.fd-wrap{max-width:1200px;margin:0 auto;padding:80px 24px}
+.fd h2{margin:0 0 14px}.fd-h2{margin-top:72px!important}
+.fd-intro{max-width:70ch;font-size:18px;color:#475B70;margin:0 0 36px}
+.fd-card{background:#fff;border:2px solid #0B1B33;border-radius:24px;padding:30px;margin-bottom:22px;scroll-margin-top:20px}
+.fd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.fd-num{margin:0 0 4px;font-weight:700;color:#2F86B5;font-size:14px}
+.fd-top h3{margin:0;font-size:28px!important}
+.fd-price{text-align:right}.fd-price b{display:block;font-family:Unbounded,sans-serif;font-size:34px;letter-spacing:-.03em;line-height:1}.fd-price span{font-size:14px;color:#475B70}
+.fd-resume{font-size:18px;margin:0 0 10px;max-width:80ch}
+.fd-pour{margin:0 0 22px;color:#475B70;max-width:80ch}
+.fd-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:22px}
+.fd-cols h4{margin:0 0 10px;font-size:15px}
+.fd-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:15.5px;line-height:1.45}
+.fd-list li{display:flex;gap:10px;align-items:flex-start}.fd-list svg{flex:none;margin-top:2px}
+.fd-no{color:#475B70}
+.fd-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.fd-facts div{background:#EEF6FA;border-radius:16px;padding:16px;font-size:15px;line-height:1.5}
+.fd-facts span{display:block;font-weight:700;font-size:13px;color:#123A6B;margin-bottom:4px}
+.fd-ex{font-weight:700;color:#123A6B;text-underline-offset:4px}
+.fd-table{overflow-x:auto;background:#fff;border:2px solid #0B1B33;border-radius:20px}
+.fd-table table{width:100%;border-collapse:collapse;min-width:760px;font-size:15px}
+.fd-table th,.fd-table td{padding:12px 14px;border-bottom:1px solid #D2E5EE;text-align:left;vertical-align:top}
+.fd-table thead th{background:#0B1B33;color:#fff;font-size:14px}
+.fd-table tbody th{font-weight:600;color:#0B1B33;width:24%}
+.fd-table tr:last-child th,.fd-table tr:last-child td{border-bottom:0;font-weight:700}
+.fd-glossary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0}
+.fd-glossary div{background:#fff;border:1px solid #D2E5EE;border-radius:16px;padding:18px}
+.fd-glossary dt{font-weight:700;margin-bottom:6px}.fd-glossary dd{margin:0;color:#475B70;line-height:1.55}
+.fd-help{margin-top:40px;background:#0B1B33;color:#fff;border-radius:20px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.fd-help p{margin:0;max-width:62ch}.fd-help a{display:inline-block;margin-left:10px;background:#F2B544;color:#0B1B33;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:999px}
+@media(max-width:860px){.fd-cols,.fd-facts,.fd-glossary{grid-template-columns:1fr}.fd-price{text-align:left}.fd-help a{margin:8px 10px 0 0}}
 </style>
 </head>
 <body>
@@ -73,13 +106,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <span style="font-size: 15px">Une page, du texte et des photos</span>
       <span style="font-size: 52px; font-weight: 900; line-height: 1">30 $<span style="font-size: 18px; font-weight: 500"> / mois</span></span>
       <span style="align-self: flex-start; background: #C9E7F3; color: #0B1B33; font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px; white-space: nowrap">Environ 1 $ par jour</span>
-      <span style="font-size: 15px; color: #475B70">+ 99 $ de création · en ligne en environ 1 semaine</span>
+      <span style="font-size: 15px; color: #475B70">+ 99 $ de création (0 $ si vous acceptez l'aperçu gratuit qu'on vous a préparé) · en ligne en environ 1 semaine</span>
       <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6">
         <li>Une page qui défile, jusqu'à 6 sections</li>
         <li>Jusqu'à 15 photos</li>
         <li>Horaire, carte, boutons Appeler et Itinéraire</li>
         <li>2 mises à jour gratuites par mois</li>
       </ul>
+      <a href="#detail-essentiel" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
     </article>
     <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
       <h3 style="margin: 0; font-size: 24px; font-weight: 900">Rendez-vous</h3>
@@ -93,6 +127,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <li>Les demandes dans votre Google Sheets, avec un courriel à chaque fois</li>
         <li>3 mises à jour gratuites par mois</li>
       </ul>
+      <a href="#detail-rendez-vous" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
     </article>
     <article style="background: #0B1B33; color: #EEF6FA; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
       <h3 style="margin: 0; font-size: 24px; font-weight: 900">Professionnel</h3>
@@ -107,6 +142,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <li>Fiche Google et lien vers vos avis</li>
         <li>4 mises à jour gratuites et 1 h d'ajouts par mois</li>
       </ul>
+      <a href="#detail-professionnel" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
     </article>
     <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
       <h3 style="margin: 0; font-size: 24px; font-weight: 900">Entreprise</h3>
@@ -121,6 +157,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <li>Bilan annuel du site</li>
         <li>10 mises à jour gratuites et 2 h d'ajouts par mois</li>
       </ul>
+      <a href="#detail-entreprise" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
     </article>
     <article style="background: #FFFFFF; border: 2px solid #0B1B33; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
       <h3 style="margin: 0; font-size: 24px; font-weight: 900">Boutique</h3>
@@ -136,8 +173,127 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <li>Aucune application à payer en plus</li>
         <li>10 mises à jour gratuites et 2 h d'ajouts par mois</li>
       </ul>
+      <a href="#detail-boutique" style="margin-top:auto;font-weight:700;color:#123A6B;text-underline-offset:4px">Tout comprendre sur ce forfait</a>
     </article>
   </section>
+  <section class="fd" id="details" aria-labelledby="fd-title">
+   <div class="fd-wrap">
+    <h2 id="fd-title">Chaque forfait expliqué, en détail</h2>
+    <p class="fd-intro">Les forfaits s'empilent : chacun comprend tout ce qu'il y a dans le précédent, plus quelque chose de nouveau. Le prix couvre la création de votre site, puis chaque mois l'hébergement, la sécurité, les sauvegardes et vos changements par texto.</p>
+    
+  <article class="fd-card" id="detail-essentiel">
+    <header class="fd-top">
+      <div><p class="fd-num">Forfait 1 sur 5</p><h3>Essentiel</h3></div>
+      <div class="fd-price"><b>30 $</b><span>par mois, environ 1 $ par jour</span></div>
+    </header>
+    <p class="fd-resume">Une seule belle page qui dit l'essentiel : qui vous êtes, ce que vous faites, quand vous êtes ouvert et comment vous joindre. Le client la parcourt en faisant défiler, puis il vous appelle ou vient vous voir.</p>
+    <p class="fd-pour"><strong>Pour qui :</strong> Garage, dépanneur, entrepreneur, atelier, service à domicile : tout commerce dont les clients veulent surtout votre horaire, votre adresse et votre numéro.</p>
+    <div class="fd-cols">
+      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Voir vos photos et ce que vous offrez</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vérifier si vous êtes ouvert en ce moment</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vous appeler en un toucher sur leur cellulaire</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ouvrir l'itinéraire jusqu'à chez vous</span></li></ul></div>
+      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>1 page qui défile, jusqu'à 6 sections (ex. : accueil, services, photos, horaire, carte, contact)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 15 photos</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Horaire, carte, boutons « Appeler » et « Itinéraire »</span></li></ul></div>
+      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de formulaire : les clients vous appellent (option Formulaire de contact : 29 $ + 5 $/mois)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de deuxième page ni de menu cliquable (c'est le Professionnel)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de version anglaise (option : +50 %)</span></li></ul></div>
+    </div>
+    <div class="fd-facts">
+      <div><span>Vos changements chaque mois</span>2 petites mises à jour par mois, par texto (ex. : changer l'horaire des Fêtes, un prix, un numéro). Pour ajouter quelque chose de nouveau, c'est 15 $ par 30 minutes.</div>
+      <div><span>Pour démarrer</span>Frais de création : 99 $, ou 0 $ si vous acceptez l'aperçu gratuit qu'on vous a préparé. En ligne en environ 1 semaine.</div>
+      <div><span>Payé à l'année</span>300 $ pour l'année (10 mois payés sur 12, création offerte)</div>
+    </div>
+    <a class="fd-ex" href="exemples/essentiel.html">Essayer l'exemple : Garage Boréal</a>
+  </article>
+  <article class="fd-card" id="detail-rendez-vous">
+    <header class="fd-top">
+      <div><p class="fd-num">Forfait 2 sur 5</p><h3>Rendez-vous</h3></div>
+      <div class="fd-price"><b>45 $</b><span>par mois, environ 1,50 $ par jour</span></div>
+    </header>
+    <p class="fd-resume">Tout l'Essentiel, plus des formulaires pour que vos clients vous fassent une demande à toute heure. Important : le client <strong>demande</strong> un rendez-vous, ce n'est pas un agenda en ligne. Vous recevez la demande et vous le rappelez pour confirmer l'heure.</p>
+    <p class="fd-pour"><strong>Pour qui :</strong> Coiffeuse, esthéticienne, massothérapeute, toiletteur, entrepreneur qui fait des soumissions, ou tout commerce qui veut recevoir des candidatures.</p>
+    <div class="fd-cols">
+      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce que permet l'Essentiel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Choisir un service et les moments où ils sont disponibles</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Laisser leurs coordonnées pour que vous les rappeliez</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Postuler (section « On embauche ») ou demander une soumission</span></li></ul></div>
+      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce qu'il y a dans l'Essentiel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 2 formulaires au choix : rendez-vous, candidature, soumission</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>La liste de vos services avec leurs prix</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Un courriel à chaque nouvelle demande, et toutes les demandes rangées dans un tableau en ligne que vous pouvez consulter en tout temps</span></li></ul></div>
+      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas d'agenda où le client réserve lui-même une heure précise (option Réservations en ligne : 49 $ + 10 $/mois, avec un outil payé directement à son fournisseur)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de menu cliquable ni de galerie (c'est le Professionnel)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de version anglaise (option : +50 %)</span></li></ul></div>
+    </div>
+    <div class="fd-facts">
+      <div><span>Vos changements chaque mois</span>3 petites mises à jour par mois, par texto. Pour ajouter quelque chose de nouveau, c'est 15 $ par 30 minutes.</div>
+      <div><span>Pour démarrer</span>Frais de création : 149 $. En ligne en environ 1 semaine.</div>
+      <div><span>Payé à l'année</span>450 $ pour l'année (10 mois payés sur 12, création offerte)</div>
+    </div>
+    <a class="fd-ex" href="exemples/rendez-vous.html">Essayer l'exemple : Salon Marée</a>
+  </article>
+  <article class="fd-card" id="detail-professionnel">
+    <header class="fd-top">
+      <div><p class="fd-num">Forfait 3 sur 5</p><h3>Professionnel</h3></div>
+      <div class="fd-price"><b>60 $</b><span>par mois, environ 2 $ par jour</span></div>
+    </header>
+    <p class="fd-resume">Un vrai site de plusieurs pages qu'on explore. C'est le forfait des restaurants et des cafés : le client parcourt votre menu par catégorie, touche un plat pour voir la photo et le prix, regarde votre galerie et vous écrit.</p>
+    <p class="fd-pour"><strong>Pour qui :</strong> Restaurant, café, traiteur, boutique sans vente en ligne, salle de spectacle, studio : tout commerce qui a beaucoup à montrer.</p>
+    <div class="fd-cols">
+      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Parcourir votre menu ou votre catalogue par catégories</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Toucher un plat ou un produit pour voir sa photo et son prix</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Agrandir les photos de votre galerie</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Voir l'horaire, y compris les jours fériés, et vous écrire par formulaire</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Aller lire vos avis Google</span></li></ul></div>
+      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 5 pages (ex. : Accueil, Menu, Galerie, À propos, Contact)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Menu ou catalogue cliquable, jusqu'à 60 plats ou articles avec photo et prix</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Galerie avec agrandissement</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Formulaire de contact</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Lien vers votre fiche Google et vos avis</span></li></ul></div>
+      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de vente ni de paiement en ligne (c'est la Boutique)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de commandes pour emporter (option : 99 $ + 15 $/mois)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de réservation de table en ligne (option : 49 $ + 10 $/mois)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de version anglaise (option : +50 %)</span></li></ul></div>
+    </div>
+    <div class="fd-facts">
+      <div><span>Vos changements chaque mois</span>4 petites mises à jour par mois (ex. : le plat du jour, un prix, l'horaire), plus 1 heure d'ajouts par mois (ex. : une nouvelle section, une promo, des photos de plus).</div>
+      <div><span>Pour démarrer</span>Frais de création : 199 $. En ligne en environ 2 semaines.</div>
+      <div><span>Payé à l'année</span>600 $ pour l'année (10 mois payés sur 12, création offerte)</div>
+    </div>
+    <a class="fd-ex" href="exemples/professionnel.html">Essayer l'exemple : Bistro du Havre</a>
+  </article>
+  <article class="fd-card" id="detail-entreprise">
+    <header class="fd-top">
+      <div><p class="fd-num">Forfait 4 sur 5</p><h3>Entreprise</h3></div>
+      <div class="fd-price"><b>75 $</b><span>par mois, environ 2,50 $ par jour</span></div>
+    </header>
+    <p class="fd-resume">Tout le Professionnel, en plus grand et en deux langues. Pour une entreprise qui a plusieurs services, une équipe, des réalisations à montrer et des nouvelles à publier souvent.</p>
+    <p class="fd-pour"><strong>Pour qui :</strong> Entreprise de services (chauffage, construction, transport), clinique, organisme, commerce avec une clientèle anglophone ou touristique.</p>
+    <div class="fd-cols">
+      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce que permet le Professionnel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Passer du français à l'anglais en un clic</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Lire vos nouvelles, vos événements et vos promotions</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Découvrir votre équipe, vos réalisations et vos offres d'emploi</span></li></ul></div>
+      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce qu'il y a dans le Professionnel</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 10 pages et 150 articles</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Une section Nouvelles, événements et promotions</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>La version anglaise complète, incluse</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Un bilan annuel : ce qui marche sur votre site et ce qu'on pourrait améliorer</span></li></ul></div>
+      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Pas de vente ni de paiement en ligne (c'est la Boutique)</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Les commandes et les réservations restent des options</span></li></ul></div>
+    </div>
+    <div class="fd-facts">
+      <div><span>Vos changements chaque mois</span>10 petites mises à jour par mois, plus 2 heures d'ajouts par mois.</div>
+      <div><span>Pour démarrer</span>Frais de création : 249 $. En ligne en environ 3 semaines.</div>
+      <div><span>Payé à l'année</span>750 $ pour l'année (10 mois payés sur 12, création offerte)</div>
+    </div>
+    <a class="fd-ex" href="exemples/entreprise.html">Essayer l'exemple : Nordet Chauffage</a>
+  </article>
+  <article class="fd-card" id="detail-boutique">
+    <header class="fd-top">
+      <div><p class="fd-num">Forfait 5 sur 5</p><h3>Boutique</h3></div>
+      <div class="fd-price"><b>89 $</b><span>par mois, moins de 3 $ par jour</span></div>
+    </header>
+    <p class="fd-resume">Tout l'Entreprise, plus une vraie boutique : le client choisit un produit, sa taille ou sa couleur, l'ajoute au panier et paie en ligne de façon sécurisée. Vous recevez la commande par courriel.</p>
+    <p class="fd-pour"><strong>Pour qui :</strong> Boutique de vêtements, artisan, marque locale, épicerie fine, commerce qui veut vendre ses produits ou ses cartes-cadeaux en ligne.</p>
+    <div class="fd-cols">
+      <div><h4>Ce que vos clients peuvent faire</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce que permet l'Entreprise</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Choisir un produit, sa taille et sa couleur</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Mettre des articles dans un panier et payer en ligne</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Recevoir un courriel de confirmation de commande</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Lire vos conditions de livraison et de retour</span></li></ul></div>
+      <div><h4>Ce que vous recevez</h4><ul class="fd-list"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tout ce qu'il y a dans l'Entreprise</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Panier et paiement sécurisé</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Jusqu'à 25 produits avec tailles et couleurs</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Les courriels de confirmation de commande</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Les pages Livraison et Retours</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#123A6B"/><path d="M5 9.3l2.6 2.6L13 6.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Aucun abonnement à une application de boutique en plus</span></li></ul></div>
+      <div><h4>Ce qui n'est pas compris</h4><ul class="fd-list fd-no"><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Les frais par transaction du service de paiement (ex. : Stripe ou Square) sont payés par vous, directement à ce service, comme pour un terminal en magasin</span></li><li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="9" fill="#D2E5EE"/><path d="M6 6l6 6M12 6l-6 6" stroke="#475B70" stroke-width="2" stroke-linecap="round"/></svg><span>Plus de 25 produits : sur soumission</span></li></ul></div>
+    </div>
+    <div class="fd-facts">
+      <div><span>Vos changements chaque mois</span>10 petites mises à jour par mois (ex. : un prix, un produit en rupture), plus 2 heures d'ajouts par mois (ex. : ajouter de nouveaux produits).</div>
+      <div><span>Pour démarrer</span>Frais de création : 349 $ (sur soumission au-delà de 25 produits). En ligne en confirmé dans votre soumission, selon le nombre de produits.</div>
+      <div><span>Payé à l'année</span>890 $ pour l'année (10 mois payés sur 12, création offerte)</div>
+    </div>
+    <a class="fd-ex" href="exemples/boutique.html">Essayer l'exemple : Atelier Fjord</a>
+  </article>
+
+    <h2 class="fd-h2">Les 5 forfaits, côte à côte</h2>
+    <div class="fd-table"><table><thead><tr><th scope="col"></th><th scope="col">Essentiel</th><th scope="col">Rendez-vous</th><th scope="col">Professionnel</th><th scope="col">Entreprise</th><th scope="col">Boutique</th></tr></thead><tbody><tr><th scope="row">Pages</th><td>1 (qui défile)</td><td>1 (qui défile)</td><td>Jusqu'à 5</td><td>Jusqu'à 10</td><td>Jusqu'à 10 + boutique</td></tr><tr><th scope="row">Photos</th><td>Jusqu'à 15</td><td>Jusqu'à 15</td><td>Galerie</td><td>Galerie</td><td>Galerie + produits</td></tr><tr><th scope="row">Horaire, carte, bouton Appeler</th><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><th scope="row">Formulaire</th><td>Option</td><td>2 formulaires</td><td>Contact</td><td>Contact</td><td>Contact</td></tr><tr><th scope="row">Demande de rendez-vous ou de soumission</th><td>—</td><td>✓</td><td>Option</td><td>Option</td><td>Option</td></tr><tr><th scope="row">Menu ou catalogue cliquable</th><td>—</td><td>—</td><td>60 articles</td><td>150 articles</td><td>150 articles</td></tr><tr><th scope="row">Nouvelles et promotions</th><td>—</td><td>—</td><td>—</td><td>✓</td><td>✓</td></tr><tr><th scope="row">Version anglaise</th><td>Option</td><td>Option</td><td>Option</td><td>✓</td><td>✓</td></tr><tr><th scope="row">Panier et paiement en ligne</th><td>—</td><td>—</td><td>—</td><td>—</td><td>✓ (25 produits)</td></tr><tr><th scope="row">Petites mises à jour par mois</th><td>2</td><td>3</td><td>4</td><td>10</td><td>10</td></tr><tr><th scope="row">Temps d'ajouts par mois</th><td>—</td><td>—</td><td>1 h</td><td>2 h</td><td>2 h</td></tr><tr><th scope="row">Frais de création</th><td>99 $ (0 $ après aperçu accepté)</td><td>149 $</td><td>199 $</td><td>249 $</td><td>349 $</td></tr><tr><th scope="row">Par mois</th><td>30 $</td><td>45 $</td><td>60 $</td><td>75 $</td><td>89 $</td></tr></tbody></table></div>
+
+    <h2 class="fd-h2">Les mots qu'on utilise</h2>
+    <dl class="fd-glossary">
+      <div><dt>Une page ou une section ?</dt><dd>Une <strong>section</strong> est un bloc dans une page (ex. : l'horaire). Une <strong>page</strong> a sa propre adresse et son propre menu (ex. : la page Menu). L'Essentiel, c'est une seule page avec jusqu'à 6 sections.</dd></div>
+      <div><dt>Mise à jour</dt><dd>Changer une information qui existe déjà : l'horaire, un prix, un plat, un numéro, un texte, une photo à remplacer. Vous nous textez, c'est fait en moins de 48 h.</dd></div>
+      <div><dt>Ajout</dt><dd>Mettre quelque chose de nouveau : une section, des photos de plus, une promo. C'est compris dans le temps d'ajouts de votre forfait, sinon 15 $ par 30 minutes.</dd></div>
+      <div><dt>Projet</dt><dd>Une nouvelle page, une nouvelle fonctionnalité ou une refonte. On vous donne toujours le prix par écrit avant de commencer.</dd></div>
+      <div><dt>Demande de rendez-vous ou réservation en ligne ?</dt><dd>Avec une <strong>demande</strong> (forfait Rendez-vous), le client propose ses disponibilités et vous le rappelez pour confirmer. Avec la <strong>réservation en ligne</strong> (option), le client choisit lui-même une heure libre dans votre agenda, sans appel.</dd></div>
+      <div><dt>Frais de création ou abonnement ?</dt><dd>Les <strong>frais de création</strong> se paient une fois, au départ, pour concevoir votre site. L'<strong>abonnement</strong> se paie chaque mois et garde le site en ligne, sécurisé et à jour. Payé à l'année, c'est 10 mois pour 12, et la création est offerte.</dd></div>
+    </dl>
+
+    <div class="fd-help"><p><strong>Encore un doute ?</strong> Faites le test en 30 secondes, ou écrivez-nous : on vous dit honnêtement quel forfait vous convient, même si c'est le moins cher.</p><p><a href="#quiz">Faire le test</a><a href="contact.html#contact">Nous écrire</a></p></div>
+   </div>
+  </section>
+
 
   <section style="max-width: 1200px; margin: 0 auto; padding: 0 24px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
     <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">À quoi ça ressemble</h2>
@@ -155,7 +311,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   <section style="background: #FFFFFF; border-top: 1px solid #D2E5EE; border-bottom: 1px solid #D2E5EE">
     <div style="max-width: 1200px; margin: 0 auto; padding: 72px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
       <h2 style="margin: 0; font-size: clamp(28px, 3.4vw, 40px); font-weight: 900">Inclus dans tous les forfaits</h2>
-      <p style="margin: 0; font-size: 18px; line-height: 1.65; max-width: 900px">Conception sur mesure, adaptation au cellulaire, hébergement, certificat HTTPS, sauvegardes, mises à jour de sécurité, référencement de base, deux rondes de révisions avant la mise en ligne,, le branchement de votre domaine et votre ligne texto directe. Une petite mention « Site créé par Studio Atlas Rimouski » apparaît en bas de page.</p>
+      <p style="margin: 0; font-size: 18px; line-height: 1.65; max-width: 900px">Conception sur mesure, adaptation au cellulaire, hébergement, certificat HTTPS, sauvegardes, mises à jour de sécurité, référencement de base, deux rondes de révisions avant la mise en ligne, le branchement de votre domaine et votre ligne texto directe. Une petite mention « Site créé par Studio Atlas Rimouski » apparaît en bas de page.</p>
       <p style="margin: 0; font-size: 18px; line-height: 1.65; max-width: 900px"><strong>Votre nom de domaine :</strong> achetez-le vous-même, il est à vous et on le branche gratuitement. Ou prenez le domaine clé en main (+4 $/mois) : on l'achète, on le gère et on le renouvelle pour vous. Il reste alors la propriété de Studio Atlas Rimouski. Si vous annulez, vous pouvez le racheter pour 50 $. Sinon, on ne le renouvelle pas et il expire. Le site est loué : il est mis hors ligne à la fin de la période payée.</p>
     </div>
   </section>
