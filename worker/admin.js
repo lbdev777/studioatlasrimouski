@@ -83,7 +83,11 @@ th{font-size:12px;color:#475B70;font-weight:700}td.n{text-align:right;font-varia
 .empty{color:#475B70;padding:8px 0}
 .msg{border-bottom:1px solid #E9F2F7;padding:14px 0}.msg:last-child{border:0}.msg .who{font-weight:700}.msg .meta{color:#475B70;font-size:13px}
 .msg p{white-space:pre-wrap;margin:8px 0}.msg.done{opacity:.55}
-.muted{color:#475B70}.tag.ret{background:#E3F6E8;color:#14532D}.tag.new{background:#FFF1B8;color:#6B5200}.btn.sm{padding:6px 12px;font-size:13px}
+.muted{color:#475B70}.tag.bot{background:#E6E8EC;color:#4B5563;border:1px solid #C9CED6}.tag.maybe{background:#fff;color:#6B7280;border:1px dashed #9CA3AF}
+tr.row-bot td,tr.row-maybe td{color:#7A8594;background:#F7F8FA}tr.row-bot td{opacity:.8}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:13px;color:#475B70;margin:0 0 12px}
+body.hide-bots tr.row-bot,body.hide-bots tr.row-maybe{display:none}
+.tag.ret{background:#E3F6E8;color:#14532D}.tag.new{background:#FFF1B8;color:#6B5200}.btn.sm{padding:6px 12px;font-size:13px}
 .tl{list-style:none;margin:0;padding:0;border-left:3px solid #D2E5EE}.tl li{position:relative;padding:8px 0 12px 18px}.tl li::before{content:"";position:absolute;left:-8px;top:13px;width:13px;height:13px;border-radius:50%;background:#123A6B;border:3px solid #fff}.tl li.ev::before{background:#A9D9EC}.tl .h{color:#475B70;font-size:13px;font-variant-numeric:tabular-nums}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px}.facts div span{display:block;font-size:12px;color:#475B70;font-weight:700}
 @media(max-width:860px){.facts{grid-template-columns:1fr 1fr}}.tag.you{background:#0B1B33;color:#A9D9EC}.tag.vis{background:#E1EFF6;color:#123A6B}
@@ -138,28 +142,38 @@ const lieu = (r) => [r.ville, r.region].filter(Boolean).join(", ") + (r.pays && 
 const lieuPlus = (r) => esc(lieu(r)) + (r.cp ? ` <span class="muted">(${esc(r.cp)})</span>` : "") + (r.fai ? `<br><span class="muted">${esc(r.fai)}</span>` : "");
 const retour = (r) => (r.nb_visites || 1) > 1 ? `<span class="tag ret">${num(r.nb_visites)}ᵉ visite</span>` : `<span class="tag new">Nouveau</span>`;
 const dureeCourte = (ms) => !ms ? "—" : ms < 60e3 ? Math.round(ms / 1e3) + " s" : Math.floor(ms / 60e3) + " min " + String(Math.round((ms % 60e3) / 1e3)).padStart(2, "0") + " s";
-const qui = (r) => r.moi ? '<span class="tag you">Vous</span>' : `<span class="tag vis">Visiteur ${esc(String(r.visiteur || "").slice(0, 4).toUpperCase())}</span>`;
+// Robot probable : comportement de robot (1 page, 0 à 2 s, aucun défilement) sans être sur un serveur connu.
+const probable = (r) => !r.moi && !r.robot && (r.duree_ms || r.actif_ms || 0) <= 2000 && !(r.scroll > 0) && (r.pages || 1) <= 1 && r.ts && Date.now() - (r.ts || r.debut) > 60e3;
+const kind = (r) => r.moi ? "you" : r.robot ? "bot" : probable(r) ? "maybe" : "vis";
+const qui = (r) => {
+  const id = esc(String(r.visiteur || "").slice(0, 4).toUpperCase());
+  const k = kind(r);
+  if (k === "you") return '<span class="tag you">Vous</span>';
+  if (k === "bot") return `<span class="tag bot" title="Vient d'un serveur (${esc(r.fai || "")}) : robot, pas une personne">Robot ${id}</span>`;
+  if (k === "maybe") return `<span class="tag maybe" title="0 à 2 secondes, aucun défilement : comportement de robot ou visite éclair">Robot probable ${id}</span>`;
+  return `<span class="tag vis">Visiteur ${id}</span>`;
+};
 
 async function liveData(env) {
   const now = Date.now();
   const rows = (await env.DB.prepare("SELECT * FROM presence WHERE dernier > ? ORDER BY moi ASC, debut ASC").bind(now - LIVE_MS).all()).results || [];
-  const others = rows.filter((r) => !r.moi).length, mine = rows.length - others;
+  const others = rows.filter((r) => !r.moi && !r.robot).length, mine = rows.filter((r) => r.moi).length, bots = rows.filter((r) => r.robot).length;
   const today = jourLocal(now);
-  const t = await env.DB.prepare("SELECT COUNT(DISTINCT CASE WHEN moi = 0 THEN visiteur END) AS v, SUM(CASE WHEN moi = 0 THEN 1 ELSE 0 END) AS p, SUM(CASE WHEN moi = 1 THEN 1 ELSE 0 END) AS mp FROM visites WHERE jour = ?").bind(today).first();
+  const t = await env.DB.prepare("SELECT COUNT(DISTINCT CASE WHEN moi = 0 AND robot = 0 THEN visiteur END) AS v, SUM(CASE WHEN moi = 0 AND robot = 0 THEN 1 ELSE 0 END) AS p, SUM(CASE WHEN moi = 1 THEN 1 ELSE 0 END) AS mp, COUNT(DISTINCT CASE WHEN robot = 1 THEN visiteur END) AS rb FROM visites WHERE jour = ?").bind(today).first();
   const recent = (await env.DB.prepare("SELECT * FROM visites ORDER BY ts DESC LIMIT 15").all()).results || [];
   const liveHtml = rows.length
-    ? `<table><tr><th>Qui</th><th>Page en ce moment</th><th>Sur le site</th><th style="text-align:right">Pages</th><th style="text-align:right">Défilé</th><th>Provenance</th><th>Appareil</th><th>Lieu</th><th></th></tr>${rows.map((r) => `<tr>
+    ? `<table><tr><th>Qui</th><th>Page en ce moment</th><th>Sur le site</th><th style="text-align:right">Pages</th><th style="text-align:right">Défilé</th><th>Provenance</th><th>Appareil</th><th>Lieu</th><th></th></tr>${rows.map((r) => `<tr class="row-${kind(r)}">
 <td>${qui(r)}<br>${retour(r)}</td><td><strong>${esc(pageName(r.page))}</strong></td><td>${dureeTxt(now - r.debut)}<br><span class="muted">actif ${dureeCourte(r.actif_ms)}</span></td><td class="n">${num(r.pages)}</td><td class="n">${num(r.scroll)} %</td>
 <td>${esc(r.source || "Accès direct")}</td><td>${esc(r.appareil || "")}<br><span class="muted">${esc([r.navigateur, r.os].filter(Boolean).join(" · "))}</span></td><td>${lieuPlus(r)}</td>
 <td><a class="btn sm" href="/admin/visite/${esc(r.session)}">Parcours</a></td></tr>`).join("")}</table>`
     : `<p class="empty">Personne sur le site en ce moment. Cette liste se met à jour toute seule.</p>`;
   const recentHtml = recent.length
-    ? `<table><tr><th>Heure</th><th>Qui</th><th>Page</th><th style="text-align:right">Temps</th><th style="text-align:right">Défilé</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${recent.map((r) => `<tr>
+    ? `<table><tr><th>Heure</th><th>Qui</th><th>Page</th><th style="text-align:right">Temps</th><th style="text-align:right">Défilé</th><th>Provenance</th><th>Appareil</th><th>Lieu</th></tr>${recent.map((r) => `<tr class="row-${kind(r)}">
 <td>${r.session ? `<a href="/admin/visite/${esc(r.session)}">` : ""}${esc(new Intl.DateTimeFormat("fr-CA", { timeZone: TZ, hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" }).format(new Date(r.ts)))}${r.session ? "</a>" : ""}</td><td>${qui(r)}</td>
 <td>${esc(pageName(r.page))}</td><td class="n">${dureeCourte(r.duree_ms)}</td><td class="n">${r.scroll != null ? num(r.scroll) + " %" : "—"}</td><td>${esc(r.source || "Accès direct")}</td><td>${esc([r.appareil, r.navigateur].filter(Boolean).join(" · "))}</td><td>${lieuPlus(r)}</td></tr>`).join("")}</table>`
     : `<p class="empty">Aucune visite enregistrée pour l'instant.</p>`;
-  const label = `${num(others)} visiteur${others > 1 ? "s" : ""} en ce moment` + (mine ? ` · ${mine === 1 ? "vous êtes" : "vous avez " + mine + " onglets"} sur le site` : "");
-  return { others, mine, label, todayV: t?.v || 0, todayP: t?.p || 0, todayMine: t?.mp || 0, liveHtml, recentHtml, at: now };
+  const label = `${num(others)} visiteur${others > 1 ? "s" : ""} en ce moment` + (mine ? ` · ${mine === 1 ? "vous êtes" : "vous avez " + mine + " onglets"} sur le site` : "") + (bots ? ` · ${bots} robot${bots > 1 ? "s" : ""}` : "");
+  return { others, mine, label, todayV: t?.v || 0, todayP: t?.p || 0, todayMine: t?.mp || 0, todayBots: t?.rb || 0, liveHtml, recentHtml, at: now };
 }
 
 async function home(env) {
@@ -170,16 +184,16 @@ async function home(env) {
   const DB = env.DB;
   const [live, perDay, topPages, sources, devices, villes, clientsRow, msgs, v7row, actions, moy] = await Promise.all([
     liveData(env),
-    DB.prepare("SELECT jour, COUNT(DISTINCT visiteur) AS v, COUNT(*) AS p FROM visites WHERE jour >= ? AND moi = 0 GROUP BY jour").bind(since7).all(),
-    DB.prepare("SELECT page, COUNT(*) AS p, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY page ORDER BY p DESC LIMIT 8").bind(since7).all(),
-    DB.prepare("SELECT source, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY source ORDER BY v DESC LIMIT 8").bind(since7).all(),
-    DB.prepare("SELECT appareil, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY appareil ORDER BY v DESC").bind(since7).all(),
-    DB.prepare("SELECT ville, region, pays, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 GROUP BY ville, region, pays ORDER BY v DESC LIMIT 8").bind(since7).all(),
+    DB.prepare("SELECT jour, COUNT(DISTINCT visiteur) AS v, COUNT(*) AS p FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY jour").bind(since7).all(),
+    DB.prepare("SELECT page, COUNT(*) AS p, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY page ORDER BY p DESC LIMIT 8").bind(since7).all(),
+    DB.prepare("SELECT source, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY source ORDER BY v DESC LIMIT 8").bind(since7).all(),
+    DB.prepare("SELECT appareil, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY appareil ORDER BY v DESC").bind(since7).all(),
+    DB.prepare("SELECT ville, region, pays, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY ville, region, pays ORDER BY v DESC LIMIT 8").bind(since7).all(),
     DB.prepare("SELECT COUNT(*) AS n, COALESCE(SUM(prix_mois),0) AS mrr FROM clients WHERE actif = 1").first(),
     DB.prepare("SELECT * FROM messages ORDER BY ts DESC LIMIT 4").all(),
-    DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0").bind(since7).first(),
-    DB.prepare("SELECT type, label, COUNT(*) AS n, COUNT(DISTINCT visiteur) AS v FROM evenements WHERE jour >= ? AND moi = 0 GROUP BY type, label ORDER BY n DESC LIMIT 12").bind(since7).all(),
-    DB.prepare("SELECT AVG(duree_ms) AS d, AVG(scroll) AS sc FROM visites WHERE jour >= ? AND moi = 0 AND duree_ms > 0").bind(since7).first(),
+    DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0").bind(since7).first(),
+    DB.prepare("SELECT type, label, COUNT(*) AS n, COUNT(DISTINCT visiteur) AS v FROM evenements WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY type, label ORDER BY n DESC LIMIT 12").bind(since7).all(),
+    DB.prepare("SELECT AVG(duree_ms) AS d, AVG(scroll) AS sc FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 AND duree_ms > 0").bind(since7).first(),
   ]);
   const map = Object.fromEntries((perDay.results || []).map((r) => [r.jour, r]));
   const week = days.map((d) => ({ d, v: map[d]?.v || 0, p: map[d]?.p || 0 }));
@@ -204,7 +218,10 @@ async function home(env) {
 ${(actions.results || []).length ? `<table><tr><th>Action</th><th>Type</th><th style="text-align:right">Fois</th><th style="text-align:right">Visiteurs</th></tr>${actions.results.map((a) => `<tr><td>${esc(a.label || "(sans nom)")}</td><td>${esc({ clic: "Clic", formulaire: "Formulaire", test: "Test des forfaits" }[a.type] || a.type)}</td><td class="n">${num(a.n)}</td><td class="n">${num(a.v)}</td></tr>`).join("")}</table>` : `<p class="empty">Aucune action pour l'instant. Les clics sur les boutons et les liens, les formulaires et les résultats du test apparaîtront ici.</p>`}</section>
 <section class="card"><h2>Visiteurs, 7 derniers jours</h2>
 <div class="bars">${week.map((w) => `<div class="bar" title="${w.v} visiteurs, ${w.p} pages vues"><em>${w.v}</em><b style="height:${Math.round((w.v / max) * 120)}px"></b><span>${dayLabel(w.d)}</span></div>`).join("")}</div></section>
-<section class="card"><h2>Dernières visites</h2><div id="recent-table">${live.recentHtml}</div></section>
+<section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px"><h2 style="margin:0">Dernières visites</h2>
+<label style="flex-direction:row;align-items:center;gap:8px;font-size:14px"><input type="checkbox" id="hide-bots" style="width:18px;height:18px;padding:0"> Cacher les robots</label></div>
+<p class="legend"><span class="tag vis">Visiteur</span> une vraie personne <span class="tag maybe">Robot probable</span> 0 à 2 s, aucun défilement <span class="tag bot">Robot</span> vient d'un serveur (Amazon, Cisco, hébergeur…) <span class="tag you">Vous</span> vos visites</p>
+<div id="recent-table">${live.recentHtml}</div><p class="muted" style="font-size:13px;margin:10px 0 0">Les robots et vos visites ne sont pas comptés dans les chiffres.${live.todayBots ? ` Aujourd'hui : ${num(live.todayBots)} robot${live.todayBots > 1 ? "s" : ""} filtré${live.todayBots > 1 ? "s" : ""}.` : ""}</p></section>
 <div class="grid2">
 <section class="card"><h2>Pages les plus vues (7 jours)</h2>${topPages.results?.length ? `<table><tr><th>Page</th><th style="text-align:right">Vues</th></tr>${topPages.results.map((r) => `<tr><td>${esc(pageName(r.page))}</td><td class="n">${num(r.p)}</td></tr>`).join("")}</table>` : `<p class="empty">Pas encore de données.</p>`}</section>
 <section class="card"><h2>D'où viennent les visiteurs (7 jours)</h2>${list(sources.results || [], "Source", (r) => r.source || "Accès direct")}</section>
@@ -274,6 +291,10 @@ ${(actions.results || []).length ? `<table><tr><th>Action</th><th>Type</th><th s
       document.getElementById('k-today-s').textContent=new Intl.NumberFormat('fr-CA').format(d.todayP)+' pages vues'+(d.todayMine?' · sans vos '+d.todayMine:'');
     }).catch(function(){});
   }
+  var hb=document.getElementById('hide-bots');
+  try{ hb.checked=localStorage.getItem('atlas_hide_bots')==='1'; }catch(e){}
+  function applyHB(){ document.body.classList.toggle('hide-bots',hb.checked); try{localStorage.setItem('atlas_hide_bots',hb.checked?'1':'0')}catch(e){} }
+  hb.addEventListener('change',applyHB); applyHB();
   setInterval(function(){ if(document.visibilityState==='visible') tick(); },5000);
   setInterval(function(){ var s=Math.round((Date.now()-last)/1000); document.getElementById('live-upd').textContent= s<3 ? 'Mis à jour à l’instant' : 'Mis à jour il y a '+s+' s'; },1000);
   document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible') tick(); });
@@ -315,7 +336,7 @@ async function parcoursPage(env, session) {
   const map = f.lat && f.lon ? ` · <a href="https://www.openstreetmap.org/?mlat=${f.lat}&mlon=${f.lon}#map=11/${f.lat}/${f.lon}" target="_blank" rel="noopener">Voir la zone sur la carte</a>` : "";
   const body = `<p><a href="/admin">← Accueil</a></p>
 <div class="hd"><h1>Parcours du ${f.moi ? "vôtre" : "visiteur " + esc(String(f.visiteur || "").slice(0, 4).toUpperCase())}</h1>${enDirect ? '<span class="live"><i></i>Sur le site en ce moment</span>' : ""}${qui(f)} ${retour(f)}</div>
-<section class="card"><div class="facts">
+${kind(f) === "bot" ? `<p class="legend"><span class="tag bot">Robot</span> Ce visiteur vient d\u2019un serveur (${esc(f.fai || "")}) : c\u2019est un programme automatique, pas une personne. Il n\u2019est pas compté dans vos chiffres.</p>` : kind(f) === "maybe" ? `<p class="legend"><span class="tag maybe">Robot probable</span> Visite de 0 à 2 secondes sans défilement : souvent un robot, parfois une personne partie très vite.</p>` : ""}<section class="card"><div class="facts">
 <div><span>Arrivé</span>${esc(dateHeure(first.ts))}</div>
 <div><span>Provenance</span>${esc(first.source || "Accès direct")}</div>
 <div><span>Pages vues</span>${num(pages.length)} · ${dureeCourte(pages.reduce((s, p) => s + (p.duree_ms || 0), 0))} au total</div>
@@ -492,6 +513,10 @@ export async function ipHash(request, env) {
   return (await sha("ip|" + (request.headers.get("cf-connecting-ip") || "") + "|" + (env.ADMIN_PASSWORD || "atlas"))).slice(0, 16);
 }
 
+// Fournisseurs de serveurs et de robots (pas des gens chez eux ou sur leur cellulaire).
+const DATACENTER = /amazon|aws|google llc|google cloud|microsoft|azure|digitalocean|ovh|hetzner|linode|akamai|cisco|egihosting|dataprovider|m247|oracle|alibaba|tencent|contabo|vultr|choopa|leaseweb|cloudflare|fastly|scaleway|colocrossing|datacamp|psychz|quadranet|zscaler|palo alto|censys|shadowserver|hostinger|ionos|godaddy|hostroyale|hostwinds|interserver|servers\.com|packet|equinix|internet archive|semrush|ahrefs|bytedance|facebook|meta platforms|apple inc|yandex|baidu|petalbot|huawei cloud|kamatera|dedipath|tzulo|clouvider|datapacket|cdn77|g-core|gcore|hivelocity|serverion|netcup|ucloud|choopa/i;
+export function isDatacenter(fai) { return !!fai && DATACENTER.test(fai); }
+
 async function isMe(request, env, ip_h, now) {
   if (getCookie(request, "atlas_moi")) return 1;
   const admin = await env.DB.prepare("SELECT 1 AS x FROM admin_ips WHERE ip_h = ? AND dernier > ?").bind(ip_h, now - 60 * 864e5).first();
@@ -533,8 +558,9 @@ export async function recordVisit(request, env) {
 
   if (t === "e") {
     const type = String(d.k || "action").slice(0, 20);
-    await DB.prepare("INSERT INTO evenements (ts, jour, session, visiteur, ip_h, moi, page, type, label, cible) VALUES (?,?,?,?,?,?,?,?,?,?)")
-      .bind(now, jour, session, visiteur, ip_h, moi, page, type, String(d.l || "").slice(0, 80), String(d.c || "").slice(0, 200)).run();
+    const rb = isDatacenter((request.cf || {}).asOrganization) ? 1 : 0;
+    await DB.prepare("INSERT INTO evenements (ts, jour, session, visiteur, ip_h, moi, page, type, label, cible, robot) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, jour, session, visiteur, ip_h, moi, page, type, String(d.l || "").slice(0, 80), String(d.c || "").slice(0, 200), moi ? 0 : rb).run();
     return ok();
   }
 
@@ -549,17 +575,18 @@ export async function recordVisit(request, env) {
   const lon = cf.longitude ? Math.round(Number(cf.longitude) * 100) / 100 : null;
   const nb = Math.max(1, Math.min(Number(d.n) || 1, 9999));
   const source = sourceOf(d);
+  const robot = !moi && (isDatacenter(fai) || (nav === "Autre" && os === "Autre")) ? 1 : 0;
 
   if (t === "v") {
-    await DB.prepare("INSERT INTO visites (ts, jour, page, source, visiteur, appareil, session, ip_h, moi, navigateur, os, ville, region, pays, pv, duree_ms, scroll, cp, fai, lat, lon, nb_visites) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-      .bind(now, jour, page, source, visiteur, appareil, session, ip_h, moi, nav, os, ville, region, pays, pv, 0, sc, cp, fai, lat, lon, nb).run();
+    await DB.prepare("INSERT INTO visites (ts, jour, page, source, visiteur, appareil, session, ip_h, moi, navigateur, os, ville, region, pays, pv, duree_ms, scroll, cp, fai, lat, lon, nb_visites, robot) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+      .bind(now, jour, page, source, visiteur, appareil, session, ip_h, moi, nav, os, ville, region, pays, pv, 0, sc, cp, fai, lat, lon, nb, robot).run();
   }
   if (session) {
-    await DB.prepare(`INSERT INTO presence (session, visiteur, ip_h, moi, page, debut, dernier, pages, source, appareil, navigateur, os, ville, region, pays, cp, fai, lat, lon, scroll, actif_ms, nb_visites)
-      VALUES (?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    await DB.prepare(`INSERT INTO presence (session, visiteur, ip_h, moi, page, debut, dernier, pages, source, appareil, navigateur, os, ville, region, pays, cp, fai, lat, lon, scroll, actif_ms, nb_visites, robot)
+      VALUES (?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       ON CONFLICT(session) DO UPDATE SET page = excluded.page, dernier = excluded.dernier, moi = MAX(presence.moi, excluded.moi), scroll = excluded.scroll, actif_ms = excluded.actif_ms,
         pages = presence.pages + (CASE WHEN ? = 'v' THEN 1 ELSE 0 END)`)
-      .bind(session, visiteur, ip_h, moi, page, now, now, source, appareil, nav, os, ville, region, pays, cp, fai, lat, lon, sc, actif, nb, t).run();
+      .bind(session, visiteur, ip_h, moi, page, now, now, source, appareil, nav, os, ville, region, pays, cp, fai, lat, lon, sc, actif, nb, robot, t).run();
   }
   if (Math.random() < 0.03) await DB.prepare("DELETE FROM presence WHERE dernier < ?").bind(now - 864e5).run();
   return ok();
