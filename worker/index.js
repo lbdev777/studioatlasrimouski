@@ -2,7 +2,7 @@
 // Les messages sont envoyés au Gmail de l'entreprise (adresse vérifiée dans Cloudflare Email Routing).
 
 import { handleAdmin, recordVisit } from "./admin.js";
-import { generatePending, serveImage } from "./photos.js";
+import { serveImage } from "./photos.js";
 
 const MAX = { nom: 120, entreprise: 160, courriel: 200, telephone: 40, message: 5000 };
 
@@ -50,11 +50,6 @@ async function sendContact(env, f) {
 }
 
 export default {
-  // Génère les photos des sites d'exemple qui manquent (s'arrête de lui-même quand tout est fait).
-  async scheduled(event, env, ctx) {
-    ctx.waitUntil(generatePending(env, 4));
-  },
-
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
