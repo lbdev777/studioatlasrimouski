@@ -152,6 +152,14 @@ button{font:inherit;color:inherit}
 .g-item.on .g-head .pr{transform:translateY(-4px)}
 .g-head:hover .nm{opacity:1}
 .g-body{display:none}
+.g-rival{position:absolute;bottom:0;transform:translateX(-50%);height:100%;pointer-events:none}
+.g-rival .mk{position:absolute;left:50%;bottom:25px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#8DA2B8}
+.g-rival .pr,.g-rival .nm{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;color:#9FB3C8}
+.g-rival .pr{bottom:-24px;font:700 22px/1 var(--serif);letter-spacing:-.03em}
+.g-rival .nm{bottom:-42px;font:400 13px/1 var(--sans)}
+.g-compare{max-width:68ch;margin:60px 0 0 auto;font:400 15px/1.55 var(--sans);color:#C9DCEA}
+.g-compare b{color:#fff;font-weight:700}
+.g-compare span{display:block;margin-top:6px;font-size:13px;opacity:.75}
 .g-panel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start;gap:clamp(24px,5vw,80px);margin-top:48px;padding-top:36px;border-top:1px solid rgba(169,217,236,.3);min-height:260px}
 .g-panel h3{font:700 clamp(32px,3.2vw,48px)/1 var(--serif);letter-spacing:-.035em;margin-bottom:12px}
 .g-panel .who{font-size:19px;color:#C9DCEA;margin-bottom:22px}
@@ -430,6 +438,8 @@ td.n,th.n{text-align:right;white-space:nowrap}
   .g-body li{padding:8px 0 8px 22px;position:relative;font-size:16px;line-height:1.4;border-bottom:1px solid rgba(169,217,236,.15)}
   .g-body li::before{content:"";position:absolute;left:0;top:16px;width:9px;height:2px;background:var(--glacier)}
   .g-panel{display:none}
+  .g-rival{display:none}
+  .g-compare{margin:22px 0 0;font-size:15px}
 }
 @media (max-width:560px){
   .form .row{grid-template-columns:1fr}
