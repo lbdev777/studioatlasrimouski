@@ -20,6 +20,8 @@
     { "binding": "DB", "database_name": "atlas-admin", "database_id": "387f602d-53a0-405e-914e-20c073c457e0" }
   ],
   // Photos des sites d'exemple : générées une fois par IA, gardées dans KV, servies sous /img/.
+  // Service Images de Cloudflare : réduit les photos une seule fois (forfait Images gratuit, 5 000 transformations par mois).
+  "images": { "binding": "IMG" },
   "kv_namespaces": [
     { "binding": "IMAGES", "id": "5871ec73251c47649a8e8aea64b5ac84" }
   ],

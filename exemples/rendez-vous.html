@@ -107,7 +107,7 @@
   .gal .ph-img{height:100%}
 </style>
 <script>
-function ph(src,alt,ratio,extra){ return '<img class="ph-img" src="/img/'+src+'" alt="'+(alt||'').replace(/"/g,'')+'" loading="lazy" decoding="async" style="'+(ratio?'aspect-ratio:'+ratio+';':'')+(extra||'')+'">'; }
+function ph(src,alt,ratio,extra){ var b='/img/'+src+'?w=', g=/hero|story|\/s-|gal-facade/.test(src); return '<img class="ph-img" src="'+b+'960" srcset="'+b+'480 480w, '+b+'960 960w'+(g?', '+b+'1600 1600w':'')+'" sizes="'+(g?'(max-width:760px) 94vw, 55vw':'(max-width:760px) 94vw, 380px')+'" alt="'+(alt||'').replace(/"/g,'')+'" loading="lazy" decoding="async" style="'+(ratio?'aspect-ratio:'+ratio+';':'')+(extra||'')+'">'; }
 if(window.self!==window.top)document.documentElement.classList.add("apercu")</script><style>.apercu .demo{display:none!important}.apercu body{overflow:hidden}</style>
 </head>
 <body>
@@ -125,7 +125,7 @@ if(window.self!==window.top)document.documentElement.classList.add("apercu")</sc
     <p class="lead">Un petit salon lumineux, à deux pas du fleuve. Demandez votre rendez-vous en ligne en une minute ; on vous rappelle dans la journée pour confirmer.</p>
     <div class="btns"><a class="b full" href="#rdv">Demander un rendez-vous</a><a class="b" href="#services">Voir les services</a></div>
   </div>
-  <div class="hero-art" role="img" aria-label="l'intérieur du salon, un fauteuil devant un miroir rond, une fenêtre sur le fleuve"><img class="ph-img" src="/img/salon/hero.jpg" alt="L'intérieur du salon, un fauteuil devant un miroir rond" loading="lazy" decoding="async" style="aspect-ratio:560/520;border-radius:inherit">
+  <div class="hero-art" role="img" aria-label="l'intérieur du salon, un fauteuil devant un miroir rond, une fenêtre sur le fleuve"><img class="ph-img" src="/img/salon/hero.jpg?w=960" srcset="/img/salon/hero.jpg?w=480 480w, /img/salon/hero.jpg?w=960 960w, /img/salon/hero.jpg?w=1600 1600w" sizes="(max-width:760px) 94vw, 55vw" alt="L'intérieur du salon, un fauteuil devant un miroir rond" loading="lazy" decoding="async" style="aspect-ratio:560/520;border-radius:inherit">
   </div>
 </div></div>
 
