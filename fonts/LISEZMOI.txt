@@ -1,0 +1,8 @@
+Polices du site Studio Atlas Rimouski
+
+atlas-serif-*.woff : sous-ensembles de TeX Gyre Schola (GUST e-foundry).
+atlas-sans-*.woff  : sous-ensembles de TeX Gyre Heros (GUST e-foundry).
+
+Fichiers modifiés (sous-ensemble de caractères latins, format WOFF) et renommés,
+distribués selon la GUST Font License (voir GUST-FONT-LICENSE.txt).
+Les polices originales : https://www.gust.org.pl/projects/e-foundry/tex-gyre
