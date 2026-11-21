@@ -17,133 +17,214 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://studioatlasrimouski.ca/">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Studio Atlas Rimouski", "url": "https://studioatlasrimouski.ca/", "image": "https://studioatlasrimouski.ca/og.png", "logo": "https://studioatlasrimouski.ca/favicon.svg", "description": "Studio web de Rimouski : sites sur mesure, adaptés au cellulaire et entretenus chaque mois, dès 30 $ par mois.", "email": "studioatlasrimouski@gmail.com", "areaServed": [{"@type": "City", "name": "Rimouski"}, {"@type": "AdministrativeArea", "name": "Bas-Saint-Laurent"}], "address": {"@type": "PostalAddress", "addressLocality": "Rimouski", "addressRegion": "QC", "addressCountry": "CA"}, "priceRange": "30 $ à 89 $ par mois", "knowsLanguage": "fr-CA"}</script>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
-<link rel="stylesheet" href="interactif.css">
+<meta name="theme-color" content="#A9D9EC">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/atlas-serif-bold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/atlas-serif-regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/atlas-sans-regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/atlas.css">
+<script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('loaded')},1800)</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<header class="top"><div class="w">
- <a class="mark" href="index.html"><b>Studio Atlas</b><span>Rimouski</span></a>
- <nav class="nav" aria-label="Menu principal"><a href="forfaits.html">Prix</a><a href="exemples/index.html">Exemples</a><a href="a-propos.html">À propos</a><a href="contact.html">Questions et contact</a></nav>
+<header class="hd"><div class="w">
+ <a class="mark" href="/" aria-label="Studio Atlas Rimouski, accueil"><b>Studio Atlas</b><span>Rimouski</span></a>
+ <nav class="nav" aria-label="Menu principal"><a href="/exemples/">Exemples</a><a href="/forfaits.html">Prix</a><a href="/a-propos.html">Le studio</a><a href="/contact.html">Contact</a><a class="btn btn-signal" href="#apercu">Aperçu gratuit</a></nav>
+ <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><i></i>Menu</button>
 </div></header>
+<div class="sheet" id="menu" aria-hidden="true">
+ <div class="sheet-top"><a class="mark" href="/"><b>Studio Atlas</b><span>Rimouski</span></a><button class="sheet-close" type="button">Fermer</button></div>
+ <nav aria-label="Menu"><a href="/">Accueil</a><a href="/exemples/">Exemples</a><a href="/forfaits.html">Prix</a><a href="/a-propos.html">Le studio</a><a href="/contact.html">Contact</a></nav>
+ <a class="btn btn-signal" href="#apercu">Recevoir mon aperçu gratuit</a>
+ <p class="sheet-foot">studioatlasrimouski@gmail.com<br>Rimouski, Bas-Saint-Laurent</p>
+</div>
 <main id="contenu">
-<section class="sec first"><div class="w hero">
- <div>
-  <h1>Des sites web pour les commerces de Rimouski.</h1>
-  <p class="lead">On conçoit votre site, on l'héberge et on le tient à jour. Quand votre horaire ou votre menu change, vous envoyez un texto et c'est fait en moins de 48 heures.</p>
-  <p class="muted">À partir de 30 $ par mois, avant taxes. Le prix et les conditions sont écrits dans un contrat qu'on vous explique avant de signer.</p>
-  <div class="acts"><a class="b" href="contact.html#contact">Demander un aperçu gratuit</a><a href="forfaits.html">Voir les prix</a></div>
- </div>
- <figure class="peek" style="margin:0;max-width:330px">
-  <div class="frame" data-w="390"><iframe src="exemples/professionnel.html" title="Site d'exemple du Bistro du Havre" loading="eager" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
-  <figcaption>Un de nos sites d'exemple : le Bistro du Havre, un resto fictif. <a href="exemples/professionnel.html">L'ouvrir</a></figcaption>
- </figure>
-</div></section>
-
-<section class="sec"><div class="w">
- <h2>Les changements se font par texto</h2>
- <p>Pas de mot de passe ni de tableau de bord à apprendre. Vous écrivez le changement comme vous le diriez à quelqu'un au comptoir, et on s'en occupe. Essayez-le ci-dessous avec un resto fictif.</p>
- <div class="ls">
-  <div class="ls-try" id="ls-try">
-   <p>Choisissez un changement :</p>
-   <div class="ls-chips">
-    <button type="button" data-k="ferme" aria-pressed="false">Fermer à 15 h vendredi</button>
-    <button type="button" data-k="plat" aria-pressed="false">Nouveau plat du jour</button>
-    <button type="button" data-k="promo" aria-pressed="false">Promo du soir</button>
-    <button type="button" data-k="lundi" aria-pressed="false">Fermé lundi</button>
+<section class="hero" aria-labelledby="h-hero">
+ <h1 class="sr" id="h-hero">Le plus beau site de la rue, pour les commerces de Rimouski</h1>
+ <div class="w hero-grid">
+  <p class="t ta" aria-hidden="true"><span>Le plus</span> <span>beau</span></p>
+  <div class="card">
+   <div class="screen" id="hero-card" data-sites="[{&quot;n&quot;: &quot;Bistro du Havre&quot;, &quot;k&quot;: &quot;un restaurant inventé&quot;, &quot;f&quot;: &quot;Professionnel&quot;, &quot;p&quot;: &quot;60 $&quot;, &quot;u&quot;: &quot;/exemples/professionnel.html&quot;}, {&quot;n&quot;: &quot;Salon Marée&quot;, &quot;k&quot;: &quot;un salon de coiffure inventé&quot;, &quot;f&quot;: &quot;Rendez-vous&quot;, &quot;p&quot;: &quot;45 $&quot;, &quot;u&quot;: &quot;/exemples/rendez-vous.html&quot;}, {&quot;n&quot;: &quot;Garage Boréal&quot;, &quot;k&quot;: &quot;un garage inventé&quot;, &quot;f&quot;: &quot;Essentiel&quot;, &quot;p&quot;: &quot;30 $&quot;, &quot;u&quot;: &quot;/exemples/essentiel.html&quot;}, {&quot;n&quot;: &quot;Atelier Fjord&quot;, &quot;k&quot;: &quot;une boutique inventée&quot;, &quot;f&quot;: &quot;Boutique&quot;, &quot;p&quot;: &quot;89 $&quot;, &quot;u&quot;: &quot;/exemples/boutique.html&quot;}, {&quot;n&quot;: &quot;Nordet Chauffage&quot;, &quot;k&quot;: &quot;une entreprise de services inventée&quot;, &quot;f&quot;: &quot;Entreprise&quot;, &quot;p&quot;: &quot;75 $&quot;, &quot;u&quot;: &quot;/exemples/entreprise.html&quot;}]">
+    <div class="frame" data-w="390"><iframe data-src="/exemples/professionnel.html" title="Site d'exemple : Bistro du Havre" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/rendez-vous.html" title="Site d'exemple : Salon Marée" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/essentiel.html" title="Site d'exemple : Garage Boréal" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/boutique.html" title="Site d'exemple : Atelier Fjord" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/entreprise.html" title="Site d'exemple : Nordet Chauffage" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div>
+    <a class="cover" href="/exemples/professionnel.html"></a>
    </div>
-   <form class="ls-form"><input type="text" maxlength="70" placeholder="Ou écrivez votre propre annonce" aria-label="Écrivez une annonce pour le site d'exemple"><button type="submit">Envoyer</button></form>
-   <div class="ls-chat" aria-live="polite"></div>
+   <div class="cap"><span id="hero-cap"><b>Bistro du Havre</b>, un restaurant inventé.</span>
+    <span class="cap-ctrl"><button type="button" id="hero-prev" aria-label="Exemple précédent"><svg viewBox="0 0 14 14"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><span id="hero-count">1 / 5</span><button type="button" id="hero-next" aria-label="Exemple suivant"><svg viewBox="0 0 14 14"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></span>
+   </div>
   </div>
-  <div class="ls-site" id="ls-stage">
-   <div class="ls-bar">bistroduhavre.ca</div>
-   <div class="ls-page">
-    <div class="ls-banner"></div>
-    <p class="ls-name">Bistro du Havre</p>
-    <p class="ls-sub">Cuisine du marché, vue sur le quai</p>
-    <div class="ls-special"></div>
-    <div class="ls-hours"><p class="ls-h">Horaire</p>
-     <div><span>Lundi au jeudi</span><span>11 h – 21 h</span></div>
-     <div class="ls-fri"><span>Vendredi</span><span class="ls-swap"><span class="old">11 h – 22 h</span><b class="new">11 h – 15 h</b></span></div>
-     <div><span>Samedi</span><span>16 h – 22 h</span></div>
-     <div><span>Dimanche</span><span>16 h – 20 h</span></div>
+  <p class="t tb" aria-hidden="true"><span>de la</span> <span>rue.</span></p>
+  <div class="lead">
+   <p>Studio Atlas conçoit, héberge et entretient les sites web des commerces de Rimouski et du Bas-Saint-Laurent. Quand votre horaire change, vous envoyez un texto et c'est réglé.</p>
+   <div class="acts"><a class="btn btn-signal" href="#apercu">Recevoir mon aperçu gratuit</a><a class="link" href="/forfaits.html">Voir les prix</a></div>
+  </div>
+  <div class="side">
+   <p class="price-tag"><b>30 $</b><span>par mois pour commencer, avant taxes. Contrat écrit d'avance.</span></p>
+   <p class="ticker">Les sites affichés sont des exemples. Les commerces sont inventés, les sites fonctionnent pour vrai.</p>
+  </div>
+ </div>
+</section>
+
+<section class="sec sec-ink" aria-labelledby="h-prix">
+ <div class="w">
+  <div class="intro" data-reveal><h2 class="h2" id="h-prix">Un site de ce calibre, à partir de 30 $ par mois.</h2>
+  <p>Pas de grosse facture au départ. L'abonnement comprend la conception, l'hébergement, la sécurité, les sauvegardes et vos changements par texto. Des frais de création se paient une seule fois.</p></div>
+  <div class="gauge" id="gauge" data-start="2">
+ <div class="g-axis"><span class="g-tick big" style="left:0%"><em>0 $</em></span><span class="g-tick" style="left:10%"></span><span class="g-tick" style="left:20%"></span><span class="g-tick" style="left:30%"></span><span class="g-tick" style="left:40%"></span><span class="g-tick big" style="left:50%"><em>50 $</em></span><span class="g-tick" style="left:60%"></span><span class="g-tick" style="left:70%"></span><span class="g-tick" style="left:80%"></span><span class="g-tick" style="left:90%"></span><span class="g-tick big" style="left:100%"><em>100 $</em></span><ul class="g-list"><li class="g-item" data-plan="Essentiel">
+   <button class="g-head" type="button" style="left:30%" aria-expanded="false"><span class="nm">Essentiel</span><span class="pr">30 $</span><span class="dot" aria-hidden="true"></span><span class="sr"> par mois</span></button>
+   <div class="g-body"><div class="gb-l"><h3>Essentiel, 30 $ par mois</h3><p class="who">Une belle page qui dit l'essentiel. Pour le garage, l'atelier, le dépanneur ou l'entrepreneur.</p><p class="g-meta">Création : 99 $, ou 0 $ si vous acceptez l'aperçu qu'on vous a préparé. En ligne en environ une semaine.</p><p class="g-links"><a class="link" href="/forfaits.html#detail-essentiel">Lire le détail</a><a class="link" href="/forfaits.html#calc">Calculer mon prix</a></p></div><div class="gb-r"><ul><li>Une page qui défile, jusqu'à 6 sections</li><li>Jusqu'à 15 photos</li><li>Horaire, carte, boutons Appeler et Itinéraire</li><li>2 changements par mois, par texto</li></ul></div></div>
+  </li><li class="g-item" data-plan="Rendez-vous">
+   <button class="g-head" type="button" style="left:45%" aria-expanded="false"><span class="nm">Rendez-vous</span><span class="pr">45 $</span><span class="dot" aria-hidden="true"></span><span class="sr"> par mois</span></button>
+   <div class="g-body"><div class="gb-l"><h3>Rendez-vous, 45 $ par mois</h3><p class="who">Vos clients demandent un rendez-vous en ligne, vous les rappelez. Pour le salon, la clinique ou l'esthéticienne.</p><p class="g-meta">Création : 149 $. En ligne en environ une semaine.</p><p class="g-links"><a class="link" href="/forfaits.html#detail-rendez-vous">Lire le détail</a><a class="link" href="/forfaits.html#calc">Calculer mon prix</a></p></div><div class="gb-r"><ul><li>Tout ce que comprend l'Essentiel</li><li>Jusqu'à 2 formulaires : rendez-vous, candidature ou soumission</li><li>Vos services et vos prix</li><li>Chaque demande par courriel et dans un tableau en ligne</li><li>3 changements par mois</li></ul></div></div>
+  </li><li class="g-item" data-plan="Professionnel">
+   <button class="g-head" type="button" style="left:60%" aria-expanded="false"><span class="nm">Professionnel</span><span class="pr">60 $</span><span class="dot" aria-hidden="true"></span><span class="sr"> par mois</span></button>
+   <div class="g-body"><div class="gb-l"><h3>Professionnel, 60 $ par mois</h3><p class="who">Un site de plusieurs pages qu'on explore. Le forfait des restaurants et des cafés.</p><p class="g-meta">Création : 199 $. En ligne en environ deux semaines.</p><p class="g-links"><a class="link" href="/forfaits.html#detail-professionnel">Lire le détail</a><a class="link" href="/forfaits.html#calc">Calculer mon prix</a></p></div><div class="gb-r"><ul><li>Jusqu'à 5 pages</li><li>Menu ou catalogue cliquable, jusqu'à 60 articles</li><li>Galerie avec agrandissement</li><li>Formulaire de contact et lien vers vos avis Google</li><li>4 changements et 1 heure d'ajouts par mois</li></ul></div></div>
+  </li><li class="g-item" data-plan="Entreprise">
+   <button class="g-head" type="button" style="left:75%" aria-expanded="false"><span class="nm">Entreprise</span><span class="pr">75 $</span><span class="dot" aria-hidden="true"></span><span class="sr"> par mois</span></button>
+   <div class="g-body"><div class="gb-l"><h3>Entreprise, 75 $ par mois</h3><p class="who">Plus de pages, en français et en anglais, avec vos nouvelles et vos promotions.</p><p class="g-meta">Création : 249 $. En ligne en environ trois semaines.</p><p class="g-links"><a class="link" href="/forfaits.html#detail-entreprise">Lire le détail</a><a class="link" href="/forfaits.html#calc">Calculer mon prix</a></p></div><div class="gb-r"><ul><li>Tout ce que comprend le Professionnel</li><li>Jusqu'à 10 pages et 150 articles</li><li>La version anglaise complète</li><li>Nouvelles, événements et promotions</li><li>10 changements et 2 heures d'ajouts par mois</li></ul></div></div>
+  </li><li class="g-item" data-plan="Boutique">
+   <button class="g-head" type="button" style="left:89%" aria-expanded="false"><span class="nm">Boutique</span><span class="pr">89 $</span><span class="dot" aria-hidden="true"></span><span class="sr"> par mois</span></button>
+   <div class="g-body"><div class="gb-l"><h3>Boutique, 89 $ par mois</h3><p class="who">Vendez en ligne : panier, paiement sécurisé et confirmation de commande.</p><p class="g-meta">Création : 349 $. Délai selon le nombre de produits.</p><p class="g-links"><a class="link" href="/forfaits.html#detail-boutique">Lire le détail</a><a class="link" href="/forfaits.html#calc">Calculer mon prix</a></p></div><div class="gb-r"><ul><li>Tout ce que comprend l'Entreprise</li><li>Jusqu'à 25 produits avec tailles et couleurs</li><li>Panier et paiement sécurisé</li><li>Pages Livraison et Retours</li><li>10 changements et 2 heures d'ajouts par mois</li></ul></div></div>
+  </li></ul></div>
+ <div class="g-panel" aria-live="polite"></div>
+</div>
+  <p class="coffee" data-reveal>L'Essentiel revient à environ 1 $ par jour, moins qu'un café. Payé à l'année, c'est 10 mois pour 12, et la création est offerte.</p>
+ </div>
+</section>
+
+<section class="sec" aria-labelledby="h-texto">
+ <div class="w">
+  <div class="intro" data-reveal><h2 class="h2" id="h-texto">Pour changer votre horaire, un texto suffit.</h2>
+  <p>Pas de mot de passe ni de tableau de bord à apprendre. Vous écrivez le changement comme vous le diriez au comptoir. C'est en ligne en moins de 48 heures, souvent le jour même.</p></div>
+  <div class="tx" data-reveal>
+   <div class="tx-chat">
+    <div class="tx-top"><i aria-hidden="true">a</i><div>Studio Atlas<small>Votre ligne texto</small></div></div>
+    <div class="ls-chat" aria-live="polite"></div>
+    <div class="ls-try" id="ls-try">
+     <div class="ls-chips" aria-label="Exemples de messages">
+      <button type="button" data-k="ferme" aria-pressed="false">Fermer à 15 h vendredi</button>
+      <button type="button" data-k="plat" aria-pressed="false">Nouveau plat du jour</button>
+      <button type="button" data-k="promo" aria-pressed="false">Promo du soir</button>
+      <button type="button" data-k="lundi" aria-pressed="false">Fermé lundi</button>
+     </div>
+     <form class="ls-form"><input type="text" maxlength="70" placeholder="Écrivez votre propre annonce" aria-label="Écrivez une annonce pour le site d'exemple"><button type="submit">Envoyer</button></form>
     </div>
-    <div class="ls-saved">Mis à jour</div>
+   </div>
+   <div class="tx-site" id="ls-stage">
+    <div class="tx-bar" aria-hidden="true"><i></i><i></i><i></i><span>bistroduhavre.ca</span></div>
+    <div class="ls-page">
+     <div class="ls-banner"></div>
+     <p class="ls-name">Bistro du Havre</p>
+     <p class="ls-sub">Cuisine du marché, vue sur le quai</p>
+     <div class="ls-special"></div>
+     <div class="ls-hours"><p class="ls-h">Horaire</p>
+      <div><span>Lundi au jeudi</span><span>11 h – 21 h</span></div>
+      <div class="ls-fri"><span>Vendredi</span><span class="ls-swap"><span class="old">11 h – 22 h</span><b class="new">11 h – 15 h</b></span></div>
+      <div><span>Samedi</span><span>16 h – 22 h</span></div>
+      <div><span>Dimanche</span><span>16 h – 20 h</span></div>
+     </div>
+     <div class="ls-saved">Mis à jour</div>
+    </div>
    </div>
   </div>
+  <p class="tx-note">Démonstration avec un commerce inventé. Choisissez un message ou écrivez le vôtre.</p>
  </div>
- <p class="small muted" style="margin-top:12px">Dans la vraie vie, le changement est fait en moins de 48 heures, souvent le jour même.</p>
-</div></section>
+</section>
 
-<section class="sec"><div class="w">
- <h2>Les prix</h2>
- <p>Un abonnement par mois qui comprend l'hébergement, la sécurité, les sauvegardes et vos changements par texto. Des frais de création se paient une fois au départ.</p>
- <div class="tbl"><table>
-  <thead><tr><th>Forfait</th><th>Pour qui</th><th class="n">Par mois</th><th class="n">Création</th></tr></thead>
-  <tbody>
-   <tr><td><a href="forfaits.html#detail-essentiel">Essentiel</a></td><td>Une belle page : horaire, photos, bouton pour appeler</td><td class="n">30 $</td><td class="n">99 $</td></tr>
-   <tr><td><a href="forfaits.html#detail-rendez-vous">Rendez-vous</a></td><td>Vos clients demandent un rendez-vous en ligne</td><td class="n">45 $</td><td class="n">149 $</td></tr>
-   <tr><td><a href="forfaits.html#detail-professionnel">Professionnel</a></td><td>Restos et cafés : menu cliquable, galerie, jusqu'à 5 pages</td><td class="n">60 $</td><td class="n">199 $</td></tr>
-   <tr><td><a href="forfaits.html#detail-entreprise">Entreprise</a></td><td>Jusqu'à 10 pages, en français et en anglais</td><td class="n">75 $</td><td class="n">249 $</td></tr>
-   <tr><td><a href="forfaits.html#detail-boutique">Boutique</a></td><td>Vente en ligne, jusqu'à 25 produits</td><td class="n">89 $</td><td class="n">349 $</td></tr>
-  </tbody>
- </table></div>
- <p>L'Essentiel revient à 1 $ par jour, moins qu'un café. Payé à l'année, c'est 10 mois pour 12 et la création est offerte.</p>
- <p><a href="forfaits.html#calc">Calculer votre prix</a> ou <a href="forfaits.html">lire le détail de chaque forfait</a>.</p>
-</div></section>
-
-<section class="sec"><div class="w">
- <h2>Des exemples selon votre commerce</h2>
- <p>Ces sites sont des exemples, avec des commerces inventés. Ils fonctionnent pour vrai : vous pouvez cliquer partout.</p>
- <div id="pick">
-  <div class="pick-chips" role="tablist" aria-label="Votre type de commerce">
-   <button type="button" role="tab" data-ex="resto" aria-selected="true">Resto ou café</button>
-   <button type="button" role="tab" data-ex="salon" aria-selected="false">Salon ou clinique</button>
-   <button type="button" role="tab" data-ex="garage" aria-selected="false">Garage ou atelier</button>
-   <button type="button" role="tab" data-ex="boutique" aria-selected="false">Boutique</button>
-   <button type="button" role="tab" data-ex="services" aria-selected="false">Entrepreneur</button>
-  </div>
-  <div class="pick-body" role="tabpanel">
-   <div class="peek pick-phone"><div class="frame" data-w="390"><iframe id="pick-frame" src="exemples/professionnel.html" title="Aperçu du site d'exemple" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div></div>
-   <div class="pick-info" aria-live="polite">
-    <p class="pick-tag">Professionnel : 60 $ par mois</p>
-    <h3>Bistro du Havre</h3>
-    <p class="pick-desc">Un site qu'on explore, pensé pour donner faim avant même d'arriver.</p>
-    <ul><li>Menu cliquable avec photos</li><li>Galerie et horaire toujours à jour</li><li>Jusqu'à 5 pages</li></ul>
-    <p class="muted pick-dayv">Environ 2 $ par jour.</p>
-    <div class="acts"><a class="b alt pick-go" href="exemples/professionnel.html">Ouvrir l'exemple</a><a href="exemples/index.html">Voir les 5 exemples</a></div>
-   </div>
-  </div>
+<section class="sec sec-mist" aria-labelledby="h-ex">
+ <div class="w">
+  <div class="intro" data-reveal><h2 class="h2" id="h-ex">Cinq sites d'exemple, un pour chaque forfait.</h2>
+  <p>Les commerces sont inventés, mais les sites fonctionnent pour vrai : menus, formulaires, langues et panier. Survolez un nom pour voir le site, cliquez pour l'essayer.</p></div>
+  <div class="ix" id="ix">
+ <ul class="ix-list"><li data-cap="Bistro du Havre, un restaurant inventé. Forfait Professionnel." data-url="bistroduhavre.ca"><a class="ix-row" href="/exemples/professionnel.html"><span><span class="n">Bistro du Havre</span><span class="k">Restaurant</span></span><span class="p">60 $ / mois<small>Professionnel</small></span></a></li><li data-cap="Salon Marée, un salon de coiffure inventé. Forfait Rendez-vous." data-url="salonmaree.ca"><a class="ix-row" href="/exemples/rendez-vous.html"><span><span class="n">Salon Marée</span><span class="k">Salon de coiffure</span></span><span class="p">45 $ / mois<small>Rendez-vous</small></span></a></li><li data-cap="Garage Boréal, un garage inventé. Forfait Essentiel." data-url="garageboreal.ca"><a class="ix-row" href="/exemples/essentiel.html"><span><span class="n">Garage Boréal</span><span class="k">Garage</span></span><span class="p">30 $ / mois<small>Essentiel</small></span></a></li><li data-cap="Atelier Fjord, une boutique inventée. Forfait Boutique." data-url="atelierfjord.ca"><a class="ix-row" href="/exemples/boutique.html"><span><span class="n">Atelier Fjord</span><span class="k">Boutique d'artisan</span></span><span class="p">89 $ / mois<small>Boutique</small></span></a></li><li data-cap="Nordet Chauffage, une entreprise de services inventée. Forfait Entreprise." data-url="nordetchauffage.ca"><a class="ix-row" href="/exemples/entreprise.html"><span><span class="n">Nordet Chauffage</span><span class="k">Entreprise de services</span></span><span class="p">75 $ / mois<small>Entreprise</small></span></a></li></ul>
+ <div class="ix-view" aria-hidden="true">
+  <div class="screen"><div class="bar"><i></i><i></i><i></i><span class="ix-url">bistroduhavre.ca</span></div><div class="frame" data-w="1280"><iframe data-src="/exemples/professionnel.html" title="Aperçu : Bistro du Havre" tabindex="-1" aria-hidden="true" scrolling="no" class=on></iframe><iframe data-src="/exemples/rendez-vous.html" title="Aperçu : Salon Marée" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/essentiel.html" title="Aperçu : Garage Boréal" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/boutique.html" title="Aperçu : Atelier Fjord" tabindex="-1" aria-hidden="true" scrolling="no"></iframe><iframe data-src="/exemples/entreprise.html" title="Aperçu : Nordet Chauffage" tabindex="-1" aria-hidden="true" scrolling="no"></iframe></div></div>
+  <p class="cap ix-cap"></p>
  </div>
-</div></section>
+</div>
+ </div>
+</section>
 
-<section class="sec"><div class="w two">
- <div>
-  <h2>Comment ça se passe</h2>
-  <ol>
-   <li><b>On se parle</b> 30 minutes, gratuitement, pour comprendre votre commerce.</li>
-   <li><b>Vous voyez votre site</b> avant de payer, avec votre nom et vos photos. Deux rondes de révisions sont comprises.</li>
-   <li><b>On le met en ligne</b> quand vous êtes satisfait, jamais avant.</li>
-   <li><b>On s'en occupe</b> chaque mois : sécurité, sauvegardes et vos changements par texto.</li>
+<section class="sec" aria-labelledby="h-etapes">
+ <div class="w">
+  <div class="intro" data-reveal><h2 class="h2" id="h-etapes">De la première conversation à la mise en ligne.</h2>
+  <p>Vous voyez votre site avant de payer. Rien n'est publié sans votre accord.</p></div>
+  <ol class="steps" data-reveal>
+   <li><span class="when">Jour 1</span><h3>On se parle</h3><p>30 minutes, gratuitement, pour comprendre votre commerce et vos clients.</p></li>
+   <li><span class="when">Environ une semaine</span><h3>Vous voyez votre site</h3><p>Un aperçu avec votre nom, vos photos et votre horaire. Deux rondes de révisions sont comprises.</p></li>
+   <li><span class="when">Quand vous êtes satisfait</span><h3>On le met en ligne</h3><p>Sur votre adresse, sécurisé en HTTPS. Le reste du mois est offert.</p></li>
+   <li><span class="when">Chaque mois</span><h3>On s'en occupe</h3><p>Hébergement, sécurité, sauvegardes et vos changements par texto, faits en moins de 48 heures.</p></li>
   </ol>
  </div>
- <div>
-  <h2>L'aperçu gratuit</h2>
-  <p>On prépare une première version de votre site avec votre nom, vos photos et votre horaire. S'il vous plaît, il peut être en ligne la même semaine. Sinon, on l'efface et vous ne devez rien.</p>
-  <a class="b" href="contact.html#contact">Demander mon aperçu</a>
+</section>
+
+<section class="sec sec-mist" aria-labelledby="h-contrat">
+ <div class="w ct">
+  <div data-reveal><h2 class="h2" id="h-contrat">Tout est écrit d'avance.</h2>
+  <p style="font-size:20px;margin-top:24px;max-width:26em">Avant de signer, on passe le contrat avec vous, point par point, et vous en gardez une copie. Voici ce qu'il contient.</p></div>
+  <div class="doc" data-reveal>
+   <div class="doc-h"><b>Ce que dit votre contrat</b><span>En résumé</span></div>
+   <ol>
+    <li><div><b>Le prix</b><span>Votre abonnement par mois et vos frais de création, avant taxes.</span></div></li>
+    <li><div><b>Ce qui est compris</b><span>Conception, hébergement, certificat HTTPS, sauvegardes, mises à jour de sécurité, deux rondes de révisions et votre ligne texto.</span></div></li>
+    <li><div><b>Vos changements</b><span>De 2 à 10 mises à jour par mois selon le forfait, faites en moins de 48 heures.</span></div></li>
+    <li><div><b>Votre domaine</b><span>Si vous l'achetez, il est à vous. Avec l'option clé en main (+4 $ par mois), il reste à Studio Atlas, et vous pouvez le racheter pour 50 $ si vous partez.</span></div></li>
+    <li><div><b>Le site est loué</b><span>Le design et le code restent à Studio Atlas. À l'annulation, le site est mis hors ligne à la fin de la période payée, et vos textes et vos photos vous sont renvoyés sur demande.</span></div></li>
+    <li><div><b>L'annulation</b><span>Les conditions sont écrites dans le contrat et expliquées avant de signer.</span></div></li>
+   </ol>
+   <div class="sig"><div>Studio Atlas Rimouski</div><div>Votre commerce</div></div>
+  </div>
  </div>
-</div></section>
+</section>
+
+<section class="horizon" aria-labelledby="h-studio">
+ <div class="hz-sky"><div class="w hz-top"><h2 class="h2" id="h-studio" data-reveal>Un studio de Rimouski, au bord du fleuve.</h2><svg class="hz-mark" viewBox="0 0 34 92" aria-hidden="true"><path d="M17 2 L24 9 H10 Z" fill="currentColor"/><rect x="11" y="9" width="12" height="11" fill="#fff"/><rect x="8" y="20" width="18" height="3" fill="currentColor"/><path d="M11 23 H23 L27 92 H7 Z" fill="#fff"/><path d="M10.4 38 H23.6 L24.2 48 H9.8 Z M9.2 62 H24.8 L25.4 72 H8.6 Z" fill="#C63D24"/></svg></div></div>
+ <div class="hz-water"><div class="w hz-bot"><svg class="hz-refl" viewBox="0 0 34 92" aria-hidden="true"><path d="M17 2 L24 9 H10 Z" fill="currentColor"/><rect x="11" y="9" width="12" height="11" fill="#fff"/><rect x="8" y="20" width="18" height="3" fill="currentColor"/><path d="M11 23 H23 L27 92 H7 Z" fill="#fff"/><path d="M10.4 38 H23.6 L24.2 48 H9.8 Z M9.2 62 H24.8 L25.4 72 H8.6 Z" fill="#C63D24"/></svg>
+  <p class="hz-left">Les sites sont conçus et entretenus à Rimouski, pour les commerces du Bas-Saint-Laurent.</p>
+  <div class="hz-card" data-reveal>
+   <p>Studio Atlas est un petit studio d'ici. La personne qui répond à vos textos est celle qui a construit votre site : pas de centre d'appels, pas de billet de soutien.</p>
+   <p>On commence à peine. Nos premières réalisations seront présentées ici, toujours avec la permission du client.</p>
+   <a class="link" href="/a-propos.html">Lire la suite</a>
+  </div>
+ </div></div>
+</section>
+
+<section class="sec" id="apercu" aria-labelledby="h-apercu">
+ <div class="w ask">
+  <div data-reveal>
+   <h2 class="h2" id="h-apercu">Recevez un aperçu de votre site, gratuitement.</h2>
+   <p style="font-size:20px">On prépare une première version avec votre nom, vos photos et votre horaire. Si elle vous plaît, on continue. Sinon, on l'efface et vous ne devez rien.</p>
+   <ul class="ask-points">
+    <li><b>Réponse en un jour ouvrable</b>Par la personne qui fera votre site.</li>
+    <li><b>Rien à préparer</b>Quelques mots sur votre commerce suffisent pour commencer.</li>
+    <li><b>Aucun paiement maintenant</b>Les frais de création se paient seulement à la signature.</li>
+   </ul>
+  </div>
+  <div data-reveal><form class="form contact-form" action="/api/contact" method="post">
+ <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Ne pas remplir<input type="text" name="site_web" tabindex="-1" autocomplete="off"></label></div>
+ <div class="row"><label>Votre nom<input type="text" name="nom" autocomplete="name" required></label><label>Votre commerce<input type="text" name="entreprise" autocomplete="organization"></label></div>
+ <div class="row"><label>Courriel<input type="email" name="courriel" autocomplete="email" required pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="Une adresse comme nom@exemple.com"></label><label>Téléphone (facultatif)<input type="tel" name="telephone" autocomplete="tel"></label></div>
+ <label>Votre commerce en quelques mots<textarea name="message" rows="5" required placeholder="Ce que vous faites, où vous êtes, ce que vous aimeriez sur votre site."></textarea></label>
+ <input type="hidden" name="duree" value="">
+ <label class="check"><input type="checkbox" name="infolettre" value="oui">J'accepte de recevoir l'infolettre de Studio Atlas Rimouski. C'est facultatif, et on se désabonne en un clic.</label>
+ <div class="send"><button class="btn btn-signal" type="submit">Envoyer ma demande</button><p class="fine">Vos renseignements servent seulement à vous répondre.</p></div>
+ <p class="status" role="status" hidden></p>
+</form></div>
+ </div>
+</section>
 
 </main>
-<footer class="foot"><div class="w">
- <div><p>Studio Atlas Rimouski, studio web à Rimouski (Québec).</p><p>studioatlasrimouski@gmail.com</p></div>
- <div><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p><p><a href="contact.html#contact">Annuler mon abonnement</a></p></div>
-</div></footer>
+<footer class="ft">
+ <div class="w ft-top">
+  <div><p class="ft-big">Voyez votre site avant de payer quoi que ce soit.</p><a class="btn btn-signal" href="#apercu">Recevoir mon aperçu gratuit</a></div>
+  <div><h4>Le site</h4><ul><li><a href="/exemples/">Exemples</a></li><li><a href="/forfaits.html">Prix</a></li><li><a href="/a-propos.html">Le studio</a></li><li><a href="/contact.html">Questions et contact</a></li></ul></div>
+  <div><h4>Nous joindre</h4><ul><li>studioatlasrimouski@gmail.com</li><li><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></li><li>Rimouski (Québec)</li></ul></div>
+  <div><h4>Déjà client</h4><ul><li>Changements : par texto</li><li><a href="/contact.html#apercu">Annuler mon abonnement</a></li></ul></div>
+ </div>
+ <div class="w"><div class="ft-line"></div></div>
+ <div class="w ft-bot"><span>Studio Atlas Rimouski, studio web à Rimouski, Bas-Saint-Laurent.</span><span>Tous les prix sont avant taxes.</span></div>
+</footer>
+<div class="dock"><p><b>Votre site, avant de payer</b>Aperçu gratuit, dès 30 $ par mois</p><a class="btn btn-signal" href="#apercu">Mon aperçu</a></div>
 <script src="/stats.js" defer></script>
-<script src="interactif.js" defer></script>
-
+<script src="/atlas.js" defer></script>
 </body>
 </html>

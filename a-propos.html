@@ -16,52 +16,80 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://studioatlasrimouski.ca/a-propos.html">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
-<link rel="stylesheet" href="interactif.css">
+<meta name="theme-color" content="#A9D9EC">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/atlas-serif-bold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/atlas-serif-regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/atlas-sans-regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/atlas.css">
+<script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('loaded')},1800)</script>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<header class="top"><div class="w">
- <a class="mark" href="index.html"><b>Studio Atlas</b><span>Rimouski</span></a>
- <nav class="nav" aria-label="Menu principal"><a href="forfaits.html">Prix</a><a href="exemples/index.html">Exemples</a><a href="a-propos.html" aria-current=page>À propos</a><a href="contact.html">Questions et contact</a></nav>
+<header class="hd"><div class="w">
+ <a class="mark" href="/" aria-label="Studio Atlas Rimouski, accueil"><b>Studio Atlas</b><span>Rimouski</span></a>
+ <nav class="nav" aria-label="Menu principal"><a href="/exemples/">Exemples</a><a href="/forfaits.html">Prix</a><a href="/a-propos.html" aria-current=page>Le studio</a><a href="/contact.html">Contact</a><a class="btn btn-signal" href="/contact.html#apercu">Aperçu gratuit</a></nav>
+ <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><i></i>Menu</button>
 </div></header>
+<div class="sheet" id="menu" aria-hidden="true">
+ <div class="sheet-top"><a class="mark" href="/"><b>Studio Atlas</b><span>Rimouski</span></a><button class="sheet-close" type="button">Fermer</button></div>
+ <nav aria-label="Menu"><a href="/">Accueil</a><a href="/exemples/">Exemples</a><a href="/forfaits.html">Prix</a><a href="/a-propos.html">Le studio</a><a href="/contact.html">Contact</a></nav>
+ <a class="btn btn-signal" href="/contact.html#apercu">Recevoir mon aperçu gratuit</a>
+ <p class="sheet-foot">studioatlasrimouski@gmail.com<br>Rimouski, Bas-Saint-Laurent</p>
+</div>
 <main id="contenu">
-<section class="sec first"><div class="w two">
- <div>
-  <h1>À propos</h1>
-  <p class="lead">Studio Atlas Rimouski conçoit des sites web pour les commerces, les PME et les travailleurs autonomes de la région, puis les entretient chaque mois.</p>
-  <p>Le studio est petit et c'est voulu : la personne qui répond à vos textos est celle qui a construit votre site. Pas de centre d'appels, pas de billet de soutien.</p>
-  <p>On commence à peine. Nos premières réalisations seront présentées ici, toujours avec la permission du client. En attendant, vous pouvez essayer <a href="exemples/index.html">nos sites d'exemple</a>.</p>
+<section class="ph"><div class="w">
+ <h1>Un petit studio, à Rimouski.</h1>
+ <p>Studio Atlas conçoit des sites web pour les commerces, les PME et les travailleurs autonomes du Bas-Saint-Laurent, puis les entretient chaque mois.</p>
+</div></section>
+<section class="sec"><div class="w split">
+ <div data-reveal>
+  <h2 class="h3" style="margin-bottom:20px">Pourquoi un studio si petit</h2>
+  <p>La personne qui répond à vos textos est celle qui a construit votre site. Pas de centre d'appels, pas de billet de soutien.</p>
+  <p>Un site abordable ne devrait pas avoir l'air bon marché. C'est pour ça que les sites sont loués au mois : vous avez un site soigné dès le départ, sans grosse facture, et il reste à jour.</p>
+  <p>On commence à peine. Nos premières réalisations seront présentées ici, toujours avec la permission du client. En attendant, vous pouvez essayer <a href="/exemples/">nos sites d'exemple</a>.</p>
  </div>
- <div>
-  <h2>Ce qu'on promet</h2>
-  <ul>
+ <div data-reveal>
+  <h2 class="h3" style="margin-bottom:14px">Ce qu'on promet</h2>
+  <ul class="ask-points" style="margin-top:0">
    <li>Un design qui part de votre commerce : vos couleurs, vos photos, vos mots.</li>
    <li>Un site pensé d'abord pour le cellulaire.</li>
    <li>Une réponse en un jour ouvrable.</li>
    <li>Des prix écrits d'avance.</li>
   </ul>
-  <h2>Ce qu'on ne fera jamais</h2>
-  <ul>
+  <h2 class="h3" style="margin:36px 0 14px">Ce qu'on ne fera jamais</h2>
+  <ul class="ask-points" style="margin-top:0">
    <li>Mettre de faux avis ou de fausses statistiques sur votre site.</li>
    <li>Présenter des photos de banque d'images comme si c'était votre commerce.</li>
    <li>Recycler le même modèle avec un autre logo.</li>
    <li>Cacher une règle : ce qui arrive à votre domaine si vous partez est écrit d'avance.</li>
   </ul>
-  <a class="b" href="contact.html#contact">Demander un aperçu gratuit</a>
  </div>
 </div></section>
+<section class="horizon" aria-labelledby="h-studio">
+ <div class="hz-sky"><div class="w hz-top"><h2 class="h2" id="h-studio" data-reveal>Fait ici, au bord du fleuve.</h2><svg class="hz-mark" viewBox="0 0 34 92" aria-hidden="true"><path d="M17 2 L24 9 H10 Z" fill="currentColor"/><rect x="11" y="9" width="12" height="11" fill="#fff"/><rect x="8" y="20" width="18" height="3" fill="currentColor"/><path d="M11 23 H23 L27 92 H7 Z" fill="#fff"/><path d="M10.4 38 H23.6 L24.2 48 H9.8 Z M9.2 62 H24.8 L25.4 72 H8.6 Z" fill="#C63D24"/></svg></div></div>
+ <div class="hz-water"><div class="w hz-bot"><svg class="hz-refl" viewBox="0 0 34 92" aria-hidden="true"><path d="M17 2 L24 9 H10 Z" fill="currentColor"/><rect x="11" y="9" width="12" height="11" fill="#fff"/><rect x="8" y="20" width="18" height="3" fill="currentColor"/><path d="M11 23 H23 L27 92 H7 Z" fill="#fff"/><path d="M10.4 38 H23.6 L24.2 48 H9.8 Z M9.2 62 H24.8 L25.4 72 H8.6 Z" fill="#C63D24"/></svg>
+  <p class="hz-left">Studio Atlas Rimouski, studio web du Bas-Saint-Laurent.</p>
+  <div class="hz-card" data-reveal>
+   <p>Le plus simple pour commencer : demandez un aperçu. On prépare une première version de votre site avec votre nom, vos photos et votre horaire, et vous décidez ensuite.</p>
+   <a class="btn btn-signal" href="/contact.html#apercu">Recevoir mon aperçu gratuit</a>
+  </div>
+ </div></div>
+</section>
 
 </main>
-<footer class="foot"><div class="w">
- <div><p>Studio Atlas Rimouski, studio web à Rimouski (Québec).</p><p>studioatlasrimouski@gmail.com</p></div>
- <div><p><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></p><p><a href="contact.html#contact">Annuler mon abonnement</a></p></div>
-</div></footer>
+<footer class="ft">
+ <div class="w ft-top">
+  <div><p class="ft-big">Voyez votre site avant de payer quoi que ce soit.</p><a class="btn btn-signal" href="/contact.html#apercu">Recevoir mon aperçu gratuit</a></div>
+  <div><h4>Le site</h4><ul><li><a href="/exemples/">Exemples</a></li><li><a href="/forfaits.html">Prix</a></li><li><a href="/a-propos.html">Le studio</a></li><li><a href="/contact.html">Questions et contact</a></li></ul></div>
+  <div><h4>Nous joindre</h4><ul><li>studioatlasrimouski@gmail.com</li><li><a href="https://www.facebook.com/profile.php?id=61593451400932">Facebook</a></li><li>Rimouski (Québec)</li></ul></div>
+  <div><h4>Déjà client</h4><ul><li>Changements : par texto</li><li><a href="/contact.html#apercu">Annuler mon abonnement</a></li></ul></div>
+ </div>
+ <div class="w"><div class="ft-line"></div></div>
+ <div class="w ft-bot"><span>Studio Atlas Rimouski, studio web à Rimouski, Bas-Saint-Laurent.</span><span>Tous les prix sont avant taxes.</span></div>
+</footer>
+<div class="dock"><p><b>Votre site, avant de payer</b>Aperçu gratuit, dès 30 $ par mois</p><a class="btn btn-signal" href="/contact.html#apercu">Mon aperçu</a></div>
 <script src="/stats.js" defer></script>
-<script src="interactif.js" defer></script>
-
+<script src="/atlas.js" defer></script>
 </body>
 </html>
