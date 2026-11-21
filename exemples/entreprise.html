@@ -69,11 +69,15 @@
   footer{background:var(--navy);color:#C7D2E3;font-size:14px;padding:32px 0;margin-top:40px}
   footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
   footer a{color:#fff}
+
+  .ph-img{display:block;width:100%;height:auto;object-fit:cover;background:#E8E2D8}
+  .gal .ph-img{height:100%}
+  .proj .ph-img{aspect-ratio:16/10}
 </style>
 <script>if(window.self!==window.top)document.documentElement.classList.add("apercu")</script><style>.apercu .demo{display:none!important}.apercu body{overflow:hidden}</style>
 </head>
 <body>
-<div class="demo"><span data-i="demo">Exemple fictif du forfait <strong>Entreprise · 75 $/mois</strong> — plusieurs pages, bilingue, nouvelles et carrières.</span> <a href="index.html" data-i="demoOthers">Voir les autres exemples</a> <a href="../forfaits.html" data-i="demoPlans">Voir les forfaits</a></div>
+<div class="demo"><span data-i="demo">Exemple fictif du forfait <strong>Entreprise · 75 $/mois</strong> — plusieurs pages, bilingue, nouvelles et carrières.</span> <span>Photos générées par IA pour l'exemple.</span> <a href="index.html" data-i="demoOthers">Voir les autres exemples</a> <a href="../forfaits.html" data-i="demoPlans">Voir les forfaits</a></div>
 <div class="top"><div class="wrap"><span data-i="topLeft">Urgences 24/7 · 418 555-0177</span><span data-i="topRight">Service au Bas-Saint-Laurent</span></div></div>
 <header><div class="wrap">
   <a class="logo" href="#accueil"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#13294B"/><path d="M8 22 Q17 6 26 22" stroke="#F2A541" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="17" cy="23" r="3.5" fill="#fff"/></svg>Nordet</a>
@@ -93,7 +97,7 @@
         <div class="urg"><span data-i="urgTag">URGENCE</span><span data-i="urgTxt">Bris de tuyau ou pas de chauffage ? Appelez, jour et nuit.</span></div>
       </div>
       <div aria-hidden="true" style="flex:0 1 360px">
-        <svg viewBox="0 0 360 300" style="width:100%;height:auto"><rect x="30" y="40" width="300" height="220" rx="20" fill="#fff"/><path d="M70 220 L70 120 Q70 90 100 90 L260 90" stroke="#13294B" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M260 90 L260 180" stroke="#13294B" stroke-width="18" stroke-linecap="round"/><circle cx="260" cy="200" r="22" fill="#F2A541"/><rect x="140" y="150" width="70" height="70" rx="10" fill="#1F4E8C"/><path d="M160 200 Q175 165 190 200" stroke="#F2A541" stroke-width="6" fill="none"/></svg>
+        <img class="ph-img" src="/img/nordet/hero.jpg" alt="Une thermopompe installée près d’une maison, en hiver" loading="lazy" decoding="async" style="aspect-ratio:360/300;border-radius:20px">
       </div>
     </div></div>
     <section class="pad"><div class="wrap">
@@ -119,9 +123,9 @@
   <section class="page pad" id="p-realisations"><div class="wrap">
     <h2 data-i="nProj">Réalisations</h2>
     <div class="proj">
-      <figure><div class="ph" data-i="ph">Ici : la vraie photo du chantier</div><figcaption><h3 data-i="r1t">Thermopompe, maison de 1950</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r1p">Remplacement d'une fournaise au mazout.</p></figcaption></figure>
-      <figure><div class="ph" data-i="ph">Ici : la vraie photo du chantier</div><figcaption><h3 data-i="r2t">Salle de bain complète</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r2p">Plomberie neuve et douche sans seuil.</p></figcaption></figure>
-      <figure><div class="ph" data-i="ph">Ici : la vraie photo du chantier</div><figcaption><h3 data-i="r3t">Immeuble de 6 logements</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r3p">Chauffe-eau et contrat d'entretien.</p></figcaption></figure>
+      <figure><img class="ph-img" src="/img/nordet/r1.jpg" alt="Thermopompe, maison de 1950" loading="lazy" decoding="async" style="aspect-ratio:16/10;"><figcaption><h3 data-i="r1t">Thermopompe, maison de 1950</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r1p">Remplacement d'une fournaise au mazout.</p></figcaption></figure>
+      <figure><img class="ph-img" src="/img/nordet/r2.jpg" alt="Salle de bain complète" loading="lazy" decoding="async" style="aspect-ratio:16/10;"><figcaption><h3 data-i="r2t">Salle de bain complète</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r2p">Plomberie neuve et douche sans seuil.</p></figcaption></figure>
+      <figure><img class="ph-img" src="/img/nordet/r3.jpg" alt="Immeuble de 6 logements" loading="lazy" decoding="async" style="aspect-ratio:16/10;"><figcaption><h3 data-i="r3t">Immeuble de 6 logements</h3><p class="lead" style="margin-top:6px;font-size:16px" data-i="r3p">Chauffe-eau et contrat d'entretien.</p></figcaption></figure>
     </div>
   </div></section>
 

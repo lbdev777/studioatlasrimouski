@@ -162,11 +162,19 @@
   .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:14px 20px;font-size:14px;z-index:60;opacity:0;transition:.3s;pointer-events:none;max-width:90vw}
   .toast.on{opacity:1;transform:translate(-50%,0)}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+  .ph-img{display:block;width:100%;height:auto;object-fit:cover;background:#E8E2D8}
+  .gal .ph-img{height:100%}
+  .p .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform .6s ease}
+  .thumbs .ph-img,.main .ph-img,.line .th .ph-img{width:100%;height:100%}
+  .thumbs button,.main,.line .th{overflow:hidden}
+  .hero-art .ph-img{position:absolute;inset:0;width:100%;height:100%}
+  .story-art .ph-img{width:100%;height:100%}
 </style>
 <script>if(window.self!==window.top)document.documentElement.classList.add("apercu")</script><style>.apercu .demo{display:none!important}.apercu body{overflow:hidden}</style>
 </head>
 <body>
-<div class="demo">Exemple fictif du forfait <strong>Boutique · 89 $/mois</strong> — produits, formats, panier et paiement. Produits et prix d'exemple. <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
+<div class="demo">Exemple fictif du forfait <strong>Boutique · 89 $/mois</strong> — produits, formats, panier et paiement. Produits et prix d'exemple. <span>Photos générées par IA pour l'exemple.</span> <a href="index.html">Voir les autres exemples</a> <a href="../forfaits.html">Voir les forfaits</a></div>
 <div class="ann">Cueillette gratuite à l'atelier · Livraison gratuite au Québec dès 75 $</div>
 
 <header>
@@ -347,7 +355,8 @@
     if(flowers){ s+='<path d="M200 130 Q190 70 160 40 M200 130 Q215 80 250 60 M200 130 Q200 80 205 30" stroke="#6F7B62" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="160" cy="40" r="10" fill="#C9A14A"/><circle cx="250" cy="60" r="9" fill="#C9A14A"/><circle cx="205" cy="30" r="8" fill="#E6D3A3"/>'; }
     return s;
   }
-  function svg(inner,cls){ return '<svg'+(cls?' class="'+cls+'"':'')+' viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+inner+'</svg>'; }
+  function ph(src,alt,ratio,extra){ return '<img class="ph-img" src="/img/'+src+'" alt="'+(alt||'').replace(/"/g,'')+'" loading="lazy" decoding="async" style="'+(ratio?'aspect-ratio:'+ratio+';':'')+(extra||'')+'">'; }
+  function svg(inner,cls){ if(String(inner).indexOf('<img')===0) return inner.replace('class="ph-img"','class="ph-img'+(cls?' '+cls:'')+'"'); return '<svg'+(cls?' class="'+cls+'"':'')+' viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+inner+'</svg>'; }
   function ext(o,k,v){ var r={}; for(var x in o) r[x]=o[x]; r[k]=v; return r; }
 
   var CARE_C='Coupez la mèche à 5 mm avant chaque utilisation. La première fois, laissez brûler jusqu’à ce que toute la surface soit fondue, environ 2 heures.';
@@ -388,15 +397,11 @@
   function byId(id){ return P.filter(function(p){return p.id===id})[0]; }
   function from(p){ return Math.min.apply(null,p.v.map(function(v){return v[2]})); }
   cart=cart.filter(function(l){ var a=String(l.k).split('|'), p=byId(a[0]); return p && p.v[+a[1]] && l.q>0; });
+  P.forEach(function(p){ p.art=function(k){ var z=k===1?'transform:scale(1.55);transform-origin:50% 42%':k===2?'transform:scale(1.22);transform-origin:38% 62%':''; return ph('fjord/p-'+p.id+'.jpg', p.name, '4/5', z); }; });
   var FREE=75, SHIPFEE=12, cat='Tout', sort='feat', query='';
 
-  $('heroArt').style.background=T.sky; $('heroArt').innerHTML='<svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice"><rect width="600" height="700" fill="'+T.sky+'"/><circle cx="440" cy="220" r="120" fill="'+T.sun+'"/><rect y="252" width="600" height="16" fill="'+T.sky+'"/><rect y="292" width="600" height="22" fill="'+T.sky+'"/><rect y="338" width="600" height="30" fill="'+T.sky+'"/><rect y="440" width="600" height="260" fill="'+T.floor+'"/><rect y="440" width="600" height="10" fill="'+T.edge+'"/>'+
-    '<g transform="translate(40 168) scale(.66)">'+jar(F,true,true)+'</g>'+
-    '<g transform="translate(220 212) scale(.58)">'+mug(TF,false,true)+'</g>'+
-    '<g transform="translate(360 160) scale(.68)">'+vase({glaze:'#FFFFFF'},true,true)+'</g></svg>';
-  $('storyArt').innerHTML='<svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice"><rect width="500" height="500" fill="'+T.story+'"/><rect y="330" width="500" height="170" fill="'+T.storyFloor+'"/>'+
-    [0,1,2,3].map(function(i){ var o={glass:'#FFFFFF',wax:'#FFF8EE',label:['#1F7A78','#C2452D','#6E5BB8','#F2B63A'][i],ink:'#FFFFFF',lid:'#14213D',scent:['Marée','Feu','Brume','Bois'][i],w:124}; return '<g transform="translate('+(26+i*112)+' 186) scale(.36)">'+jar(o,i%2===0,true)+'</g>'; }).join('')+
-    '<text x="40" y="440" font-family="Instrument Serif,serif" font-style="italic" font-size="30" fill="#E7E3D6">Lot n° 24 · au repos</text></svg>';
+  $('heroArt').style.background=T.sky; $('heroArt').innerHTML=ph('fjord/hero.jpg','Chandelles et céramiques sur une tablette près d’une fenêtre','6/7');
+  $('storyArt').innerHTML=ph('fjord/story.jpg','La table de l’atelier','1/1');
 
   ['Tout','Chandelles','Céramique','Coffrets'].forEach(function(c){ var b=document.createElement('button'); b.type='button'; b.textContent=c; b.setAttribute('aria-pressed',c===cat); b.onclick=function(){cat=c;[].forEach.call($('chips').children,function(x){x.setAttribute('aria-pressed',x.textContent===c)});draw();}; $('chips').appendChild(b); });
   $('sort').onchange=function(){sort=this.value;draw();};
