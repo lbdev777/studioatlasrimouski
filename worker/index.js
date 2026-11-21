@@ -78,11 +78,15 @@ export default {
         return wantsJson ? json({ ok: false, error: why }, 400)
                          : Response.redirect(url.origin + "/contact.html?erreur=1#contact", 303);
       }
+      // Filtre à pourriel : le message est gardé dans /admin (section Pourriel), mais aucun courriel n'est envoyé.
+      const raison = spamReason(clean, f);
       // Garde une copie dans le tableau de bord (/admin), même si le courriel échoue.
       try {
-        if (env.DB) await env.DB.prepare("INSERT INTO messages (ts, nom, entreprise, courriel, telephone, message, infolettre) VALUES (?,?,?,?,?,?,?)")
-          .bind(Date.now(), clean.nom, clean.entreprise, clean.courriel, clean.telephone, clean.message, clean.infolettre ? 1 : 0).run();
+        if (env.DB) await env.DB.prepare("INSERT INTO messages (ts, nom, entreprise, courriel, telephone, message, infolettre, spam, raison) VALUES (?,?,?,?,?,?,?,?,?)")
+          .bind(Date.now(), clean.nom, clean.entreprise, clean.courriel, clean.telephone, clean.message, clean.infolettre ? 1 : 0, raison ? 1 : 0, raison || null).run();
       } catch (e) { console.error("Enregistrement du message impossible", e); }
+      // Le robot reçoit la même réponse qu'une vraie personne, pour ne pas lui apprendre à contourner le filtre.
+      if (raison) return wantsJson ? json({ ok: true }) : Response.redirect(url.origin + "/contact.html?envoye=1#contact", 303);
       try { await sendContact(env, clean); }
       catch (e) {
         console.error("Envoi impossible", e);
@@ -95,3 +99,15 @@ export default {
     return env.ASSETS.fetch(request);
   },
 };
+
+// Reconnaît les messages publicitaires envoyés en masse par des robots.
+function spamReason(c, f) {
+  const duree = parseInt(f.duree, 10);
+  if (duree > 0 && duree < 3000) return "Formulaire rempli en moins de 3 secondes";
+  const t = [c.nom, c.entreprise, c.message].join(" ").toLowerCase();
+  if (/t\.me\/|telegram|wa\.me\/|whatsapp/.test(t)) return "Lien Telegram ou WhatsApp";
+  if ((t.match(/https?:\/\/|www\./g) || []).length >= 2) return "Plusieurs liens dans le message";
+  if (/[\u0400-\u04ff]{4,}/.test(t)) return "Texte en alphabet cyrillique";
+  if (/offres commerciales|via (un|les) formulaires? de contact|formulaires? de contact pour|millions? de messages|backlinks?|\bseo\b|crypto|bitcoin|casino|forex|viagra/.test(t)) return "Publicité envoyée en masse";
+  return "";
+}

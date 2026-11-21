@@ -133,7 +133,7 @@ const PAGE_NAMES = { "/": "Accueil", "/forfaits": "Forfaits", "/a-propos": "À p
 const pageName = (p) => PAGE_NAMES[p] || p;
 
 async function counts(env) {
-  const r = await env.DB.prepare("SELECT COUNT(*) AS n FROM messages WHERE traite = 0").first();
+  const r = await env.DB.prepare("SELECT COUNT(*) AS n FROM messages WHERE traite = 0 AND spam = 0").first();
   return { nouveaux: r?.n || 0 };
 }
 
@@ -190,7 +190,7 @@ async function home(env) {
     DB.prepare("SELECT appareil, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY appareil ORDER BY v DESC").bind(since7).all(),
     DB.prepare("SELECT ville, region, pays, COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY ville, region, pays ORDER BY v DESC LIMIT 8").bind(since7).all(),
     DB.prepare("SELECT COUNT(*) AS n, COALESCE(SUM(prix_mois),0) AS mrr FROM clients WHERE actif = 1").first(),
-    DB.prepare("SELECT * FROM messages ORDER BY ts DESC LIMIT 4").all(),
+    DB.prepare("SELECT * FROM messages WHERE spam = 0 ORDER BY ts DESC LIMIT 4").all(),
     DB.prepare("SELECT COUNT(DISTINCT visiteur) AS v FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0").bind(since7).first(),
     DB.prepare("SELECT type, label, COUNT(*) AS n, COUNT(DISTINCT visiteur) AS v FROM evenements WHERE jour >= ? AND moi = 0 AND robot = 0 GROUP BY type, label ORDER BY n DESC LIMIT 12").bind(since7).all(),
     DB.prepare("SELECT AVG(duree_ms) AS d, AVG(scroll) AS sc FROM visites WHERE jour >= ? AND moi = 0 AND robot = 0 AND duree_ms > 0").bind(since7).first(),
@@ -304,17 +304,26 @@ ${(actions.results || []).length ? `<table><tr><th>Action</th><th>Type</th><th s
 }
 
 async function messagesPage(env) {
-  const rows = (await env.DB.prepare("SELECT * FROM messages ORDER BY traite ASC, ts DESC LIMIT 200").all()).results || [];
+  const rows = (await env.DB.prepare("SELECT * FROM messages WHERE spam = 0 ORDER BY traite ASC, ts DESC LIMIT 200").all()).results || [];
+  const spam = (await env.DB.prepare("SELECT * FROM messages WHERE spam = 1 ORDER BY ts DESC LIMIT 200").all()).results || [];
   const c = await counts(env);
-  const body = `<div class="hd"><h1>Messages</h1><span class="sub">${num(c.nouveaux)} à traiter · reçus par le formulaire de contact</span></div>
-<section class="card">${rows.length ? rows.map((m) => `
+  const one = (m) => `
 <div class="msg${m.traite ? " done" : ""}">
-  <div><span class="who">${esc(m.nom)}</span>${m.entreprise ? ` · ${esc(m.entreprise)}` : ""} ${m.traite ? '<span class="tag ok">Traité</span>' : '<span class="tag">Nouveau</span>'}</div>
-  <div class="meta">${esc(dateHeure(m.ts))} · ${esc(m.courriel)}${m.telephone ? ` · ${esc(m.telephone)}` : ""}${m.infolettre ? " · veut l'infolettre" : ""}</div>
+  <div><span class="who">${esc(m.nom)}</span>${m.entreprise ? ` · ${esc(m.entreprise)}` : ""} ${m.spam ? `<span class="tag bot">Pourriel</span>` : m.traite ? '<span class="tag ok">Traité</span>' : '<span class="tag">Nouveau</span>'}</div>
+  <div class="meta">${esc(dateHeure(m.ts))} · ${esc(m.courriel)}${m.telephone ? ` · ${esc(m.telephone)}` : ""}${m.infolettre ? " · veut l'infolettre" : ""}${m.raison ? ` · <b>${esc(m.raison)}</b>` : ""}</div>
   <p>${esc(m.message)}</p>
-  <form class="inline" method="post" action="/admin/messages/${m.id}/${m.traite ? "rouvrir" : "traite"}"><button class="light" type="submit">${m.traite ? "Remettre à traiter" : "Marquer traité"}</button></form>
+  ${m.spam
+    ? `<form class="inline" method="post" action="/admin/messages/${m.id}/passpam"><button class="light" type="submit">Ce n'est pas du pourriel</button></form>`
+    : `<form class="inline" method="post" action="/admin/messages/${m.id}/${m.traite ? "rouvrir" : "traite"}"><button class="light" type="submit">${m.traite ? "Remettre à traiter" : "Marquer traité"}</button></form>
+  <form class="inline" method="post" action="/admin/messages/${m.id}/spam"><button class="light" type="submit">C'est du pourriel</button></form>`}
   <form class="inline" method="post" action="/admin/messages/${m.id}/supprimer" onsubmit="return confirm('Supprimer ce message?')"><button class="danger" type="submit">Supprimer</button></form>
-</div>`).join("") : `<p class="empty">Aucun message pour l'instant. Ceux envoyés par le formulaire apparaîtront ici (et dans votre Gmail).</p>`}</section>`;
+</div>`;
+  const body = `<div class="hd"><h1>Messages</h1><span class="sub">${num(c.nouveaux)} à traiter · reçus par le formulaire de contact</span></div>
+<section class="card">${rows.length ? rows.map(one).join("") : `<p class="empty">Aucun message pour l'instant. Ceux envoyés par le formulaire apparaîtront ici (et dans votre Gmail).</p>`}</section>
+<section class="card"><details><summary><strong>Pourriel filtré (${num(spam.length)})</strong></summary>
+<p class="muted" style="font-size:13px">Messages publicitaires envoyés par des robots. Ils ne vous sont pas envoyés par courriel. Si un vrai client s'y trouve, cliquez « Ce n'est pas du pourriel ».</p>
+${spam.length ? spam.map(one).join("") + `<form method="post" action="/admin/messages/pourriel/vider" onsubmit="return confirm('Supprimer tout le pourriel?')"><button class="danger" type="submit">Supprimer tout le pourriel</button></form>` : `<p class="empty">Rien pour l'instant.</p>`}
+</details></section>`;
   return page("Messages", "messages", body, c);
 }
 
@@ -423,6 +432,14 @@ export async function handleAdmin(request, env, url) {
 
   if (request.method === "POST") {
     let m;
+    if (p === "/admin/messages/pourriel/vider") {
+      await env.DB.prepare("DELETE FROM messages WHERE spam = 1").run();
+      return redirect("/admin/messages");
+    }
+    if ((m = p.match(/^\/admin\/messages\/(\d+)\/(spam|passpam)$/))) {
+      await env.DB.prepare("UPDATE messages SET spam = ?, raison = ? WHERE id = ?").bind(m[2] === "spam" ? 1 : 0, m[2] === "spam" ? "Marqué à la main" : null, +m[1]).run();
+      return redirect("/admin/messages");
+    }
     if ((m = p.match(/^\/admin\/messages\/(\d+)\/(traite|rouvrir|supprimer)$/))) {
       const id = Number(m[1]);
       if (m[2] === "supprimer") await env.DB.prepare("DELETE FROM messages WHERE id = ?").bind(id).run();

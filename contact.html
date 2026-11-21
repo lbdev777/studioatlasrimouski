@@ -41,6 +41,7 @@
    <div class="row"><label>Nom<input type="text" name="nom" autocomplete="name" required></label><label>Commerce<input type="text" name="entreprise" autocomplete="organization"></label></div>
    <div class="row"><label>Courriel<input type="email" name="courriel" autocomplete="email" required pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="Une adresse comme nom@exemple.com"></label><label>Téléphone (facultatif)<input type="tel" name="telephone" autocomplete="tel"></label></div>
    <label>Votre commerce en quelques mots<textarea name="message" rows="5" required></textarea></label>
+   <input type="hidden" name="duree" value="">
    <label class="check"><input type="checkbox" name="infolettre" value="oui">J'accepte de recevoir l'infolettre de Studio Atlas Rimouski (facultatif, désabonnement en un clic).</label>
    <div><button class="b" type="submit" id="contact-send">Envoyer</button></div>
    <p id="contact-status" role="status" hidden></p>
@@ -64,6 +65,7 @@
 <script>
 (function(){
   var form=document.getElementById('contact-form'); if(!form) return;
+  var T0=Date.now(); form.addEventListener('submit',function(){ if(form.duree) form.duree.value=Date.now()-T0; },true);
   var box=document.getElementById('contact-status'), btn=document.getElementById('contact-send');
   function show(ok,msg){ box.hidden=false; box.textContent=msg; box.style.background=ok?'#E3F6E8':'#FDE8E8'; box.style.color=ok?'#14532D':'#7F1D1D'; }
   var q=new URLSearchParams(location.search);
