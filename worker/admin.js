@@ -531,7 +531,7 @@ export async function ipHash(request, env) {
 }
 
 // Fournisseurs de serveurs et de robots (pas des gens chez eux ou sur leur cellulaire).
-const DATACENTER = /amazon|aws|google llc|google cloud|microsoft|azure|digitalocean|ovh|hetzner|linode|akamai|cisco|egihosting|dataprovider|m247|oracle|alibaba|tencent|contabo|vultr|choopa|leaseweb|cloudflare|fastly|scaleway|colocrossing|datacamp|psychz|quadranet|zscaler|palo alto|censys|shadowserver|hostinger|ionos|godaddy|hostroyale|hostwinds|interserver|servers\.com|packet|equinix|internet archive|semrush|ahrefs|bytedance|facebook|meta platforms|apple inc|yandex|baidu|petalbot|huawei cloud|kamatera|dedipath|tzulo|clouvider|datapacket|cdn77|g-core|gcore|hivelocity|serverion|netcup|ucloud|choopa/i;
+const DATACENTER = /amazon|aws|google llc|google cloud|microsoft|azure|digitalocean|ovh|hetzner|linode|akamai|cisco|egihosting|dataprovider|m247|oracle|alibaba|tencent|contabo|vultr|choopa|leaseweb|cloudflare|fastly|scaleway|colocrossing|datacamp|psychz|quadranet|zscaler|palo alto|censys|shadowserver|hostinger|ionos|godaddy|hostroyale|hostwinds|interserver|servers\.com|packet|equinix|internet archive|semrush|ahrefs|bytedance|facebook|meta platforms|apple inc|yandex|baidu|petalbot|huawei cloud|kamatera|dedipath|tzulo|clouvider|datapacket|cdn77|g-core|gcore|hivelocity|serverion|netcup|ucloud|logicweb|psinet|frantech|buyvm|ponynet|racknerd|ovh|greencloud|terrahost|i3d|zenlayer|cogent|hostpapa|a2 hosting|liquid web|ramnode|nexeon|sharktech|incapsula|imperva|tier\.net|wholesale internet|choopa/i;
 export function isDatacenter(fai) { return !!fai && DATACENTER.test(fai); }
 
 async function isMe(request, env, ip_h, now) {
