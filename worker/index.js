@@ -52,7 +52,7 @@ async function sendContact(env, f) {
 export default {
   // Génère les photos des sites d'exemple qui manquent (s'arrête de lui-même quand tout est fait).
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(generatePending(env, 2));
+    ctx.waitUntil(generatePending(env, 4));
   },
 
   async fetch(request, env, ctx) {
