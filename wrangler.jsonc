@@ -24,7 +24,7 @@
   "kv_namespaces": [
     { "binding": "IMAGES", "id": "5871ec73251c47649a8e8aea64b5ac84" }
   ],
-  // Temporaire : génère les photos manquantes chaque minute.
-  "triggers": { "crons": ["* * * * *"] },
+  // Temporaire : génère les photos manquantes, une fois par heure (quota gratuit de Workers AI).
+  "triggers": { "crons": ["17 * * * *"] },
   "observability": { "enabled": true }
 }

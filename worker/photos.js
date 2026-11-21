@@ -87,7 +87,8 @@ export async function generatePending(env, max = 2) {
       form.append("height", String(p.h));
       form.append("seed", String(p.seed));
       const fr = new Response(form);
-      const out = await env.AI.run("@cf/black-forest-labs/flux-2-dev", { multipart: { body: fr.body, contentType: fr.headers.get("content-type") } });
+      // FLUX.2 [klein] 9B : même famille que [dev], beaucoup moins coûteux en neurones.
+      const out = await env.AI.run("@cf/black-forest-labs/flux-2-klein-9b", { multipart: { body: fr.body, contentType: fr.headers.get("content-type") } });
       const s = atob(out.image);
       const u = new Uint8Array(s.length);
       for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
@@ -95,7 +96,9 @@ export async function generatePending(env, max = 2) {
       await env.IMAGES.put(p.k, u, { metadata: { type, w: p.w, h: p.h, at: Date.now() } });
       console.log("Photo générée", p.k, u.length);
     } catch (e) {
-      console.error("Photo non générée", p.k, String(e && e.message || e).slice(0, 300));
+      const msg = String(e && e.message || e);
+      console.error("Photo non générée", p.k, msg.slice(0, 300));
+      if (msg.includes("4006") || msg.includes("allocation")) break; // quota du jour atteint : on reprend à la prochaine heure
     }
   }
 }
