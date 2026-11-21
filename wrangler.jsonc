@@ -9,7 +9,7 @@
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*", "/admin", "/admin/*"]
+    "run_worker_first": ["/api/*", "/admin", "/admin/*", "/img/*"]
   },
   // Formulaire de contact : envoi au Gmail de l'entreprise (adresse vérifiée dans Email Routing).
   "send_email": [
@@ -19,5 +19,12 @@
   "d1_databases": [
     { "binding": "DB", "database_name": "atlas-admin", "database_id": "387f602d-53a0-405e-914e-20c073c457e0" }
   ],
+  // Photos des sites d'exemple : générées par Workers AI, gardées dans KV, servies sous /img/.
+  "ai": { "binding": "AI" },
+  "kv_namespaces": [
+    { "binding": "IMAGES", "id": "5871ec73251c47649a8e8aea64b5ac84" }
+  ],
+  // Temporaire : génère les photos manquantes chaque minute.
+  "triggers": { "crons": ["* * * * *"] },
   "observability": { "enabled": true }
 }
