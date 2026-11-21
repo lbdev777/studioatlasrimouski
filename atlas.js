@@ -66,8 +66,12 @@
   (function () {
     var card = $('#hero-card'); if (!card) return;
     var frames = $$('iframe', card), cap = $('#hero-cap'), cnt = $('#hero-count'), cover = $('a.cover', card);
-    var data = JSON.parse(card.dataset.sites), i = 0, timer = null, scroller = null, paused = false;
-    function loadAll() { frames.forEach(function (f) { if (!f.getAttribute('src')) f.setAttribute('src', f.dataset.src); }); }
+    var data = JSON.parse(card.dataset.sites), i = 0, timer = null, scroller = null, paused = false, pret = false, suivant = null;
+    // Connexion lente ou mode économie de données : un seul aperçu, pas de défilement automatique.
+    var cx = navigator.connection, lent = !!(cx && (cx.saveData || /(^|-)2g|3g/.test(cx.effectiveType || '')));
+    function charger(f) { if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src); }
+    // On ne précharge que l'aperçu suivant, quelques secondes après que l'actuel est affiché.
+    function prechargerSuivant() { clearTimeout(suivant); if (lent) return; suivant = setTimeout(function () { charger(frames[(i + 1) % frames.length]); }, 3500); }
     function scrollInside(f) {
       cancelAnimationFrame(scroller);
       if (reduce) return;
@@ -93,19 +97,23 @@
       cnt.textContent = (i + 1) + ' / ' + data.length;
       cover.href = d.u; cover.setAttribute('aria-label', 'Ouvrir le site d\'exemple : ' + d.n);
       var f = frames[i];
-      if (!f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
-      if (f.contentDocument && f.contentDocument.readyState === 'complete' && f.contentWindow.location.href !== 'about:blank') scrollInside(f);
-      else f.addEventListener('load', function () { if (frames[i] === f) scrollInside(f); }, { once: true });
+      if (!pret) return;
+      charger(f);
+      if (f.contentDocument && f.contentDocument.readyState === 'complete' && f.contentWindow.location.href !== 'about:blank') { scrollInside(f); prechargerSuivant(); }
+      else f.addEventListener('load', function () { if (frames[i] === f) { scrollInside(f); prechargerSuivant(); } }, { once: true });
       if (user) evt('essai', 'Héros : ' + d.n, 'hero');
     }
-    function play() { if (reduce || paused) return; clearInterval(timer); timer = setInterval(function () { show(i + 1); }, 7000); }
+    function play() { if (reduce || paused || lent) return; clearInterval(timer); timer = setInterval(function () { show(i + 1); }, 7000); }
     $('#hero-prev').addEventListener('click', function () { show(i - 1, true); play(); });
     $('#hero-next').addEventListener('click', function () { show(i + 1, true); play(); });
     card.addEventListener('mouseenter', function () { paused = true; clearInterval(timer); });
     card.addEventListener('mouseleave', function () { paused = false; play(); });
     card.addEventListener('focusin', function () { paused = true; clearInterval(timer); });
-    frames[0].addEventListener('load', function () { setTimeout(loadAll, 600); }, { once: true });
-    show(0); play();
+    // Le premier aperçu attend que la page elle-même soit chargée.
+    function demarrer() { pret = true; show(i); }
+    show(0);
+    if (document.readyState === 'complete') demarrer(); else window.addEventListener('load', demarrer, { once: true });
+    play();
     document.addEventListener('visibilitychange', function () { if (document.hidden) clearInterval(timer); else play(); });
   })();
 
@@ -135,13 +143,14 @@
   (function () {
     var ix = $('#ix'); if (!ix) return;
     var lis = $$('.ix-list li', ix), view = $('.ix-view', ix), cap = $('.ix-cap', ix), url = $('.ix-url', ix);
-    var frames = view ? $$('iframe', view) : [];
+    var frames = view ? $$('iframe', view) : [], vu = false, cur = 0;
     function sel(n) {
+      cur = n;
       lis.forEach(function (li, j) { li.classList.toggle('on', j === n); });
       if (!view) return;
       var li = lis[n];
       frames.forEach(function (f, j) {
-        if (j === n && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
+        if (j === n && vu && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
         f.classList.toggle('on', j === n);
       });
       cap.textContent = li.dataset.cap; url.textContent = li.dataset.url;
@@ -151,7 +160,8 @@
       $('a', li).addEventListener('focus', function () { sel(j); });
     });
     if (view && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { frames.forEach(function (f) { if (!f.getAttribute('src')) f.setAttribute('src', f.dataset.src); }); io.disconnect(); } }, { rootMargin: '400px' });
+      // Seul l'aperçu choisi se charge (au survol), et seulement quand la liste est près de l'écran.
+      var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { vu = true; sel(cur); io.disconnect(); } }, { rootMargin: '300px' });
       io.observe(view);
     }
     sel(0);

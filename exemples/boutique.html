@@ -355,7 +355,7 @@
     if(flowers){ s+='<path d="M200 130 Q190 70 160 40 M200 130 Q215 80 250 60 M200 130 Q200 80 205 30" stroke="#6F7B62" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="160" cy="40" r="10" fill="#C9A14A"/><circle cx="250" cy="60" r="9" fill="#C9A14A"/><circle cx="205" cy="30" r="8" fill="#E6D3A3"/>'; }
     return s;
   }
-  function ph(src,alt,ratio,extra){ return '<img class="ph-img" src="/img/'+src+'" alt="'+(alt||'').replace(/"/g,'')+'" loading="lazy" decoding="async" style="'+(ratio?'aspect-ratio:'+ratio+';':'')+(extra||'')+'">'; }
+  function ph(src,alt,ratio,extra){ var b='/img/'+src+'?w=', g=/hero|story|\/s-|gal-facade/.test(src); return '<img class="ph-img" src="'+b+'960" srcset="'+b+'480 480w, '+b+'960 960w'+(g?', '+b+'1600 1600w':'')+'" sizes="'+(g?'(max-width:760px) 94vw, 55vw':'(max-width:760px) 94vw, 380px')+'" alt="'+(alt||'').replace(/"/g,'')+'" loading="lazy" decoding="async" style="'+(ratio?'aspect-ratio:'+ratio+';':'')+(extra||'')+'">'; }
   function svg(inner,cls){ if(String(inner).indexOf('<img')===0) return inner.replace('class="ph-img"','class="ph-img'+(cls?' '+cls:'')+'"'); return '<svg'+(cls?' class="'+cls+'"':'')+' viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+inner+'</svg>'; }
   function ext(o,k,v){ var r={}; for(var x in o) r[x]=o[x]; r[k]=v; return r; }
 

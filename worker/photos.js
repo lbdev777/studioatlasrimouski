@@ -104,15 +104,40 @@ export async function generatePending(env, max = 2) {
 }
 
 // Sert une photo depuis le stockage, avec cache.
+// Sert /img/<clé>.jpg?w=480|960|1600. Les originaux (environ 600 Ko) sont réduits une seule fois
+// en WebP par le service Images de Cloudflare, puis gardés dans KV sous opt/<largeur>/<clé>.
+// Si l'optimisation échoue, l'original est servi.
+const LARGEURS = [480, 960, 1600];
 export async function serveImage(request, env, ctx, url) {
   const key = decodeURIComponent(url.pathname.slice(5));
   if (!env.IMAGES || !/^[a-z0-9\-\/]+\.jpg$/.test(key)) return new Response("Introuvable", { status: 404 });
+  const demande = parseInt(url.searchParams.get("w") || "960", 10);
+  const w = LARGEURS.includes(demande) ? demande : 960;
+  const cacheKey = new Request(url.origin + url.pathname + "?w=" + w);
   const cache = caches.default;
-  const hit = await cache.match(request);
+  const hit = await cache.match(cacheKey);
   if (hit) return hit;
-  const { value, metadata } = await env.IMAGES.getWithMetadata(key, { type: "stream" });
-  if (!value) return new Response("Introuvable", { status: 404, headers: { "cache-control": "no-store" } });
-  const res = new Response(value, { headers: { "content-type": (metadata && metadata.type) || "image/jpeg", "cache-control": "public, max-age=86400", "x-content-type-options": "nosniff" } });
-  ctx.waitUntil(cache.put(request, res.clone()));
+  const entetes = { "cache-control": "public, max-age=2592000", "x-content-type-options": "nosniff", "vary": "Accept" };
+  const optKey = "opt/" + w + "/" + key;
+  let corps = await env.IMAGES.get(optKey, { type: "arrayBuffer" });
+  let type = "image/webp";
+  if (!corps) {
+    const original = await env.IMAGES.get(key, { type: "arrayBuffer" });
+    if (!original) return new Response("Introuvable", { status: 404, headers: { "cache-control": "no-store" } });
+    try {
+      if (!env.IMG) throw new Error("pas de liaison Images");
+      const sortie = await env.IMG.input(new Blob([original]).stream())
+        .transform({ width: w, fit: "scale-down" })
+        .output({ format: "image/webp", quality: 72 });
+      corps = await sortie.response().arrayBuffer();
+      if (corps.byteLength < original.byteLength) ctx.waitUntil(env.IMAGES.put(optKey, corps));
+      else { corps = original; type = "image/jpeg"; }
+    } catch (e) {
+      console.error("Optimisation impossible", key, String(e && e.message || e).slice(0, 200));
+      corps = original; type = "image/jpeg"; entetes["cache-control"] = "public, max-age=3600";
+    }
+  }
+  const res = new Response(corps, { headers: { ...entetes, "content-type": type } });
+  ctx.waitUntil(cache.put(cacheKey, res.clone()));
   return res;
 }
