@@ -1,3 +1,4 @@
+import { genererVoix, voixBody } from "./voix.js";
 // Tableau de bord privé de Studio Atlas Rimouski : /admin
 // Visites, messages du formulaire et clients. Protégé par le mot de passe ADMIN_PASSWORD (secret Cloudflare).
 
@@ -115,7 +116,7 @@ function page(title, current, body, counts = {}) {
 <title>${esc(title)} · Admin Studio Atlas</title><link rel="icon" href="/favicon.svg">${FONTS}<style>${CSS}</style></head><body>
 <header class="top"><a class="brand" href="/admin">${LOGO}<span>Studio Atlas · Admin</span></a>
 <div class="right"><a href="/" target="_blank" rel="noopener">Voir le site</a><a href="/admin/logout">Se déconnecter</a></div></header>
-<div class="layout"><nav class="side">${item("/admin", "Accueil", "home")}${item("/admin/messages", "Messages", "messages", counts.nouveaux)}${item("/admin/clients", "Clients", "clients")}</nav>
+<div class="layout"><nav class="side">${item("/admin", "Accueil", "home")}${item("/admin/messages", "Messages", "messages", counts.nouveaux)}${item("/admin/clients", "Clients", "clients")}${item("/admin/voix", "Voix", "voix")}</nav>
 <main>${body}</main></div></body></html>`);
 }
 
@@ -429,6 +430,9 @@ export async function handleAdmin(request, env, url) {
   if (p === "/admin/api/live") {
     return new Response(JSON.stringify(await liveData(env)), { headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
   }
+
+  if (p === "/admin/voix/generer" && request.method === "POST") return genererVoix(request, env);
+  if (p === "/admin/voix") return page("Voix", "voix", voixBody(esc));
 
   if (request.method === "POST") {
     let m;
