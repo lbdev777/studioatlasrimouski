@@ -22,6 +22,8 @@
   // Photos des sites d'exemple : générées une fois par IA, gardées dans KV, servies sous /img/.
   // Service Images de Cloudflare : réduit les photos une seule fois (forfait Images gratuit, 5 000 transformations par mois).
   "images": { "binding": "IMG" },
+  // IA de Cloudflare : sert seulement à la page « Voix » de l'admin (génération à la demande).
+  "ai": { "binding": "AI" },
   "kv_namespaces": [
     { "binding": "IMAGES", "id": "5871ec73251c47649a8e8aea64b5ac84" }
   ],
